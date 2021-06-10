@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author Vanconingsloo Kevin
  */
-@WebServlet(name = "LogoutServlet")
+
 public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

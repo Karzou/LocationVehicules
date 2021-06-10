@@ -20,7 +20,7 @@ import java.sql.Date;
  * @author Vanconingsloo Kevin
  */
 
-@WebServlet(name = "CreationUtilisateur")
+
 public class CreationUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

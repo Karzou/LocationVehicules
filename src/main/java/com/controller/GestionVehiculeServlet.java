@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Wets Jeoffroy
  */
-@WebServlet(name = "GestionVehiculeServlet")
+
 public class GestionVehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

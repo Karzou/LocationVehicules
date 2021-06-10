@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author Vanconingsloo Kevin
  */
 
-@WebServlet(name = "AdminServlet")
+
 public class AdminServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
