@@ -1,19 +1,17 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Vehicule;
+import com.entity.Entrepot;
 import com.exception.ServiceException;
-import com.service.VehiculeService;
+import com.service.EntrepotService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ModifVehiculeServlet")
 public class ModifEntrepotServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,12 +25,12 @@ public class ModifEntrepotServlet extends HttpServlet {
         String idReq = request.getParameter("idModif");
         int id = Integer.parseInt(idReq);
 
-        VehiculeService vehiculeService = new VehiculeService(em);
-        Vehicule vehicule = null;
+        EntrepotService entrepotService = new EntrepotService(em);
+        Entrepot entrepot = null;
 
         try {
 
-            vehicule = vehiculeService.trouver(id);
+            entrepot = entrepotService.trouver(id);
         } catch (ServiceException e) {
 
             e.printStackTrace();
@@ -41,8 +39,8 @@ public class ModifEntrepotServlet extends HttpServlet {
             em.close();
         }
 
-        request.setAttribute("vehicule", vehicule);
+        request.setAttribute("entrepot", entrepot);
 
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifVehicule.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifEntrepot.jsp" ).forward( request, response );
     }
 }

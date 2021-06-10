@@ -15,45 +15,37 @@
             <jsp:include page="menu.jsp" />
 
             <div class="modif">
-                <form action="gestionVehicule" method="post">
+                <form action="gestionEntrepot" method="post">
                     <div class="form-group" id="form-modif">
-                        <label>Marque : </label>
-                        <input class="form-control" type="text" name="marque" value="${vehicule.modelesByIdModele.marquesByIdMarque.nomMarque}">
+                        <label>Nom entrepôt : </label>
+                        <input class="form-control" type="text" name="marque" value="${entrepot.nomEntrepot}">
                     </div>
                     <div class="form-group" id="form-modif2">
-                        <label>Modèle : </label>
-                        <input class="form-control" type="text" name="modele" value="${vehicule.modelesByIdModele.nomModele}">
+                        <label>Nombre de place : </label>
+                        <input class="form-control" type="text" name="modele" value="${entrepot.nombrePlace}">
                     </div>
                     <div class="form-group" id="form-modif9">
-                        <label>Cylindrée : </label>
-                        <input class="form-control" type="text" name="cylindree" value="${vehicule.cylindree}">
+                        <label>Rue : </label>
+                        <input class="form-control" type="text" name="cylindree" value="${entrepot.adressesByIdAdresse.rue}">
                     </div>
                     <div class="form-group" id="form-modif10">
-                        <label>Puissance: </label>
-                        <input class="form-control" type="text" name="puissance" value="${vehicule.puissance}">
+                        <label>Numéro : </label>
+                        <input class="form-control" type="text" name="puissance" value="${entrepot.adressesByIdAdresse.numero}">
                     </div>
                     <div class="form-group" id="form-modif3">
-                        <label>Numéro de chassis: </label>
-                        <input class="form-control" type="text" name="numChassis" value="${vehicule.numChassis}">
+                        <label>Boite : </label>
+                        <input class="form-control" type="text" name="numChassis" value="${entrepot.adressesByIdAdresse.boite}">
                     </div>
                     <div class="form-group" id="form-modif4">
-                        <label>Immatriculation : </label>
-                        <input class="form-control" type="text" name="immatriculation" value="${vehicule.immatriculation}">
+                        <label>Code postal : </label>
+                        <input class="form-control" type="text" name="immatriculation" value="${entrepot.adressesByIdAdresse.villesByIdVille.codePostal}">
                     </div>
                     <div class="form-group" id="form-modif5">
-                        <label>Date achat : </label>
-                        <input class="form-control" type="text" name="dateAchat" value="${vehicule.dateAchat}">
-                    </div>
-                    <div class="form-group" id="form-modif6">
-                        <label>Prix journalier : </label>
-                        <input class="form-control" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
-                    </div>
-                    <div class="form-group" id="form-modif7">
-                        <label>Status : </label>
-                        <input class="form-control" type="text" name="status" value="${vehicule.actifVehicule}">
+                        <label>Ville : </label>
+                        <input class="form-control" type="text" name="dateAchat" value="${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}">
                     </div>
 
-                    <input type="hidden" name="idModif" value="${vehicule.idVehicule}"></input>
+                    <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"></input>
                     <button type="submit" value="Envoyer" id="bouton-modif" class="btn btn-primary">Modifer</button>
                 </form>
             </div>
