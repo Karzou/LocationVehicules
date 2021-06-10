@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author Vanconingsloo Kevin
  */
 
-@WebServlet(name = "ModifUtilisateurServlet")
+
 public class ModifUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

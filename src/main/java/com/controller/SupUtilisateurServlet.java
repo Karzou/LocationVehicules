@@ -22,7 +22,7 @@ import static java.lang.Integer.parseInt;
  * @author Vanconingsloo Kevin
  */
 
-@WebServlet(name = "SupUtilisateurServlet")
+
 public class SupUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
