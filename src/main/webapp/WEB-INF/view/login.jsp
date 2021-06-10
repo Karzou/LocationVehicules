@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Connexion / Enregistrement</title>
+        <title>Login</title>
         <style><%@ include file="/css/style.css"%></style>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
     </head>
