@@ -1,9 +1,5 @@
 package com.controller;
 
-/**
- * @author Wets Jeoffroy
- */
-
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import com.connection.EMF;
@@ -12,10 +8,12 @@ import com.service.VehiculeService;
 import javax.persistence.EntityManager;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Wets Jeoffroy
+ */
 
 public class VehiculeServlet extends HttpServlet {
 

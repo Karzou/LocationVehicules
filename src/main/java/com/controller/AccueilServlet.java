@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
 
 public class AccueilServlet extends HttpServlet {

@@ -13,7 +13,6 @@ import com.service.VilleService;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +23,6 @@ import java.util.List;
 /**
  * @author Vanconingsloo Kevin
  */
-
 
 public class GestionUtilisateurServlet extends HttpServlet {
 

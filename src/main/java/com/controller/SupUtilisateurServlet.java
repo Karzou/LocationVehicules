@@ -8,20 +8,16 @@ import com.service.UtilisateurService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 
-import static java.lang.Integer.parseInt;
 /**
  * @author Vanconingsloo Kevin
  */
-
 
 public class SupUtilisateurServlet extends HttpServlet {
 
