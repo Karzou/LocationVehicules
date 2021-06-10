@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Wets Jeoffroy
+ */
 
 public class SupEntrepotServlet extends HttpServlet {
 
