@@ -25,7 +25,6 @@
                             <th scope="col">Modification</th>
                             <th scope="col">Activation</th>
                         </thead>
-
                         <tbody>
                         <c:forEach var="user" items="${utilisateurList}">
                             <tr>
@@ -33,12 +32,8 @@
                                 <td><c:out value="${user.nomUtilisateur}"></c:out></td>
                                 <td><c:out value="${user.prenomUtilisateur}"></c:out></td>
                                 <td><c:out value="${user.adressesByIdAdresse.rue}"></c:out></td>
+                                <td><c:out value="${user.rolesByIdRole.roleDescription}"></c:out></td>
                                 <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.nomVille}"></c:out></td>
-                                <td>
-                                    <c:forEach var="autorise" items="${autoriseList}">
-                                        <c:out value="${autorise.permissionsByIdPermission.nomPermission}"></c:out></br>
-                                    </c:forEach>
-                                </td>
                                 <td>
                                     <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                         <input type="hidden" name="idModif" value="${user.idUtilisateur}"></input>
