@@ -6,6 +6,7 @@ import com.exception.ServiceException;
 import com.service.EntrepotService;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,10 +45,13 @@ public class GestionEntrepotServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*String idReq = request.getParameter("idModif");
+        EntityManager em = EMF.getEM();
+        EntityTransaction transaction = em.getTransaction();
+
+        String idReq = request.getParameter("idModif");
         int id = Integer.parseInt(idReq);
 
-        EntrepotService entrepotService = new EntrepotService();
+        EntrepotService entrepotService = new EntrepotService(em);
         Entrepot entrepot = null;
 
         try {
@@ -63,15 +67,14 @@ public class GestionEntrepotServlet extends HttpServlet {
 
             transaction.begin();
 
-            entrepot.getModelesByIdModele().getMarquesByIdMarque().setNomMarque(request.getParameter("marque"));
-            entrepot.getModelesByIdModele().setNomModele(request.getParameter("modele"));
-            entrepot.setPuissance(Integer.parseInt(request.getParameter("puissance")));
-            entrepot.setCylindree(Integer.parseInt(request.getParameter("cylindree")));
-            entrepot.setImmatriculation(request.getParameter("immatriculation"));
-            entrepot.setDateAchat(Date.valueOf(request.getParameter("dateAchat")));
-            entrepot.setNumChassis(request.getParameter("numChassis"));
-            entrepot.setPrixJournalier(Float.parseFloat(request.getParameter("prixJournalier")));
-            entrepot.setActifVehicule(Boolean.parseBoolean(request.getParameter("status")));
+            entrepot.setNomEntrepot(request.getParameter("nomEntrepot"));
+            entrepot.setNombrePlace(Integer.parseInt(request.getParameter("nombrePlace")));
+            entrepot.getAdressesByIdAdresse().setRue(request.getParameter("rue"));
+            entrepot.getAdressesByIdAdresse().setNumero(request.getParameter("numero"));
+            entrepot.getAdressesByIdAdresse().setBoite(request.getParameter("boite"));
+            entrepot.getAdressesByIdAdresse().getVillesByIdVille().setNomVille(request.getParameter("nomVille"));
+            entrepot.getAdressesByIdAdresse().getVillesByIdVille().setCodePostal(request.getParameter("codePostal"));
+            entrepot.setActifEntrepot(Boolean.parseBoolean(request.getParameter("actifEntrepot")));
 
             entrepotService.update(entrepot);
 
@@ -89,6 +92,6 @@ public class GestionEntrepotServlet extends HttpServlet {
             em.close();
         }
 
-        response.sendRedirect("gestionEntrepot");*/
+        response.sendRedirect("gestionEntrepot");
     }
 }

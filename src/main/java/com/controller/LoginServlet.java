@@ -2,8 +2,10 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Utilisateur;
+import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.UtilisateurService;
+import com.service.VilleService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Vanconingsloo Kevin
@@ -20,6 +23,18 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        EntityManager em = EMF.getEM();
+
+        VilleService villeService = new VilleService(em);
+        List<Ville> villeList = null;
+        try {
+            villeList = villeService.lister();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("villes", villeList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/login.jsp" ).forward( request, response );
     }
@@ -33,6 +48,16 @@ public class LoginServlet extends HttpServlet {
 
         UtilisateurService utilisateurService = new UtilisateurService(em);
         Utilisateur utilisateur = null;
+
+        VilleService villeService = new VilleService(em);
+        List<Ville> villeList = null;
+        try {
+            villeList = villeService.lister();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("villes", villeList);
 
         if(utilisateurService.checkLogin(userName, password)) {
 

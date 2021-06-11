@@ -77,7 +77,6 @@ public class GestionVehiculeServlet extends HttpServlet {
             vehicule.setPrixJournalier(Float.parseFloat(request.getParameter("prixJournalier")));
             vehicule.setActifVehicule(Boolean.parseBoolean(request.getParameter("status")));
 
-
             vehiculeService.update(vehicule);
 
             transaction.commit();

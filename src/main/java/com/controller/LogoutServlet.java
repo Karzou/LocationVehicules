@@ -1,6 +1,5 @@
 package com.controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class LogoutServlet extends HttpServlet {
 
             session.invalidate(); //removes all session attributes bound to the session
             request.setAttribute("errMessage", "Vous etes bien deconnecté");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+
             response.sendRedirect("login");
         }
     }

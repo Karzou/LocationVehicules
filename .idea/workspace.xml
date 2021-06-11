@@ -2,36 +2,18 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="LocationVoiture:war" />
+      <artifact name="LocationVehicules:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2755211-9bae-41d3-a9db-b5d954c5cae8" name="Default Changelist" comment="Add @Author">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/CreationUtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/CreationUtilisateurServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/GestionEntrepotServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/GestionEntrepotServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/GestionUtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/GestionUtilisateurServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/GestionVehiculeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/GestionVehiculeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/SupEntrepotServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/SupEntrepotServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/SupUtilisateurServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/SupUtilisateurServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/SupVehiculeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/SupVehiculeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionEntrepot.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionEntrepot.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionUtilisateur.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionUtilisateur.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionVehicule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/gestionVehicule.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/modifEntrepot.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/modifEntrepot.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/modifUtilisateur.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/modifUtilisateur.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/vehicule.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/vehicule.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8f9ef5ed-5c84-4df6-a1dc-c1520c931121" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -40,60 +22,33 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectId" id="1tkpVSVRPOjLbvhJpRPMLQYvcM2" />
+  <component name="ProjectId" id="1tlyWSpLbOG06LXU2pBYWJ0sbKo" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="LocationVehicules" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="LocationVehicules" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 9.0.45" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.45" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8" nameIsGenerated="true">
-      <option name="UPDATING_POLICY" value="restart-server" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
-        <artifact name="LocationVoiture:war">
+        <artifact name="LocationVehicules:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/LocationVoiture_war" />
+            <option name="CONTEXT_PATH" value="/LocationVehicules_war" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="63d5ef06-53e7-4a98-a667-e54d2b12c659" />
+        <option name="BASE_DIRECTORY_NAME" value="4638b045-352a-4745-991e-0eb94b399066" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -101,7 +56,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="62836" />
+        <option name="DEBUG_PORT" value="50787" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -166,7 +121,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="LocationVoiture:war" />
+          <artifact name="LocationVehicules:war" />
         </option>
       </method>
     </configuration>
@@ -174,51 +129,21 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a2755211-9bae-41d3-a9db-b5d954c5cae8" name="Default Changelist" comment="" />
-      <created>1623322966610</created>
+      <changelist id="8f9ef5ed-5c84-4df6-a1dc-c1520c931121" name="Default Changelist" comment="" />
+      <created>1623358003835</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1623322966610</updated>
-      <workItem from="1623322968560" duration="521000" />
-      <workItem from="1623323505109" duration="653000" />
-      <workItem from="1623324174292" duration="178000" />
-      <workItem from="1623324765105" duration="3791000" />
+      <updated>1623358003835</updated>
+      <workItem from="1623358005509" duration="442000" />
+      <workItem from="1623358465737" duration="10000" />
+      <workItem from="1623358553128" duration="3107000" />
+      <workItem from="1623361712031" duration="1237000" />
+      <workItem from="1623363286233" duration="115000" />
+      <workItem from="1623363778002" duration="167000" />
     </task>
-    <task id="LOCAL-00001" summary="Refactoring">
-      <created>1623323374604</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1623323374604</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Add @Author">
-      <created>1623323712341</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1623323712341</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactoring" />
-    <MESSAGE value="Add @Author" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add @Author" />
   </component>
 </project>

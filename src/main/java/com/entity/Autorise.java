@@ -7,7 +7,9 @@ import java.util.Objects;
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
 @Entity
-@NamedQuery(name = "Autorise.hasPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole = :idRole and a.permissionsByIdPermission.nomPermission = :permission")
+@NamedQueries({@NamedQuery(name = "Autorise.hasPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole = :idRole and a.permissionsByIdPermission.nomPermission = :permission"),
+        @NamedQuery(name = "Autorise.listeParRole", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole=:idRole")
+        ,})
 public class Autorise {
     private int idAutorise;
     private Permission permissionsByIdPermission;

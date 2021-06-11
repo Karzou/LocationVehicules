@@ -51,7 +51,7 @@ public class AutoriseService {
 
     public List<Autorise> lister(int idRole) throws ServiceException {
         try {
-            TypedQuery<Autorise> query = em.createQuery("SELECT c FROM Autorise c where c.rolesByIdRole.idRole = :idRole ORDER BY  c.idAutorise", Autorise.class);
+            TypedQuery<Autorise> query = em.createNamedQuery("Autorise.listeParRole", Autorise.class);
             query.setParameter("idRole", idRole);
             return query.getResultList();
         } catch (Exception e) {

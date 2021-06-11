@@ -48,104 +48,51 @@ public class CreationUtilisateurServlet extends HttpServlet {
         String rue = request.getParameter("rue");
         String numero = request.getParameter("numero");
         String boite = request.getParameter("boite");
-        String villeInput = request.getParameter("ville");
-        String codePostal = request.getParameter("codepostal");
-        String dateNaissance = request.getParameter("dateNaissance");
-        String datePermis = request.getParameter("datePermis");
+        int idVille = Integer.parseInt(request.getParameter("ville"));
+        Date dateNaissance = Date.valueOf(request.getParameter("dateNaissance"));
+        Date datePermis = Date.valueOf(request.getParameter("datePermis"));
         String confirmPassword = request.getParameter("confirmPassword");
 
         nom = nom.substring(0,1).toUpperCase() + nom.substring(1).toLowerCase();
         prenom = prenom.substring(0,1).toUpperCase() + prenom.substring(1).toLowerCase();
-        villeInput = villeInput.substring(0,1).toUpperCase() + villeInput.substring(1).toLowerCase();
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
         VilleService villeService = new VilleService(em);
         RoleService roleService = new RoleService(em);
         Role role = null;
+        Ville ville = null;
 
         if ( nom.trim().isEmpty() || prenom.trim().isEmpty() || telephone.trim().isEmpty() || password.trim().isEmpty()
                 || mail.trim().isEmpty() || rue.trim().isEmpty() || numero.trim().isEmpty()
-                || villeInput.trim().isEmpty()) {
-
+                ) {
             request.setAttribute("errMessage", "Veuillez remplir tous les champs");
-
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/login.jsp").forward( request, response );
         } else {
-
             if (utilisateurService.mailExist(mail)) {
-
                 request.setAttribute("errMessage", "Ce mail existe deja !!!");
             } else {
-
-                // conversion date
-                Date dateNaissanceSql = Date.valueOf(dateNaissance);
-                Date datePermisSql = Date.valueOf(datePermis);
-                Ville ville = null;
-
                 try {
-
                     transaction.begin();
-                    // traitements
                     try {
-
+                        ville = villeService.trouver(idVille);
                         role = roleService.trouver(2);
                     } catch (ServiceException e) {
-
                         e.printStackTrace();
                     }
-
-                    try {
-
-                        ville = villeService.trouverParVille(villeInput);
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    } finally {
-
-                        if (ville == null) {
-
-                            ville = new Ville();
-                            PaysService paysService = new PaysService(em);
-                            ville.setNomVille(villeInput);
-                            ville.setCodePostal(codePostal);
-
-                            try {
-
-                                ville.setPaysByIdPays(paysService.trouver(1));
-                            } catch (ServiceException e) {
-
-                                e.printStackTrace();
-                            }
-
-                            try {
-
-                                villeService.creer(ville);
-                            } catch (ServiceException e) {
-
-                                e.printStackTrace();
-                            }
-
-                            ville = villeService.trouverParVille(villeInput);
-                        }
-                    }
-
                     Adresse adresse = new Adresse(rue, numero, boite, ville);
                     Utilisateur utilisateur = new Utilisateur(
                                 nom,
                                 prenom,
                                 mail,
                                 password,
-                                dateNaissanceSql,
-                                datePermisSql,
+                                dateNaissance,
+                                datePermis,
                                 adresse,
                                 role);
-
                     //insertion db
                     if (confirmPassword.equals(password)) {
-
                         try {
-
                             utilisateurService.creer(utilisateur);
                             Utilisateur utilisateur1 = utilisateurService.trouverParNom(utilisateur.getNomUtilisateur());
                             TelephoneService telephoneService = new TelephoneService(em);
@@ -153,30 +100,22 @@ public class CreationUtilisateurServlet extends HttpServlet {
                             telephoneService.creer(telephoneDb);
                             request.setAttribute("succes", "L'utilisateur a été créé avec succes.");
                         } catch (ServiceException e) {
-
                             e.printStackTrace();
                         }
                     } else {
-
                         request.setAttribute("errMessagePass", "Vos mots de passe ne sont pas identiques");
                     }
-
                     transaction.commit();
                 } catch ( Exception e ) {
-
                     throw new ServletException( e );
                 } finally {
-
                     if (transaction.isActive()) {
-
                         transaction.rollback();
                     }
-
                     em.close();
                 }
             }
         }
-
         // redirection
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/login.jsp").forward( request, response );
         //response.sendRedirect("login");
