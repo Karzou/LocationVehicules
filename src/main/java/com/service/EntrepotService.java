@@ -16,43 +16,57 @@ public class EntrepotService {
     EntityManager em;
 
     public EntrepotService(EntityManager em) {
+
         this.em = em;
     }
 
     public void update(Entrepot entrepot) {
+
         em.merge(entrepot);
     }
 
     public Entrepot trouver(int id) throws ServiceException {
+
         try {
+
             return em.find(Entrepot.class, id);
         } catch (Exception e) {
+
             throw new ServiceException(e);
         }
     }
 
     public void creer(Entrepot entrepot) throws ServiceException {
+
         try {
+
             em.persist(entrepot);
         } catch (Exception e) {
+
             throw new ServiceException(e);
         }
     }
 
     public List<Entrepot> lister() throws ServiceException {
+
         try {
+
             TypedQuery<Entrepot> query = em.createNamedQuery("Entrepot.lister", Entrepot.class);
             return query.getResultList();
         } catch (Exception e) {
+
             throw new ServiceException(e);
         }
     }
 
     public void suppressionLogique (Entrepot entrepot) throws ServiceException {
+
         try {
+
             entrepot.setActifEntrepot(false);
             em.persist(entrepot);
         } catch (Exception e) {
+
             throw new ServiceException(e);
         }
     }

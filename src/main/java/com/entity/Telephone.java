@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "telephones", schema = "location_vehicules")
 @NamedQuery(name = "Telephone.lister", query = "SELECT t FROM Telephone t WHERE t.utilisateursByIdUtilisateur =:utilisateur")

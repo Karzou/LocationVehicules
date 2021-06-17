@@ -6,10 +6,12 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @NamedQueries({@NamedQuery(name = "Autorise.hasPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole = :idRole and a.permissionsByIdPermission.nomPermission = :permission"),
-        @NamedQuery(name = "Autorise.listeParRole", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole=:idRole")
-        ,})
+        @NamedQuery(name = "Autorise.listeParRole", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole=:idRole"),
+        @NamedQuery(name = "Autorise.lister", query = "SELECT a from Autorise a"),
+        @NamedQuery(name = "Autorise.trouverParRoleEtPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole =:idRole and a.permissionsByIdPermission.idPermission =:idPermission"),})
 public class Autorise {
     private int idAutorise;
     private Permission permissionsByIdPermission;
@@ -46,7 +48,7 @@ public class Autorise {
         return Objects.hash(idAutorise);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Id_permission", referencedColumnName = "Id_permission", nullable = false)
     public Permission getPermissionsByIdPermission() {
         return permissionsByIdPermission;
@@ -56,7 +58,7 @@ public class Autorise {
         this.permissionsByIdPermission = permissionsByIdPermission;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Id_role", referencedColumnName = "Id_role", nullable = false)
     public Role getRolesByIdRole() {
         return rolesByIdRole;

@@ -7,8 +7,13 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "modeles", schema = "location_vehicules")
+@NamedQueries({
+        @NamedQuery(name = "Modele.trouverParNom", query = "SELECT mo FROM Modele mo WHERE mo.nomModele = :nomModele"),
+        @NamedQuery(name = "Modele.lister", query = "SELECT mo FROM Modele mo GROUP BY mo.nomModele"),
+})
 public class Modele {
     private int idModele;
     private String nomModele;

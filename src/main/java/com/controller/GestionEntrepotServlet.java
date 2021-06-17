@@ -2,12 +2,15 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Entrepot;
+import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.EntrepotService;
+import com.service.VilleService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +21,25 @@ import java.util.List;
  * @author Wets Jeoffroy
  */
 
+@WebServlet("/gestionEntrepot")
 public class GestionEntrepotServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         EntityManager em = EMF.getEM();
 
-        List<Entrepot> entrepotList = null;
         EntrepotService entrepotService = new EntrepotService(em);
+        VilleService villeService = new VilleService(em);
+        List<Entrepot> entrepotList = null;
+        List<Ville> villeList = null;
+
+        try {
+
+            villeList = villeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         try {
 
@@ -38,6 +52,7 @@ public class GestionEntrepotServlet extends HttpServlet {
             em.close();
         }
 
+        request.setAttribute("villeList", villeList);
         request.setAttribute("entrepotList", entrepotList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionEntrepot.jsp" ).forward( request, response );
@@ -48,11 +63,22 @@ public class GestionEntrepotServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        String idReq = request.getParameter("idModif");
-        int id = Integer.parseInt(idReq);
+        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idVille = Integer.parseInt(request.getParameter("idVille"));
+        String status = request.getParameter("actifEntrepot");
 
         EntrepotService entrepotService = new EntrepotService(em);
+        VilleService villeService = new VilleService(em);
         Entrepot entrepot = null;
+        Ville ville = null;
+
+        try {
+
+            ville = villeService.trouver(idVille);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         try {
 
@@ -61,7 +87,6 @@ public class GestionEntrepotServlet extends HttpServlet {
 
             e.printStackTrace();
         }
-
 
         try {
 
@@ -72,9 +97,13 @@ public class GestionEntrepotServlet extends HttpServlet {
             entrepot.getAdressesByIdAdresse().setRue(request.getParameter("rue"));
             entrepot.getAdressesByIdAdresse().setNumero(request.getParameter("numero"));
             entrepot.getAdressesByIdAdresse().setBoite(request.getParameter("boite"));
-            entrepot.getAdressesByIdAdresse().getVillesByIdVille().setNomVille(request.getParameter("nomVille"));
-            entrepot.getAdressesByIdAdresse().getVillesByIdVille().setCodePostal(request.getParameter("codePostal"));
-            entrepot.setActifEntrepot(Boolean.parseBoolean(request.getParameter("actifEntrepot")));
+            entrepot.getAdressesByIdAdresse().setVillesByIdVille(ville);
+
+            if (status == null) {
+                entrepot.setActifEntrepot(false);
+            } else {
+                entrepot.setActifEntrepot(true);
+            }
 
             entrepotService.update(entrepot);
 

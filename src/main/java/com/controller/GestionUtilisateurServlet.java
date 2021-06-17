@@ -1,21 +1,19 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Autorise;
-import com.entity.Role;
 import com.entity.Utilisateur;
+import com.entity.Ville;
 import com.exception.ServiceException;
-import com.service.AutoriseService;
-import com.service.RoleService;
-import com.service.UtilisateurService;
-import com.service.VilleService;
+import com.service.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -23,7 +21,7 @@ import java.util.List;
 /**
  * @author Vanconingsloo Kevin
  */
-
+@WebServlet("/gestionUtilisateur")
 public class GestionUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,39 +32,31 @@ public class GestionUtilisateurServlet extends HttpServlet {
         UtilisateurService utilisateurService = new UtilisateurService(em);
 
         try {
-
             utilisateurList = utilisateurService.lister();
         } catch (ServiceException e) {
-
             e.printStackTrace();
         }
 
-        Role role = null;
-        RoleService roleService = null;
-        Autorise autorise = new Autorise();
-        AutoriseService autoriseService = new AutoriseService(em);
+        // Plus besoin du coup
 
-        /*try {
-            role = roleService.trouver(1);
+      //  Role role = null;
+     //   RoleService roleService = null;
+      //  Autorise autorise = new Autorise();
+      //  AutoriseService autoriseService = new AutoriseService(em);
+
+      //  List<Autorise> autoriseList = null;
+
+      /*  try {
+            autoriseList = autoriseService.listerParIdRole(2);
         } catch (ServiceException e) {
-            e.printStackTrace();
-        }*/
-
-        List<Autorise> autoriseList = null;
-
-        try {
-
-            autoriseList = autoriseService.lister(2);
-        } catch (ServiceException e) {
-
             e.printStackTrace();
         } finally {
-
             em.close();
-        }
+        }*/
 
         request.setAttribute("utilisateurList", utilisateurList);
-        request.setAttribute("autoriseList", autoriseList);
+
+       // request.setAttribute("autoriseList", autoriseList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
     }
@@ -81,75 +71,105 @@ public class GestionUtilisateurServlet extends HttpServlet {
         String nom = request.getParameter("nom");
         String password = request.getParameter("password");
         String prenom = request.getParameter("prenom");
-        String mail = request.getParameter("mail");
+      //  String mail = request.getParameter("mail");
         String telephone = request.getParameter("telephone");
         String rue = request.getParameter("rue");
         String numero = request.getParameter("numero");
         String boite = request.getParameter("boite");
-        String villeInput = request.getParameter("ville");
-        String codePostal = request.getParameter("codepostal");
-        String dateNaissance = request.getParameter("dateNaissance");
-        String datePermis = request.getParameter("datePermis");
-        int role = Integer.parseInt(request.getParameter("role"));
+        String profilFlag = request.getParameter("profilFlag");
+        int idVille = Integer.parseInt(request.getParameter("ville"));
+        Date dateNaissance = Validation.dateFormat(request.getParameter("dateNaissance"));
+        Date datePermis = Validation.dateFormat(request.getParameter("datePermis"));
+      //  int role = Integer.parseInt(request.getParameter("role"));
+        boolean erreurFlag = false;
+        String message = ".";
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
         VilleService villeService = new VilleService(em);
-        RoleService roleService = new RoleService(em);
+    //    RoleService roleService = new RoleService(em);
         Utilisateur utilisateur = null;
+        Ville ville = null;
+        HttpSession session = request.getSession();
 
-        try {
+                if(!Validation.validationPrenom(nom)) {
+                    message += "Veuillez entrer un nom avec au moins 2 caracteres ! ";
+                    erreurFlag = true;
+                }
+                if(!Validation.validationPrenom(prenom)) {
+                    message += "Veuillez entrer un prenom avec au moins 2 carcateres ! ";
+                    erreurFlag = true;
+                }
+           /*     if(!Validation.validationTelephone(telephone)){
+                    message += "Veuillez entrer que des chiffres ! ";
+                    erreurFlag = true;
+                }*/
 
-            utilisateur = utilisateurService.trouver(id);
-        } catch (ServiceException e) {
+                if(!Validation.validationAdresse(rue)){
+                    message += "Veuillez entrer une adresse d'au moins 6 caracteres ! ";
+                    erreurFlag = true;
+                }
+                if(!erreurFlag) {
+                    nom = Validation.ucFirst(nom);
+                    prenom = Validation.ucFirst(prenom);
+                    try {
+                        ville = villeService.trouver(idVille);
+                    } catch (ServiceException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        utilisateur = utilisateurService.trouver(id);
+                    } catch (ServiceException e) {
+                        e.printStackTrace();
+                    }
+         /*           Role roleDb = null;
+                    try {
+                        roleDb = roleService.trouver(role);
+                    } catch (ServiceException e) {
+                        e.printStackTrace();
+                    }
+         */          try {
+                        transaction.begin();
 
-            e.printStackTrace();
+                        utilisateur.setNomUtilisateur(nom);
+                        utilisateur.setPrenomUtilisateur(prenom);
+                        utilisateur.setDateNaissance(dateNaissance);
+                        utilisateur.setMotDePasse(password);
+                        utilisateur.setDatePermis(datePermis);
+                        utilisateur.getAdressesByIdAdresse().setBoite(boite);
+                        utilisateur.getAdressesByIdAdresse().setNumero(numero);
+                        utilisateur.getAdressesByIdAdresse().setRue(rue);
+                        utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
+        //                utilisateur.setRolesByIdRole(roleDb);
+
+                        utilisateurService.update(utilisateur);
+
+                        transaction.commit();
+                    } catch (Exception e) {
+                        session.setAttribute("erreur", "Une erreur est survenue lors de l'insertion en db !" );
+                    } finally {
+                        if (transaction.isActive()) {
+                            transaction.rollback();
+                        }
+                        em.close();
+                    }
+                }else {
+                    session.setAttribute("erreur", "Veuillez remplir tous les champs ! " + message);
+                }
+
+                if(session.getAttribute("erreur") != null){
+                    session.setAttribute("retour", "/gestionUtilisateur");
+                    response.sendRedirect("erreur");
+                }else{
+                    if(! (profilFlag == null)){
+                        response.sendRedirect("profil");
+                    }else{
+                        response.sendRedirect("gestionUtilisateur");
+                    }
+                }
         }
-
-        Role roleDb = null;
-
-        try {
-
-            roleDb = roleService.trouver(role);
-        } catch (ServiceException e) {
-
-            e.printStackTrace();
-        }
-
-        Date dateDeNaissance = Date.valueOf(dateNaissance);
-        Date dateDePermis = Date.valueOf(datePermis);
-
-        try {
-
-            transaction.begin();
-
-            utilisateur.setNomUtilisateur(nom);
-            utilisateur.setPrenomUtilisateur(prenom);
-            utilisateur.setDateNaissance(dateDeNaissance);
-            utilisateur.setDatePermis(dateDePermis);
-            utilisateur.getAdressesByIdAdresse().setBoite(boite);
-            utilisateur.getAdressesByIdAdresse().setNumero(numero);
-            utilisateur.getAdressesByIdAdresse().setRue(rue);
-            utilisateur.getAdressesByIdAdresse().getVillesByIdVille().setCodePostal(codePostal);
-            utilisateur.getAdressesByIdAdresse().getVillesByIdVille().setNomVille(villeInput);
-            utilisateur.setRolesByIdRole(roleDb);
-
-            utilisateurService.update(utilisateur);
-
-            transaction.commit();
-        } catch ( Exception e ) {
-
-            throw new ServletException( e );
-        } finally {
-
-            if (transaction.isActive()) {
-
-                transaction.rollback();
-            }
-
-            em.close();
-        }
-
-        response.sendRedirect("gestionUtilisateur");
     }
-}
+
+
+
+

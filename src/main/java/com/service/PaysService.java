@@ -13,6 +13,8 @@ import java.util.List;
 
 public class PaysService {
 
+    // classe pour plus tard
+
     EntityManager em;
 
     public PaysService(EntityManager em) {

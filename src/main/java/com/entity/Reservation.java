@@ -9,8 +9,12 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+
 @Entity
 @Table(name = "reservations", schema = "location_vehicules")
+@NamedQueries({
+        @NamedQuery(name = "Reservation.lister", query = "SELECT r FROM Reservation r"),
+})
 public class Reservation {
     private int idReservation;
     private Date dateDebutLocation;

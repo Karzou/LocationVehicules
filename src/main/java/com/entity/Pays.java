@@ -7,18 +7,20 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 public class Pays {
     private int idPays;
     private String nomPays;
     private List<Ville> villeByIdPays;
 
+  /* Pour l'instant on ne prévoit pas l'insert de nouveau pays
     public Pays(){}
 
     public Pays(String nomPays){
         this.nomPays = nomPays;
     }
-
+*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_pays", nullable = false)

@@ -9,6 +9,7 @@ import com.service.VilleService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * @author Vanconingsloo Kevin
  */
-
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +35,7 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        request.setAttribute("errMessage", null);
         request.setAttribute("villes", villeList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/login.jsp" ).forward( request, response );
@@ -75,22 +77,14 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
+            session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
             session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
             session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
 
-            if(utilisateur.getRolesByIdRole().getRoleDescription().equals("admin")) {
+            response.sendRedirect("accueil");
 
-                response.sendRedirect("accueil");
-            } else if(utilisateur.getRolesByIdRole().getRoleDescription().equals("employe")) {
-
-                response.sendRedirect("employe");
-            } else {
-
-                response.sendRedirect("accueil");
-            }
         } else {
-
-            request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné");
+            request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }

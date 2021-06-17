@@ -4,18 +4,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <title>Gestion Vehicule</title>
-        <style><%@ include file="/css/style.css" %></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
+        <title>Gestion véhicule</title>
+        <c:import url="head.jsp"/>
     </head>
 
     <body class="body">
         <div class="container">
-            <jsp:include page="menu.jsp" />
+            <c:import url="menu.jsp"/>
 
             <div class="content-vehicle">
-                <h1>Liste des véhicules</h1>
+                <h2>Ajout de véhicule</h2>
+
+
+            </div>
+
+            <div class="content-vehicle">
+                <h2>Liste des véhicules</h2>
 
                 <div>
                     <table class="table-custom">
@@ -36,24 +40,26 @@
                         <tbody>
                             <c:forEach var="vehicule" items="${vehiculeList}">
                             <tr>
-                                <td><c:out value="${vehicule.modelesByIdModele.marquesByIdMarque.nomMarque}"></c:out></td>
-                                <td><c:out value="${vehicule.modelesByIdModele.nomModele}"></c:out></td>
-                                <td><c:out value="${vehicule.cylindree}"></c:out></td>
-                                <td><c:out value="${vehicule.puissance}"></c:out></td>
-                                <td><c:out value="${vehicule.numChassis}"></c:out></td>
-                                <td><c:out value="${vehicule.immatriculation}"></c:out></td>
-                                <td><c:out value="${vehicule.dateAchat}"></c:out></td>
-                                <td><c:out value="${vehicule.prixJournalier}"></c:out></td>
-                                <td><c:out value="${vehicule.actifVehicule}"></c:out></td>
+                                <td><c:out value="${vehicule.modelesByIdModele.marquesByIdMarque.nomMarque}"/></td>
+                                <td><c:out value="${vehicule.modelesByIdModele.nomModele}"/></td>
+                                <td><c:out value="${vehicule.cylindree}"/></td>
+                                <td><c:out value="${vehicule.puissance}"/></td>
+                                <td><c:out value="${vehicule.numChassis}"/></td>
+                                <td><c:out value="${vehicule.immatriculation}"/></td>
+                                <td><c:out value="${vehicule.dateAchat}"/></td>
+                                <td><c:out value="${vehicule.prixJournalier}"/></td>
+                                <td><c:out value="${vehicule.actifVehicule}"/></td>
                                 <td>
                                     <form action="<c:url value="/modifVehicule"/>" method="post">
-                                        <input type="hidden" name="idModif" value="${vehicule.idVehicule}"></input>
+                                        <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
+                                        <input type="hidden" name="idMarque" value="${vehicule.modelesByIdModele.marquesByIdMarque.idMarque}"/>
+                                        <input type="hidden" name="modifFlag" value="true"/>
                                         <button class="btn-modif" name="idModif" type="submit" value="modifer">Modifer</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="<c:url value="/supVehicule"/>" method="post">
-                                        <input type="hidden" name="idSup" value="${vehicule.idVehicule}"></input>
+                                        <input type="hidden" name="idSup" value="${vehicule.idVehicule}"/>
                                         <button class="btn-sup" name="idSup" type="submit" value="supprimer">Supprimer</button>
                                     </form>
                                 </td>
@@ -64,7 +70,7 @@
                 </div>
             </div>
 
-            <jsp:include page="footer.jsp"></jsp:include>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

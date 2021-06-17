@@ -19,6 +19,7 @@ public class VilleService {
         this.em = em;
     }
 
+    // jamais utilisée
     public Ville trouver(int id) throws ServiceException {
         try {
             return em.find(Ville.class, id);
@@ -38,6 +39,7 @@ public class VilleService {
         }
     }
 
+    // jamais utilisé
     public void creer(Ville ville) throws ServiceException {
         try {
             em.persist(ville);

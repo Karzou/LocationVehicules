@@ -4,15 +4,13 @@
 <html>
     <head>
         <title>Employe</title>
-        <style><%@ include file="/css/style.css" %></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
-
+        <c:import url="head.jsp"></c:import>
     </head>
 
     <body>
         <div class="container">
-            <jsp:include page="menu.jsp" />
-            <jsp:include page="footer.jsp"></jsp:include>
+            <c:import url="menu.jsp"></c:import>
+            <c:import url="footer.jsp"></c:import>
         </div>
     </body>
 </html>

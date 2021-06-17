@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <c:import url="head.jsp"></c:import>
         <title>Accueil</title>
-        <style><%@ include file="/css/style.css" %></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
     </head>
 
     <body>
         <div class="container">
-            <jsp:include page="menu.jsp" />
+            <c:import url="menu.jsp"></c:import>
             <div class="content1">
                 <div class="head">
                     <img class="img-home" src="${pageContext.request.contextPath}/images/home.png" alt="home" />
@@ -22,11 +20,9 @@
                     </div>
                 </div>
 
-                <form method="post" action="accueil">
-
+                <form name="searchVehicle" action="<c:url value="/vehicule"/>" method="post">
                     <div class="box">
                         <p>Veuillez complèter les informations ci-dessous</p>
-                        <p>${ Tests }</p>
                         <br/>
 
                         <div class="boxSelect1">
@@ -53,21 +49,30 @@
                             </select>
                         </div>
 
-                        <div class="boxDatetime1">
+                        <div class="boxDate1">
                             <label for="dateTimeDepart">Date et heure de départ</label>
-                            <input type="datetime-local" id="dateTimeDepart"
-                                   name="dateTimeDepart" value=""
-                                   min="2021-01-01T00:00" max="2050-01-01T00:00" class="empty" />
+                            <input type="date" id="dateTimeDepart"
+                                   name="dateTimeDepart" value="" class="empty" />
                         </div>
 
-                        <div class="boxDatetime2">
+                        <div class="boxtime1">
+                            <input type="time" id="heureDepart"
+                                   name="heureDepart" value="" class="empty" />
+                        </div>
+
+                        <div class="boxDate2">
                             <label for="dateTimeRetour">Date et heure de retour</label>
-                            <input type="datetime-local" id="dateTimeRetour"
-                                   name="dateTimeRetour" value=""
-                                   min="2021-01-01T00:00" max="2050-01-01T00:00" class="empty" step="100" />
+                            <input type="date" id="dateTimeRetour"
+                                   name="dateTimeRetour" class="empty" />
+                        </div>
+
+                        <div class="boxtime2">
+                            <input type="time" id="heureRetour"
+                                   name="heureRetour" value="" class="empty" />
                         </div>
 
                         <div class="submitButton ">
+                            <input type="hidden" name="dateFin" value="2021-06-24">
                             <input type="submit" value="Rechercher" class="searchButton" />
                         </div>
                     </div>
@@ -94,7 +99,7 @@
                 </div>
             </div>
 
-            <jsp:include page="footer.jsp"></jsp:include>
+            <c:import url="footer.jsp"></c:import>
         </div>
     </body>
 </html>

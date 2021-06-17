@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 public class Contient {
     private int idContient;

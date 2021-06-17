@@ -7,8 +7,12 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "options_vehicules", schema = "location_vehicules")
+@NamedQueries({
+    @NamedQuery(name = "OptionVehicule.lister", query = "SELECT o FROM OptionVehicule o"),
+})
 public class OptionVehicule {
     private int idOption;
     private String nomOption;

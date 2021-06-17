@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "options_supplementaires", schema = "location_vehicules")
 public class OptionSupplementaire {
@@ -14,7 +15,7 @@ public class OptionSupplementaire {
     private String nomOptionSup;
     private float prixOptionSup;
     private boolean actifOptionSup;
-    private int quantitéOptionSup;
+    private int quantiteOptionSup;
     private List<Choisir> choisirsByIdOptionSup;
 
     @Id
@@ -59,13 +60,13 @@ public class OptionSupplementaire {
     }
 
     @Basic
-    @Column(name = "Quantité_option_sup", nullable = false)
-    public int getQuantitéOptionSup() {
-        return quantitéOptionSup;
+    @Column(name = "Quantite_option_sup", nullable = false)
+    public int getQuantiteOptionSup() {
+        return quantiteOptionSup;
     }
 
-    public void setQuantitéOptionSup(int quantitéOptionSup) {
-        this.quantitéOptionSup = quantitéOptionSup;
+    public void setQuantiteOptionSup(int quantiteOptionSup) {
+        this.quantiteOptionSup = quantiteOptionSup;
     }
 
     @Override
@@ -73,12 +74,12 @@ public class OptionSupplementaire {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OptionSupplementaire that = (OptionSupplementaire) o;
-        return idOptionSup == that.idOptionSup && actifOptionSup == that.actifOptionSup && quantitéOptionSup == that.quantitéOptionSup && Objects.equals(nomOptionSup, that.nomOptionSup) && Objects.equals(prixOptionSup, that.prixOptionSup);
+        return idOptionSup == that.idOptionSup && actifOptionSup == that.actifOptionSup && quantiteOptionSup == that.quantiteOptionSup && Objects.equals(nomOptionSup, that.nomOptionSup) && Objects.equals(prixOptionSup, that.prixOptionSup);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idOptionSup, nomOptionSup, prixOptionSup, actifOptionSup, quantitéOptionSup);
+        return Objects.hash(idOptionSup, nomOptionSup, prixOptionSup, actifOptionSup, quantiteOptionSup);
     }
 
     @OneToMany(mappedBy = "optionsSupplementairesByIdOptionSup")

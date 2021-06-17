@@ -8,12 +8,14 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+
 @Entity
 @Table(name = "vehicules", schema = "location_vehicules")
 @NamedQueries({
         @NamedQuery(name = "Vehicule.trouverParMarque", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.marquesByIdMarque.nomMarque = :marque"),
         @NamedQuery(name = "Vehicule.trouverParModele", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.nomModele = :modele"),
         @NamedQuery(name = "Vehicule.lister", query = "SELECT v FROM Vehicule v JOIN v.modelesByIdModele mo JOIN mo.marquesByIdMarque ma"),
+        @NamedQuery(name = "Vehicule.rechercher", query = "SELECT v FROM Vehicule v JOIN v.modelesByIdModele mo JOIN mo.marquesByIdMarque ma WHERE v.entrepotsByIdEntrepot.idEntrepot = :idEntrepot AND NOT EXISTS (SELECT r FROM Reservation r WHERE r.vehiculesByIdVehicule.idVehicule = v.idVehicule AND r.dateDebutLocation <= :dateFin AND r.dateFinLocation >= :dateDebut)"),
 })
 public class Vehicule {
     private int idVehicule;
@@ -29,6 +31,25 @@ public class Vehicule {
     private Entrepot entrepotsByIdEntrepot;
     private Couleur couleursByIdCouleur;
     private Modele modelesByIdModele;
+
+    public Vehicule() {
+
+    }
+
+    public Vehicule(String numChassis, int cylindree, int puissance, Date dateAchat, String immatriculation, float prixJournalier, Entrepot entrepot, Couleur couleur, Modele modele, Marque marque) {
+
+        this.numChassis = numChassis;
+        this.cylindree = cylindree;
+        this.puissance = puissance;
+        this.dateAchat = dateAchat;
+        this.immatriculation = immatriculation;
+        this.prixJournalier = prixJournalier;
+        this.actifVehicule = true;
+        this.entrepotsByIdEntrepot = entrepot;
+        this.couleursByIdCouleur = couleur;
+        this.modelesByIdModele = modele;
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

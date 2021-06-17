@@ -1,12 +1,9 @@
 package com.service;
 
-import com.connection.EMF;
 import com.entity.Autorise;
-import com.entity.Utilisateur;
 import com.exception.ServiceException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 /**
@@ -49,13 +46,40 @@ public class AutoriseService {
         }
     }
 
-    public List<Autorise> lister(int idRole) throws ServiceException {
+    public List<Autorise> lister() throws ServiceException {
         try {
-            TypedQuery<Autorise> query = em.createNamedQuery("Autorise.listeParRole", Autorise.class);
-            query.setParameter("idRole", idRole);
+            TypedQuery<Autorise> query = em.createNamedQuery("Autorise.lister", Autorise.class);
+           // query.setParameter("idRole", idRole);
             return query.getResultList();
         } catch (Exception e) {
             throw new ServiceException(e);
         }
+    }
+
+    public List<Autorise> listerParIdRole(int idRole) throws ServiceException {
+        try {
+            TypedQuery<Autorise> query = em.createNamedQuery("Autorise.listeParRole", Autorise.class);
+             query.setParameter("idRole", idRole);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public boolean checkAutorise (int idRole, int idPermission){
+        TypedQuery<Autorise> query = em.createNamedQuery("Autorise.trouverParRoleEtPermission", Autorise.class);
+        query.setParameter("idRole", idRole);
+        query.setParameter("idPermission", idPermission);
+
+        try {
+            Autorise a = query.getSingleResult();
+            return true;
+        } catch(javax.persistence.NoResultException e) {
+            return false;
+        }
+    }
+
+    public void supprimer (Autorise autorise){
+        em.remove(autorise);
     }
 }

@@ -8,175 +8,44 @@
         <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.controller.LoginServlet</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>logFilter</filter-name>
+        <filter-class>com.filtre.LogFilter</filter-class>
+    </filter>
 
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+    <filter>
+        <filter-name>adminFiltre</filter-name>
+        <filter-class>com.filtre.AdminFiltre</filter-class>
+    </filter>
 
-    <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.controller.LogoutServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CreationUtilisateurServlet</servlet-name>
-        <servlet-class>com.controller.CreationUtilisateurServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CreationUtilisateurServlet</servlet-name>
-        <url-pattern>/creationUtilisateur</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Accueil</servlet-name>
-        <servlet-class>com.controller.AccueilServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Accueil</servlet-name>
+    <filter-mapping>
+        <filter-name>logFilter</filter-name>
         <url-pattern>/accueil</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Vehicule</servlet-name>
-        <servlet-class>com.controller.VehiculeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Vehicule</servlet-name>
-        <url-pattern>/vehicule</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>OptionSup</servlet-name>
-        <servlet-class>com.controller.OptionSupServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>OptionSup</servlet-name>
-        <url-pattern>/optionSup</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GestionUtilisateur</servlet-name>
-        <servlet-class>com.controller.GestionUtilisateurServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GestionUtilisateur</servlet-name>
-        <url-pattern>/gestionUtilisateur</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>supUtilisateur</servlet-name>
-        <servlet-class>com.controller.SupUtilisateurServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>supUtilisateur</servlet-name>
-        <url-pattern>/supUtilisateur</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>modifUtilisateur</servlet-name>
-        <servlet-class>com.controller.ModifUtilisateurServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>modifUtilisateur</servlet-name>
-        <url-pattern>/modifUtilisateur</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GestionVehicule</servlet-name>
-        <servlet-class>com.controller.GestionVehiculeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GestionVehicule</servlet-name>
-        <url-pattern>/gestionVehicule</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>modifVehicule</servlet-name>
-        <servlet-class>com.controller.ModifVehiculeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>modifVehicule</servlet-name>
-        <url-pattern>/modifVehicule</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>supVehicule</servlet-name>
-        <servlet-class>com.controller.SupVehiculeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>supVehicule</servlet-name>
-        <url-pattern>/supVehicule</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GestionEntrepot</servlet-name>
-        <servlet-class>com.controller.GestionEntrepotServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GestionEntrepot</servlet-name>
-        <url-pattern>/gestionEntrepot</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>modifEntrepot</servlet-name>
-        <servlet-class>com.controller.ModifEntrepotServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>modifEntrepot</servlet-name>
-        <url-pattern>/modifEntrepot</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>supEntrepot</servlet-name>
-        <servlet-class>com.controller.SupEntrepotServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>supEntrepot</servlet-name>
-        <url-pattern>/supEntrepot</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>admin</servlet-name>
-        <servlet-class>com.controller.AdminServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>admin</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>gestionDroit</servlet-name>
-        <servlet-class>com.controller.GestionDroitServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>gestionDroit</servlet-name>
         <url-pattern>/gestionDroit</url-pattern>
-    </servlet-mapping>
+        <url-pattern>/gestionEntrepot</url-pattern>
+        <url-pattern>/gestionUtilisateur</url-pattern>
+        <url-pattern>/gestionReservation</url-pattern>
+        <url-pattern>/gestionVehicule</url-pattern>
+        <url-pattern>/modifEntrepot</url-pattern>
+        <url-pattern>/modifUtilisateur</url-pattern>
+        <url-pattern>/modifVehicule</url-pattern>
+        <url-pattern>/optionSup</url-pattern>
+        <url-pattern>/ajoutEntrepot</url-pattern>
+        <url-pattern>/ajoutVehicule</url-pattern>
+        <url-pattern>/supEntrepot</url-pattern>
+        <url-pattern>/supUtilisateur</url-pattern>
+        <url-pattern>/supVehicule</url-pattern>
+        <url-pattern>/vehicule</url-pattern>
+        <url-pattern>/gestionRolePermission</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>adminFiltre</filter-name>
+        <url-pattern>/gestionDroit</url-pattern>
+        <url-pattern>/supUtilisateur</url-pattern>
+        <url-pattern>/supVehicule</url-pattern>
+        <url-pattern>/gestionRolePermission</url-pattern>
+    </filter-mapping>
 
     <error-page>
         <error-code>404</error-code>

@@ -8,11 +8,12 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "utilisateurs", schema = "location_vehicules")
 @NamedQueries({
         @NamedQuery(name = "Utilisateur.mailExist", query = "SELECT u FROM Utilisateur u WHERE u.email = :email"),
-        @NamedQuery(name = "Utilisateur.checkLogin", query = "SELECT u FROM Utilisateur u WHERE u.email = :email AND u.motDePasse = :password"),
+        @NamedQuery(name = "Utilisateur.checkLogin", query = "SELECT u FROM Utilisateur u WHERE u.email = :email AND u.motDePasse = :password AND u.actifUtilisateur=true"),
         @NamedQuery(name = "Utilisateur.trouverParEmail", query = "SELECT u FROM Utilisateur u WHERE u.email = :email"),
         @NamedQuery(name = "Utilisateur.trouverParNom", query = "SELECT u FROM Utilisateur u WHERE u.nomUtilisateur = :nom"),
         @NamedQuery(name = "Utilisateur.lister", query = "SELECT c FROM Utilisateur c JOIN c.adressesByIdAdresse a JOIN a.villesByIdVille v ORDER BY c.nomUtilisateur"),})
@@ -148,7 +149,7 @@ public class Utilisateur {
         this.reservationsByIdUtilisateur = reservationsByIdUtilisateur;
     }
 
-    @OneToMany(mappedBy = "utilisateursByIdUtilisateur", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "utilisateursByIdUtilisateur", cascade = CascadeType.ALL)
     public List<Telephone> getTelephonesByIdUtilisateur() {
         return telephonesByIdUtilisateur;
     }

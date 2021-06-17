@@ -3,6 +3,7 @@ package com.enumeration;
 /**
  * @author Wets Jeoffroy
  */
+
 public enum Etat {
 
     SIGNE("Signé"),

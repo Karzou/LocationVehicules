@@ -3,12 +3,16 @@
 
 <html>
     <head>
-        <title>Title</title>
+        <title>Erreur</title>
+        <c:import url="head.jsp"></c:import>
     </head>
 
     <body>
-        <h1><c:out value="${errorMessage}"></c:out></h1>
-        <a clas="btn btn-primary" href="${pageContext.request.contextPath}${retour}">Liste utilisateur</a>
-        <jsp:include page="footer.jsp"></jsp:include>
+    <div class="container">
+        <c:import url="menu.jsp"></c:import>
+        <h1><c:out value="${sessionScope.erreur}"></c:out></h1>
+        <a clas="btn btn-primary" href="${pageContext.request.contextPath}${sessionScope.retour}">Liste utilisateur</a>
+    </div>
+    <c:import url="footer.jsp"></c:import>
     </body>
 </html>

@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+
 @Entity
 @Table(name = "contrats", schema = "location_vehicules")
 public class Contrat {

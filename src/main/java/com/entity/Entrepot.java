@@ -22,6 +22,18 @@ public class Entrepot {
     private Adresse adressesByIdAdresse;
     private List<Vehicule> vehiculesByIdEntrepot;
 
+    public Entrepot() {
+
+    }
+
+    public Entrepot(String nomEntrepot, int nombrePlace, Adresse adresse) {
+
+        this.nomEntrepot = nomEntrepot;
+        this.nombrePlace = nombrePlace;
+        this.actifEntrepot = true;
+        this.adressesByIdAdresse = adresse;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_entrepot", nullable = false)
@@ -76,7 +88,7 @@ public class Entrepot {
         return Objects.hash(idEntrepot, nombrePlace, actifEntrepot);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Id_adresse", referencedColumnName = "Id_adresse", nullable = false)
     public Adresse getAdressesByIdAdresse() {
         return adressesByIdAdresse;

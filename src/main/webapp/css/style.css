@@ -1,4 +1,4 @@
-/* General --------------------------------------------------------------------------------------- */
+/* General ---------------------------------------------------------------------------------------------------------- */
 html {
     position:relative;
     min-height: 100%;
@@ -9,6 +9,54 @@ body {
     background-color: white;
     margin:0;
     padding:0;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: square;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.div-input-modif {
+    height: 50px;
+}
+
+.div-input-modif .label-input {
+    display: inline-block;
+    width: 200px;
+}
+
+.div-input-modif2 {
+    height: 385px;
+}
+
+.div-input-left {
+    float: left;
+    width: 200px;
+}
+
+.div-input-left .label-input {
+    display: inline-block;
+    width: 200px;
+}
+
+.div-input-checkbox {
+    padding: 0 0 6px 5px;
+}
+
+.div-input-right {
+    float: left;
 }
 
 .body {
@@ -93,7 +141,160 @@ body {
     background-color: darkgreen;
 }
 
-/* Table ----------------------------------------------------------------------------------------- */
+.input-modif {
+    height: 25px;
+    border-radius: 5px;
+    outline: none !important;
+    border: 1px solid gray;
+    width: 394px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.input-modif:hover {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.input-modif:focus {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.input-modif:active {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.select-modif {
+    height: 25px;
+    border-radius: 5px;
+    outline: none !important;
+    border: 1px solid gray;
+    width: 400px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.select-modif:hover {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.select-modif:focus {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.select-modif:active {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: 0;
+    /*top: 5px;*/
+    opacity: 0.01;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 2.3em;
+    font-size: 1.05em;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 1.4em;
+    height: 1.4em;
+    border: 1px solid #777;
+    background: #FFF;
+    border-radius: .2em;
+}
+
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: 'x';
+    position: absolute;
+    top: .235em;
+    left: .15em;
+    font-size: 1.775em;
+    font-weight: bold;
+    color: green;
+    line-height: 0;
+}
+
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0) rotate(45deg);
+    transform: scale(0) rotate(45deg);
+}
+
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0);
+}
+
+/* Disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #e9e9e9;
+}
+
+[type="checkbox"]:disabled:checked + label:after {
+    color: #777;
+}
+
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+
+/* Accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+[type="checkbox"]:checked:hover + label:before,
+[type="checkbox"]:not(:checked):hover + label:before {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.btn-modif2 {
+    width: 150px;
+    height: 40px;
+    background-color: gold;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.btn-modif2:hover {
+    background-color: #F1C40F;
+}
+
+/* Table ------------------------------------------------------------------------------------------------------------ */
 .table-custom {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -103,15 +304,20 @@ body {
 .table-custom td,
 .table-custom th {
     border: 1px solid #ddd;
-    padding: 8px 20px 8px 8px;
 }
 
 .table-custom th {
-    padding-top: 12px;
-    padding-bottom: 12px;
     text-align: left;
     background-color: green;
     color: white;
+    height: 30px;
+    padding: 5px 0 5px 8px;
+}
+
+.table-custom td {
+    text-align: left;
+    height: 30px;
+    padding: 0 0 0 8px;
 }
 
 .btn-modif {
@@ -121,6 +327,8 @@ body {
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
 }
 
 .btn-modif:hover {
@@ -134,6 +342,8 @@ body {
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
 }
 
 .btn-sup:hover {
@@ -147,6 +357,8 @@ body {
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
 }
 
 .btn-right:hover {
@@ -160,13 +372,15 @@ body {
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
 }
 
 .btn-reserv:hover {
     background-color: #F1C40F;
 }
 
-/* Login ----------------------------------------------------------------------------------------- */
+/* Login ------------------------------------------------------------------------------------------------------------ */
 .container-login {
     background-color: white;
     border-radius: 5px;
@@ -418,7 +632,7 @@ body {
     cursor: pointer;
 }
 
-/* Home ------------------------------------------------------------------------------------------ */
+/* Home ------------------------------------------------------------------------------------------------------------- */
 .container {
     width: 100%;
 }
@@ -573,23 +787,43 @@ body {
     color: black;
 }
 
-.box div.boxDatetime1 {
+.box div.boxDate1 {
     margin-left: 10px;
-    margin-right: 3px;
-    width: 220px;
+    margin-right: 0px;
+    width: 145px;
 }
 
-.box div.boxDatetime1 .empty{
+.box div.boxDate1 .empty{
     color: #999;
 }
 
-.box div.boxDatetime2 {
-    margin-left: 10px;
-    margin-right: 3px;
-    width: 220px;
+.box div.boxTime1 {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100px;
 }
 
-.box div.boxDatetime2 .empty {
+.box div.boxTime1 .empty{
+    color: #999;
+}
+
+.box div.boxDate2 {
+    margin-left: 10px;
+    margin-right: 0px;
+    width: 145px;
+}
+
+.box div.boxDate2 .empty {
+    color: #999;
+}
+
+.box div.boxTime2 {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100px;
+}
+
+.box div.boxTime2 .empty{
     color: #999;
 }
 
@@ -615,9 +849,9 @@ body {
     cursor: pointer;
 }
 
-.box div input[type=datetime-local] {
+.box div input[type=date] {
     height: 47px;
-    border-radius: 5px;
+    border-radius: 5px 0px 0px 5px;
     outline: none !important;
     border: 1px solid gray;
     width: 100%;
@@ -625,17 +859,30 @@ body {
     font-weight: bold;
 }
 
-.box div input[type=datetime-local]:hover {
+.box div input[type=time] {
+    height: 47px;
+    border-radius: 0px 5px 5px 0px;
+    outline: none !important;
+    border: 1px solid gray;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+}
+
+.box div input[type=date]:hover,
+.box div input[type=time]:hover {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
 }
 
-.box div input[type=datetime-local]:focus {
+.box div input[type=date]:focus,
+.box div input[type=time]:focus {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
 }
 
-.box div input[type=datetime-local]:active {
+.box div input[type=date]:active,
+.box div input[type=time]:active {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
 }
@@ -737,27 +984,172 @@ body {
     text-align: center;
 }
 
-/* Recherche Vehicule --------------------------------------------------------------------------------------- */
+/* Recherche Vehicule ----------------------------------------------------------------------------------------------- */
 .content-vehicle-search {
     background-color: white;
     width: 1020px;
     border-radius: 5px;
-    padding: 20px;
+    padding: 1px 20px 20px;
     margin: 30px auto;
 }
 
-/* Gestion Vehicule --------------------------------------------------------------------------------------- */
-.content-vehicle {
+.search-vehicle-title {
+    border-bottom: 1px solid #777;
+    height: 25px;
+}
+
+.search-vehicle-title h3 {
+    height: 20px;
+}
+
+.search-vehicle-content {
+    overflow: auto;
+}
+
+.search-vehicle-content-img {
+    float: left;
+    width: 32%;
+    height: 300px;
+}
+
+.search-vehicle-content-img img {
+    display: block;
+    margin-left: 10px;
+}
+
+.search-vehicle-content-info {
+    float: left;
+    width: 40%;
+    height: 300px;
+}
+
+.search-vehicle-content-button {
+    float: left;
+    background-color: #ddd;
+    width: 28%;
+    height: 300px;
+    position: relative;
+}
+
+.btn-select-vehicule {
+    background-color: white;
+    border: 4px solid gold;
+    height: 100px;
+    width: 245px;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.btn-select-vehicule:hover {
+    border: 4px solid green;
+}
+
+.ageMinimum {
+    text-decoration-line: underline;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.infoVehicule {
+    color: #555;
+    font-size: 14px;
+}
+
+.optionTitle {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.search-vehicle-content-info-box1 {
+    float: left;
+    width: 45%;
+}
+
+.search-vehicle-content-info-box2 {
+    float: left;
+    width: 55%;
+}
+
+.calculPrix {
+    width: 245px;
+    margin: 20px;
+}
+
+.calculPrix p {
+    font-weight: bold;
+}
+
+.calculPrix h2 {
+    font-weight: bold;
+    color: green;
+}
+
+/* Réservation -------------------------------------------------------------------------------------------------------*/
+.content-reservation-client {
+    background-color: white;
+    width: 1020px;
+    border-radius: 5px;
+    padding: 1px 20px 20px;
+    margin: 30px auto;
+}
+
+/* Gestion réservation -----------------------------------------------------------------------------------------------*/
+.content-reservation {
     background-color: white;
     border-radius: 5px;
-    padding: 20px;
+    padding: 2px 20px 20px;
     margin: 30px;
 }
 
-/* Gestion Utilisateur ------------------------------------------------------------------------------------------ */
+/* Gestion Vehicule ------------------------------------------------------------------------------------------------- */
+.content-vehicle {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
+/* Gestion Utilisateur ---------------------------------------------------------------------------------------------- */
 .content-utilisateur {
     background-color: white;
     border-radius: 5px;
-    padding: 20px;
+    padding: 2px 20px 20px;
     margin: 30px;
 }
+
+/* Gestion Entrepot ------------------------------------------------------------------------------------------------- */
+.content-entrepot {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
+/* Modification Vehicule -------------------------------------------------------------------------------------------- */
+.content-vehicle2 {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
+/* Modification Utilisateur ----------------------------------------------------------------------------------------- */
+.content-user2 {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
+/* Modification Entrepot -------------------------------------------------------------------------------------------- */
+.content-entrepot2 {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+

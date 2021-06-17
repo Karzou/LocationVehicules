@@ -13,6 +13,7 @@ public class AdresseService {
 
     EntityManager em;
 
+    //si pas utilisé, a enlever
     public AdresseService(EntityManager em) {
         this.em = em;
     }

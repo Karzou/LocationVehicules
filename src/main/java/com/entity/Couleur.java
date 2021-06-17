@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "couleurs", schema = "location_vehicules")
 public class Couleur {

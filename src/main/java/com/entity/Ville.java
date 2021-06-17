@@ -7,11 +7,12 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+
 @Entity
 @Table(name = "villes", schema = "location_vehicules")
 @NamedQueries({
 @NamedQuery(name = "Ville.trouverParNomVille", query = "SELECT v FROM Ville v WHERE v.nomVille = :nomVille "),
-@NamedQuery(name = "Ville.lister", query= "SELECT c FROM Ville c ORDER BY c.idVille"),})
+@NamedQuery(name = "Ville.lister", query= "SELECT c FROM Ville c ORDER BY c.nomVille"),})
 public class Ville {
     private int idVille;
     private String nomVille;

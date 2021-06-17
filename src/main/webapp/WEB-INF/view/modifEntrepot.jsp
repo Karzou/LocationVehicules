@@ -4,57 +4,58 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <title>Gestion Vehicule</title>
-        <style><%@ include file="/css/style.css" %></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
+        <title>Gestion Entrepot</title>
+        <c:import url="head.jsp"></c:import>
     </head>
 
     <body class="body">
         <div class="container">
-            <jsp:include page="menu.jsp" />
+            <c:import url="menu.jsp"></c:import>
 
-            <div class="modif">
+            <div class="content-entrepot2">
+                <h2>Modification entrepot</h2>
+
                 <form action="<c:url value="/gestionEntrepot"/>" method="post">
-                    <div class="form-group" id="form-modif">
-                        <label>Nom entrepôt : </label>
-                        <input class="form-control" type="text" name="nomEntrepot" value="${entrepot.nomEntrepot}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Nom entrepôt : </label>
+                        <input class="input-modif" type="text" name="nomEntrepot" value="${entrepot.nomEntrepot}">
                     </div>
-                    <div class="form-group" id="form-modif2">
-                        <label>Nombre de place : </label>
-                        <input class="form-control" type="text" name="nombrePlace" value="${entrepot.nombrePlace}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Nombre de place : </label>
+                        <input class="input-modif" type="text" name="nombrePlace" value="${entrepot.nombrePlace}">
                     </div>
-                    <div class="form-group" id="form-modif9">
-                        <label>Rue : </label>
-                        <input class="form-control" type="text" name="rue" value="${entrepot.adressesByIdAdresse.rue}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Rue : </label>
+                        <input class="input-modif" type="text" name="rue" value="${entrepot.adressesByIdAdresse.rue}">
                     </div>
-                    <div class="form-group" id="form-modif10">
-                        <label>Numéro : </label>
-                        <input class="form-control" type="text" name="numero" value="${entrepot.adressesByIdAdresse.numero}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Numéro : </label>
+                        <input class="input-modif" type="text" name="numero" value="${entrepot.adressesByIdAdresse.numero}">
                     </div>
-                    <div class="form-group" id="form-modif3">
-                        <label>Boite : </label>
-                        <input class="form-control" type="text" name="boite" value="${entrepot.adressesByIdAdresse.boite}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Boite : </label>
+                        <input class="input-modif" type="text" name="boite" value="${entrepot.adressesByIdAdresse.boite}">
                     </div>
-                    <div class="form-group" id="form-modif4">
-                        <label>Code postal : </label>
-                        <input class="form-control" type="text" name="codePostal" value="${entrepot.adressesByIdAdresse.villesByIdVille.codePostal}">
+                    <div class="div-input-modif">
+                        <label class="label-input">Ville : </label>
+                        <select class="select-modif" id="modif-ville" name="idVille" value="">
+                            <c:forEach var="villeList" items="${villeList}">
+                                <option value="${villeList.idVille}" <c:if test="${ville.idVille == villeList.idVille}">selected</c:if>>${villeList.codePostal} - ${villeList.nomVille}</option>
+                            </c:forEach>
+                        </select>
                     </div>
-                    <div class="form-group" id="form-modif5">
-                        <label>Ville : </label>
-                        <input class="form-control" type="text" name="nomVille" value="${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}">
-                    </div>
-                    <div class="form-group" id="form-modif6">
-                        <label>Status : </label>
-                        <input class="form-control" type="text" name="actifEntrepot" value="test">
+                    <div class="div-input-modif">
+                        <label class="label-input">Status : </label>
+                        <input type="checkbox" name="actifEntrepot" id="actifEntrepot" value="ok" <c:if test="${entrepot.actifEntrepot}">checked</c:if>>
+                        <label for="actifEntrepot" class="label-checkbox">Actif</label>
                     </div>
 
                     <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"></input>
-                    <button type="submit" value="Envoyer" id="bouton-modif" class="btn btn-primary">Modifer</button>
+                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifer</button>
                 </form>
             </div>
 
-            <jsp:include page="footer.jsp"></jsp:include>
+            <c:import url="footer.jsp"></c:import>
         </div>
     </body>
 </html>

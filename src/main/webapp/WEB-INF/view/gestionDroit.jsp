@@ -3,16 +3,15 @@
 
 <html>
     <head>
-        <title>Title</title>
-        <style><%@ include file="/css/style.css" %></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
+        <title>Gestion des droits</title>
+        <c:import url="head.jsp"></c:import>
     </head>
 
     <body>
         <div class="container">
-            <jsp:include page="menu.jsp" />
+            <c:import url="menu.jsp"></c:import>
 
-            <h1>Gestion des droits utilisateur</h1>
+            <h2>Gestion des droits utilisateur</h2>
 
             <div>
                 <table class="table-custom">
@@ -32,15 +31,14 @@
                                 <label>Role : </label>
                                 <select class="form-control" name="idRole" id="pet-select">
                                     <option value="${utilisateur.rolesByIdRole.idRole}">${utilisateur.rolesByIdRole.roleDescription}</option>
-                                    <option value="1">admin</option>
-                                    <option value="3">employe</option>
-                                    <option value="2">client</option>
+                                    <c:forEach var="role" items="${roleList}">
+                                        <option value="${role.idRole}">${role.roleDescription}</option>
+                                    </c:forEach>
                                 </select>
-
                         </td>
                         <td>
                             <c:forEach var="autorise" items="${autorise}">
-                                <c:out value="${autorise.permissionsByIdPermission.nomPermission}"></c:out>
+                                <c:out value="${autorise.permissionsByIdPermission.nomPermission}"></c:out></br>
                             </c:forEach>
                         </td>
                         <td>
@@ -51,7 +49,7 @@
                 </table>
             </div>
 
-            <jsp:include page="footer.jsp"></jsp:include>
+            <c:import url="footer.jsp"></c:import>
         </div>
     </body>
 </html>

@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * @authors Wets Jeoffroy / Vanconingsloo Kevin
  */
+ 
 @Entity
 @Table(name = "adresses", schema = "location_vehicules")
 @NamedQuery(name = "Adresse.lister", query = "SELECT c FROM Adresse c ORDER BY c.idAdresse")
@@ -20,6 +21,7 @@ public class Adresse {
     private List<Utilisateur> utilisateursByIdAdresse;
 
     public Adresse(){
+
     }
 
     public Adresse(String rue, String numero, String boite, Ville ville){

@@ -43,5 +43,9 @@ public class RoleService {
             throw new ServiceException(e);
         }
     }
+
+    public void supprimer (Role role){
+        em.remove(role);
+    }
 }
 

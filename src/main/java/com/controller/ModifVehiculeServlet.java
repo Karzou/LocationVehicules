@@ -1,36 +1,80 @@
 package com.controller;
 
 import com.connection.EMF;
+import com.entity.Marque;
+import com.entity.Modele;
+import com.entity.OptionVehicule;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
+import com.service.MarqueService;
+import com.service.ModeleService;
+import com.service.OptionVehiculeService;
 import com.service.VehiculeService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Wets Jeoffroy
  */
 
+@WebServlet("/modifVehicule")
 public class ModifVehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         EntityManager em = EMF.getEM();
 
-        String idReq = request.getParameter("idModif");
-        int id = Integer.parseInt(idReq);
+        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
 
         VehiculeService vehiculeService = new VehiculeService(em);
+        OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+        MarqueService marqueService = new MarqueService(em);
+        ModeleService modeleService = new ModeleService(em);
         Vehicule vehicule = null;
+        List<OptionVehicule> optionVehiculesList = null;
+        Marque marque = null;
+        List<Marque> marqueList = null;
+        List<Modele> modeleList = null;
+
+        try {
+
+            marqueList = marqueService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            marque = marqueService.trouver(idMarque);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            modeleList = modeleService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            optionVehiculesList = optionVehiculeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         try {
 
@@ -43,6 +87,81 @@ public class ModifVehiculeServlet extends HttpServlet {
             em.close();
         }
 
+        request.setAttribute("marque", marque);
+        request.setAttribute("marqueList", marqueList);
+        request.setAttribute("modeleList", modeleList);
+        request.setAttribute("optionVehiculesList", optionVehiculesList);
+        request.setAttribute("vehicule", vehicule);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifVehicule.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        EntityManager em = EMF.getEM();
+
+        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+        boolean modifFlag = Boolean.parseBoolean(request.getParameter("modifFlag"));
+
+        VehiculeService vehiculeService = new VehiculeService(em);
+        OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+        MarqueService marqueService = new MarqueService(em);
+        ModeleService modeleService = new ModeleService(em);
+        Vehicule vehicule = null;
+        List<OptionVehicule> optionVehiculesList = null;
+        Marque marque = null;
+        List<Marque> marqueList = null;
+        List<Modele> modeleList = null;
+
+        try {
+
+            marqueList = marqueService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            marque = marqueService.trouver(idMarque);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            modeleList = modeleService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            optionVehiculesList = optionVehiculeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            vehicule = vehiculeService.trouver(id);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            em.close();
+        }
+
+        request.setAttribute("modifFlag", modifFlag);
+        request.setAttribute("marque", marque);
+        request.setAttribute("marqueList", marqueList);
+        request.setAttribute("modeleList", modeleList);
+        request.setAttribute("optionVehiculesList", optionVehiculesList);
         request.setAttribute("vehicule", vehicule);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifVehicule.jsp").forward(request, response);

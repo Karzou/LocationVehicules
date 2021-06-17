@@ -2,20 +2,24 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Entrepot;
+import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.EntrepotService;
+import com.service.VilleService;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Wets Jeoffroy
  */
-
+@WebServlet("/modifEntrepot")
 public class ModifEntrepotServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,11 +30,30 @@ public class ModifEntrepotServlet extends HttpServlet {
 
         EntityManager em = EMF.getEM();
 
-        String idReq = request.getParameter("idModif");
-        int id = Integer.parseInt(idReq);
+        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idVille = Integer.parseInt(request.getParameter("idVille"));
 
         EntrepotService entrepotService = new EntrepotService(em);
+        VilleService villeService = new VilleService(em);
         Entrepot entrepot = null;
+        Ville ville = null;
+        List<Ville> villeList = null;
+
+        try {
+
+            villeList = villeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            ville = villeService.trouver(idVille);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         try {
 
@@ -44,7 +67,9 @@ public class ModifEntrepotServlet extends HttpServlet {
         }
 
         request.setAttribute("entrepot", entrepot);
+        request.setAttribute("ville", ville);
+        request.setAttribute("villeList", villeList);
 
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifEntrepot.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifEntrepot.jsp" ).forward( request, response);
     }
 }

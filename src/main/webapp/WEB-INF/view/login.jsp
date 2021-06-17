@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <c:import url="head.jsp"></c:import>
         <title>Connexion / Enregistrement</title>
-        <style><%@ include file="/css/style.css"%></style>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/utils.js"></script>
     </head>
 
     <body class="body">
@@ -22,17 +20,16 @@
                 <form name="form" action="<c:url value="/login"/>" method="post">
                     <div class="username-login-div">
                         <input type="text" class="username-login" name="username" id="username" placeholder="Email"/>
-                       <!-- <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>-->
                     </div>
 
                     <div class="password-login-div">
                         <input type="password" class="password-login" name="password" id="password" placeholder="Mot de passe"/>
-                    	<!--<span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>-->
                     </div>
-                    
-                    <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
-                    </div>
+                    <c:if test="${empty succes}">
+                        <div class="login-div-error">
+                            <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+                        </div>
+                    </c:if>
 
                     <div class="login-div-success">
                         <span style="color:green"><%=(request.getAttribute("succes") == null) ? "" : request.getAttribute("succes")%></span>
@@ -53,27 +50,44 @@
             </div>
         </div>
 
-        <div class="container-register" id="container-register">
+        <div class="container-register" id="container-register" style="display: ${(empty erreurFlag) ? 'none': 'block'};">
             <div class="content-register">
                 <form name="createUser" action="<c:url value="/creationUtilisateur"/>" method="post">
                     <div class="register-div">
                         <label for="register-nom">Nom</label>
                         <input type="text" class="register-input" id="register-nom" name="nom"/>
                     </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurNom") == null) ? "" : request.getAttribute("erreurNom")%></span>
+                    </br>
+                    </div>
+
 
                     <div class="register-div">
                         <label for="register-prenom">Prénom</label>
                         <input type="text" class="register-input" id="register-prenom" name="prenom"/>
+                    </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurPrenom") == null) ? "" : request.getAttribute("erreurPrenom")%></span>
+                        </br>
                     </div>
 
                     <div class="register-div">
                         <label for="register-mail">Email</label>
                         <input type="mail" class="register-input" id="register-mail" name="mail"/>
                     </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurMail") == null) ? "" : request.getAttribute("erreurMail")%></span>
+                        </br>
+                    </div>
 
                     <div class="register-div">
                         <label for="register-password">Mot de passe</label>
                         <input type="password" class="register-input" id="register-password" name="password"/>
+                    </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurPassword") == null) ? "" : request.getAttribute("erreurPassword")%></span>
+                        </br>
                     </div>
 
                     <div class="register-div">
@@ -85,10 +99,18 @@
                         <label for="register-telephone">Téléphone</label>
                         <input type="text" class="register-input" id="register-telephone" name="telephone"/>
                     </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurTelephone") == null) ? "" : request.getAttribute("erreurTelephone")%></span>
+                        </br>
+                    </div>
 
                     <div class="register-div">
                         <label for="register-rue">Rue</label>
                         <input type="text" class="register-input" id="register-rue" name="rue"/>
+                    </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><%=(request.getAttribute("erreurAdresse") == null) ? "" : request.getAttribute("erreurAdresse")%></span>
+                        </br>
                     </div>
 
                     <div class="register-div">
@@ -111,11 +133,6 @@
                     </div>
 
                     <div class="register-div">
-                        <label for="register-codepostal">Code postal</label>
-                        <input type="text" class="register-input" id="register-codepostal" name="codepostal"/>
-                    </div>
-
-                    <div class="register-div">
                         <label for="register-dateNaissance">Date de naissance</label>
                         <input type="date" class="register-input" id="register-dateNaissance" name="dateNaissance"/>
                     </div>
@@ -129,12 +146,14 @@
                         <input type="submit" class="btn-register" value="Enregistrer"></input>
                         <input type="reset"class="btn-reset" value="Reset"></input>
                     </div>
-
+                <c:if test="${empty succes}">
 					<div class="login-div-error">
-                    	<span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+                    	<span style="color:#ff0000"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
                     </div>
+                </c:if>
                 </form>
             </div>
+            <c:import url="footer.jsp"></c:import>
         </div>
     </body>
 </html>
