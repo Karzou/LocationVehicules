@@ -1,5 +1,12 @@
 package com.controller;
 
+import com.connection.EMF;
+import com.entity.Vehicule;
+import com.service.Validation;
+import com.service.VehiculeService;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +27,19 @@ public class AjoutVehiculeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*EntityManager em = EMF.getEM();
+        EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
+
+        idMarque
+                idModele
+        cylindree
+                puissance
+        numChassis
+                immatriculation
+        dateAchat
+                prixJournalier
+        actifVehicule
+
 
         // Récupération des données
         String nomEntrepot = Validation.ucFirst(request.getParameter("nomEntrepot"));
@@ -29,13 +47,11 @@ public class AjoutVehiculeServlet extends HttpServlet {
         String rueEntrepot = request.getParameter("rue");
         String numeroEntrepot = request.getParameter("numero");
         String boiteEntrepot = request.getParameter("boite");
-        int idVilleEntrepot = Integer.parseInt(request.getParameter("idVille"));
+        int idModele = Integer.parseInt(request.getParameter("idVille"));
 
         // Instanciation
         VehiculeService vehiculeService = new VehiculeService(em);
-        Vehicule vehicule = null;
-
-        Entrepot entrepot = new Entrepot(nomEntrepot, nombrePlaceEntrepot, adresse);
+        Vehicule vehicule = new Vehicule();
 
         try {
 
@@ -57,6 +73,6 @@ public class AjoutVehiculeServlet extends HttpServlet {
             em.close();
         }
 
-        response.sendRedirect("gestionEntrepot");*/
+        response.sendRedirect("gestionVehicule");
     }
 }

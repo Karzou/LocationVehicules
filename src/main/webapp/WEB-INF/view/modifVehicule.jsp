@@ -18,7 +18,7 @@
                 <form action="<c:url value="/gestionVehicule"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>
-                        <select class="select-modif"name="idMarque" value="" onChange="location.href='${pageContext.request.contextPath}/modifVehicule?idMarque='+this.value+'&idModif='+${vehicule.idVehicule};">
+                        <select class="select-modif" name="idMarque" onChange="location.href='${pageContext.request.contextPath}/modifVehicule?idMarque='+this.value+'&idModif='+${vehicule.idVehicule};">
                             <c:forEach var="marqueList" items="${marqueList}">
                                 <c:choose>
                                     <c:when test="${modifFlag == true}">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Modèle : </label>
-                        <select class="select-modif" name="idModele" value="">
+                        <select class="select-modif" name="idModele">
                             <c:forEach var="modeleList" items="${modeleList}">
                                 <c:choose>
                                     <c:when test="${modifFlag == true}">

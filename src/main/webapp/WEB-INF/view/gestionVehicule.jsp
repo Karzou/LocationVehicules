@@ -15,7 +15,78 @@
             <div class="content-vehicle">
                 <h2>Ajout de véhicule</h2>
 
+                <form action="<c:url value="/ajoutVehicule"/>" method="post">
+                    <div class="div-input-modif">
+                        <label class="label-input">Marque : </label>
+                        <select class="select-modif" name="idMarque" onChange="location.href='${pageContext.request.contextPath}/gestionVehicule?idMarque='+this.value+'&newVehicleFlag=true';">
+                            <option value="" <c:if test="${newVehicleFlag == false}">selected</c:if> disabled>Choisissez une marque</option>
+                            <c:forEach var="marqueList" items="${marqueList}">
+                                <option value="${marqueList.idMarque}" <c:if test="${newVehicleFlag == true && marqueList.idMarque == marque.idMarque}">selected</c:if>>${marqueList.nomMarque}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Modèle : </label>
+                        <select class="select-modif" name="idModele">
+                            <c:forEach var="modeleList" items="${modeleList}">
+                                <c:choose>
+                                    <c:when test="${modifFlag == true}">
+                                        <c:if test="${vehicule.modelesByIdModele.marquesByIdMarque.idMarque == modeleList.marquesByIdMarque.idMarque}">
+                                            <option value="${modeleList.idModele}" <c:if test="${vehicule.modelesByIdModele.idModele == modeleList.idModele}">selected</c:if>>${modeleList.nomModele}</option>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:if test="${marque.idMarque == modeleList.marquesByIdMarque.idMarque}">
+                                            <option value="${modeleList.idModele}" <c:if test="${vehicule.modelesByIdModele.idModele == modeleList.idModele}">selected</c:if>>${modeleList.nomModele}</option>
+                                        </c:if>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Cylindrée : </label>
+                        <input class="input-modif" type="text" name="cylindree" value="${vehicule.cylindree}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Puissance: </label>
+                        <input class="input-modif" type="text" name="puissance" value="${vehicule.puissance}">
+                    </div>
+                    <div class="div-input-modif2">
+                        <div class="div-input-left"><label class="label-input">Option: </label></div>
+                        <div class="div-input-right">
+                            <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
+                                <div class="div-input-checkbox">
+                                    <input type="checkbox" class="input-checkbox" id="${optionVehiculesList.idOption}" name="option" checked/>
+                                    <label class="input-checkbox" for="${optionVehiculesList.idOption}">${optionVehiculesList.nomOption}</label>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Numéro de chassis: </label>
+                        <input class="input-modif" type="text" name="numChassis" value="${vehicule.numChassis}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Immatriculation : </label>
+                        <input class="input-modif" type="text" name="immatriculation" value="${vehicule.immatriculation}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Date achat : </label>
+                        <input class="input-modif" type="date" name="dateAchat" value="${vehicule.dateAchat}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Prix journalier : </label>
+                        <input class="input-modif" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Status : </label>
+                        <input type="checkbox" name="actifVehicule" id="actifVehicule" value="ok" <c:if test="${vehicule.actifVehicule}">checked</c:if>>
+                        <label for="actifVehicule" class="label-checkbox">Actif</label>
+                    </div>
 
+                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Enregistrer</button>
+                </form>
             </div>
 
             <div class="content-vehicle">

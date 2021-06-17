@@ -3,10 +3,12 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.Marque;
 import com.entity.Modele;
+import com.entity.OptionVehicule;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import com.service.MarqueService;
 import com.service.ModeleService;
+import com.service.OptionVehiculeService;
 import com.service.VehiculeService;
 
 import javax.persistence.EntityManager;
@@ -31,8 +33,54 @@ public class GestionVehiculeServlet extends HttpServlet {
 
         EntityManager em = EMF.getEM();
 
-        List<Vehicule> vehiculeList = null;
+        boolean newVehicleFlag = Boolean.parseBoolean(request.getParameter("newVehicleFlag"));
+
+        MarqueService marqueService = new MarqueService(em);
+        ModeleService modeleService = new ModeleService(em);
+        OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
         VehiculeService vehiculeService = new VehiculeService(em);
+        Marque marque = null;
+        List<Marque> marqueList = null;
+        List<Modele> modeleList = null;
+        List<OptionVehicule> optionVehiculesList = null;
+        List<Vehicule> vehiculeList = null;
+
+        try {
+
+            marqueList = marqueService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        if (newVehicleFlag) {
+
+            int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+
+            try {
+
+                marque = marqueService.trouver(idMarque);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            }
+
+            try {
+
+                modeleList = modeleService.lister();
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            }
+        }
+
+        try {
+
+            optionVehiculesList = optionVehiculeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         try {
 
@@ -45,6 +93,11 @@ public class GestionVehiculeServlet extends HttpServlet {
             em.close();
         }
 
+        request.setAttribute("newVehicleFlag", newVehicleFlag);
+        request.setAttribute("marque", marque);
+        request.setAttribute("marqueList", marqueList);
+        request.setAttribute("modeleList", modeleList);
+        request.setAttribute("optionVehiculesList", optionVehiculesList);
         request.setAttribute("vehiculeList", vehiculeList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionVehicule.jsp" ).forward( request, response );
@@ -56,24 +109,13 @@ public class GestionVehiculeServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         int id = Integer.parseInt(request.getParameter("idModif"));
-        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
         int idModele = Integer.parseInt(request.getParameter("idModele"));
         String status = request.getParameter("actifVehicule");
 
         VehiculeService vehiculeService = new VehiculeService(em);
-        MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
         Vehicule vehicule = null;
-        Marque marque = null;
         Modele modele = null;
-
-        try {
-
-            marque = marqueService.trouver(idMarque);
-        } catch (ServiceException e) {
-
-            e.printStackTrace();
-        }
 
         try {
 
@@ -95,7 +137,6 @@ public class GestionVehiculeServlet extends HttpServlet {
 
             transaction.begin();
 
-            vehicule.getModelesByIdModele().setMarquesByIdMarque(marque);
             vehicule.setModelesByIdModele(modele);
             vehicule.setPuissance(Integer.parseInt(request.getParameter("puissance")));
             vehicule.setCylindree(Integer.parseInt(request.getParameter("cylindree")));

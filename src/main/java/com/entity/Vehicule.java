@@ -36,7 +36,7 @@ public class Vehicule {
 
     }
 
-    public Vehicule(String numChassis, int cylindree, int puissance, Date dateAchat, String immatriculation, float prixJournalier, Entrepot entrepot, Couleur couleur, Modele modele, Marque marque) {
+    public Vehicule(String numChassis, int cylindree, int puissance, Date dateAchat, String immatriculation, float prixJournalier, Entrepot entrepot, Couleur couleur, Modele modele) {
 
         this.numChassis = numChassis;
         this.cylindree = cylindree;
@@ -49,7 +49,6 @@ public class Vehicule {
         this.couleursByIdCouleur = couleur;
         this.modelesByIdModele = modele;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
