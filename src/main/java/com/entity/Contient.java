@@ -13,6 +13,16 @@ public class Contient {
     private OptionVehicule optionsVehiculesByIdOption;
     private Vehicule vehiculesByIdVehicule;
 
+    public Contient() {
+
+    }
+
+    public Contient(OptionVehicule optionVehicule, Vehicule vehicule) {
+
+        this.optionsVehiculesByIdOption = optionVehicule;
+        this.vehiculesByIdVehicule = vehicule;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_contient", nullable = false)

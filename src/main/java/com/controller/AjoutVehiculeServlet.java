@@ -1,10 +1,7 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Couleur;
-import com.entity.Entrepot;
-import com.entity.Modele;
-import com.entity.Vehicule;
+import com.entity.*;
 import com.service.*;
 
 import javax.persistence.EntityManager;
@@ -15,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Wets Jeoffroy
@@ -29,6 +29,20 @@ public class AjoutVehiculeServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        /*response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // get all parameter names
+        Set<String> paramNames = request.getParameterMap().keySet();
+
+        // iterating over parameter names and get its value
+        for (String name : paramNames) {
+            String value = request.getParameter(name);
+            out.write(name + ": " + value);
+            out.write("<br>");
+        }*/
+
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -49,9 +63,11 @@ public class AjoutVehiculeServlet extends HttpServlet {
         EntrepotService entrepotService = new EntrepotService(em);
         CouleurService couleurService = new CouleurService(em);
         ModeleService modeleService = new ModeleService(em);
+        OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
         Entrepot entrepot = null;
         Couleur couleur = null;
         Modele modele = null;
+        List<OptionVehicule> optionVehiculeList = null;
 
         try {
 

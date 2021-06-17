@@ -57,7 +57,7 @@
                         <div class="div-input-right">
                             <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
                                 <div class="div-input-checkbox">
-                                    <input type="checkbox" class="input-checkbox" id="${optionVehiculesList.idOption}" name="option" checked/>
+                                    <input type="checkbox" class="input-checkbox" id="${optionVehiculesList.idOption}" value="ok" name="optionVehicule${optionVehiculesList.idOption}"/>
                                     <label class="input-checkbox" for="${optionVehiculesList.idOption}">${optionVehiculesList.nomOption}</label>
                                 </div>
                             </c:forEach>
