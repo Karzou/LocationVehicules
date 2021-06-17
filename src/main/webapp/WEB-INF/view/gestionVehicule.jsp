@@ -80,9 +80,20 @@
                         <input class="input-modif" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Status : </label>
-                        <input type="checkbox" name="actifVehicule" id="actifVehicule" value="ok" <c:if test="${vehicule.actifVehicule}">checked</c:if>>
-                        <label for="actifVehicule" class="label-checkbox">Actif</label>
+                        <label class="label-input">Couleur : </label>
+                        <select class="select-modif" name="idCouleur">
+                            <c:forEach var="couleurList" items="${couleurList}">
+                                <option value="${couleurList.idCouleur}">${couleurList.nomCouleur}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Entrepot : </label>
+                        <select class="select-modif" name="idEntrepot">
+                            <c:forEach var="entrepotList" items="${entrepotList}">
+                                <option value="${entrepotList.idEntrepot}">${entrepotList.nomEntrepot} >> ${entrepotList.adressesByIdAdresse.rue} ${entrepotList.adressesByIdAdresse.numero} - ${entrepotList.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepotList.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                            </c:forEach>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Enregistrer</button>

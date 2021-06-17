@@ -1,15 +1,9 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Marque;
-import com.entity.Modele;
-import com.entity.OptionVehicule;
-import com.entity.Vehicule;
+import com.entity.*;
 import com.exception.ServiceException;
-import com.service.MarqueService;
-import com.service.ModeleService;
-import com.service.OptionVehiculeService;
-import com.service.VehiculeService;
+import com.service.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -38,12 +32,16 @@ public class GestionVehiculeServlet extends HttpServlet {
         MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
         OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+        EntrepotService entrepotService = new EntrepotService(em);
+        CouleurService couleurService = new CouleurService(em);
         VehiculeService vehiculeService = new VehiculeService(em);
         Marque marque = null;
         List<Marque> marqueList = null;
         List<Modele> modeleList = null;
         List<OptionVehicule> optionVehiculesList = null;
         List<Vehicule> vehiculeList = null;
+        List<Entrepot> entrepotList = null;
+        List<Couleur> couleurList = null;
 
         try {
 
@@ -76,6 +74,22 @@ public class GestionVehiculeServlet extends HttpServlet {
 
         try {
 
+            couleurList = couleurService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            entrepotList = entrepotService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
             optionVehiculesList = optionVehiculeService.lister();
         } catch (ServiceException e) {
 
@@ -98,6 +112,8 @@ public class GestionVehiculeServlet extends HttpServlet {
         request.setAttribute("marqueList", marqueList);
         request.setAttribute("modeleList", modeleList);
         request.setAttribute("optionVehiculesList", optionVehiculesList);
+        request.setAttribute("entrepotList", entrepotList);
+        request.setAttribute("couleurList", couleurList);
         request.setAttribute("vehiculeList", vehiculeList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionVehicule.jsp" ).forward( request, response );

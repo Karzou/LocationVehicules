@@ -1,9 +1,11 @@
 package com.controller;
 
 import com.connection.EMF;
+import com.entity.Couleur;
+import com.entity.Entrepot;
+import com.entity.Modele;
 import com.entity.Vehicule;
-import com.service.Validation;
-import com.service.VehiculeService;
+import com.service.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 
 /**
  * @author Wets Jeoffroy
@@ -30,28 +33,52 @@ public class AjoutVehiculeServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        idMarque
-                idModele
-        cylindree
-                puissance
-        numChassis
-                immatriculation
-        dateAchat
-                prixJournalier
-        actifVehicule
-
-
         // Récupération des données
-        String nomEntrepot = Validation.ucFirst(request.getParameter("nomEntrepot"));
-        int nombrePlaceEntrepot = Integer.parseInt(request.getParameter("nombrePlace"));
-        String rueEntrepot = request.getParameter("rue");
-        String numeroEntrepot = request.getParameter("numero");
-        String boiteEntrepot = request.getParameter("boite");
-        int idModele = Integer.parseInt(request.getParameter("idVille"));
+        int idModele = Integer.parseInt(request.getParameter("idModele"));
+        int idCouleur = Integer.parseInt(request.getParameter("idCouleur"));
+        int idEntrepot = Integer.parseInt(request.getParameter("idEntrepot"));
+        int cylindree = Integer.parseInt(request.getParameter("cylindree"));
+        int puissance = Integer.parseInt(request.getParameter("puissance"));
+        String numChassis = request.getParameter("numChassis");
+        String immatriculation = request.getParameter("immatriculation");
+        Date dateAchat = Date.valueOf(request.getParameter("dateAchat"));
+        float prixJournalier = Float.parseFloat(request.getParameter("prixJournalier"));
 
         // Instanciation
         VehiculeService vehiculeService = new VehiculeService(em);
-        Vehicule vehicule = new Vehicule();
+        EntrepotService entrepotService = new EntrepotService(em);
+        CouleurService couleurService = new CouleurService(em);
+        ModeleService modeleService = new ModeleService(em);
+        Entrepot entrepot = null;
+        Couleur couleur = null;
+        Modele modele = null;
+
+        try {
+
+            modele = modeleService.trouver(idModele);
+        } catch ( Exception e ) {
+
+            throw new ServletException( e );
+        }
+
+        try {
+
+            entrepot = entrepotService.trouver(idEntrepot);
+        } catch ( Exception e ) {
+
+            throw new ServletException( e );
+        }
+
+        try {
+
+            couleur = couleurService.trouver(idCouleur);
+        } catch ( Exception e ) {
+
+            throw new ServletException( e );
+        }
+
+        Vehicule vehicule = new Vehicule(numChassis, cylindree, puissance, dateAchat,
+                immatriculation, prixJournalier, entrepot, couleur, modele);
 
         try {
 
