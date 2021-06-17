@@ -91,7 +91,9 @@
                         <label class="label-input">Entrepot : </label>
                         <select class="select-modif" name="idEntrepot">
                             <c:forEach var="entrepotList" items="${entrepotList}">
-                                <option value="${entrepotList.idEntrepot}">${entrepotList.nomEntrepot} >> ${entrepotList.adressesByIdAdresse.rue} ${entrepotList.adressesByIdAdresse.numero} - ${entrepotList.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepotList.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                                <c:if test="${entrepotList.actifEntrepot}">
+                                    <option value="${entrepotList.idEntrepot}">${entrepotList.nomEntrepot} >> ${entrepotList.adressesByIdAdresse.rue} ${entrepotList.adressesByIdAdresse.numero} - ${entrepotList.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepotList.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </div>

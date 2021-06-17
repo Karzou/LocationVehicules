@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
         <title>Accueil</title>
     </head>
 
     <body>
         <div class="container">
-            <c:import url="menu.jsp"></c:import>
+            <c:import url="menu.jsp"/>
             <div class="content1">
                 <div class="head">
                     <img class="img-home" src="${pageContext.request.contextPath}/images/home.png" alt="home" />
@@ -51,24 +51,20 @@
 
                         <div class="boxDate1">
                             <label for="dateTimeDepart">Date et heure de départ</label>
-                            <input type="date" id="dateTimeDepart"
-                                   name="dateTimeDepart" value="" class="empty" />
+                            <input type="date" id="dateTimeDepart" name="dateTimeDepart" value="" class="empty" />
                         </div>
 
                         <div class="boxtime1">
-                            <input type="time" id="heureDepart"
-                                   name="heureDepart" value="" class="empty" />
+                            <input type="time" id="heureDepart" name="heureDepart" value="" class="empty" />
                         </div>
 
                         <div class="boxDate2">
                             <label for="dateTimeRetour">Date et heure de retour</label>
-                            <input type="date" id="dateTimeRetour"
-                                   name="dateTimeRetour" class="empty" />
+                            <input type="date" id="dateTimeRetour" name="dateTimeRetour" class="empty" />
                         </div>
 
                         <div class="boxtime2">
-                            <input type="time" id="heureRetour"
-                                   name="heureRetour" value="" class="empty" />
+                            <input type="time" id="heureRetour" name="heureRetour" value="" class="empty" />
                         </div>
 
                         <div class="submitButton ">
@@ -99,7 +95,7 @@
                 </div>
             </div>
 
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

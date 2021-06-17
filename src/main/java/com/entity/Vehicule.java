@@ -15,7 +15,7 @@ import java.util.Objects;
         @NamedQuery(name = "Vehicule.trouverParMarque", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.marquesByIdMarque.nomMarque = :marque"),
         @NamedQuery(name = "Vehicule.trouverParModele", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.nomModele = :modele"),
         @NamedQuery(name = "Vehicule.lister", query = "SELECT v FROM Vehicule v JOIN v.modelesByIdModele mo JOIN mo.marquesByIdMarque ma"),
-        @NamedQuery(name = "Vehicule.rechercher", query = "SELECT v FROM Vehicule v JOIN v.modelesByIdModele mo JOIN mo.marquesByIdMarque ma WHERE v.entrepotsByIdEntrepot.idEntrepot = :idEntrepot AND NOT EXISTS (SELECT r FROM Reservation r WHERE r.vehiculesByIdVehicule.idVehicule = v.idVehicule AND r.dateDebutLocation <= :dateFin AND r.dateFinLocation >= :dateDebut)"),
+        @NamedQuery(name = "Vehicule.rechercher", query = "SELECT v FROM Vehicule v JOIN v.modelesByIdModele mo JOIN mo.marquesByIdMarque ma WHERE v.actifVehicule = true AND v.entrepotsByIdEntrepot.idEntrepot = :idEntrepot AND NOT EXISTS (SELECT r FROM Reservation r WHERE r.vehiculesByIdVehicule.idVehicule = v.idVehicule AND r.dateDebutLocation <= :dateFin AND r.dateFinLocation >= :dateDebut)"),
 })
 public class Vehicule {
     private int idVehicule;

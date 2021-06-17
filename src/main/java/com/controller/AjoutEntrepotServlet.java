@@ -35,7 +35,7 @@ public class AjoutEntrepotServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données
-        String nomEntrepot = Validation.ucFirst(request.getParameter("nomEntrepot"));
+        String nomEntrepot = Validation.upperCase(request.getParameter("nomEntrepot"));
         int nombrePlaceEntrepot = Integer.parseInt(request.getParameter("nombrePlace"));
         String rueEntrepot = request.getParameter("rue");
         String numeroEntrepot = request.getParameter("numero");

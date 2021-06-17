@@ -46,6 +46,11 @@ public class Validation {
         return mot.substring(0,1).toUpperCase() + mot.substring(1).toLowerCase();
     }
 
+    public static String upperCase (String mot) {
+
+        return mot.toUpperCase();
+    }
+
     public static Date dateFormat (String date){
         return Date.valueOf(date);
     }
