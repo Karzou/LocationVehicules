@@ -28,20 +28,6 @@ public class AjoutVehiculeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /*response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        // get all parameter names
-        Set<String> paramNames = request.getParameterMap().keySet();
-
-        // iterating over parameter names and get its value
-        for (String name : paramNames) {
-            String value = request.getParameter(name);
-            out.write(name + ": " + value);
-            out.write("<br>");
-        }*/
-
-
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
