@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @authors Wets Jeoffroy // Vanconingsloo Kevin
+ * @author Wets Jeoffroy
  */
 
 public class EntrepotService {

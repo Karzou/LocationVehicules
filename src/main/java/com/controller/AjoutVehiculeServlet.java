@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,10 +62,11 @@ public class AjoutVehiculeServlet extends HttpServlet {
         CouleurService couleurService = new CouleurService(em);
         ModeleService modeleService = new ModeleService(em);
         OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+        ContientService contientService = new ContientService(em);
         Entrepot entrepot = null;
         Couleur couleur = null;
         Modele modele = null;
-        List<OptionVehicule> optionVehiculeList = null;
+        OptionVehicule optionVehicule = null;
 
         try {
 
@@ -103,6 +102,46 @@ public class AjoutVehiculeServlet extends HttpServlet {
             vehiculeService.creer(vehicule);
 
             transaction.commit();
+        } catch ( Exception e ) {
+
+            throw new ServletException( e );
+        } finally {
+
+            if (transaction.isActive()) {
+
+                transaction.rollback();
+            }
+        }
+
+        try {
+
+            // get all parameter names
+            Set<String> paramNames = request.getParameterMap().keySet();
+
+            // iterating over parameter names and get its value
+            for (String name : paramNames) {
+
+                if (name.contains("option")) {
+
+                    int idOption = Integer.parseInt(request.getParameter(name));
+
+                    try {
+
+                        optionVehicule = optionVehiculeService.trouver(idOption);
+                    } catch ( Exception e ) {
+
+                        throw new ServletException( e );
+                    }
+
+                    Contient contient = new Contient(optionVehicule, vehicule);
+
+                    transaction.begin();
+
+                    contientService.creer(contient);
+
+                    transaction.commit();
+                }
+            }
         } catch ( Exception e ) {
 
             throw new ServletException( e );
