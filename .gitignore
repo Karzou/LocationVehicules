@@ -2,3 +2,5 @@
 target/
 .iml
 .iml.bak
+logs/
+log4j2.xml
