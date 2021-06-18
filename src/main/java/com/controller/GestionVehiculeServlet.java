@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Wets Jeoffroy
@@ -124,14 +125,22 @@ public class GestionVehiculeServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idVehicule = Integer.parseInt(request.getParameter("idModif"));
         int idModele = Integer.parseInt(request.getParameter("idModele"));
+        int idCouleur = Integer.parseInt(request.getParameter("idCouleur"));
+        int idEntrepot = Integer.parseInt(request.getParameter("idEntrepot"));
         String status = request.getParameter("actifVehicule");
 
         VehiculeService vehiculeService = new VehiculeService(em);
         ModeleService modeleService = new ModeleService(em);
+        CouleurService couleurService = new CouleurService(em);
+        EntrepotService entrepotService = new EntrepotService(em);
+        ContientService contientService = new ContientService(em);
         Vehicule vehicule = null;
         Modele modele = null;
+        Couleur couleur = null;
+        Entrepot entrepot = null;
+        List<Contient> contientList;
 
         try {
 
@@ -143,7 +152,23 @@ public class GestionVehiculeServlet extends HttpServlet {
 
         try {
 
-            vehicule = vehiculeService.trouver(id);
+            vehicule = vehiculeService.trouver(idVehicule);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            couleur = couleurService.trouver(idCouleur);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            entrepot = entrepotService.trouver(idEntrepot);
         } catch (ServiceException e) {
 
             e.printStackTrace();
@@ -160,6 +185,8 @@ public class GestionVehiculeServlet extends HttpServlet {
             vehicule.setDateAchat(Date.valueOf(request.getParameter("dateAchat")));
             vehicule.setNumChassis(request.getParameter("numChassis"));
             vehicule.setPrixJournalier(Float.parseFloat(request.getParameter("prixJournalier")));
+            vehicule.setCouleursByIdCouleur(couleur);
+            vehicule.setEntrepotsByIdEntrepot(entrepot);
 
             if (status == null) {
                 vehicule.setActifVehicule(false);
@@ -169,7 +196,41 @@ public class GestionVehiculeServlet extends HttpServlet {
 
             vehiculeService.update(vehicule);
 
+            contientList = contientService.lister();
 
+            for (Contient contient: contientList) {
+
+                if (contient.getVehiculesByIdVehicule().getIdVehicule() == idVehicule) {
+
+                    contientService.supprimer(contient);
+                }
+            }
+
+            // get all parameter names
+            Set<String> paramNames = request.getParameterMap().keySet();
+
+            // iterating over parameter names and get its value
+            for (String name : paramNames) {
+
+                if (name.contains("option")) {
+
+                    int idOption = Integer.parseInt(request.getParameter(name));
+                    OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+                    OptionVehicule optionVehicule;
+
+                    try {
+
+                        optionVehicule = optionVehiculeService.trouver(idOption);
+                    } catch ( Exception e ) {
+
+                        throw new ServletException( e );
+                    }
+
+                    Contient contient = new Contient(optionVehicule, vehicule);
+
+                    contientService.creer(contient);
+                }
+            }
 
             transaction.commit();
         } catch ( Exception e ) {

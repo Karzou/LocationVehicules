@@ -63,7 +63,7 @@
                         <div class="div-input-right">
                         <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
                             <div class="div-input-checkbox">
-                                <input type="checkbox" class="input-checkbox" value="${optionVehiculesList.idOption}" name="option${optionVehiculesList.idOption}" <c:forEach var="contientList" items="${contientList}"><c:if test="${optionVehiculesList.idOption == contientList.optionsVehiculesByIdOption.idOption && vehicule.idVehicule == contientList.vehiculesByIdVehicule.idVehicule}">checked</c:if></c:forEach>/>
+                                <input type="checkbox" class="input-checkbox" id="${optionVehiculesList.idOption}" value="${optionVehiculesList.idOption}" name="option${optionVehiculesList.idOption}" <c:forEach var="contientList" items="${contientList}"><c:if test="${optionVehiculesList.idOption == contientList.optionsVehiculesByIdOption.idOption && vehicule.idVehicule == contientList.vehiculesByIdVehicule.idVehicule}">checked</c:if></c:forEach>/>
                                 <label class="input-checkbox" for="${optionVehiculesList.idOption}">${optionVehiculesList.nomOption}</label>
                             </div>
                         </c:forEach>
