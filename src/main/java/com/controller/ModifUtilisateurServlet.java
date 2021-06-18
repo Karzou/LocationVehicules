@@ -6,6 +6,8 @@ import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.UtilisateurService;
 import com.service.VilleService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -23,11 +25,15 @@ import java.util.List;
 @WebServlet("/modifUtilisateur")
 public class ModifUtilisateurServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    final static Logger logger = LogManager.getLogger(ModifUtilisateurServlet.class);
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("Appel de la methode doGet de ModifUtilisateurServlet.");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel de la methode doPost de ModifUtilisateurServlet.");
 
         HttpSession session = request.getSession();
         session.removeAttribute("erreur");
@@ -44,15 +50,19 @@ public class ModifUtilisateurServlet extends HttpServlet {
         Utilisateur utilisateur = null;
 
         try {
+            logger.info("Import de la liste ville.");
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            session.setAttribute("erreur", "Probleme avec le chargement de la liste de ville. " + e.getMessage());
+            logger.warn("Probleme lors de l import de la liste ville. " + e);
+            session.setAttribute("erreur", "Probleme avec le chargement de la liste de ville. ");
         }
 
         try {
+            logger.info("Import de l utilisateur : " + id);
             utilisateur = utilisateurService.trouver(id);
         } catch (ServiceException e) {
-            session.setAttribute("erreur", "Probleme avec le chargement de l'utilisateur'. " + e.getMessage());
+            logger.warn("Probleme lors de l import de l utilisateur : " + e);
+            session.setAttribute("erreur", "Probleme avec le chargement de l'utilisateur'.");
         } finally {
             em.close();
         }
@@ -66,6 +76,7 @@ public class ModifUtilisateurServlet extends HttpServlet {
             session.setAttribute("retour", "/gestionUtilisateur");
             response.sendRedirect("erreur");
         }else{
+            logger.info("Tout ok redirection vers modifUtilisateur.");
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifUtilisateur.jsp" ).forward( request, response );
         }
     }

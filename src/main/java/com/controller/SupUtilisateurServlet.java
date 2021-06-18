@@ -5,6 +5,8 @@ import com.entity.Utilisateur;
 import com.exception.ServiceException;
 import com.service.AutoriseService;
 import com.service.UtilisateurService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -22,11 +24,15 @@ import java.io.IOException;
 @WebServlet("/supUtilisateur")
 public class SupUtilisateurServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    final static Logger logger = LogManager.getLogger(SupUtilisateurServlet.class);
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("Appel de la methode doGet de SupUtilisateurServlet.");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel de la methode doPost de SupUtilisateurServlet.");
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -36,7 +42,7 @@ public class SupUtilisateurServlet extends HttpServlet {
         AutoriseService autoriseService = new AutoriseService(em);
 
         if(autoriseService.hasPermission((Integer)session.getAttribute("idRole"), "all")  || autoriseService.hasPermission((Integer)session.getAttribute("idRole"), "utilisateurs:write")) {
-
+            logger.info("Permission all ou utilisateur:write ok. ");
             String id = request.getParameter("idSup");
             int idSup = Integer.parseInt(id);
 
@@ -45,29 +51,34 @@ public class SupUtilisateurServlet extends HttpServlet {
             Utilisateur utilisateur = null;
 
             try {
-
+                logger.info("Import de l utilisateur : " + idSup);
                 utilisateur = utilisateurService.trouver(idSup);
 
             } catch (ServiceException e) {
-                session.setAttribute("erreur", "erreur lors de l'import de la liste de permission. " + e.getMessage());
+                logger.warn("Probleme lors de l import de l utilisateur : " + idSup + ". " + e);
+                session.setAttribute("erreur", "erreur lors de l'import de la liste de permission. ");
             }
 
             try {
                 transaction.begin();
-
+                logger.info("Debut de la transaction de suppression de l utilisateur : " + utilisateur.getEmail());
                 utilisateurService.suppressionLogique(utilisateur);
 
                 transaction.commit();
             } catch ( Exception e ) {
+                logger.warn("Probleme lors de la suppression de l utilisateur : " + utilisateur.getEmail() + ". " + e);
                 throw new ServletException( e );
             } finally {
                 if (transaction.isActive()) {
+                    logger.warn("Rollback de la suppression de l utilisateur : " + utilisateur.getEmail());
                     transaction.rollback();
                 }
                 em.close();
             }
             response.sendRedirect("gestionUtilisateur");
         } else {
+            logger.info("Permissions non accordée pour la suppression d utilisateur.");
+
             String message = "Vous n'avez pas les permissions pour supprimer un utilisateur !";
             request.setAttribute("errorMessage", message);
             String retour = "/gestionUtilisateur";

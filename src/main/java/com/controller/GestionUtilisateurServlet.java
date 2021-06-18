@@ -5,6 +5,8 @@ import com.entity.Utilisateur;
 import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -24,7 +26,11 @@ import java.util.List;
 @WebServlet("/gestionUtilisateur")
 public class GestionUtilisateurServlet extends HttpServlet {
 
+    final static Logger logger = LogManager.getLogger(GestionUtilisateurServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doGet de la servlet GestionUtilisateurPermission.");
 
         EntityManager em = EMF.getEM();
 
@@ -32,36 +38,20 @@ public class GestionUtilisateurServlet extends HttpServlet {
         UtilisateurService utilisateurService = new UtilisateurService(em);
 
         try {
+            logger.info("Importation de la liste utilisateur.");
             utilisateurList = utilisateurService.lister();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme lors de l import de la lite utilisateur. " + e);
         }
 
-        // Plus besoin du coup
-
-      //  Role role = null;
-     //   RoleService roleService = null;
-      //  Autorise autorise = new Autorise();
-      //  AutoriseService autoriseService = new AutoriseService(em);
-
-      //  List<Autorise> autoriseList = null;
-
-      /*  try {
-            autoriseList = autoriseService.listerParIdRole(2);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }*/
-
         request.setAttribute("utilisateurList", utilisateurList);
-
-       // request.setAttribute("autoriseList", autoriseList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doPost de la servlet GestionRolePermission.");
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -113,23 +103,19 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     nom = Validation.ucFirst(nom);
                     prenom = Validation.ucFirst(prenom);
                     try {
+                        logger.info("Import de la ville : " + idVille);
                         ville = villeService.trouver(idVille);
                     } catch (ServiceException e) {
-                        e.printStackTrace();
+                        logger.warn("Probleme avec l import de la ville: " + e);
                     }
                     try {
                         utilisateur = utilisateurService.trouver(id);
                     } catch (ServiceException e) {
-                        e.printStackTrace();
+                        logger.warn("Probleme avec l import de l utilisateur : " + id + ". " + e);
                     }
-         /*           Role roleDb = null;
-                    try {
-                        roleDb = roleService.trouver(role);
-                    } catch (ServiceException e) {
-                        e.printStackTrace();
-                    }
-         */          try {
+                   try {
                         transaction.begin();
+                        logger.info("Debut de la transaction de l update utilisateur." + utilisateur.getEmail());
 
                         utilisateur.setNomUtilisateur(nom);
                         utilisateur.setPrenomUtilisateur(prenom);
@@ -146,15 +132,18 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
                         transaction.commit();
                     } catch (Exception e) {
+                       logger.warn("Probleme lors de la mise a jour de l utilisateur. " + e);
                         session.setAttribute("erreur", "Une erreur est survenue lors de l'insertion en db !" );
                     } finally {
                         if (transaction.isActive()) {
+                            logger.warn("Rollback de la misa a jour de l utilisateur. " + utilisateur.getEmail());
                             transaction.rollback();
                         }
                         em.close();
                     }
                 }else {
-                    session.setAttribute("erreur", "Veuillez remplir tous les champs ! " + message);
+                    logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis." + message);
+                    session.setAttribute("erreur", "Veuillez remplir tous les champs ! ");
                 }
 
                 if(session.getAttribute("erreur") != null){
