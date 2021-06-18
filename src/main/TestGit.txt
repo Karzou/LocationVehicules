@@ -1,1 +1,8 @@
-Juste pour tester git chez Kevin
+Si vous avez des difficultés avec le lancement du projet git (comme chez moi),
+Faites un projet clean et à chaque fois vous transferer le src entre les 2 projets.
+Exemple :
+- 1) télécharger de git vers le fichier git de votre pc.
+- 2) copier coller le src du fichier git vers le projet clean
+- 3) faire vos changements dans le projet clean.
+- 4) copier coller le src du projet clean vers projet git
+- 5) push du projet git.
