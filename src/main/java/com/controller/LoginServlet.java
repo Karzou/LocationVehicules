@@ -6,6 +6,8 @@ import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.UtilisateurService;
 import com.service.VilleService;
+import org.apache.log4j.Logger;
+
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -24,6 +26,7 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         EntityManager em = EMF.getEM();
 
