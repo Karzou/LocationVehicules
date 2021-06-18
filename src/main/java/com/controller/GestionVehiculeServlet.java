@@ -21,7 +21,7 @@ import java.util.Set;
  * @author Wets Jeoffroy
  */
 
-@WebServlet(value = "/gestionVehicule")
+@WebServlet("/gestionVehicule")
 public class GestionVehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
