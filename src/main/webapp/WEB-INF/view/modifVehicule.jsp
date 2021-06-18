@@ -63,7 +63,7 @@
                         <div class="div-input-right">
                         <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
                             <div class="div-input-checkbox">
-                                <input type="checkbox" class="input-checkbox" id="${optionVehiculesList.idOption}" name="option" checked/>
+                                <input type="checkbox" class="input-checkbox" value="${optionVehiculesList.idOption}" name="option${optionVehiculesList.idOption}" <c:forEach var="contientList" items="${contientList}"><c:if test="${optionVehiculesList.idOption == contientList.optionsVehiculesByIdOption.idOption && vehicule.idVehicule == contientList.vehiculesByIdVehicule.idVehicule}">checked</c:if></c:forEach>/>
                                 <label class="input-checkbox" for="${optionVehiculesList.idOption}">${optionVehiculesList.nomOption}</label>
                             </div>
                         </c:forEach>
@@ -84,6 +84,24 @@
                     <div class="div-input-modif">
                         <label class="label-input">Prix journalier : </label>
                         <input class="input-modif" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Couleur : </label>
+                        <select class="select-modif" name="idCouleur">
+                            <c:forEach var="couleurList" items="${couleurList}">
+                                <option value="${couleurList.idCouleur}" <c:if test="${vehicule.couleursByIdCouleur.idCouleur == couleurList.idCouleur}">selected</c:if>>${couleurList.nomCouleur}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="div-input-modif">
+                        <label class="label-input">Entrepot : </label>
+                        <select class="select-modif" name="idEntrepot">
+                            <c:forEach var="entrepotList" items="${entrepotList}">
+                                <c:if test="${entrepotList.actifEntrepot}">
+                                    <option value="${entrepotList.idEntrepot}" <c:if test="${vehicule.entrepotsByIdEntrepot.idEntrepot == entrepotList.idEntrepot}">selected</c:if>>${entrepotList.nomEntrepot} >> ${entrepotList.adressesByIdAdresse.rue} ${entrepotList.adressesByIdAdresse.numero} - ${entrepotList.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepotList.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Status : </label>

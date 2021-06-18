@@ -1,15 +1,9 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Marque;
-import com.entity.Modele;
-import com.entity.OptionVehicule;
-import com.entity.Vehicule;
+import com.entity.*;
 import com.exception.ServiceException;
-import com.service.MarqueService;
-import com.service.ModeleService;
-import com.service.OptionVehiculeService;
-import com.service.VehiculeService;
+import com.service.*;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -19,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Wets Jeoffroy
@@ -108,11 +103,17 @@ public class ModifVehiculeServlet extends HttpServlet {
         OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
         MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
+        ContientService contientService = new ContientService(em);
+        EntrepotService entrepotService = new EntrepotService(em);
+        CouleurService couleurService = new CouleurService(em);
         Vehicule vehicule = null;
         List<OptionVehicule> optionVehiculesList = null;
         Marque marque = null;
         List<Marque> marqueList = null;
         List<Modele> modeleList = null;
+        List<Contient> contientList = null;
+        List<Entrepot> entrepotList = null;
+        List<Couleur> couleurList = null;
 
         try {
 
@@ -148,6 +149,30 @@ public class ModifVehiculeServlet extends HttpServlet {
 
         try {
 
+            contientList = contientService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            couleurList = couleurService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            entrepotList = entrepotService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
             vehicule = vehiculeService.trouver(id);
         } catch (ServiceException e) {
 
@@ -162,6 +187,9 @@ public class ModifVehiculeServlet extends HttpServlet {
         request.setAttribute("marqueList", marqueList);
         request.setAttribute("modeleList", modeleList);
         request.setAttribute("optionVehiculesList", optionVehiculesList);
+        request.setAttribute("contientList", contientList);
+        request.setAttribute("entrepotList", entrepotList);
+        request.setAttribute("couleurList", couleurList);
         request.setAttribute("vehicule", vehicule);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifVehicule.jsp").forward(request, response);

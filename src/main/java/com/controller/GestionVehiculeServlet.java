@@ -169,6 +169,8 @@ public class GestionVehiculeServlet extends HttpServlet {
 
             vehiculeService.update(vehicule);
 
+
+
             transaction.commit();
         } catch ( Exception e ) {
 

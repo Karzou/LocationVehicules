@@ -8,6 +8,9 @@ import java.util.Objects;
  */
  
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Contient.lister", query = "SELECT c from Contient c"),
+})
 public class Contient {
     private int idContient;
     private OptionVehicule optionsVehiculesByIdOption;
