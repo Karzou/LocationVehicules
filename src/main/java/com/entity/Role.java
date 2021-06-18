@@ -10,7 +10,11 @@ import java.util.Objects;
  
 @Entity
 @Table(name = "roles", schema = "location_vehicules")
-@NamedQuery(name = "Role.lister", query = "SELECT c FROM Role c, Autorise a, Permission p GROUP BY c.idRole ORDER BY c.idRole")
+@NamedQueries({
+        @NamedQuery(name = "Role.lister", query = "SELECT r FROM Role r, Autorise a, Permission p GROUP BY r.idRole ORDER BY r.idRole"),
+        @NamedQuery(name = "Role.trouverParNom", query = "SELECT r FROM Role r where r.roleDescription=:roleDescritpion")
+        ,})
+
 public class Role {
     private int idRole;
     private String roleDescription;

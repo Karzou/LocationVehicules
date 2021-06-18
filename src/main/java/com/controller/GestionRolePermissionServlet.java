@@ -8,6 +8,8 @@ import com.exception.ServiceException;
 import com.service.AutoriseService;
 import com.service.PermissionService;
 import com.service.RoleService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -27,7 +29,11 @@ import java.util.List;
 @WebServlet("/gestionRolePermission")
 public class GestionRolePermissionServlet extends HttpServlet {
 
+    final static Logger logger = LogManager.getLogger(GestionRolePermissionServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doGet de la servlet GestionRolePermission.");
 
         EntityManager em = EMF.getEM();
 
@@ -41,20 +47,26 @@ public class GestionRolePermissionServlet extends HttpServlet {
         AutoriseService autoriseService = new AutoriseService(em);
 
         try{
+            logger.info("Import de la liste autorise.");
             autoriseList = autoriseService.lister();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme avec l import de la liste autorisation. " + e);
+            session.setAttribute("erreur", "Erreur lors de l'import de la liste des autorises. ");
         }
         try {
+            logger.info("Improt de la liste des permissions.");
             permissionList = permissionService.lister();
         } catch (ServiceException e) {
-            session.setAttribute("erreur", "Erreur lors de l'import de la liste des permissions. " + e.getMessage());
+            logger.warn("Erreur lors de l'import de la liste des permissions. " + e);
+            session.setAttribute("erreur", "Erreur lors de l'import de la liste des permissions. ");
         }
 
         try {
+            logger.info("Import de la liste des roles.");
             roleList = roleService.lister();
         } catch (ServiceException e) {
-            session.setAttribute("erreur","Probleme lors de l'import' de la liste des roles. " + e.getMessage());
+            logger.warn("Probleme lors de l'import' de la liste des roles. " + e);
+            session.setAttribute("erreur","Probleme lors de l'import' de la liste des roles.");
         }
 
         em.close();
@@ -64,15 +76,20 @@ public class GestionRolePermissionServlet extends HttpServlet {
         request.setAttribute("permissionList", permissionList);
 
         if(session.getAttribute("erreur") != null ){
+            logger.info("Des erreurs ont ete comise. " + session.getAttribute("erreur"));
             request.setAttribute("retour", "/gestionRolePermission");
             response.sendRedirect("erreur");
 
         }else {
+            logger.info("Tout ok.");
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/gestionRolePermission.jsp").forward( request, response );
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doPost de la servlet GestionRolePermission.");
+
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
         HttpSession session = request.getSession();
@@ -92,10 +109,12 @@ public class GestionRolePermissionServlet extends HttpServlet {
         String ajoutRoleFlag = request.getParameter("ajoutRoleFlag");
 
         if(ajoutRoleFlag != null){
+
             String nomRole = request.getParameter("nomRole");
 
             Role role = new Role(nomRole);
             try {
+                logger.info("Debut methode ajout de role. : " + nomRole);
                 transaction.begin();
                 roleService.creer(role);
                 transaction.commit();

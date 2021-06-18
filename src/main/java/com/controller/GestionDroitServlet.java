@@ -8,6 +8,8 @@ import com.exception.ServiceException;
 import com.service.AutoriseService;
 import com.service.RoleService;
 import com.service.UtilisateurService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -26,7 +28,11 @@ import java.util.List;
 @WebServlet("/gestionDroit")
 public class GestionDroitServlet extends HttpServlet {
 
+    final static Logger logger = LogManager.getLogger(GestionDroitServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doGet de la servlet GestionDroit.");
 
         EntityManager em = EMF.getEM();
 
@@ -38,9 +44,10 @@ public class GestionDroitServlet extends HttpServlet {
         List<Role> roleList = null;
 
         try {
+            logger.info("Import de la liste des services.");
             roleList = roleService.lister();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme avec l import de a liste de role. " + e);
         }
 
         int id = Integer.parseInt(request.getParameter("idSup"));
@@ -50,7 +57,7 @@ public class GestionDroitServlet extends HttpServlet {
             utilisateur = utilisateurService.trouver(id);
             autorise = autoriseService.listerParIdRole(idRole);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme avec l import de la liste des autorisation par role. " + e);
         }
         em.close();
 
@@ -62,6 +69,8 @@ public class GestionDroitServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel du doPost de la servlet GestionDroit.");
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -77,25 +86,27 @@ public class GestionDroitServlet extends HttpServlet {
         try {
             utilisateur = utilisateurService.trouver(idUtilisateur);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme lors de la recherche de l idUtilisateur : " + idUtilisateur + ". " + e);
         }
 
         try {
             role = roleService.trouver(idRole);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme lors de la recherche de role par idRole : " + idRole + ". " + e);
         }
         try {
             utilisateur.setRolesByIdRole(role);
         } catch (Exception e){
-            // A faire
+            logger.warn("Probleme lors de la mise a jour du role de l utilisateur : " + utilisateur.getEmail() + ". " + e);
         }
         try {
+            logger.info("Debut de la transaction de la mise a jour des droits de l utilisateur : " + utilisateur.getEmail());
             transaction.begin();
             utilisateurService.update(utilisateur);
             transaction.commit();
         }finally {
             if (transaction.isActive()) {
+                logger.info("Rollback de la mise a jour des droits de " + utilisateur.getEmail());
                 transaction.rollback();
             }
             em.close();

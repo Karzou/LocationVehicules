@@ -19,6 +19,7 @@ public class AutoriseService {
 
     public Autorise trouver(int id) throws ServiceException {
         try {
+
             return em.find(Autorise.class, id);
         } catch (Exception e) {
             throw new ServiceException(e);

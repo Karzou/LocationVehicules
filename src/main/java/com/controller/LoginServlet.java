@@ -6,6 +6,7 @@ import com.entity.Ville;
 import com.exception.ServiceException;
 import com.service.UtilisateurService;
 import com.service.VilleService;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 
@@ -25,8 +26,11 @@ import java.util.List;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+    final static Logger logger = LogManager.getLogger(LoginServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        logger.info("Appelle de la methode doGet servletLogin");
 
         EntityManager em = EMF.getEM();
 
@@ -35,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         try {
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme avec l import des villes. " + e);
         }
 
         request.setAttribute("errMessage", null);
@@ -45,6 +49,8 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appelle de la methode doPost servletLogin");
 
         EntityManager em = EMF.getEM();
 
@@ -59,19 +65,17 @@ public class LoginServlet extends HttpServlet {
         try {
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            logger.warn("Probleme lors de l import des villes. " + e);
         }
 
         request.setAttribute("villes", villeList);
 
         if(utilisateurService.checkLogin(userName, password)) {
-
+            logger.info("CheckLogin OK " + userName);
             try {
-
                 utilisateur = utilisateurService.trouverParEmail(userName);
             } catch ( ServiceException e) {
-
-                e.printStackTrace();
+                logger.warn("Probleme de trouver le mail " + userName + " en db. " + e);
             } finally {
 
                 em.close();
@@ -87,6 +91,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("accueil");
 
         } else {
+            logger.info("Probleme du mail ou password erronne. " + userName);
             request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }

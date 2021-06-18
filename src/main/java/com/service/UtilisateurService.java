@@ -69,7 +69,9 @@ public class UtilisateurService {
     public Utilisateur trouverParEmail(String email) throws ServiceException {
         TypedQuery<Utilisateur> query = em.createNamedQuery("Utilisateur.trouverParEmail", Utilisateur.class);
         query.setParameter("email", email);
+
         LOGGER.info("recherche en db le mail : " + email );
+
         return  query.getSingleResult();
 
     }
