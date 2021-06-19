@@ -21,15 +21,18 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appelle de la methode doGet servletLogout");
+        if(logger.isInfoEnabled()){
+            logger.info("Appelle de la methode doGet servletLogout");
+        }
 
-        HttpSession session = request.getSession(false); //Fetch session object
+        HttpSession session = request.getSession(false);
 
-        if(session!=null) { //If session is not null
+        if(session!=null) {
+            if(logger.isInfoEnabled()){
+                logger.info("Session destroy. " + session.getAttributeNames());
+            }
 
-            logger.info("Session destroy. " + session.getAttributeNames());
-
-            session.invalidate(); //removes all session attributes bound to the session
+            session.invalidate();
             request.setAttribute("errMessage", "Vous etes bien deconnecté");
 
             response.sendRedirect("login");

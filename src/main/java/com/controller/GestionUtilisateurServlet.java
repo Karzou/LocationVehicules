@@ -30,7 +30,9 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doGet de la servlet GestionUtilisateurPermission.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel du doGet de la servlet GestionUtilisateurPermission.");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -38,7 +40,10 @@ public class GestionUtilisateurServlet extends HttpServlet {
         UtilisateurService utilisateurService = new UtilisateurService(em);
 
         try {
-            logger.info("Importation de la liste utilisateur.");
+            if(logger.isInfoEnabled()){
+                logger.info("Importation de la liste utilisateur.");
+            }
+
             utilisateurList = utilisateurService.lister();
         } catch (ServiceException e) {
             logger.warn("Probleme lors de l import de la lite utilisateur. " + e);
@@ -51,7 +56,9 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doPost de la servlet GestionRolePermission.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel du doPost de la servlet GestionRolePermission.");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -103,7 +110,9 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     nom = Validation.ucFirst(nom);
                     prenom = Validation.ucFirst(prenom);
                     try {
-                        logger.info("Import de la ville : " + idVille);
+                        if(logger.isInfoEnabled()){
+                            logger.info("Import de la ville : " + idVille);
+                        }
                         ville = villeService.trouver(idVille);
                     } catch (ServiceException e) {
                         logger.warn("Probleme avec l import de la ville: " + e);
@@ -115,7 +124,9 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     }
                    try {
                         transaction.begin();
-                        logger.info("Debut de la transaction de l update utilisateur." + utilisateur.getEmail());
+                        if(logger.isInfoEnabled()){
+                            logger.info("Debut de la transaction de l update utilisateur." + utilisateur.getEmail());
+                        }
 
                         utilisateur.setNomUtilisateur(nom);
                         utilisateur.setPrenomUtilisateur(prenom);
@@ -142,7 +153,10 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         em.close();
                     }
                 }else {
-                    logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis." + message);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis." + message);
+                    }
+
                     session.setAttribute("erreur", "Veuillez remplir tous les champs ! ");
                 }
 

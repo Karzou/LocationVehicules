@@ -32,7 +32,9 @@ public class GestionDroitServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doGet de la servlet GestionDroit.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel du doGet de la servlet GestionDroit.");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -44,7 +46,10 @@ public class GestionDroitServlet extends HttpServlet {
         List<Role> roleList = null;
 
         try {
-            logger.info("Import de la liste des services.");
+            if(logger.isInfoEnabled()){
+                logger.info("Import de la liste des services.");
+            }
+
             roleList = roleService.lister();
         } catch (ServiceException e) {
             logger.warn("Probleme avec l import de a liste de role. " + e);
@@ -70,7 +75,9 @@ public class GestionDroitServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doPost de la servlet GestionDroit.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel du doPost de la servlet GestionDroit.");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -100,13 +107,16 @@ public class GestionDroitServlet extends HttpServlet {
             logger.warn("Probleme lors de la mise a jour du role de l utilisateur : " + utilisateur.getEmail() + ". " + e);
         }
         try {
-            logger.info("Debut de la transaction de la mise a jour des droits de l utilisateur : " + utilisateur.getEmail());
+            if(logger.isInfoEnabled()){
+                logger.info("Debut de la transaction de la mise a jour des droits de l utilisateur : " + utilisateur.getEmail());
+            }
+
             transaction.begin();
             utilisateurService.update(utilisateur);
             transaction.commit();
         }finally {
             if (transaction.isActive()) {
-                logger.info("Rollback de la mise a jour des droits de " + utilisateur.getEmail());
+                logger.warn("Rollback de la mise a jour des droits de " + utilisateur.getEmail());
                 transaction.rollback();
             }
             em.close();

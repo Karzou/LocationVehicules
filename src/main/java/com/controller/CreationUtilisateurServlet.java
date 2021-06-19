@@ -28,12 +28,16 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doGet la servlet CreationUtilisateur");
+        if (logger.isInfoEnabled()){
+            logger.info("Appel du doGet la servlet CreationUtilisateur");
+        }
 
         HttpSession session = request.getSession(false);
 
         if(session != null) {
-            logger.info("Pas de session ==> redirection login.");
+            if (logger.isInfoEnabled()){
+                logger.info("Pas de session ==> redirection login.");
+            }
             response.sendRedirect("login");
         } else {
 
@@ -42,7 +46,9 @@ public class CreationUtilisateurServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel du doPost la servlet CreationUtilisateur");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel du doPost la servlet CreationUtilisateur");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -74,12 +80,16 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 || mail.trim().isEmpty() || rue.trim().isEmpty() || numero.trim().isEmpty() || dateNaissanceInput.trim().isEmpty()
                 || datePermisInput.trim().isEmpty()
                 ) {
-            logger.info("Tous les champs du formulaire creation utilisateur ne sont pas remplis.");
+            if(logger.isInfoEnabled()){
+                logger.info("Tous les champs du formulaire creation utilisateur ne sont pas remplis.");
+            }
 
             request.setAttribute("errMessage", "Veuillez remplir tous les champs");
             this.getServletContext().getRequestDispatcher("/login").forward( request, response );
         } else {
-            logger.info("Les champs du formulaire creation utilisateur sont bien remplis");
+            if(logger.isInfoEnabled()){
+                logger.info("Les champs du formulaire creation utilisateur sont bien remplis");
+            }
 
             int idVille = Integer.parseInt(idVilleInput);
             nom = Validation.ucFirst(nom);
@@ -88,41 +98,52 @@ public class CreationUtilisateurServlet extends HttpServlet {
             Date datePermis = Validation.dateFormat(dateNaissanceInput);
 
             if (utilisateurService.mailExist(mail)) {
-                logger.info("Le mail existe deja : " + mail);
+                if(logger.isInfoEnabled()){
+                    logger.info("Le mail existe deja : " + mail);
+                }
 
                 request.setAttribute("errMessage", "Ce mail existe deja !!!");
             } else {
                 if(!Validation.validationPassword(password)){
 
-                    logger.info("Probleme avec la validation du password : " + password);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation du password : " + password);
+                    }
 
                     request.setAttribute("erreurPassword", "Veuillez entrer un mot de passe d'au moins 4 caractères !");
                     erreurFlag = true;
                 }
                 if(!Validation.validationEmail(mail)){
 
-                    logger.info("Probleme avec la validation du mail : " + mail);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation du mail : " + mail);
+                    }
 
                     request.setAttribute("erreurMail", "Veuillez entrer un mail valide !");
                     erreurFlag = true;
                 }
                 if(!Validation.validationPrenom(nom)) {
 
-                    logger.info("Probleme avec la validation du nom : " + nom);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation du nom : " + nom);
+                    }
 
                     request.setAttribute("erreurNom", "Veuillez entrer un nom avec au moins 2 caractères !");
                     erreurFlag = true;
                 }
                 if(!Validation.validationPrenom(prenom)) {
-
-                    logger.info("Probleme avec la validation du prenom : " + prenom);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation du prenom : " + prenom);
+                    }
 
                     request.setAttribute("erreurPrenom", "Veuillez entrer un prénom avec au moins 2 carcatères");
                     erreurFlag = true;
                 }
                 if(!Validation.validationTelephone(telephone)){
 
-                    logger.info("Probleme avec la validation du telephone : " + telephone);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation du telephone : " + telephone);
+                    }
 
                     request.setAttribute("erreurTelephone", "Veuillez entrer que des chiffres ! ");
                     erreurFlag = true;
@@ -130,14 +151,19 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
                 if(!Validation.validationAdresse(rue)){
 
-                    logger.info("Probleme avec la validation de l adresse : " + rue);
+                    if(logger.isInfoEnabled()){
+                        logger.info("Probleme avec la validation de l adresse : " + rue);
+                    }
 
                     request.setAttribute("erreurAdresse", "Veuillez entrer une adresse d'au moins 6 caractères ! ");
                     erreurFlag = true;
                 }
                 if( ! erreurFlag ) {
                     try {
-                        logger.info("Debut de la transaction CreationUtilisateur");
+                        if(logger.isInfoEnabled()){
+                            logger.info("Debut de la transaction CreationUtilisateur");
+                        }
+
                         transaction.begin();
                         try {
                             ville = villeService.trouver(idVille);
@@ -157,9 +183,14 @@ public class CreationUtilisateurServlet extends HttpServlet {
                                 role);
                         //insertion db
                         if (confirmPassword.equals(password)) {
-                            logger.info("Les mots de passes sont identiques : " + password + "/" + confirmPassword);
+                            if(logger.isInfoEnabled()){
+                                logger.info("Les mots de passes sont identiques : " + password + "/" + confirmPassword);
+                            }
+
                             try {
-                                logger.info("Début de la creation de l utilisateur " + utilisateur.getEmail());
+                                if(logger.isInfoEnabled()){
+                                    logger.info("Début de la creation de l utilisateur " + utilisateur.getEmail());
+                                }
 
                                 utilisateurService.creer(utilisateur);
                                 Utilisateur utilisateur1 = utilisateurService.trouverParNom(utilisateur.getNomUtilisateur());
@@ -178,7 +209,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                         logger.warn("Probleme lors de la transaction de creation utilisateur. " + e);
                     } finally {
                         if (transaction.isActive()) {
-                            logger.info("Rollback de la creation d utilisateur.");
+                            logger.warn("Rollback de la creation d utilisateur.");
                             transaction.rollback();
                         }
                         em.close();

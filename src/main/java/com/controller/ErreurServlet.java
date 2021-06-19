@@ -19,7 +19,9 @@ public class ErreurServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel de la methode doGet ErreurServlet.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel de la methode doGet ErreurServlet.");
+        }
 
         HttpSession session = request.getSession();
 

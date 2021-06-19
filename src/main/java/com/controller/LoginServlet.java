@@ -30,9 +30,11 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("COUCOU PETITE PERUCHE !!!!!! ");
-        logger.info("/////////////////////////// ");
-        logger.info("Appelle de la methode doGet servletLogin");
+        if(logger.isInfoEnabled()){
+            logger.info("COUCOU PETITE PERUCHE !!!!!! ");
+            logger.info("/////////////////////////// ");
+            logger.info("Appelle de la methode doGet servletLogin");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -52,7 +54,9 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appelle de la methode doPost servletLogin");
+        if(logger.isInfoEnabled()){
+            logger.info("Appelle de la methode doPost servletLogin");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -73,7 +77,10 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("villes", villeList);
 
         if(utilisateurService.checkLogin(userName, password)) {
-            logger.info("CheckLogin OK " + userName);
+            if(logger.isInfoEnabled()){
+                logger.info("CheckLogin OK " + userName);
+            }
+
             try {
                 utilisateur = utilisateurService.trouverParEmail(userName);
             } catch ( ServiceException e) {
@@ -93,7 +100,10 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("accueil");
 
         } else {
-            logger.info("Probleme du mail ou password erronne. " + userName);
+            if(logger.isInfoEnabled()){
+                logger.info("Probleme du mail ou password erronne. " + userName);
+            }
+
             request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
