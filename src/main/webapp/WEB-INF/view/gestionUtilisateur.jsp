@@ -11,13 +11,10 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="login-div-error">
-                <span style="color:red"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
-                </br>
-            </div>
-
-            <div class="content-utilisateur">
+            <div class="content-global">
                 <h2>Liste des utilisateurs actifs</h2>
+
+                <span style="color:red"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
 
                 <div>
                     <table class="table-custom">
@@ -91,33 +88,33 @@
                             <c:forEach var="user" items="${utilisateurList}">
                                 <tr>
                                     <c:if test="${! user.actifUtilisateur}">
-                                        <td><c:out value="${user.nomUtilisateur}"></c:out></td>
-                                        <td><c:out value="${user.prenomUtilisateur}"></c:out></td>
-                                        <td><c:out value="${user.adressesByIdAdresse.rue}"></c:out>
-                                        <td><c:out value="${user.adressesByIdAdresse.numero}"></c:out></td>
-                                        <td><c:out value="${user.adressesByIdAdresse.boite}"></c:out></td>
-                                        <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.codePostal}"></c:out></td>
-                                        <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.nomVille}"></c:out></td>
-                                        <td><c:out value="${user.rolesByIdRole.roleDescription}"></c:out></td>
+                                        <td><c:out value="${user.nomUtilisateur}"/></td>
+                                        <td><c:out value="${user.prenomUtilisateur}"/></td>
+                                        <td><c:out value="${user.adressesByIdAdresse.rue}"/>
+                                        <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
+                                        <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
+                                        <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
+                                        <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
+                                        <td><c:out value="${user.rolesByIdRole.roleDescription}"/></td>
                                         <c:if test="${(sessionScope.role == 'admin') || (sessionScope.role == 'employe') }">
                                             <td>
                                                 <c:if test="${(sessionScope.role == 'admin')}">
                                                     <form action="<c:url value="/gestionDroit"/>" method="get">
-                                                        <input type="hidden" name="idSup" value="${user.idUtilisateur}"></input>
-                                                        <input type="hidden" name="idRole" value="${user.rolesByIdRole.idRole}"></input>
+                                                        <input type="hidden" name="idSup" value="${user.idUtilisateur}">
+                                                        <input type="hidden" name="idRole" value="${user.rolesByIdRole.idRole}">
                                                         <button class="btn-right" name="idSup" type="submit" value="supprimer">Gestion des droits</button>
                                                     </form>
                                                 </c:if>
                                             </td>
                                             <td>
                                                 <form action="<c:url value="/reservation"/>" method="post">
-                                                    <input type="hidden" name="idSup" value="${user.idUtilisateur}"></input>
+                                                    <input type="hidden" name="idSup" value="${user.idUtilisateur}">
                                                     <button class="btn-reserv" name="idSup" type="submit" value="reservation">Réservations client</button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="<c:url value="/modifUtilisateur"/>" method="post">
-                                                    <input type="hidden" name="idModif" value="${user.idUtilisateur}"></input>
+                                                    <input type="hidden" name="idModif" value="${user.idUtilisateur}">
                                                     <button class="btn-modif" name="idModif" type="submit">Modifier</button>
                                                 </form>
                                             </td>

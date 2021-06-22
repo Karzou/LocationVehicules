@@ -13,7 +13,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-marque-modele">
+            <div class="content-global">
                 <h2>Ajout de marque</h2>
 
                 <form action="<c:url value="/ajoutMarque"/>" method="post">
@@ -26,7 +26,7 @@
                 </form>
             </div>
 
-            <div class="content-marque-modele">
+            <div class="content-global">
                 <h2>Ajout de modèle</h2>
 
                 <form action="<c:url value="/ajoutModele"/>" method="post">
@@ -47,7 +47,7 @@
                 </form>
             </div>
 
-            <div class="content-marque-modele">
+            <div class="content-global">
                 <h2>Liste des marques et modèles</h2>
 
                 <div>

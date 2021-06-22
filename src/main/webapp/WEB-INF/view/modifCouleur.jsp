@@ -12,7 +12,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-couleur">
+            <div class="content-global">
                 <h2>Modification couleur</h2>
 
                 <form action="<c:url value="/gestionCouleur"/>" method="post">

@@ -11,6 +11,13 @@ body {
     padding:0;
 }
 
+.content-global {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
 form {
     margin: 0;
     padding: 0;
@@ -1129,30 +1136,12 @@ li {
 }
 
 /* Réservation -------------------------------------------------------------------------------------------------------*/
-.content-reservation-client {
-    background-color: white;
-    width: 1020px;
-    border-radius: 5px;
-    padding: 1px 20px 20px;
-    margin: 30px auto;
-}
+
 
 /* Gestion réservation -----------------------------------------------------------------------------------------------*/
-.content-reservation {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 
 /* Gestion Vehicule ------------------------------------------------------------------------------------------------- */
-.content-vehicle {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
-
 .div-input-modif-select {
     float: left;
     height: 50px;
@@ -1164,50 +1153,50 @@ li {
 }
 
 /* Gestion Utilisateur ---------------------------------------------------------------------------------------------- */
-.content-utilisateur {
-    background-color: white;
+
+
+/* Gestion Rôle et Permission --------------------------------------------------------------------------------------- */
+.btn-table-role {
+    width: 180px;
+    height: 30px;
+    background-color: gold;
+    border: 0;
     border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-table-role:hover {
+    background-color: #F1C40F;
+}
+
+.btn-table-perm {
+    width: 250px;
+    height: 30px;
+    background-color: gold;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+}
+
+.btn-table-perm:hover {
+    background-color: #F1C40F;
 }
 
 /* Gestion Entrepot ------------------------------------------------------------------------------------------------- */
-.content-entrepot {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 
 /* Gestion Marque Modèle -------------------------------------------------------------------------------------------- */
-.content-marque-modele {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 
 /* Modification Vehicule -------------------------------------------------------------------------------------------- */
-.content-vehicle2 {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 
 /* Modification Utilisateur ----------------------------------------------------------------------------------------- */
-.content-user2 {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 
 /* Modification Entrepot -------------------------------------------------------------------------------------------- */
-.content-entrepot2 {
-    background-color: white;
-    border-radius: 5px;
-    padding: 2px 20px 20px;
-    margin: 30px;
-}
+
 

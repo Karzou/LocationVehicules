@@ -11,7 +11,7 @@
         <div class="container">
             <c:import url="menu.jsp"></c:import>
 
-            <div class="content-user2">
+            <div class="content-global">
                 <h2>Modification utilisateur</h2>
 
                 <form action="<c:url value="/gestionUtilisateur"/>" method="post">

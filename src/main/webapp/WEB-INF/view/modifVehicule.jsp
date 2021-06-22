@@ -12,7 +12,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-vehicle2">
+            <div class="content-global">
                 <h2>Modification véhicule</h2>
 
                 <form action="<c:url value="/gestionVehicule"/>" method="post">

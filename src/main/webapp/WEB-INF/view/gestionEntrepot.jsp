@@ -13,7 +13,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-vehicle">
+            <div class="content-global">
                 <h2>Ajout d'entrepot</h2>
 
                 <form action="<c:url value="/ajoutEntrepot"/>" method="post">
@@ -50,7 +50,7 @@
                 </form>
             </div>
 
-            <div class="content-vehicle">
+            <div class="content-global">
                 <h2>Liste des entrepots</h2>
 
                 <div>

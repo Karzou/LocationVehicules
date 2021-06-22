@@ -12,7 +12,7 @@
         <div class="container">
             <c:import url="menu.jsp"></c:import>
 
-            <div class="content-reservation">
+            <div class="content-global">
                 <h1>Page en construction</h1>
             </div>
 

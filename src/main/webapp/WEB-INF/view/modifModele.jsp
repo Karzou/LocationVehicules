@@ -12,7 +12,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-entrepot2">
+            <div class="content-global">
                 <h2>Modification modèle</h2>
 
                 <form action="<c:url value="/gestionMarqueModele"/>" method="post">

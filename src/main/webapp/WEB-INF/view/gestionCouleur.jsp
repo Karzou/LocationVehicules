@@ -13,7 +13,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
 
-            <div class="content-vehicle">
+            <div class="content-global">
                 <h2>Ajout de couleur</h2>
 
                 <form action="<c:url value="/ajoutCouleur"/>" method="post">
@@ -26,7 +26,7 @@
                 </form>
             </div>
 
-            <div class="content-vehicle">
+            <div class="content-global">
                 <h2>Liste des couleurs</h2>
 
                 <div>
