@@ -1,9 +1,20 @@
-A faire :
+---------------
+|  A faire :  |
+---------------
+Toutes les validations partie véhicule (JO)
 
 
 
 
 
-
-
-Fait :
+------------------------------------------------------------------------------------------------------------------------
+------------
+|  Fait :  |
+------------
+Page accueil
+Page recherche véhicule
+Gestion/modification Entrepot
+Gestion/modification Véhicule
+Gestion/modification couleur
+Gestion/modification marque
+Gestion/modification modèle
