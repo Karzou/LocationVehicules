@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestion Entrepot</title>
+        <title>Modification couleur</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -13,7 +13,7 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-couleur">
-                <h2>Modification entrepot</h2>
+                <h2>Modification couleur</h2>
 
                 <form action="<c:url value="/gestionCouleur"/>" method="post">
                     <div class="div-input-modif">

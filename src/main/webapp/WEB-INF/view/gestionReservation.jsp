@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Réservation</title>
+        <title>Gestion réservation</title>
         <c:import url="head.jsp"></c:import>
     </head>
 

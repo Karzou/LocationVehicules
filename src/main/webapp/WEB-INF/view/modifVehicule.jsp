@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modification Vehicule</title>
+        <title>Modification véhicule</title>
         <c:import url="head.jsp"/>
     </head>
 

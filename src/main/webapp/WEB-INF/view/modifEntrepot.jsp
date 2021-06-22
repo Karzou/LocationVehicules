@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestion Entrepot</title>
+        <title>Modification Entrepot</title>
         <c:import url="head.jsp"></c:import>
     </head>
 

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestion Entrepot</title>
+        <title>Modification marque</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -13,7 +13,7 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-entrepot2">
-                <h2>Modification entrepot</h2>
+                <h2>Modification marque</h2>
 
                 <form action="<c:url value="/gestionMarqueModele"/>" method="post">
                     <div class="div-input-modif">
