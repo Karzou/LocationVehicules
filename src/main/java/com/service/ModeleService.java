@@ -1,6 +1,8 @@
 package com.service;
 
+import com.entity.Couleur;
 import com.entity.Modele;
+import com.entity.Utilisateur;
 import com.exception.ServiceException;
 
 import javax.persistence.EntityManager;
@@ -18,6 +20,11 @@ public class ModeleService {
     public ModeleService(EntityManager em) {
 
         this.em = em;
+    }
+
+    public void update(Modele modele) {
+
+        em.merge(modele);
     }
 
     public Modele trouver(int id) throws ServiceException {
@@ -66,6 +73,11 @@ public class ModeleService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public void suppression (Modele modele) {
+
+        em.remove(modele);
     }
 }
 

@@ -51,7 +51,7 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"></input>
-                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifer</button>
+                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifier</button>
                 </form>
             </div>
 

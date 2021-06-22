@@ -20,6 +20,16 @@ public class Couleur {
     private boolean actifCouleur;
     private List<Vehicule> vehiculesByIdCouleur;
 
+    public Couleur() {
+
+    }
+
+    public Couleur(String nomCouleur) {
+
+        this.nomCouleur = nomCouleur;
+        this.actifCouleur = true;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_couleur", nullable = false)

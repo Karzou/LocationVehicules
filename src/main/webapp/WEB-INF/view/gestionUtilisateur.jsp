@@ -67,7 +67,7 @@
                                         <td>
                                             <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                                 <input type="hidden" name="idModif" value="${user.idUtilisateur}"/>
-                                                <button type="submit" class="btn-modif" name="idModif" value="modifer">Modifer</button>
+                                                <button type="submit" class="btn-modif" name="idModif">Modifier</button>
                                             </form>
                                         </td>
                                         <td>
@@ -118,7 +118,7 @@
                                             <td>
                                                 <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                                     <input type="hidden" name="idModif" value="${user.idUtilisateur}"></input>
-                                                    <button class="btn-modif" name="idModif" type="submit" value="modifer">Modifer</button>
+                                                    <button class="btn-modif" name="idModif" type="submit">Modifier</button>
                                                 </form>
                                             </td>
                                         </c:if>

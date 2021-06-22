@@ -4,12 +4,12 @@
 <html>
     <head>
         <title>Profil</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body>
     <div class="container">
-            <c:import url="menu.jsp"></c:import>
+            <c:import url="menu.jsp"/>
 
             <h1>Mes données.</h1>
                 <div>
@@ -29,27 +29,27 @@
                         </thead>
 
                         <tbody>
-                            <td><c:out value="${utilisateur.nomUtilisateur}"></c:out> </td>
-                            <td><c:out value="${utilisateur.prenomUtilisateur}"></c:out> </td>
-                            <td><c:out value="${utilisateur.adressesByIdAdresse.rue}"></c:out> </td>
-                            <td><c:out value="${utilisateur.adressesByIdAdresse.numero}"></c:out> </td>
-                            <td><c:out value="${utilisateur.adressesByIdAdresse.boite}"></c:out> </td>
-                            <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.codePostal}"></c:out> </td>
-                            <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.nomVille}"></c:out></td>
+                            <td><c:out value="${utilisateur.nomUtilisateur}"/></td>
+                            <td><c:out value="${utilisateur.prenomUtilisateur}"/></td>
+                            <td><c:out value="${utilisateur.adressesByIdAdresse.rue}"/></td>
+                            <td><c:out value="${utilisateur.adressesByIdAdresse.numero}"/></td>
+                            <td><c:out value="${utilisateur.adressesByIdAdresse.boite}"/></td>
+                            <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
+                            <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
                             <td>En cours (shahin)</td>
                             <td>En cours (Jerome)</td>
                             <td> En cours (Jerome)</td>
                             <td>
                                 <form action="<c:url value="/modifUtilisateur"/>" method="post">
-                                    <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}"></input>
-                                    <button class="btn-modif" name="idModif" type="submit" value="modifer">Modifer</button>
+                                    <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
+                                    <button class="btn-modif" name="idModif" type="submit">Modifier</button>
                                     <input type="hidden" name="profilFlag" value="ok">
                                 </form>
                             </td>
                         </tbody>
 
 
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

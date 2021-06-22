@@ -84,7 +84,7 @@
                                     <form action="<c:url value="/modifEntrepot"/>" method="post">
                                         <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"/>
                                         <input type="hidden" name="idVille" value="${entrepot.adressesByIdAdresse.villesByIdVille.idVille}"/>
-                                        <button class="btn-modif" name="idModif" type="submit" value="modifer">Modifer</button>
+                                        <button class="btn-modif" name="idModif" type="submit">Modifier</button>
                                     </form>
                                 </td>
                                 <td>

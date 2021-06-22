@@ -42,7 +42,7 @@
                             </c:forEach>
                         </td>
                         <td>
-                            <button type="submit">Modifer</button>
+                            <button type="submit">Modifier</button>
                         </td>
                     </form>
                     </tbody>

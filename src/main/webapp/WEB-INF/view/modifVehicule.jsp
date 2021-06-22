@@ -110,7 +110,7 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
-                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifer</button>
+                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifier</button>
                 </form>
             </div>
 

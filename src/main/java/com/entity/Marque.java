@@ -12,12 +12,21 @@ import java.util.Objects;
 @Table(name = "marques", schema = "location_vehicules")
 @NamedQueries({
         @NamedQuery(name = "Marque.trouverParNom", query = "SELECT ma FROM Marque ma WHERE ma.nomMarque = :nomMarque"),
-        @NamedQuery(name = "Marque.lister", query = "SELECT ma FROM Marque ma"),
+        @NamedQuery(name = "Marque.lister", query = "SELECT ma FROM Marque ma ORDER BY ma.nomMarque"),
 })
 public class Marque {
     private int idMarque;
     private String nomMarque;
     private List<Modele> modelesByIdMarque;
+
+    public Marque() {
+
+    }
+
+    public Marque(String nomMarque) {
+
+        this.nomMarque = nomMarque;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

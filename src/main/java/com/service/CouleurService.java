@@ -1,6 +1,7 @@
 package com.service;
 
 import com.entity.Couleur;
+import com.entity.Entrepot;
 import com.exception.ServiceException;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,11 @@ public class CouleurService {
     public CouleurService(EntityManager em) {
 
         this.em = em;
+    }
+
+    public void update(Couleur couleur) {
+
+        em.merge(couleur);
     }
 
     public Couleur trouver(int id) throws ServiceException {
@@ -62,6 +68,18 @@ public class CouleurService {
 
             TypedQuery<Couleur> query = em.createNamedQuery("Couleur.lister", Couleur.class);
             return query.getResultList();
+        } catch (Exception e) {
+
+            throw new ServiceException(e);
+        }
+    }
+
+    public void suppressionLogique (Couleur couleur) throws ServiceException {
+
+        try {
+
+            couleur.setActifCouleur(false);
+            em.persist(couleur);
         } catch (Exception e) {
 
             throw new ServiceException(e);

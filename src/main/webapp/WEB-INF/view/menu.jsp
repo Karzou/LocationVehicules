@@ -16,6 +16,7 @@
                         <c:when test="${sessionScope.role == 'admin'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
                             <a href="${pageContext.request.contextPath}/gestionRolePermission">Gestion roles et permissions</a>
+                            <a href="${pageContext.request.contextPath}/gestionMarqueModele">Gestion marque et modèle</a>
                             <a href="${pageContext.request.contextPath}/gestionVehicule">Gestion véhicule</a>
                             <a href="${pageContext.request.contextPath}/gestionEntrepot">Gestion entrepot</a>
                             <a href="${pageContext.request.contextPath}/gestionReservation">Gestion réservation</a>

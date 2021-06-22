@@ -21,6 +21,16 @@ public class Modele {
     private Marque marquesByIdMarque;
     private List<Vehicule> vehiculesByIdModele;
 
+    public Modele() {
+
+    }
+
+    public Modele(String nomModele, Marque marque) {
+
+        this.nomModele = nomModele;
+        this.marquesByIdMarque = marque;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_modele", nullable = false)

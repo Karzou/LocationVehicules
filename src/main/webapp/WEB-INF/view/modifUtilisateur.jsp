@@ -102,7 +102,7 @@
                         <input type="hidden" name="profilFlag" value="ok"></input>
                     </c:if>
                     <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}"></input>
-                    <button type="submit" value="Envoyer"id="bouton-modif" class="btn btn-primary">Modifer</button>
+                    <button type="submit" value="Envoyer"id="bouton-modif" class="btn btn-primary">Modifier</button>
                 </form>
             </div>
         </div>

@@ -294,6 +294,21 @@ li {
     background-color: #F1C40F;
 }
 
+.btn-add {
+    width: 120px;
+    height: 25px;
+    background-color: gold;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-add:hover {
+    background-color: #F1C40F;
+}
+
 /* Table ------------------------------------------------------------------------------------------------------------ */
 .table-custom {
     font-family: Arial, Helvetica, sans-serif;
@@ -304,6 +319,7 @@ li {
 .table-custom td,
 .table-custom th {
     border: 1px solid #ddd;
+    padding: 8px;
 }
 
 .table-custom th {
@@ -311,7 +327,6 @@ li {
     background-color: green;
     color: white;
     height: 30px;
-    padding: 5px 0 5px 8px;
 }
 
 .table-custom td {
@@ -378,6 +393,31 @@ li {
 
 .btn-reserv:hover {
     background-color: #F1C40F;
+}
+
+.select-table {
+    height: 25px;
+    border-radius: 5px;
+    outline: none !important;
+    border: 1px solid gray;
+    width: 200px;
+    color: black;
+    font-weight: bold;
+}
+
+.select-table:hover {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.select-table:focus {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
+}
+
+.select-table:active {
+    box-shadow: 0 0 1px 2px green;
+    border: 1px solid green;
 }
 
 /* Login ------------------------------------------------------------------------------------------------------------ */
@@ -1113,6 +1153,16 @@ li {
     margin: 30px;
 }
 
+.div-input-modif-select {
+    float: left;
+    height: 50px;
+}
+
+.div-input-modif-button {
+    float: left;
+    margin-left: 20px;
+}
+
 /* Gestion Utilisateur ---------------------------------------------------------------------------------------------- */
 .content-utilisateur {
     background-color: white;
@@ -1123,6 +1173,14 @@ li {
 
 /* Gestion Entrepot ------------------------------------------------------------------------------------------------- */
 .content-entrepot {
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px 20px 20px;
+    margin: 30px;
+}
+
+/* Gestion Marque Modèle -------------------------------------------------------------------------------------------- */
+.content-marque-modele {
     background-color: white;
     border-radius: 5px;
     padding: 2px 20px 20px;

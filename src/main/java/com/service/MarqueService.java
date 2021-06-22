@@ -1,5 +1,6 @@
 package com.service;
 
+import com.entity.Couleur;
 import com.entity.Marque;
 import com.exception.ServiceException;
 
@@ -18,6 +19,11 @@ public class MarqueService {
     public MarqueService(EntityManager em) {
 
         this.em = em;
+    }
+
+    public void update(Marque marque) {
+
+        em.merge(marque);
     }
 
     public Marque trouver(int id) throws ServiceException {
