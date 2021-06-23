@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Couleur;
 import com.service.CouleurService;
 import com.service.Validation;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -21,8 +23,13 @@ import java.io.IOException;
 @WebServlet("/ajoutCouleur")
 public class AjoutCouleurServlet extends HttpServlet {
 
+    final static Logger logger = LogManager.getLogger(AjoutCouleurServlet.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()){
+            logger.info("Appel de la m�thode \"doGet\" de la servlet \"AjoutCouleurServlet\"");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 
                 <form action="<c:url value="/gestionCouleur"/>" method="post">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom entrepÃ´t : </label>
+                        <label class="label-input">Nom entrepôt : </label>
                         <input class="input-modif" type="text" name="nomCouleur" value="${couleur.nomCouleur}">
                     </div>
                     <div class="div-input-modif">

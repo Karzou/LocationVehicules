@@ -1,13 +1,13 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Couleur;
 import com.entity.Marque;
 import com.entity.Modele;
 import com.exception.ServiceException;
-import com.service.CouleurService;
 import com.service.MarqueService;
 import com.service.ModeleService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -21,8 +21,11 @@ import java.util.List;
 /**
  * @author Wets Jeoffroy
  */
+
 @WebServlet("/modifModele")
 public class ModifModeleServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(ModifModeleServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

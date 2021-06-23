@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestion vÃ©hicule</title>
+        <title>Gestion véhicule</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -13,7 +13,7 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-global">
-                <h2>Ajout de vÃ©hicule</h2>
+                <h2>Ajout de véhicule</h2>
 
                 <form action="<c:url value="/ajoutVehicule"/>" method="post">
                     <div class="div-input-modif">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
-                            <label class="label-input">ModÃ¨le : </label>
+                            <label class="label-input">Modèle : </label>
                             <select class="select-modif" name="idModele">
                                 <c:forEach var="modeleList" items="${modeleList}">
                                     <c:choose>
@@ -51,11 +51,11 @@
                             </select>
                         </div>
                         <div class="div-input-modif-button">
-                            <input type="button" class="btn-add" value="Ajout modÃ¨le" onclick=location.href="${pageContext.request.contextPath}/gestionMarqueModele">
+                            <input type="button" class="btn-add" value="Ajout modèle" onclick=location.href="${pageContext.request.contextPath}/gestionMarqueModele">
                         </div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">CylindrÃ©e : </label>
+                        <label class="label-input">Cylindrée : </label>
                         <input class="input-modif" type="text" name="cylindree" value="${vehicule.cylindree}">
                     </div>
                     <div class="div-input-modif">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">NumÃ©ro de chassis: </label>
+                        <label class="label-input">Numéro de chassis: </label>
                         <input class="input-modif" type="text" name="numChassis" value="${vehicule.numChassis}">
                     </div>
                     <div class="div-input-modif">
@@ -123,14 +123,14 @@
             </div>
 
             <div class="content-global">
-                <h2>Liste des vÃ©hicules</h2>
+                <h2>Liste des véhicules</h2>
 
                 <div>
                     <table class="table-custom">
                         <thead>
                             <th scope="col">Marque</th>
-                            <th scope="col">ModÃ¨le</th>
-                            <th scope="col">CylindrÃ©e</th>
+                            <th scope="col">Modèle</th>
+                            <th scope="col">Cylindrée</th>
                             <th scope="col">Puissance</th>
                             <th scope="col">Num Chassis</th>
                             <th scope="col">Immatriculation</th>

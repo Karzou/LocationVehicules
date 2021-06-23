@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <div class="header">
     <div class="banner1">
@@ -16,21 +16,21 @@
                         <c:when test="${sessionScope.role == 'admin'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
                             <a href="${pageContext.request.contextPath}/gestionRolePermission">Gestion roles et permissions</a>
-                            <a href="${pageContext.request.contextPath}/gestionMarqueModele">Gestion marque et modÃ¨le</a>
-                            <a href="${pageContext.request.contextPath}/gestionVehicule">Gestion vÃ©hicule</a>
+                            <a href="${pageContext.request.contextPath}/gestionMarqueModele">Gestion marque et modèle</a>
+                            <a href="${pageContext.request.contextPath}/gestionVehicule">Gestion véhicule</a>
                             <a href="${pageContext.request.contextPath}/gestionEntrepot">Gestion entrepot</a>
-                            <a href="${pageContext.request.contextPath}/gestionReservation">Gestion rÃ©servation</a>
+                            <a href="${pageContext.request.contextPath}/gestionReservation">Gestion réservation</a>
                             <a href="">Gestion facture</a>
                             <a href="">Gestion contrat</a>
                         </c:when>
                         <c:when test="${sessionScope.role == 'employe'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
-                            <a href="">Gestion rÃ©servation</a>
+                            <a href="">Gestion réservation</a>
                             <a href="">Gestion facture</a>
                             <a href="">Gestion contrat</a>
                         </c:when>
                     </c:choose>
-                    <a href="${pageContext.request.contextPath}/logout">Se dÃ©connecter</a>
+                    <a href="${pageContext.request.contextPath}/logout">Se déconnecter</a>
                 </div>
             </div>
         </div>

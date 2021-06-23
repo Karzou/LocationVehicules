@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,19 +16,19 @@
                     <img class="img-home" src="${pageContext.request.contextPath}/images/home.png" alt="home" />
 
                     <div class="text">
-                        <h1>Vous souhaitez louer un vÃ©hicule ? Vous Ãªtes au bon endroit !</h1>
+                        <h1>Vous souhaitez louer un véhicule ? Vous êtes au bon endroit !</h1>
                     </div>
                 </div>
 
                 <form name="searchVehicle" action="<c:url value="/vehicule"/>" method="post">
                     <div class="box">
-                        <p>Veuillez complÃ¨ter les informations ci-dessous</p>
+                        <p>Veuillez complèter les informations ci-dessous</p>
                         <br/>
 
                         <div class="boxSelect1">
-                            <label for="LieuDepart">Lieu de dÃ©part</label>
+                            <label for="LieuDepart">Lieu de départ</label>
                             <select name="LieuDepart" id="LieuDepart" oninput='style.color="black"'>
-                                <option value="" style='display:none'>Lieu de dÃ©part</option>
+                                <option value="" style='display:none'>Lieu de départ</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
                                     <optgroup label="${entrepot.nomEntrepot}">
                                     <option value="${entrepot.idEntrepot}">${entrepot.adressesByIdAdresse.rue} ${entrepot.adressesByIdAdresse.numero} - ${entrepot.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}</option>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="boxDate1">
-                            <label for="dateTimeDepart">Date et heure de dÃ©part</label>
+                            <label for="dateTimeDepart">Date et heure de départ</label>
                             <input type="date" id="dateTimeDepart" name="dateTimeDepart" value="" class="empty" />
                         </div>
 
@@ -78,14 +78,14 @@
             <div class="content2">
                 <div class="box1">
                     <img class="img-box1" src="${pageContext.request.contextPath}/images/car.png" alt="car" />
-                    <h2>Renouvellement rÃ©guliÃ¨re de notre flotte</h2>
-                    <p>Nous renouvellons notre flotte le plus rÃ©guliÃ¨rement possible</p>
+                    <h2>Renouvellement régulière de notre flotte</h2>
+                    <p>Nous renouvellons notre flotte le plus régulièrement possible</p>
                 </div>
 
                 <div class="box2">
                     <img class="img-box2" src="${pageContext.request.contextPath}/images/calendar.png" alt="calendar" />
                     <h2>Quotidien, hebdomadaire ou mensuel</h2>
-                    <p>Louez votre vÃ©hicule aussi longtemps que vous le souhaiter</p>
+                    <p>Louez votre véhicule aussi longtemps que vous le souhaiter</p>
                 </div>
 
                 <div class="box3">

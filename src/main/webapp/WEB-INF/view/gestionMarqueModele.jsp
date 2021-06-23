@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Gestion marque et modÃ¨le</title>
+        <title>Gestion marque et modèle</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="content-global">
-                <h2>Ajout de modÃ¨le</h2>
+                <h2>Ajout de modèle</h2>
 
                 <form action="<c:url value="/ajoutModele"/>" method="post">
                     <div class="div-input-modif">
@@ -39,7 +39,7 @@
                         </select>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">ModÃ¨le : </label>
+                        <label class="label-input">Modèle : </label>
                         <input class="input-modif" type="text" name="nomModele">
                     </div>
 
@@ -48,16 +48,16 @@
             </div>
 
             <div class="content-global">
-                <h2>Liste des marques et modÃ¨les</h2>
+                <h2>Liste des marques et modèles</h2>
 
                 <div>
                     <table class="table-custom">
                         <thead>
                             <th scope="col">Marque</th>
-                            <th scope="col">ModÃ¨le</th>
+                            <th scope="col">Modèle</th>
                             <th scope="col">Modification Marque</th>
-                            <th scope="col">Modification ModÃ¨le</th>
-                            <th scope="col">Supprimer ModÃ¨le</th>
+                            <th scope="col">Modification Modèle</th>
+                            <th scope="col">Supprimer Modèle</th>
                         </thead>
 
                         <tbody>

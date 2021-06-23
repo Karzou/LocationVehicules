@@ -20,7 +20,7 @@ public class OptionVehiculeService {
         this.em = em;
     }
 
-    // si pas utilisé, a enlever
+    // si pas utilisÃ©, a enlever
     public void update(OptionVehicule optionVehicule) throws ServiceException {
 
         try {

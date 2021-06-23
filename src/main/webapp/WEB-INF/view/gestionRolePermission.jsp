@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <html>
     <head>
@@ -12,7 +12,7 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-global">
-                <h2>Ajout de rÃ´le</h2>
+                <h2>Ajout de rôle</h2>
 
                 <span style="color:red"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
 
@@ -28,7 +28,7 @@
             </div>
 
             <div class="content-global">
-                <h2>Liste des rÃ´les et permissions</h2>
+                <h2>Liste des rôles et permissions</h2>
 
                 <div>
                     <table class="table-custom">

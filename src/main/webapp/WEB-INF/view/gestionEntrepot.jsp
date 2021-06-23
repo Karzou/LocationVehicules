@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
 
                 <form action="<c:url value="/ajoutEntrepot"/>" method="post">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom entrepÃ´t : </label>
+                        <label class="label-input">Nom entrepôt : </label>
                         <input class="input-modif" type="text" name="nomEntrepot" value="${entrepot.nomEntrepot}">
                     </div>
                     <div class="div-input-modif">
@@ -30,7 +30,7 @@
                         <input class="input-modif" type="text" name="rue" value="${entrepot.adressesByIdAdresse.rue}">
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">NumÃ©ro : </label>
+                        <label class="label-input">Numéro : </label>
                         <input class="input-modif" type="text" name="numero" value="${entrepot.adressesByIdAdresse.numero}">
                     </div>
                     <div class="div-input-modif">
@@ -59,7 +59,7 @@
                             <th scope="col">Nom entrepot</th>
                             <th scope="col">Nombre place</th>
                             <th scope="col">Rue</th>
-                            <th scope="col">NumÃ©ro</th>
+                            <th scope="col">Numéro</th>
                             <th scope="col">Boite</th>
                             <th scope="col">Code postal</th>
                             <th scope="col">Ville</th>

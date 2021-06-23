@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Entrepot;
 import com.exception.ServiceException;
 import com.service.EntrepotService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,6 +22,8 @@ import java.io.IOException;
 
 @WebServlet("/supMarqueModele")
 public class SupMarqueModeleServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(SupMarqueModeleServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

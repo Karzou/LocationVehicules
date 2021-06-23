@@ -3,6 +3,8 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.*;
 import com.service.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -21,6 +23,8 @@ import java.util.Set;
 
 @WebServlet("/ajoutVehicule")
 public class AjoutVehiculeServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(AjoutVehiculeServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

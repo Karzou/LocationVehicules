@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modification vÃ©hicule</title>
+        <title>Modification véhicule</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -13,7 +13,7 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-global">
-                <h2>Modification vÃ©hicule</h2>
+                <h2>Modification véhicule</h2>
 
                 <form action="<c:url value="/gestionVehicule"/>" method="post">
                     <div class="div-input-modif">
@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">ModÃ¨le : </label>
+                        <label class="label-input">Modèle : </label>
                         <select class="select-modif" name="idModele">
                             <c:forEach var="modeleList" items="${modeleList}">
                                 <c:choose>
@@ -51,7 +51,7 @@
                         </select>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">CylindrÃ©e : </label>
+                        <label class="label-input">Cylindrée : </label>
                         <input class="input-modif" type="text" name="cylindree" value="${vehicule.cylindree}">
                     </div>
                     <div class="div-input-modif">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">NumÃ©ro de chassis: </label>
+                        <label class="label-input">Numéro de chassis: </label>
                         <input class="input-modif" type="text" name="numChassis" value="${vehicule.numChassis}">
                     </div>
                     <div class="div-input-modif">

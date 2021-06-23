@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import com.service.VehiculeService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -13,13 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Wets Jeoffroy
  */
+
 @WebServlet("/supVehicule")
 public class SupVehiculeServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(SupVehiculeServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

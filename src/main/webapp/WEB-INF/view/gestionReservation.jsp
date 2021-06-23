@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gestion rÃ©servation</title>
+        <title>Gestion réservation</title>
         <c:import url="head.jsp"></c:import>
     </head>
 

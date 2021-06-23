@@ -6,6 +6,8 @@ import com.entity.Modele;
 import com.exception.ServiceException;
 import com.service.MarqueService;
 import com.service.ModeleService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -23,6 +25,8 @@ import java.util.List;
 
 @WebServlet("/gestionMarqueModele")
 public class GestionMarqueModeleServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(GestionMarqueModeleServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

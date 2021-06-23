@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
                         <div class="search-vehicle-content-info-box1">
                             <p class="ageMinimum">Age minimum 18 ans</p>
 
-                            <p class="infoVehicule">CylindrÃ©e: <c:out value="${vehicule.cylindree}"></c:out> cc</p>
+                            <p class="infoVehicule">Cylindrée: <c:out value="${vehicule.cylindree}"></c:out> cc</p>
                             <p class="infoVehicule">Puissance: <c:out value="${vehicule.puissance}"></c:out> cv</p>
                             <p class="infoVehicule">Couleur: <c:out value="${vehicule.couleursByIdCouleur.nomCouleur}"></c:out></p>
                         </div>
@@ -47,7 +47,7 @@
                         </div>
                         <input type="hidden" name="idVehicule" value="<c:out value="${vehicule.idVehicule}"></c:out>">
                         <input type="hidden" name="prixTotal" value="">
-                        <input type="button" class="btn-select-vehicule" value="Choisir ce vÃ©hicule"/>
+                        <input type="button" class="btn-select-vehicule" value="Choisir ce véhicule"/>
                     </div>
                 </div>
             </div>

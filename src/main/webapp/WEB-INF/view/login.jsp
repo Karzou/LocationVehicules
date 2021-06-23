@@ -1,6 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,11 +39,11 @@
                     </div>
 
                     <div>
-                        <p>Vous Ãªtes nouveau ici ? Cliquez ci-dessous pour vous enregistrer !</p>
+                        <p>Vous êtes nouveau ici ? Cliquez ci-dessous pour vous enregistrer !</p>
                     </div>
 
                     <div>
-                        <input type="button" class="btn-register-form" value="CrÃ©er un compte" onclick="showRegisterForm()"></input>
+                        <input type="button" class="btn-register-form" value="Créer un compte" onclick="showRegisterForm()"></input>
                     </div>
                 </form>
             </div>
@@ -64,7 +63,7 @@
 
 
                     <div class="register-div">
-                        <label for="register-prenom">PrÃ©nom</label>
+                        <label for="register-prenom">Prénom</label>
                         <input type="text" class="register-input" id="register-prenom" name="prenom"/>
                     </div>
                     <div class="login-div-error">
@@ -96,7 +95,7 @@
                     </div>
 
                     <div class="register-div">
-                        <label for="register-telephone">TÃ©lÃ©phone</label>
+                        <label for="register-telephone">Téléphone</label>
                         <input type="text" class="register-input" id="register-telephone" name="telephone"/>
                     </div>
                     <div class="login-div-error">
@@ -114,7 +113,7 @@
                     </div>
 
                     <div class="register-div">
-                        <label for="register-numero">NumÃ©ro</label>
+                        <label for="register-numero">Numéro</label>
                         <input type="text" class="register-input" id="register-numero" name="numero"/>
                     </div>
 

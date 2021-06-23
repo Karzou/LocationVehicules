@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modification modÃ¨le</title>
+        <title>Modification modèle</title>
         <c:import url="head.jsp"/>
     </head>
 
@@ -13,11 +13,11 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-global">
-                <h2>Modification modÃ¨le</h2>
+                <h2>Modification modèle</h2>
 
                 <form action="<c:url value="/gestionMarqueModele"/>" method="post">
                     <div class="div-input-modif">
-                        <label class="label-input">ModÃ¨le Ã  modifer : </label>
+                        <label class="label-input">Modèle à modifer : </label>
                         <select class="select-modif" id="modif-modele" name="idModif" value="">
                             <c:forEach var="modele" items="${modeleList}">
                                 <c:if test="${modele.marquesByIdMarque.idMarque == marque.idMarque}">

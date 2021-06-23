@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Couleur;
 import com.exception.ServiceException;
 import com.service.CouleurService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -16,8 +18,11 @@ import java.io.IOException;
 /**
  * @author Wets Jeoffroy
  */
+
 @WebServlet("/modifCouleur")
 public class ModifCouleurServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(ModifCouleurServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

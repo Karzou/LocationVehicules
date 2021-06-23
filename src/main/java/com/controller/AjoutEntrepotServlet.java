@@ -8,6 +8,8 @@ import com.exception.ServiceException;
 import com.service.EntrepotService;
 import com.service.Validation;
 import com.service.VilleService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -24,6 +26,8 @@ import java.io.IOException;
 
 @WebServlet("/ajoutEntrepot")
 public class AjoutEntrepotServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(AjoutEntrepotServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=ISO-8859-1" %>
 
 <html>
     <head>
@@ -22,13 +22,13 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
                             <th scope="col">Rue</th>
-                            <th scope="col">NumÃ©ro</th>
+                            <th scope="col">Numéro</th>
                             <th scope="col">Boite</th>
                             <th scope="col">Code postal</th>
                             <th scope="col">Ville</th>
-                            <th scope="col">RÃ´les</th>
+                            <th scope="col">Rôles</th>
                             <th scope="col">Autorisation</th>
-                            <th scope="col">RÃ©servation</th>
+                            <th scope="col">Réservation</th>
                             <th scope="col">Modification</th>
                             <th scope="col">Activation</th>
                         </thead>
@@ -58,7 +58,7 @@
                                         <td>
                                             <form action="<c:url value="/reservation"/>" method="post">
                                                 <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
-                                                <button type="submit" class="btn-reserv" name="idSup" value="rÃ©servations">RÃ©servations client</button>
+                                                <button type="submit" class="btn-reserv" name="idSup" value="réservations">Réservations client</button>
                                             </form>
                                         </td>
                                         <td>
@@ -109,7 +109,7 @@
                                             <td>
                                                 <form action="<c:url value="/reservation"/>" method="post">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}">
-                                                    <button class="btn-reserv" name="idSup" type="submit" value="reservation">RÃ©servations client</button>
+                                                    <button class="btn-reserv" name="idSup" type="submit" value="reservation">Réservations client</button>
                                                 </form>
                                             </td>
                                             <td>

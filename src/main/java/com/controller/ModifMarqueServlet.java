@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Marque;
 import com.exception.ServiceException;
 import com.service.MarqueService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import java.io.IOException;
 
 @WebServlet("/modifMarque")
 public class ModifMarqueServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(ModifMarqueServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
