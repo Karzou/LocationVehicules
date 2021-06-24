@@ -27,9 +27,18 @@ public class VehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"VehiculeServlet\"");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"VehiculeServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -49,6 +58,11 @@ public class VehiculeServlet extends HttpServlet {
 
             e.printStackTrace();
         } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
 
             em.close();
         }

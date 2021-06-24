@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
         <title>Connexion / Enregistrement</title>
     </head>
 
@@ -35,7 +35,7 @@
                     </div>
 
                     <div>
-                        <input type="submit" class="btn-login" value="Connexion"></input>
+                        <input type="submit" class="btn-login" value="Connexion">
                     </div>
 
                     <div>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div>
-                        <input type="button" class="btn-register-form" value="Créer un compte" onclick="showRegisterForm()"></input>
+                        <input type="button" class="btn-register-form" value="Créer un compte" onclick="showRegisterForm()">
                     </div>
                 </form>
             </div>
@@ -142,8 +142,8 @@
                     </div>
 
                     <div class="register-button-div">
-                        <input type="submit" class="btn-register" value="Enregistrer"></input>
-                        <input type="reset"class="btn-reset" value="Reset"></input>
+                        <input type="submit" class="btn-register" value="Enregistrer">
+                        <input type="reset"class="btn-reset" value="Reset">
                     </div>
                 <c:if test="${empty succes}">
 					<div class="login-div-error">
@@ -152,7 +152,7 @@
                 </c:if>
                 </form>
             </div>
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

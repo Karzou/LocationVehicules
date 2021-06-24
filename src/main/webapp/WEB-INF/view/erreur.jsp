@@ -4,15 +4,16 @@
 <html>
     <head>
         <title>Erreur</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body>
-    <div class="container">
-        <c:import url="menu.jsp"></c:import>
-        <h1><c:out value="${sessionScope.erreur}"></c:out></h1>
-        <a clas="btn btn-primary" href="${pageContext.request.contextPath}${sessionScope.retour}">Liste utilisateur</a>
-    </div>
-    <c:import url="footer.jsp"></c:import>
+        <div class="container">
+            <c:import url="menu.jsp"/>
+            <h1><c:out value="${sessionScope.erreur}"/></h1>
+            <a clas="btn btn-primary" href="${pageContext.request.contextPath}${sessionScope.retour}">Liste utilisateur</a>
+
+            <c:import url="footer.jsp"/>
+        </div>
     </body>
 </html>

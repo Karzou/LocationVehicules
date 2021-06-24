@@ -53,7 +53,8 @@
                                     <td>
                                         <c:forEach var="autorise" items="${autoriseList}">
                                             <c:if test="${autorise.rolesByIdRole.idRole eq role.idRole}">
-                                                <c:out value="${autorise.permissionsByIdPermission.nomPermission}"/></br>
+                                                <c:out value="${autorise.permissionsByIdPermission.nomPermission}"/>
+                                                </br>
                                             </c:if>
                                         </c:forEach>
                                     </td>

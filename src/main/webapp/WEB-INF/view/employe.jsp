@@ -4,13 +4,14 @@
 <html>
     <head>
         <title>Employe</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body>
         <div class="container">
-            <c:import url="menu.jsp"></c:import>
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="menu.jsp"/>
+
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

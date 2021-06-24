@@ -27,9 +27,18 @@ public class SupModeleServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"SupModeleServlet\"");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"SupModeleServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -62,6 +71,11 @@ public class SupModeleServlet extends HttpServlet {
             if (transaction.isActive()) {
 
                 transaction.rollback();
+            }
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
             }
 
             em.close();

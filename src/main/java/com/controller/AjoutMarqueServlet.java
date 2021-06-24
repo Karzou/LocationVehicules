@@ -27,9 +27,18 @@ public class AjoutMarqueServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"AjoutMarqueServlet\"");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"AjoutMarqueServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -56,6 +65,11 @@ public class AjoutMarqueServlet extends HttpServlet {
             if (transaction.isActive()) {
 
                 transaction.rollback();
+            }
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
             }
 
             em.close();

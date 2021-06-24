@@ -30,6 +30,11 @@ public class GestionVehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"GestionVehiculeServlet\"");
+        }
+
         EntityManager em = EMF.getEM();
 
         boolean newVehicleFlag = Boolean.parseBoolean(request.getParameter("newVehicleFlag"));
@@ -109,6 +114,11 @@ public class GestionVehiculeServlet extends HttpServlet {
             e.printStackTrace();
         } finally {
 
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
             em.close();
         }
 
@@ -125,6 +135,11 @@ public class GestionVehiculeServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"GestionVehiculeServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -245,6 +260,11 @@ public class GestionVehiculeServlet extends HttpServlet {
             if (transaction.isActive()) {
 
                 transaction.rollback();
+            }
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
             }
 
             em.close();

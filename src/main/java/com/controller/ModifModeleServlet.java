@@ -29,9 +29,18 @@ public class ModifModeleServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifModeleServlet\"");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"ModifModeleServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -57,6 +66,11 @@ public class ModifModeleServlet extends HttpServlet {
 
             e.printStackTrace();
         } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
 
             em.close();
         }

@@ -27,6 +27,11 @@ public class ModifVehiculeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifVehiculeServlet\"");
+        }
+
         EntityManager em = EMF.getEM();
 
         int id = Integer.parseInt(request.getParameter("idModif"));
@@ -82,6 +87,11 @@ public class ModifVehiculeServlet extends HttpServlet {
             e.printStackTrace();
         } finally {
 
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
             em.close();
         }
 
@@ -95,6 +105,11 @@ public class ModifVehiculeServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"ModifVehiculeServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -181,6 +196,11 @@ public class ModifVehiculeServlet extends HttpServlet {
 
             e.printStackTrace();
         } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
 
             em.close();
         }

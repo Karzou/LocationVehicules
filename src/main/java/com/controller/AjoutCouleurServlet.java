@@ -27,12 +27,18 @@ public class AjoutCouleurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (logger.isInfoEnabled()){
-            logger.info("Appel de la m�thode \"doGet\" de la servlet \"AjoutCouleurServlet\"");
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"AjoutCouleurServlet\"");
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"AjoutCouleurServlet\"");
+        }
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
@@ -60,6 +66,11 @@ public class AjoutCouleurServlet extends HttpServlet {
             if (transaction.isActive()) {
 
                 transaction.rollback();
+            }
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
             }
 
             em.close();

@@ -4,17 +4,18 @@
 <html>
     <head>
         <title>404</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body>
-    <div class="container">
-        <c:import url="menu.jsp"></c:import>
-        <h1>OUPS ERREUR 404</h1>
+        <div class="container">
+            <c:import url="menu.jsp"/>
 
+            <h1>OUPS ERREUR 404</h1>
 
-        <h1>EN CONSTRUCTION !!! </h1>
-        <c:import url="footer.jsp"></c:import>
-    </div>
+            <h1>EN CONSTRUCTION !!! </h1>
+
+            <c:import url="footer.jsp"/>
+        </div>
     </body>
 </html>

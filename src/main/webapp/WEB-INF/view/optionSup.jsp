@@ -5,18 +5,20 @@
 <html>
     <head>
         <title>Option</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body class="body">
         <div class="container">
-            <c:import url="menu.jsp"></c:import>
+            <c:import url="menu.jsp"/>
 
-            <div class="content-option">
-                <h1>Page under construction</h1>
+            <div class="content-option-sup">
+                <h2>Option supplémentaire</h2>
+
+                <h3>Page en construction</h3>
             </div>
 
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

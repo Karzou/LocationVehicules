@@ -5,12 +5,12 @@
 <html>
     <head>
         <title>Modification Entrepot</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body class="body">
         <div class="container">
-            <c:import url="menu.jsp"></c:import>
+            <c:import url="menu.jsp"/>
 
             <div class="content-global">
                 <h2>Modification entrepot</h2>
@@ -50,12 +50,12 @@
                         <label for="actifEntrepot" class="label-checkbox">Actif</label>
                     </div>
 
-                    <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"></input>
+                    <input type="hidden" name="idModif" value="${entrepot.idEntrepot}">
                     <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifier</button>
                 </form>
             </div>
 
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>

@@ -5,18 +5,18 @@
 <html>
     <head>
         <title>Gestion réservation</title>
-        <c:import url="head.jsp"></c:import>
+        <c:import url="head.jsp"/>
     </head>
 
     <body class="body">
         <div class="container">
-            <c:import url="menu.jsp"></c:import>
+            <c:import url="menu.jsp"/>
 
             <div class="content-global">
                 <h1>Page en construction</h1>
             </div>
 
-            <c:import url="footer.jsp"></c:import>
+            <c:import url="footer.jsp"/>
         </div>
     </body>
 </html>
