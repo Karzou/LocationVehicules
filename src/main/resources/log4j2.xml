@@ -3,7 +3,7 @@
 
     <!-- Logging Properties -->
     <Properties>
-        <Property name="LOG_PATTERN">%d{yyyy-MM-dd 'T' HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd 'T' HH:mm:ss.SSSZ} | %p | %m (%F:%L) | %c %n</Property>
         <Property name="APP_LOG_ROOT">C:\Users\djkar\OneDrive\Bureau\LocationVehiculesFusion-2\LocationVehicules\src\logs</Property>
     </Properties>
 
@@ -92,8 +92,9 @@
             <AppenderRef ref="Console" />
         </Logger>
 
-        <Logger name="com.entity" additivity="false" level="fatal">
-            <AppenderRef ref="traceLog" />
+        <Logger name="com.entity" additivity="false" level="info">
+            <AppenderRef ref="infoLog" />
+            <AppenderRef ref="warnLog" />
             <AppenderRef ref="Console" />
         </Logger>
 
@@ -103,7 +104,8 @@
         </Logger>
 
         <Logger name="com.controller" additivity="false" level="info">
-            <AppenderRef ref="infoLog"  />
+            <AppenderRef ref="infoLog" />
+            <AppenderRef ref="warnLog"  />
             <AppenderRef ref="errorLog" />
             <AppenderRef ref="Console"  />
         </Logger>

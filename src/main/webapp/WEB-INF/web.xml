@@ -37,6 +37,7 @@
         <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/vehicule</url-pattern>
         <url-pattern>/gestionRolePermission</url-pattern>
+        <url-pattern>/facture</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
@@ -45,6 +46,7 @@
         <url-pattern>/supUtilisateur</url-pattern>
         <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/gestionRolePermission</url-pattern>
+        <url-pattern>/facture</url-pattern>
     </filter-mapping>
 
     <error-page>

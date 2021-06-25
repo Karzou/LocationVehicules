@@ -17,6 +17,7 @@
                         <thead>
                         <th scope="col">Nom</th>
                         <th scope="col">Prenom</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Rue</th>
                         <th scope="col">Numéro</th>
                         <th scope="col">Boite</th>
@@ -31,6 +32,7 @@
                         <tbody>
                             <td><c:out value="${utilisateur.nomUtilisateur}"/></td>
                             <td><c:out value="${utilisateur.prenomUtilisateur}"/></td>
+                            <td><c:out value="${utilisateur.email}"></c:out> </td>
                             <td><c:out value="${utilisateur.adressesByIdAdresse.rue}"/></td>
                             <td><c:out value="${utilisateur.adressesByIdAdresse.numero}"/></td>
                             <td><c:out value="${utilisateur.adressesByIdAdresse.boite}"/></td>

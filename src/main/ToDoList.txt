@@ -1,15 +1,45 @@
 ---------------
 |  A faire :  |
 ---------------
+JO
+-------------------------------------------
 Toutes les validations partie véhicule (JO)
+- Page erreur si pas de co bdd (car pour le moment c est une page 500)
+
+Kevin
+-------------------------------------------
+- Page erreur si pas de co bdd
+- suppression role (sup perm)
+- telehpone dans modif utilisateur
+- checks actifs.
+- ajouter "enlever permission sur ce role".
+- ajouter permission (pdf, read unique,...).
+- filtre employé.
+- validation js.
+- faire les tests.
+- hasPermission pour les autres.
+- demande de reset password (utilisateur)
+- verif filtre admin/client
+- faire validation taille max
+- css modif utilisateur
+- check login servlet car double appel au demarrage, appel de la fonction checklogin lors de la creation.
 
 
+Nath
+---------------------------
+
+Sahin
+---------------------------
 
 
+Jerome
+---------------------------
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------
 |  Fait :  |
+------------
+JO
 ------------
 Page accueil
 Page recherche véhicule
@@ -18,3 +48,43 @@ Gestion/modification Véhicule
 Gestion/modification couleur
 Gestion/modification marque
 Gestion/modification modèle
+
+Kevin
+--------------
+- Page login + validation bdd
+- Page creation user + verif bdd + ecriture bdd
+- Page profil + modif profil
+- Page role permission + gestion + bdd.
+- page modif utilisateur + gestion + bdd.
+- Droit admin / client.
+- check de pas 2x meme permission sur un role.
+- refaire select dans gestion droits par utilisateurs.  (fait)
+- page profil. (Fait)
+- menu employé. (fait)
+- demande de reset password (employe)(fait)
+- reset password (admin)(fait)
+- liste ville seconde fois (fait)
+- effacer message erreur quand ok.(fait)
+- check liste permission dans role Permission. (fait)
+- attention ucFirst sans rien login(fait)
+- erreur droit/perm (fait)
+- Liste utilisateurs inactifs admin
+- recuperer info qd erreur (fait)
+- Servlet Gestion Utilisateur ==> lister par id (2) (fait)
+- !!!! accent dans "quantité" otpionsSup (fait)
+- accent dans page erreur.(fait)
+- empecher la connection si plus actif
+- Recherche du role en dure dans creation utilisateur => pas bien
+- faire le log4j 1.2.
+- ajouter email de l utilisateur sur profil
+
+Nath
+----------------------
+
+
+Shahin
+----------------------
+
+
+Jerome
+----------------------

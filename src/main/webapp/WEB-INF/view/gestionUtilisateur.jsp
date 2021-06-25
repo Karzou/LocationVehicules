@@ -21,6 +21,7 @@
                         <thead>
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Rue</th>
                             <th scope="col">Numéro</th>
                             <th scope="col">Boite</th>
@@ -39,6 +40,7 @@
                                 <c:if test="${user.actifUtilisateur}">
                                     <td><c:out value="${user.nomUtilisateur}"/></td>
                                     <td><c:out value="${user.prenomUtilisateur}"/></td>
+                                    <td><c:out value="${user.email}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.rue}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
@@ -90,6 +92,7 @@
                                     <c:if test="${! user.actifUtilisateur}">
                                         <td><c:out value="${user.nomUtilisateur}"/></td>
                                         <td><c:out value="${user.prenomUtilisateur}"/></td>
+                                        <td><c:out value="${user.email}"/></td>
                                         <td><c:out value="${user.adressesByIdAdresse.rue}"/>
                                         <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                         <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
