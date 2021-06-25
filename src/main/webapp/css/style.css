@@ -2,6 +2,7 @@
 html {
     position:relative;
     min-height: 100%;
+    font-family: sans-serif;
 }
 
 body {
@@ -705,10 +706,9 @@ li {
 .head .text {
     position: absolute;
     text-align: left;
-    top: 20%;
+    top: 250px;
     color: white;
     width: 870px;
-    /*text-shadow: green 1px 1px, green -1px 1px, green -1px -1px, green 1px -1px;*/
     font-weight: bold;
     font-size: 26px;
     text-shadow: 0 0 2px black;
@@ -728,8 +728,54 @@ li {
     padding: 10px 30px 20px;
 }
 
-.box p {
+.title-box {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.title-box p {
     font-weight: bold;
+    text-align: left;
+}
+
+.error-message-accueil {
+    background-color: #F10F0F;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.error-message-accueil-title {
+    width: 100%;
+    margin-top: 5px;
+    height: 25px;
+}
+
+.error-message-accueil-title-img {
+    float: left;
+    margin: 12px 20px 0 20px;
+}
+
+.error-message-accueil-title-txt {
+    float: left;
+}
+
+.error-message-accueil-title-txt p {
+    color: white;
+    font-weight: bold;
+}
+
+.error-message-accueil-body {
+    width: 100%;
+}
+
+.error-message-accueil-body-txt {
+    float: left;
+    margin-left: 64px;
+}
+
+.error-message-accueil-body-txt p {
+    color: white;
 }
 
 .box div {
@@ -747,6 +793,7 @@ li {
 
 .box div.boxSelect1 {
     width: 255px;
+    height: 100px;
 }
 
 .box div.boxSelect1 select {
@@ -756,7 +803,6 @@ li {
     border: 1px solid gray;
     width: 100%;
     font-weight: bold;
-    color:gray;
 }
 
 .box div.boxSelect1 select:hover {
@@ -791,6 +837,7 @@ li {
 
 .box div.boxSelect2 {
     width: 255px;
+    height: 100px;
     margin-left: 10px;
 }
 
@@ -801,7 +848,6 @@ li {
     border: 1px solid gray;
     width: 100%;
     font-weight: bold;
-    color:gray;
 }
 
 .box div.boxSelect2 select:hover {
@@ -838,45 +884,54 @@ li {
     margin-left: 10px;
     margin-right: 0px;
     width: 145px;
-}
-
-.box div.boxDate1 .empty{
-    color: #999;
+    height: 100px;
 }
 
 .box div.boxTime1 {
     margin-left: 0px;
     margin-right: 0px;
     width: 100px;
-}
-
-.box div.boxTime1 .empty{
-    color: #999;
+    height: 100px;
 }
 
 .box div.boxDate2 {
     margin-left: 10px;
     margin-right: 0px;
     width: 145px;
-}
-
-.box div.boxDate2 .empty {
-    color: #999;
+    height: 100px;
 }
 
 .box div.boxTime2 {
     margin-left: 0px;
     margin-right: 0px;
     width: 100px;
+    height: 100px;
 }
 
-.box div.boxTime2 .empty{
-    color: #999;
+.overflow-label {
+    width: 180px;
+}
+
+.span-error {
+    float: left;
+    text-align: left;
+    color: red;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.span-error2 {
+    float: left;
+    text-align: left;
+    width: 220px;
+    color: red;
+    margin-top: 3px;
+    font-size: 14px;
 }
 
 .box div.submitButton {
     width: 100%;
-    padding-top: 30px;
+    margin-top: 10px;
 }
 
 .searchButton {
@@ -888,12 +943,12 @@ li {
     font-weight: bold;
     border: 0;
     float: right;
+    cursor: pointer;
 }
 
 .searchButton:focus,
 .searchButton:hover {
     background-color: #F1C40F;
-    cursor: pointer;
 }
 
 .box div input[type=date] {
@@ -1093,6 +1148,22 @@ li {
 
 .btn-select-vehicule:hover {
     border: 4px solid green;
+}
+
+.btn-return {
+    background-color: gold;
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-return:focus,
+.btn-return:hover {
+    background-color: #F1C40F;
 }
 
 .ageMinimum {

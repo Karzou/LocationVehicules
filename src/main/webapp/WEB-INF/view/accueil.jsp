@@ -8,7 +8,7 @@
         <title>Accueil</title>
     </head>
 
-    <body>
+    <body onload="colorOnLoadHome()">
         <div class="container">
             <c:import url="menu.jsp"/>
             <div class="content1">
@@ -20,13 +20,33 @@
                     </div>
                 </div>
 
-                <form name="searchVehicle" action="<c:url value="/vehicule"/>" method="post">
+                <form name="searchVehicle" action="<c:url value="/vehicule"/>" method="post" onsubmit="return validateSearchVehicle()">
                     <div class="box">
-                        <p>Veuillez complèter les informations ci-dessous</p>
-                        <br/>
+                        <div class="title-box">
+                            <p>Veuillez complèter les informations ci-dessous</p>
+                        </div>
+
+                        <c:if test="${sessionScope.errMessage != null}">
+                            <div class="error-message-accueil">
+                                <div class="error-message-accueil-title">
+                                    <div class="error-message-accueil-title-img">
+                                        <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                    </div>
+                                    <div class="error-message-accueil-title-txt">
+                                        <p>L'erreur suivante est survenue</p>
+                                    </div>
+                                </div>
+                                <div class="error-message-accueil-body">
+                                    <div class="error-message-accueil-body-txt">
+                                        <p>${errMessage}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <c:remove var="errMessage" scope="session" />
+                        </c:if>
 
                         <div class="boxSelect1">
-                            <label for="LieuDepart">Lieu de départ</label>
+                            <label>Lieu de départ</label>
                             <select name="LieuDepart" id="LieuDepart" oninput='style.color="black"'>
                                 <option value="" style='display:none'>Lieu de départ</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
@@ -35,10 +55,12 @@
                                     </optgroup>
                                 </c:forEach>
                             </select>
+
+                            <span class="span-error" id="lieu-depart-error"></span>
                         </div>
 
                         <div class="boxSelect2">
-                            <label for="LieuRetour">Lieu de retour</label>
+                            <label>Lieu de retour</label>
                             <select name="LieuRetour" id="LieuRetour" oninput='style.color="black"'>
                                 <option value="" style='display:none'>Lieu de retour</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
@@ -47,29 +69,35 @@
                                     </optgroup>
                                 </c:forEach>
                             </select>
+
+                            <span class="span-error" id="lieu-retour-error"></span>
                         </div>
 
                         <div class="boxDate1">
-                            <label for="dateTimeDepart">Date et heure de départ</label>
-                            <input type="date" id="dateTimeDepart" name="dateTimeDepart" value="" class="empty" />
+                            <label class="overflow-label">Date et heure de départ</label>
+                            <input type="date" id="dateTimeDepart" name="dateTimeDepart" value="" class="empty" onchange="changeColor('dateTimeDepart')"/>
+
+                            <span class="span-error2" id="date-depart-error"></span>
                         </div>
 
                         <div class="boxtime1">
-                            <input type="time" id="heureDepart" name="heureDepart" value="" class="empty" />
+                            <input type="time" id="heureDepart" name="heureDepart" value="" class="empty" onchange="changeColor('heureDepart')"/>
                         </div>
 
                         <div class="boxDate2">
-                            <label for="dateTimeRetour">Date et heure de retour</label>
-                            <input type="date" id="dateTimeRetour" name="dateTimeRetour" class="empty" />
+                            <label class="overflow-label">Date et heure de retour</label>
+                            <input type="date" id="dateTimeRetour" name="dateTimeRetour" class="empty" onchange="changeColor('dateTimeRetour')"/>
+
+                            <span class="span-error2" id="date-retour-error"></span>
                         </div>
 
                         <div class="boxtime2">
-                            <input type="time" id="heureRetour" name="heureRetour" value="" class="empty" />
+                            <input type="time" id="heureRetour" name="heureRetour" value="" class="empty" onchange="changeColor('heureRetour')"/>
                         </div>
 
                         <div class="submitButton ">
-                            <input type="hidden" name="dateFin" value="2021-06-24">
-                            <input type="submit" value="Rechercher" class="searchButton" />
+                            <input type="hidden" name="dateFin" value="2021-06-24" />
+                            <input type="submit" class="searchButton" value="Rechercher" />
                         </div>
                     </div>
                 </form>

@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.entity.Entrepot;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import com.connection.EMF;
+import com.service.EntrepotService;
 import com.service.Validation;
 import com.service.VehiculeService;
 import org.apache.log4j.LogManager;
@@ -46,31 +48,45 @@ public class VehiculeServlet extends HttpServlet {
         List<Vehicule> vehiculeList = null;
         int periodeLocation = 0;
 
-        Date dateDebut = Validation.dateFormat(request.getParameter("dateTimeDepart"));
-        Date dateFin = Validation.dateFormat(request.getParameter("dateTimeRetour"));
-        int idEntrepot = Integer.parseInt(request.getParameter("LieuDepart"));
+        String strDateDebut = request.getParameter("dateTimeDepart");
+        String strDateFin = request.getParameter("dateTimeRetour");
+        String strIdEntrepot = request.getParameter("LieuDepart");
 
-        try {
+        if (strDateDebut.trim().isEmpty() || strDateFin.trim().isEmpty() || strIdEntrepot.trim().isEmpty()) {
 
-            vehiculeList = vehiculeService.rechercher(idEntrepot, dateDebut, dateFin);
-            periodeLocation = (int) vehiculeService.periodeLocation(dateDebut, dateFin);
-        } catch (ServiceException e) {
+            HttpSession session = request.getSession();
 
-            e.printStackTrace();
-        } finally {
+            session.setAttribute("errMessage", "Veuillez remplir tous les champs pour effectuer une recheche de véhicule");
 
-            if(logger.isInfoEnabled()) {
+            response.sendRedirect("accueil");
 
-                logger.info("Fermeture de l'EntityManager");
+        } else {
+
+            Date dateDebut = Validation.dateFormat(strDateDebut);
+            Date dateFin = Validation.dateFormat(strDateFin);
+            int idEntrepot = Integer.parseInt(strIdEntrepot);
+
+            try {
+
+                vehiculeList = vehiculeService.rechercher(idEntrepot, dateDebut, dateFin);
+                periodeLocation = (int) vehiculeService.periodeLocation(dateDebut, dateFin);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            } finally {
+
+                if (logger.isInfoEnabled()) {
+
+                    logger.info("Fermeture de l'EntityManager");
+                }
+
+                em.close();
             }
 
-            em.close();
+            request.setAttribute("periodeLocation", periodeLocation);
+            request.setAttribute("vehiculeList", vehiculeList);
+
+            this.getServletContext().getRequestDispatcher("/WEB-INF/view/vehicule.jsp").forward(request, response);
         }
-
-        request.setAttribute("periodeLocation", periodeLocation);
-        request.setAttribute("vehiculeList", vehiculeList);
-
-        /* Affichage de la page d'inscription */
-        this.getServletContext().getRequestDispatcher("/WEB-INF/view/vehicule.jsp").forward( request, response );
     }
 }

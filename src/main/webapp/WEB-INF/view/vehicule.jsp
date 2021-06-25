@@ -18,6 +18,8 @@
                 <c:when test="${fn:length(vehiculeList) == 0}">
                     <div class="content-vehicle-search">
                         <h1>Aucun véhicule disponible</h1>
+
+                        <input type="button" class="btn-return" value="Retour" onclick=location.href="${pageContext.request.contextPath}/accueil">
                     </div>
                 </c:when>
 
