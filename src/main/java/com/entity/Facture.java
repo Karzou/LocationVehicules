@@ -10,6 +10,9 @@ import java.util.Objects;
  
 @Entity
 @Table(name = "factures", schema = "location_vehicules")
+@NamedQueries({
+        @NamedQuery(name = "Facture.getAll", query = "SELECT f FROM Facture f")
+})
 public class Facture {
     private int idFacture;
     private Date dateFacture;
