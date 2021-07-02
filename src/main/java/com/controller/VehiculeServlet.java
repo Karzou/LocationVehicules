@@ -1,10 +1,8 @@
 package com.controller;
 
-import com.entity.Entrepot;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import com.connection.EMF;
-import com.service.EntrepotService;
 import com.service.Validation;
 import com.service.VehiculeService;
 import org.apache.log4j.LogManager;
@@ -48,11 +46,14 @@ public class VehiculeServlet extends HttpServlet {
         List<Vehicule> vehiculeList = null;
         int periodeLocation = 0;
 
-        String strDateDebut = request.getParameter("dateTimeDepart");
-        String strDateFin = request.getParameter("dateTimeRetour");
-        String strIdEntrepot = request.getParameter("LieuDepart");
+        String strIdLieuDepart = request.getParameter("LieuDepart");
+        String strIdLieuRetour = request.getParameter("LieuRetour");
+        String strDateDepart = request.getParameter("dateDepart");
+        String strHeureDepart = request.getParameter("heureDepart");
+        String strDateRetour = request.getParameter("dateRetour");
+        String strHeureRetour = request.getParameter("heureRetour");
 
-        if (strDateDebut.trim().isEmpty() || strDateFin.trim().isEmpty() || strIdEntrepot.trim().isEmpty()) {
+        if (strIdLieuDepart.trim().isEmpty() || strIdLieuRetour.trim().isEmpty() || strDateDepart.trim().isEmpty() || strHeureDepart.isEmpty() || strDateRetour.isEmpty() || strHeureRetour.isEmpty()) {
 
             HttpSession session = request.getSession();
 
@@ -62,14 +63,15 @@ public class VehiculeServlet extends HttpServlet {
 
         } else {
 
-            Date dateDebut = Validation.dateFormat(strDateDebut);
-            Date dateFin = Validation.dateFormat(strDateFin);
-            int idEntrepot = Integer.parseInt(strIdEntrepot);
+            int idLieuDepart = Integer.parseInt(strIdLieuDepart);
+            int idLieuRetour = Integer.parseInt(strIdLieuDepart);
+            Date dateDepart = Validation.dateFormat(strDateDepart);
+            Date dateRetour = Validation.dateFormat(strDateRetour);
 
             try {
 
-                vehiculeList = vehiculeService.rechercher(idEntrepot, dateDebut, dateFin);
-                periodeLocation = (int) vehiculeService.periodeLocation(dateDebut, dateFin);
+                vehiculeList = vehiculeService.rechercher(idLieuDepart, dateDepart, dateRetour);
+                periodeLocation = (int) vehiculeService.periodeLocation(dateDepart, dateRetour);
             } catch (ServiceException e) {
 
                 e.printStackTrace();
@@ -85,6 +87,12 @@ public class VehiculeServlet extends HttpServlet {
 
             request.setAttribute("periodeLocation", periodeLocation);
             request.setAttribute("vehiculeList", vehiculeList);
+            request.setAttribute("idLieuDepart", idLieuDepart);
+            request.setAttribute("idLieuRetour", idLieuRetour);
+            request.setAttribute("strDateDepart", strDateDepart);
+            request.setAttribute("strHeureDepart", strHeureDepart);
+            request.setAttribute("strDateRetour", strDateRetour);
+            request.setAttribute("strHeureRetour", strHeureRetour);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/vehicule.jsp").forward(request, response);
         }

@@ -358,6 +358,12 @@ li {
     background-color: #F1C40F;
 }
 
+.btn-modif:disabled {
+    background-color: #eee;
+    color: grey;
+    cursor: not-allowed;
+}
+
 .btn-sup {
     width: 100px;
     height: 30px;
@@ -810,7 +816,7 @@ li {
     border: 1px solid green;
 }
 
-.box div.boxSelect1 select:focus {
+/*.box div.boxSelect1 select:focus {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
 }
@@ -818,7 +824,7 @@ li {
 .box div.boxSelect1 select:active {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
-}
+}*/
 
 .box div.boxSelect1 select option:not(:first-of-type) {
     color: black;
@@ -855,7 +861,7 @@ li {
     border: 1px solid green;
 }
 
-.box div.boxSelect2 select:focus {
+/*.box div.boxSelect2 select:focus {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
 }
@@ -863,7 +869,7 @@ li {
 .box div.boxSelect2 select:active {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
-}
+}*/
 
 .box div.boxSelect2 select option:not(:first-of-type) {
     color: black;
@@ -946,7 +952,6 @@ li {
     cursor: pointer;
 }
 
-.searchButton:focus,
 .searchButton:hover {
     background-color: #F1C40F;
 }
@@ -977,7 +982,7 @@ li {
     border: 1px solid green;
 }
 
-.box div input[type=date]:focus,
+/*.box div input[type=date]:focus,
 .box div input[type=time]:focus {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
@@ -987,7 +992,7 @@ li {
 .box div input[type=time]:active {
     box-shadow: 0 0 1px 2px green;
     border: 1px solid green;
-}
+}*/
 
 .content2 {
     background-color: #ECF0F1;

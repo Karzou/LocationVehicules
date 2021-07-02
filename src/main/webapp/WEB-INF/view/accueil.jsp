@@ -8,7 +8,7 @@
         <title>Accueil</title>
     </head>
 
-    <body onload="colorOnLoadHome()">
+    <body onload="colorOnLoadHome();defineMinDate()">
         <div class="container">
             <c:import url="menu.jsp"/>
             <div class="content1">
@@ -47,7 +47,7 @@
 
                         <div class="boxSelect1">
                             <label>Lieu de départ</label>
-                            <select name="LieuDepart" id="LieuDepart" oninput='style.color="black"'>
+                            <select name="LieuDepart" id="LieuDepart" oninput="style.color='black';resetSelectLieuDepart()">
                                 <option value="" style='display:none'>Lieu de départ</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
                                     <optgroup label="${entrepot.nomEntrepot}">
@@ -61,7 +61,7 @@
 
                         <div class="boxSelect2">
                             <label>Lieu de retour</label>
-                            <select name="LieuRetour" id="LieuRetour" oninput='style.color="black"'>
+                            <select name="LieuRetour" id="LieuRetour" oninput="style.color='black';resetSelectLieuRetour()">
                                 <option value="" style='display:none'>Lieu de retour</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
                                     <optgroup label="${entrepot.nomEntrepot}">
@@ -75,28 +75,27 @@
 
                         <div class="boxDate1">
                             <label class="overflow-label">Date et heure de départ</label>
-                            <input type="date" id="dateTimeDepart" name="dateTimeDepart" value="" class="empty" onchange="changeColor('dateTimeDepart')"/>
+                            <input type="date" id="dateDepart" name="dateDepart" value="" class="empty" oninput="changeColor('dateDepart');resetInputDateDepart()"/>
 
-                            <span class="span-error2" id="date-depart-error"></span>
+                            <span class="span-error2" id="date-time-depart-error"></span>
                         </div>
 
                         <div class="boxtime1">
-                            <input type="time" id="heureDepart" name="heureDepart" value="" class="empty" onchange="changeColor('heureDepart')"/>
+                            <input type="time" id="heureDepart" name="heureDepart" value="" class="empty" oninput="changeColor('heureDepart');resetInputHeureDepart()"/>
                         </div>
 
                         <div class="boxDate2">
                             <label class="overflow-label">Date et heure de retour</label>
-                            <input type="date" id="dateTimeRetour" name="dateTimeRetour" class="empty" onchange="changeColor('dateTimeRetour')"/>
+                            <input type="date" id="dateRetour" name="dateRetour" class="empty" oninput="changeColor('dateRetour');resetInputDateRetour()"/>
 
-                            <span class="span-error2" id="date-retour-error"></span>
+                            <span class="span-error2" id="date-time-retour-error"></span>
                         </div>
 
                         <div class="boxtime2">
-                            <input type="time" id="heureRetour" name="heureRetour" value="" class="empty" onchange="changeColor('heureRetour')"/>
+                            <input type="time" id="heureRetour" name="heureRetour" value="" class="empty" oninput="changeColor('heureRetour');resetInputHeureRetour()"/>
                         </div>
 
                         <div class="submitButton ">
-                            <input type="hidden" name="dateFin" value="2021-06-24" />
                             <input type="submit" class="searchButton" value="Rechercher" />
                         </div>
                     </div>

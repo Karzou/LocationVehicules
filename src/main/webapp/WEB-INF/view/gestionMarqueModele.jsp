@@ -74,25 +74,27 @@
                                 <td>
                                     <form action="<c:url value="/modifMarque"/>" method="post">
                                         <input type="hidden" name="idModif" value="${marque.idMarque}"/>
-                                        <button class="btn-modif" name="idModif" type="submit">Modifier</button>
+                                        <button type="submit" class="btn-modif" name="idModif">Modifier</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="<c:url value="/modifModele"/>" method="post">
                                         <input type="hidden" name="idModif" value="${marque.idMarque}"/>
-                                        <button class="btn-modif" name="idModif" type="submit">Modifier</button>
+                                        <button type="submit" class="btn-modif" name="idModif">Modifier</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="<c:url value="/supModele"/>" method="post">
                                         <select class="select-table" name="idSup" value="">
+                                            <c:set var="count" value="0"/>
                                             <c:forEach var="modele" items="${modeleList}">
                                                 <c:if test="${modele.marquesByIdMarque.idMarque == marque.idMarque}">
                                                     <option value="${modele.idModele}">${modele.nomModele}</option>
+                                                    <c:set var="count" value="${count + 1}"/>
                                                 </c:if>
                                             </c:forEach>
                                         </select>
-                                        <button class="btn-modif" name="idModif" type="submit">Supprimer</button>
+                                        <button type="submit" class="btn-modif" name="idModif" <c:if test="${count == 0}">disabled</c:if>>Supprimer</button>
                                     </form>
                                 </td>
                             </tr>

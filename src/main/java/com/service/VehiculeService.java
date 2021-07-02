@@ -99,7 +99,7 @@ public class VehiculeService {
             return query.getResultList();
         } catch (Exception e) {
 
-            LOGGER.warn("Impossible de recherche les véhicules disponibles suivant les paramètres de recherche dans la base de données");
+            LOGGER.warn("Impossible de rechercher les véhicules disponibles suivant les paramètres de recherche dans la base de données");
 
             throw new ServiceException(e);
         }
@@ -125,6 +125,6 @@ public class VehiculeService {
 
     public double periodeLocation(Date d1, Date d2) {
 
-        return (d2.getTime() - d1.getTime()) / AVERAGE_MILLIS_PER_DAYS;
+        return ((d2.getTime() - d1.getTime()) / AVERAGE_MILLIS_PER_DAYS) + 1;
     }
 }

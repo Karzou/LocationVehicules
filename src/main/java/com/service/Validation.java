@@ -1,6 +1,7 @@
 package com.service;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  * @author Vanconingsloo Kevin
@@ -53,6 +54,7 @@ public class Validation {
     }
 
     public static Date dateFormat (String date){
+
         return Date.valueOf(date);
     }
 }
