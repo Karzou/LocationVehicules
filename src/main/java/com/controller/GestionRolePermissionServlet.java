@@ -8,6 +8,7 @@ import com.exception.ServiceException;
 import com.service.AutoriseService;
 import com.service.PermissionService;
 import com.service.RoleService;
+import com.service.Validation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -130,22 +131,30 @@ public class GestionRolePermissionServlet extends HttpServlet {
 
             String nomRole = request.getParameter("nomRole");
 
-            Role role = new Role(nomRole);
-            try {
+            if( !Validation.validationNomPermRole(nomRole)){
                 if(logger.isInfoEnabled()){
-                    logger.info("Debut methode ajout de role. : " + nomRole);
+                    logger.info("Nom du role pas valide: " + nomRole);
                 }
+                session.setAttribute("erreur", "probleme lors de la creation du role. Nom du role pas valide.");
+            }
+            else{
+                Role role = new Role(nomRole);
+                try {
+                    if(logger.isInfoEnabled()){
+                        logger.info("Debut methode ajout de role. : " + nomRole);
+                    }
 
-                transaction.begin();
-                roleService.creer(role);
-                transaction.commit();
-            } catch (ServiceException e) {
-                logger.warn("Probleme lors de la creation du role : " + e);
-                session.setAttribute("erreur", "probleme lors de la creation du role. ");
-            }finally {
-                if (transaction.isActive()) {
-                    logger.warn("Rollback de la creation du role.");
-                    transaction.rollback();
+                    transaction.begin();
+                    roleService.creer(role);
+                    transaction.commit();
+                } catch (ServiceException e) {
+                    logger.warn("Probleme lors de la creation du role : " + e);
+                    session.setAttribute("erreur", "probleme lors de la creation du role. ");
+                }finally {
+                    if (transaction.isActive()) {
+                        logger.warn("Rollback de la creation du role.");
+                        transaction.rollback();
+                    }
                 }
             }
         }

@@ -9,7 +9,7 @@ import java.sql.Time;
 public class Validation {
 
     public static boolean validationPrenom( String prenom ){
-        if ( prenom != null && prenom.length() > 1 ) {
+        if ( prenom != null && prenom.length() > 1 && prenom.length() < 50) {
 
             return true;
         }
@@ -17,27 +17,41 @@ public class Validation {
     }
 
     public static boolean validationAdresse( String adresse ){
-        if ( adresse != null && adresse.length() > 5) {
+        if ( adresse != null && adresse.length() > 5 && adresse.length() < 100) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean validationNumAdresse (String num){
+        if( num != null && num.length() < 10){
             return true;
         }
         return false;
     }
 
     public static boolean validationTelephone( String telephone ){
-        if ( telephone != null  /*&& telephone.matches( "^\\d+$" ) &&  telephone.length() > 7 */) {
+        if ( telephone != null  /*&& telephone.matches( "^\\d+$" ) &&  telephone.length() > 7 */ && telephone.length() < 50) {
               return true;
         }
         return false;
     }
     public static boolean validationEmail( String email ){
-        if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+        if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) && email.length() < 100 ) {
             return false;
         }
         return true;
     }
 
     public static boolean validationPassword (String password) {
-        if (password.length() > 3 ){
+        if (password.length() > 3 && password.length() < 255){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean validationNomPermRole (String nomPermRole){
+        if (nomPermRole != null && nomPermRole.length() < 50){
             return true;
         }
         return false;

@@ -103,7 +103,12 @@ public class GestionUtilisateurServlet extends HttpServlet {
                 }*/
 
                 if(!Validation.validationAdresse(rue)){
-                    message += "Veuillez entrer une adresse d'au moins 6 caracteres ! ";
+                    message += "Veuillez entrer une adresse d'au moins 6 caracteres et maximum 99 catactères ! ";
+                    erreurFlag = true;
+                }
+
+                if(!Validation.validationNumAdresse(numero)){
+                    message += "Veuillez entrer un numéro valide ! ";
                     erreurFlag = true;
                 }
                 if(!erreurFlag) {
