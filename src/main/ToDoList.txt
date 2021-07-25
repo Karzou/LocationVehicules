@@ -25,12 +25,6 @@ Kevin
 - check login servlet car double appel au demarrage, appel de la fonction checklogin lors de la creation.
 
 
-Nath
----------------------------
-
-Sahin
----------------------------
-
 
 Jerome
 ---------------------------
@@ -77,13 +71,7 @@ Kevin
 - Recherche du role en dure dans creation utilisateur => pas bien
 - faire le log4j 1.2.
 - ajouter email de l utilisateur sur profil
-
-Nath
-----------------------
-
-
-Shahin
-----------------------
+- validation maximum
 
 
 Jerome
