@@ -36,8 +36,11 @@
                 </thead>
 
                 <tbody>
+                <%--création d'une variable temporaire nommée "facture" (uniquement présente dans le foreach)--%>
+                <%--items="${factureList} provient de FactureServlet => request.setAttribute("factureList", factureList);--%>
                 <c:forEach var="facture" items="${factureList}">
                 <tr>
+
                     <td><c:out value="${facture.idFacture}"/></td>
 
                 </tr>
