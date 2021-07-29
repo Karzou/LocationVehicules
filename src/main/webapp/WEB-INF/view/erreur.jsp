@@ -11,7 +11,7 @@
         <div class="container">
             <c:import url="menu.jsp"/>
             <h1><c:out value="${sessionScope.erreur}"/></h1>
-            <a clas="btn btn-primary" href="${pageContext.request.contextPath}${sessionScope.retour}">Liste utilisateur</a>
+            <a clas="btn btn-primary" href="${pageContext.request.contextPath}${sessionScope.retour}">retour</a>
 
             <c:import url="footer.jsp"/>
         </div>

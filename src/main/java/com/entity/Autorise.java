@@ -11,7 +11,8 @@ import java.util.Objects;
 @NamedQueries({@NamedQuery(name = "Autorise.hasPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole = :idRole and a.permissionsByIdPermission.nomPermission = :permission"),
         @NamedQuery(name = "Autorise.listeParRole", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole=:idRole"),
         @NamedQuery(name = "Autorise.lister", query = "SELECT a from Autorise a"),
-        @NamedQuery(name = "Autorise.trouverParRoleEtPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole =:idRole and a.permissionsByIdPermission.idPermission =:idPermission"),})
+        @NamedQuery(name = "Autorise.trouverParRoleEtPermission", query = "SELECT a from Autorise a where a.rolesByIdRole.idRole =:idRole and a.permissionsByIdPermission.idPermission =:idPermission"),
+        @NamedQuery(name = "Autorise.effacerParRole", query = "DELETE from Autorise a where a.rolesByIdRole.idRole =:idRole "),})
 public class Autorise {
     private int idAutorise;
     private Permission permissionsByIdPermission;

@@ -50,10 +50,8 @@ public class ContientService {
     public void supprimer(Contient contient) throws ServiceException {
 
         try {
-
             em.remove(contient);
         } catch (Exception e) {
-
             throw new ServiceException(e);
         }
     }

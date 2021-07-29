@@ -80,6 +80,13 @@ public class AutoriseService {
         }
     }
 
+    public void supprimerParRole (int idRole) {
+        TypedQuery query = em.createNamedQuery("Autorise.effacerParRole", Autorise.class);
+        query.setParameter("idRole", idRole);
+
+        int row = query.executeUpdate();
+    }
+
     public void supprimer (Autorise autorise){
         em.remove(autorise);
     }

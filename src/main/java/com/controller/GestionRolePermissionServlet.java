@@ -176,6 +176,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 }
 
                 transaction.begin();
+                autoriseService.supprimerParRole(role.getIdRole());
                 roleService.supprimer(role);
                 transaction.commit();
             }catch (Exception e){

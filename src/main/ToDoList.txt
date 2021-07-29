@@ -9,7 +9,6 @@ Toutes les validations partie véhicule (JO)
 Kevin
 -------------------------------------------
 - Page erreur si pas de co bdd
-- suppression role (sup perm)
 - telehpone dans modif utilisateur
 - checks actifs.
 - ajouter "enlever permission sur ce role".
@@ -18,17 +17,20 @@ Kevin
 - validation js.
 - faire les tests.
 - hasPermission pour les autres.
-- demande de reset password (utilisateur)
-- verif filtre admin/client
+- demande de reset password (utilisateur).
+- verif filtre admin/client.
 - faire validation taille max
-- css modif utilisateur
 - check login servlet car double appel au demarrage, appel de la fonction checklogin lors de la creation.
-
-
 
 Jerome
 ---------------------------
-
+- page facture ( jsp ) + css
+- page contrat (jsp ) + css
+- Servlet facture
+- Servlet contrat
+- ContratService => on va t'aider
+- FactureService => on va t aider
+- sortie pdf facture / contrat
 ------------------------------------------------------------------------------------------------------------------------
 ------------
 |  Fait :  |
@@ -72,7 +74,7 @@ Kevin
 - faire le log4j 1.2.
 - ajouter email de l utilisateur sur profil
 - validation maximum
-
+- suppression role (sup perm)
 
 Jerome
 ----------------------
