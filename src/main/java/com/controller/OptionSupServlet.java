@@ -1,20 +1,14 @@
 package com.controller;
 
-import com.connection.EMF;
-import com.entity.Vehicule;
-import com.service.VehiculeService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Wets Jeoffroy
@@ -42,6 +36,8 @@ public class OptionSupServlet extends HttpServlet {
             logger.info("Appel de la méthode \"doPost\" de la servlet \"OptionSupServlet\"");
         }
 
+        boolean erreurConnBdd = false;
+
         String strIdLieuDepart = request.getParameter("idLieuDepart");
         String strIdLieuRetour = request.getParameter("idLieuRetour");
         String strDateDepart = request.getParameter("strDateDepart");
@@ -59,6 +55,7 @@ public class OptionSupServlet extends HttpServlet {
         request.setAttribute("HeureRetour", strHeureRetour);
         request.setAttribute("idVehicule", idVehicule);
         request.setAttribute("prixTotal", prixTotal);
+        request.setAttribute("erreurConnBdd", erreurConnBdd);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/optionSup.jsp").forward( request, response );
     }

@@ -44,6 +44,7 @@ public class VehiculeServlet extends HttpServlet {
 
         VehiculeService vehiculeService = new VehiculeService(em);
         List<Vehicule> vehiculeList = null;
+        boolean erreurConnBdd = false;
         int periodeLocation = 0;
 
         String strIdLieuDepart = request.getParameter("LieuDepart");
@@ -57,7 +58,7 @@ public class VehiculeServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
 
-            session.setAttribute("errMessage", "Veuillez remplir tous les champs pour effectuer une recheche de véhicule");
+            session.setAttribute("errMessage", "Veuillez remplir tous les champs pour effectuer une recherche de véhicule");
 
             response.sendRedirect("accueil");
 
@@ -74,6 +75,7 @@ public class VehiculeServlet extends HttpServlet {
                 periodeLocation = (int) vehiculeService.periodeLocation(dateDepart, dateRetour);
             } catch (ServiceException e) {
 
+                erreurConnBdd = true;
                 e.printStackTrace();
             } finally {
 
@@ -93,6 +95,7 @@ public class VehiculeServlet extends HttpServlet {
             request.setAttribute("strHeureDepart", strHeureDepart);
             request.setAttribute("strDateRetour", strDateRetour);
             request.setAttribute("strHeureRetour", strHeureRetour);
+            request.setAttribute("erreurConnBdd", erreurConnBdd);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/vehicule.jsp").forward(request, response);
         }

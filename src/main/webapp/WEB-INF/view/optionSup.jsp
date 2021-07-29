@@ -13,20 +13,28 @@
             <c:import url="menu.jsp"/>
 
             <div class="content-option-sup">
-                <h2>Option supplémentaire</h2>
+                <c:choose>
+                    <c:when test="${erreurConnBdd == true}">
+                        <h1>Une erreur est survenue, veuillez réessayer !!!</h1>
+                    </c:when>
 
-                <h3>Page en construction</h3>
+                    <c:otherwise>
+                        <h2>Option supplémentaire</h2>
 
-                <h4>Exemple envoi de données</h4>
+                        <h3>Page en construction</h3>
 
-                <p>ID lieu de départ: ${idLieuDepart}</p>
-                <p>ID lieu de retour: ${idLieuRetour}</p>
-                <p>Date de départ: ${DateDepart}</p>
-                <p>Heure de départ: ${HeureDepart}</p>
-                <p>Date de retour: ${DateRetour}</p>
-                <p>Heure de retour: ${HeureRetour}</p>
-                <p>ID véhicule: ${idVehicule}</p>
-                <p>Prix total: ${prixTotal}</p>
+                        <h4>Exemple envoi de données</h4>
+
+                        <p>ID lieu de départ: ${idLieuDepart}</p>
+                        <p>ID lieu de retour: ${idLieuRetour}</p>
+                        <p>Date de départ: ${DateDepart}</p>
+                        <p>Heure de départ: ${HeureDepart}</p>
+                        <p>Date de retour: ${DateRetour}</p>
+                        <p>Heure de retour: ${HeureRetour}</p>
+                        <p>ID véhicule: ${idVehicule}</p>
+                        <p>Prix total: ${prixTotal}</p>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
             <c:import url="footer.jsp"/>

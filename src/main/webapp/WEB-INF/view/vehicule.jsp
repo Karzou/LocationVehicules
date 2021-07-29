@@ -17,7 +17,15 @@
             <c:choose>
                 <c:when test="${fn:length(vehiculeList) == 0}">
                     <div class="content-vehicle-search">
-                        <h1>Aucun véhicule disponible</h1>
+                        <c:choose>
+                            <c:when test="${erreurConnBdd == true}">
+                                <h1>Une erreur est survenue, veuillez réessayer !!!</h1>
+                            </c:when>
+
+                            <c:otherwise>
+                                <h1>Aucun véhicule disponible</h1>
+                            </c:otherwise>
+                        </c:choose>
 
                         <input type="button" class="btn-return" value="Retour" onclick=location.href="${pageContext.request.contextPath}/accueil">
                     </div>

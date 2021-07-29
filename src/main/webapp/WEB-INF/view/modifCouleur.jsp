@@ -27,7 +27,8 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${couleur.idCouleur}"/>
-                    <button type="submit" class="btn-modif2" value="Envoyer" id="bouton-modif">Modifier</button>
+                    <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
+                    <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionCouleur">
                 </form>
             </div>
 
