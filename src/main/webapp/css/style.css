@@ -326,17 +326,19 @@ li {
 
 .error-message-admin-title {
     width: 100%;
-    margin-top: 5px;
-    height: 25px;
+    margin-top: 10px;
+    height: 45px;
 }
 
 .error-message-admin-title-img {
     float: left;
     margin: 12px 20px 0 20px;
+    height: 20px;
 }
 
 .error-message-admin-title-txt {
     float: left;
+    height: 20px;
 }
 
 .error-message-admin-title-txt p {
@@ -346,6 +348,7 @@ li {
 
 .error-message-admin-body {
     width: 100%;
+    height: 30px;
 }
 
 .error-message-admin-body-txt {
@@ -355,6 +358,7 @@ li {
 
 .error-message-admin-body-txt p {
     color: white;
+    margin-top: 0;
 }
 
 /* Table ------------------------------------------------------------------------------------------------------------ */
