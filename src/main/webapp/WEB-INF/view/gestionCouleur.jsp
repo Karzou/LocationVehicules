@@ -16,27 +16,6 @@
             <div class="content-global">
                 <h2>Ajout de couleur</h2>
 
-                <div class="error-message">
-                    <c:if test="${sessionScope.errMessage != null}">
-                        <div class="error-message-admin">
-                            <div class="error-message-admin-title">
-                                <div class="error-message-admin-title-img">
-                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
-                                </div>
-                                <div class="error-message-admin-title-txt">
-                                    <p>L'erreur suivante est survenue</p>
-                                </div>
-                            </div>
-                            <div class="error-message-admin-body">
-                                <div class="error-message-admin-body-txt">
-                                    <p>${errMessage}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <c:remove var="errMessage" scope="session" />
-                    </c:if>
-                </div>
-
                 <form action="<c:url value="/ajoutCouleur"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Nom couleur : </label>

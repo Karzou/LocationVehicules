@@ -13,6 +13,12 @@
 
             <h1>Mes données.</h1>
                 <div>
+                    <c:if test="${not empty succes}">
+                        <div class="login-div-success">
+                            <span style="color:green">${succes}</span>
+                        </div>
+                    </c:if>
+
                     <table class="table-custom">
                         <thead>
                         <th scope="col">Nom</th>

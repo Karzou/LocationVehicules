@@ -14,6 +14,8 @@
             <div class="content-global">
                 <h2>Modification utilisateur</h2>
 
+
+
                 <form action="<c:url value="/gestionUtilisateur"/>" method="post">
                     <div class="form-group"id="form-modif">
                         <label>Nom : </label>
@@ -41,6 +43,7 @@
                             <option value="${utilisateur.motDePasse}">${utilisateur.motDePasse}</option>
                             <option value="0000">Reset</option>
                         </select>
+                        <a href="changerMotDePasse">Changer mot de passe</a>
                     </div>
                     <div class="form-group"id="form-modif9">
                         <label>Date de naissance : </label>
@@ -79,24 +82,7 @@
 
                     <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
 
-                    <c:if test="${sessionScope.role eq 'admin'}">
-                      <!--  <div class="form-group"id="form-modif8">
-                            <label>Role : ${utilisateur.rolesByIdRole.roleDescription}</label>  </br>
-                            <select class="input-modif" name="role" id="pet-select">
-                                <option value="${utilisateur.rolesByIdRole.idRole}">${utilisateur.rolesByIdRole.roleDescription}</option>
-                                <option value="1">admin</option>
-                                <option value="3">employe</option>
-                                <option value="2">client</option>
-                            </select>
-                        </div> -->
 
-                        <div class="div-input-modif">
-                            <label>Status : </label>
-                            <input type="checkbox" name="actif" id="actifEntrepot" value="ok" <c:if test="${utilisateur.actifUtilisateur}">checked</c:if>>
-                            <label for="actifEntrepot">Activ�</label>
-                        </div>
-
-                    </c:if>
                     <c:if test="${sessionScope.role eq 'employe'}">
                         <input type="hidden" name="role" value="${utilisateur.rolesByIdRole.idRole}">
                     </c:if>

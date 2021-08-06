@@ -50,8 +50,8 @@ public class MailSender {
         */
 		boolean sendFlag = false;
 		
-		final String username = "your-account@gmail.com";
-        final String password = "your-account";
+		final String username = "kvanconingsloo@gmail.com";
+        final String password = "Carz4719";
 		
 		// Check nick and replyTo
 		if(mail.getNick() == null || mail.getNick().equals(""))
@@ -61,7 +61,7 @@ public class MailSender {
         
         // Debug
         for(String s : mail.getListTo())
-        	log.debug("To: " + s);
+        	log.info("To: " + s);
         log.debug("Subject: " + mail.getSubject());
 		log.debug("MsgBody: " + mail.getMsgBody());
 		log.debug("From: " + mail.getFrom());

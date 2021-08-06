@@ -31,10 +31,11 @@ public class GestionUtilisateurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("Appel du doGet de la servlet GestionUtilisateurPermission.");
+            logger.info("Appel du doGet de la servlet GestionUtilisateurServlet.");
         }
 
         EntityManager em = EMF.getEM();
+        HttpSession session = request.getSession();
 
         List<Utilisateur> utilisateurList = null;
         UtilisateurService utilisateurService = new UtilisateurService(em);
@@ -52,12 +53,16 @@ public class GestionUtilisateurServlet extends HttpServlet {
         request.setAttribute("utilisateurList", utilisateurList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
+
+        if(session.getAttribute("succes") != null){
+            session.removeAttribute("succes");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("Appel du doPost de la servlet GestionRolePermission.");
+            logger.info("Appel du doPost de la servlet GestionUtilisateurservlet.");
         }
 
         EntityManager em = EMF.getEM();
@@ -68,7 +73,6 @@ public class GestionUtilisateurServlet extends HttpServlet {
         String nom = request.getParameter("nom");
         String password = request.getParameter("password");
         String prenom = request.getParameter("prenom");
-      //  String mail = request.getParameter("mail");
         String telephone = request.getParameter("telephone");
         String rue = request.getParameter("rue");
         String numero = request.getParameter("numero");
@@ -77,14 +81,12 @@ public class GestionUtilisateurServlet extends HttpServlet {
         int idVille = Integer.parseInt(request.getParameter("ville"));
         Date dateNaissance = Validation.dateFormat(request.getParameter("dateNaissance"));
         Date datePermis = Validation.dateFormat(request.getParameter("datePermis"));
-      //  int role = Integer.parseInt(request.getParameter("role"));
         boolean erreurFlag = false;
         String message = ".";
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
         VilleService villeService = new VilleService(em);
-    //    RoleService roleService = new RoleService(em);
         Utilisateur utilisateur = null;
         Ville ville = null;
         HttpSession session = request.getSession();
@@ -142,7 +144,6 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         utilisateur.getAdressesByIdAdresse().setNumero(numero);
                         utilisateur.getAdressesByIdAdresse().setRue(rue);
                         utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
-        //                utilisateur.setRolesByIdRole(roleDb);
                         utilisateurService.update(utilisateur);
 
                         transaction.commit();
@@ -169,6 +170,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     response.sendRedirect("erreur");
                 }else{
                     if(! (profilFlag == null)){
+                        session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
                         response.sendRedirect("profil");
                     }else{
                         response.sendRedirect("gestionUtilisateur");

@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -45,57 +44,38 @@ public class AjoutCouleurServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données
-        String nomCouleur = request.getParameter("nomCouleur");
-        boolean checkValidation = true;
+        String nomCouleur = Validation.ucFirst(request.getParameter("nomCouleur"));
 
-        // Validation des données
-        if(!Validation.validationCouleur(nomCouleur)) {
+        // Instanciation
+        CouleurService couleurService = new CouleurService(em);
 
-            checkValidation = false;
-        }
+        Couleur couleur = new Couleur(nomCouleur);
 
-        if(!checkValidation) {
+        try {
 
-            HttpSession session = request.getSession();
+            transaction.begin();
 
-            session.setAttribute("errMessage", "Le nom de la couleur ne doit pas être vide et doit être compris entre 2 et 50 caractères");
+            couleurService.creer(couleur);
 
-            response.sendRedirect("gestionCouleur");
-        } else {
+            transaction.commit();
+        } catch ( Exception e ) {
 
-            nomCouleur = Validation.ucFirst(nomCouleur);
+            throw new ServletException( e );
+        } finally {
 
-            // Instanciation
-            CouleurService couleurService = new CouleurService(em);
+            if (transaction.isActive()) {
 
-            Couleur couleur = new Couleur(nomCouleur);
-
-            try {
-
-                transaction.begin();
-
-                couleurService.creer(couleur);
-
-                transaction.commit();
-            } catch (Exception e) {
-
-                throw new ServletException(e);
-            } finally {
-
-                if (transaction.isActive()) {
-
-                    transaction.rollback();
-                }
-
-                if (logger.isInfoEnabled()) {
-
-                    logger.info("Fermeture de l'EntityManager");
-                }
-
-                em.close();
+                transaction.rollback();
             }
 
-            response.sendRedirect("gestionCouleur");
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
         }
+
+        response.sendRedirect("gestionCouleur");
     }
 }

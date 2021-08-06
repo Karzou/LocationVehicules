@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "/motDePasseOublie")
 public class MotDePasseOublieServlet extends HttpServlet {
@@ -62,16 +63,20 @@ public class MotDePasseOublieServlet extends HttpServlet {
             }
             em.close();
 
-            /* A vérifier
+
+
                 Mail email = new Mail();
                 email.setMsgBody("Votre mot de passe a été réinitialisé à 0000. Veuillez changer votre mot de passe lors de votre prochaine connection. ");
-                email.setFrom("locationVehicule@test.com");
+                email.setFrom("kvanconingsloo@gmail.com");
                 email.setSubject("Réinitialisation mot de passe.");
-                email.setNick(utilisateur.getEmail());
+                email.setNick("Locacar");
                 email.setReplyTo(utilisateur.getEmail());
+                email.setEncodeUTF8(true);
+                email.getListTo().add(utilisateur.getEmail());
+
 
                 MailSender.sendMail(email);
-            */
+
 
             response.sendRedirect("login");
 

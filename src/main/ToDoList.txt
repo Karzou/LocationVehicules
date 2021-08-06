@@ -9,6 +9,7 @@ Toutes les validations partie véhicule (JO)
 Kevin
 -------------------------------------------
 - Page erreur si pas de co bdd
+- Message de succes / erreur
 - telephone dans modif utilisateur
 - checks actifs.
 - ajouter "enlever permission sur ce role".
@@ -17,8 +18,7 @@ Kevin
 - validation js.
 - faire les tests.
 - hasPermission pour les autres.
-- envoi mail avec nouveau password.
-- changer mot de passe.
+
 
 
 Jerome
@@ -76,6 +76,8 @@ Kevin
 - suppression role (sup perm)
 - faire validation taille max
 - demande de reset password (utilisateur)
+- envoi mail avec nouveau password.
+- changer mot de passe.
 
 Jerome
 ----------------------

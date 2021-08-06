@@ -31,8 +31,6 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("COUCOU PETITE PERUCHE !!!!!! ");
-            logger.info("/////////////////////////// ");
             logger.info("Appelle de la methode doGet servletLogin");
         }
 

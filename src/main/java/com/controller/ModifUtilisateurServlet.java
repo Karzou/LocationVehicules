@@ -77,6 +77,7 @@ public class ModifUtilisateurServlet extends HttpServlet {
             response.sendRedirect("erreur");
         }else{
             logger.info("Tout ok redirection vers modifUtilisateur.");
+            session.setAttribute("succes", "Modfications faites avec succes. ");
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifUtilisateur.jsp" ).forward( request, response );
         }
     }

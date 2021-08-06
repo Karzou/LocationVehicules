@@ -92,8 +92,8 @@ public class CreationUtilisateurServlet extends HttpServlet {
             }
 
             int idVille = Integer.parseInt(idVilleInput);
-            nom = Validation.ucFirst(nom);
-            prenom = Validation.ucFirst(prenom);
+            nom = Validation.ucFirst(nom.trim());
+            prenom = Validation.ucFirst(prenom.trim());
             Date dateNaissance = Validation.dateFormat(dateNaissanceInput);
             Date datePermis = Validation.dateFormat(dateNaissanceInput);
 
@@ -104,7 +104,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
                 request.setAttribute("errMessage", "Ce mail existe deja !!!");
             } else {
-                if(!Validation.validationPassword(password)){
+                if(!Validation.validationPassword(password.trim())){
 
                     if(logger.isInfoEnabled()){
                         logger.info("Probleme avec la validation du password : " + password);
@@ -113,7 +113,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                     request.setAttribute("erreurPassword", "Veuillez entrer un mot de passe d'au moins 4 caractères !");
                     erreurFlag = true;
                 }
-                if(!Validation.validationEmail(mail)){
+                if(!Validation.validationEmail(mail.trim())){
 
                     if(logger.isInfoEnabled()){
                         logger.info("Probleme avec la validation du mail : " + mail);
@@ -139,7 +139,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                     request.setAttribute("erreurPrenom", "Veuillez entrer un prénom avec au moins 2 carcatères");
                     erreurFlag = true;
                 }
-                if(!Validation.validationTelephone(telephone)){
+                if(!Validation.validationTelephone(telephone.trim())){
 
                     if(logger.isInfoEnabled()){
                         logger.info("Probleme avec la validation du telephone : " + telephone);
@@ -149,7 +149,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                     erreurFlag = true;
                 }
 
-                if(!Validation.validationAdresse(rue)){
+                if(!Validation.validationAdresse(rue.trim())){
 
                     if(logger.isInfoEnabled()){
                         logger.info("Probleme avec la validation de l adresse : " + rue);
@@ -171,12 +171,12 @@ public class CreationUtilisateurServlet extends HttpServlet {
                         } catch (ServiceException e) {
                             logger.warn("Probleme de recherche de ville et de role client :" + idVille + " " + e);
                         }
-                        Adresse adresse = new Adresse(rue, numero, boite, ville);
+                        Adresse adresse = new Adresse(rue.trim(), numero.trim(), boite.trim(), ville);
                         Utilisateur utilisateur = new Utilisateur(
                                 nom,
                                 prenom,
-                                mail,
-                                password,
+                                mail.trim(),
+                                password.trim(),
                                 dateNaissance,
                                 datePermis,
                                 adresse,

@@ -14,7 +14,13 @@
             <div class="content-global">
                 <h2>Liste des utilisateurs actifs</h2>
 
-                <span style="color:red"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
+                <c:if test="${not empty succes}">
+                    <div class="login-div-success">
+                        <span style="color:green">${succes}</span>
+                    </div>
+                </c:if>
+
+                <span style="color:#ff0000"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
 
                 <div>
                     <table class="table-custom">

@@ -4,6 +4,8 @@ import com.connection.EMF;
 import com.entity.Utilisateur;
 import com.exception.ServiceException;
 import com.service.UtilisateurService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -16,11 +18,18 @@ import java.io.IOException;
 
 @WebServlet("/profil")
 public class ProfilServlet extends HttpServlet {
+
+    final static Logger logger = LogManager.getLogger(ProfilServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if(logger.isInfoEnabled()){
+            logger.info("Appel de la methode doGet de ProfilServlet");
+        }
 
         EntityManager em = EMF.getEM();
 
@@ -41,7 +50,11 @@ public class ProfilServlet extends HttpServlet {
             session.setAttribute("retour", "/profil");
             response.sendRedirect("erreur");
         }else{
+
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/profil.jsp" ).forward( request, response );
+            if(session.getAttribute("succes") != null){
+                session.removeAttribute("succes");
+            }
         }
     }
 }
