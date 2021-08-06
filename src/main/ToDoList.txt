@@ -9,7 +9,7 @@ Toutes les validations partie véhicule (JO)
 Kevin
 -------------------------------------------
 - Page erreur si pas de co bdd
-- telehpone dans modif utilisateur
+- telephone dans modif utilisateur
 - checks actifs.
 - ajouter "enlever permission sur ce role".
 - ajouter permission (pdf, read unique,...).

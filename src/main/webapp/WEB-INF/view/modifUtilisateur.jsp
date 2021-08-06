@@ -27,12 +27,14 @@
                         <label>Email : ${utilisateur.email}</label> </br>
                         <input class="input-modif" type="text" name="email" value="${utilisateur.email}">
                    </div> -->
-        <!--
+
+                    <c:forEach items="${utilisateur.telephonesByIdUtilisateur}" var="telephone">
                     <div class="form-group"id="form-modif11">
                         <label>Telephone : </label>
-                        <input class="input-modif" type="text" name="email" value="">
+                        <input class="input-modif" type="text" name="telephone" value="${telephone.numero}">
                     </div>
-                    -->
+                    </c:forEach>
+
                     <div class="form-group"id="form-modif12">
                         <label>Password : </label>
                         <select class="input-modif" name="password">

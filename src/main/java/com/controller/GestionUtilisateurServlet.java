@@ -143,7 +143,6 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         utilisateur.getAdressesByIdAdresse().setRue(rue);
                         utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
         //                utilisateur.setRolesByIdRole(roleDb);
-
                         utilisateurService.update(utilisateur);
 
                         transaction.commit();
