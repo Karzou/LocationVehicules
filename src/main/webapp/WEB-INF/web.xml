@@ -8,6 +8,15 @@
         <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>MotDePasseServlet</servlet-name>
+        <servlet-class>com.controller.MotDePasseOublieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MotDePasseServlet</servlet-name>
+        <url-pattern>/motDePasseOublie</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>logFilter</filter-name>
         <filter-class>com.filtre.LogFilter</filter-class>
