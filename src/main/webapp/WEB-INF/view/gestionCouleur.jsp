@@ -16,7 +16,7 @@
             <div class="content-global">
                 <h2>Ajout de couleur</h2>
 
-                <div>
+                <div class="error-message">
                     <c:if test="${sessionScope.errMessage != null}">
                         <div class="error-message-admin">
                             <div class="error-message-admin-title">
