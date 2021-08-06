@@ -97,10 +97,10 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     message += "Veuillez entrer un prenom avec au moins 2 carcateres ! ";
                     erreurFlag = true;
                 }
-           /*     if(!Validation.validationTelephone(telephone)){
+                if(!Validation.validationTelephone(telephone)){
                     message += "Veuillez entrer que des chiffres ! ";
                     erreurFlag = true;
-                }*/
+                }
 
                 if(!Validation.validationAdresse(rue)){
                     message += "Veuillez entrer une adresse d'au moins 6 caracteres et maximum 99 catactères ! ";
@@ -130,7 +130,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
                    try {
                         transaction.begin();
                         if(logger.isInfoEnabled()){
-                            logger.info("Debut de la transaction de l update utilisateur." + utilisateur.getEmail());
+                            logger.info("Debut de la transaction de l update utilisateur. " + utilisateur.getEmail());
                         }
 
                         utilisateur.setNomUtilisateur(nom);
@@ -158,10 +158,10 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     }
                 }else {
                     if(logger.isInfoEnabled()){
-                        logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis." + message);
+                        logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis. " + message);
                     }
 
-                    session.setAttribute("erreur", "Veuillez remplir tous les champs ! ");
+                    session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
                 }
 
                 if(session.getAttribute("erreur") != null){
