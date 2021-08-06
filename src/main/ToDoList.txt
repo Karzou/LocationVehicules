@@ -17,10 +17,9 @@ Kevin
 - validation js.
 - faire les tests.
 - hasPermission pour les autres.
-- demande de reset password (utilisateur).
-- verif filtre admin/client.
-- faire validation taille max
-- check login servlet car double appel au demarrage, appel de la fonction checklogin lors de la creation.
+- envoi mail avec nouveau password.
+- changer mot de passe.
+
 
 Jerome
 ---------------------------
@@ -75,6 +74,8 @@ Kevin
 - ajouter email de l utilisateur sur profil
 - validation maximum
 - suppression role (sup perm)
+- faire validation taille max
+- demande de reset password (utilisateur)
 
 Jerome
 ----------------------

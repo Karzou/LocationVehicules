@@ -39,6 +39,11 @@
                     </div>
 
                     <div>
+                        <a href="motDePasseOublie" >Mot de passe oublié ? </a>
+                    </div>
+
+
+                    <div>
                         <p>Vous êtes nouveau ici ? Cliquez ci-dessous pour vous enregistrer !</p>
                     </div>
 
