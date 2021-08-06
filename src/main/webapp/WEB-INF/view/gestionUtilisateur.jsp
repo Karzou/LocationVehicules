@@ -22,6 +22,7 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Telephone</th>
                             <th scope="col">Rue</th>
                             <th scope="col">Numéro</th>
                             <th scope="col">Boite</th>
@@ -41,6 +42,9 @@
                                     <td><c:out value="${user.nomUtilisateur}"/></td>
                                     <td><c:out value="${user.prenomUtilisateur}"/></td>
                                     <td><c:out value="${user.email}"/></td>
+                                    <c:forEach var="telephone" items="${user.telephonesByIdUtilisateur}">
+                                    <td><c:out value="${telephone.numero}"></c:out></td>
+                                    </c:forEach>
                                     <td><c:out value="${user.adressesByIdAdresse.rue}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
