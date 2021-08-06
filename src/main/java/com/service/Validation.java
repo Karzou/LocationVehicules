@@ -1,11 +1,11 @@
 package com.service;
 
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  * @author Vanconingsloo Kevin
  */
+
 public class Validation {
 
     public static boolean validationPrenom( String prenom ){
@@ -70,5 +70,15 @@ public class Validation {
     public static Date dateFormat (String date){
 
         return Date.valueOf(date);
+    }
+
+    public static boolean validationCouleur(String couleur) {
+
+        if (couleur != null && couleur.length() > 1 && couleur.length() <= 50) {
+
+            return true;
+        }
+
+        return false;
     }
 }

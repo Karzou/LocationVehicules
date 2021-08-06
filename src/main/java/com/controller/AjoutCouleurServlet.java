@@ -49,10 +49,10 @@ public class AjoutCouleurServlet extends HttpServlet {
         boolean checkValidation = true;
 
         // Validation des données
-        /*if(!Validation.validationCouleur(nomCouleur)) {
+        if(!Validation.validationCouleur(nomCouleur)) {
 
             checkValidation = false;
-        }*/
+        }
 
         if(!checkValidation) {
 
