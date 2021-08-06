@@ -30,6 +30,10 @@
             <div class="content-global">
                 <h2>Liste des rôles et permissions</h2>
 
+                <c:if test="${not empty sessionScope.adminSafe}">
+                    <span style="color:red">${sessionScope.adminSafe}</span>
+                </c:if>
+
                 <div>
                     <table class="table-custom">
                         <thead>

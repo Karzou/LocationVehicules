@@ -175,10 +175,16 @@ public class GestionRolePermissionServlet extends HttpServlet {
                     logger.info("Debut de la transaction de suppression de role.");
                 }
 
-                transaction.begin();
-                autoriseService.supprimerParRole(role.getIdRole());
-                roleService.supprimer(role);
-                transaction.commit();
+                if(!role.getRoleDescription().equals("admin")){
+                    transaction.begin();
+                    autoriseService.supprimerParRole(role.getIdRole());
+                    roleService.supprimer(role);
+                    transaction.commit();
+                }else{
+                    logger.info("tentative d'effacer le role admin");
+                    session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le role 'admin'");
+                }
+
             }catch (Exception e){
                 logger.warn("Probleme lors de la suppression du role : " + role.getRoleDescription() + ". " + e);
                 session.setAttribute("erreur", "Impossible de supprimer ce role car il est relié à au moins un utilisateur.");
@@ -297,6 +303,9 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 logger.info("OK");
             }
            this.getServletContext().getRequestDispatcher("/WEB-INF/view/gestionRolePermission.jsp").forward( request, response );
+            if(session.getAttribute("adminSafe") != null){
+                session.removeAttribute("adminSafe");
+            }
         }
     }
 }
