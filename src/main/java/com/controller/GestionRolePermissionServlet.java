@@ -55,7 +55,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
 
             autoriseList = autoriseService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme avec l import de la liste autorisation. " + e);
+            logger.warn("Problème avec l'import de la liste autorisation. " + e);
             session.setAttribute("erreur", "Erreur lors de l'import de la liste des autorises. ");
         }
         try {
@@ -135,24 +135,24 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 if(logger.isInfoEnabled()){
                     logger.info("Nom du role pas valide: " + nomRole);
                 }
-                session.setAttribute("erreur", "probleme lors de la creation du role. Nom du role pas valide.");
+                session.setAttribute("erreur", "problème lors de la création du rôle. Le nom du rôle n'est pas valide.");
             }
             else{
                 Role role = new Role(nomRole);
                 try {
                     if(logger.isInfoEnabled()){
-                        logger.info("Debut methode ajout de role. : " + nomRole);
+                        logger.info("Début methode ajout de role. : " + nomRole);
                     }
 
                     transaction.begin();
                     roleService.creer(role);
                     transaction.commit();
                 } catch (ServiceException e) {
-                    logger.warn("Probleme lors de la creation du role : " + e);
-                    session.setAttribute("erreur", "probleme lors de la creation du role. ");
+                    logger.warn("Problème lors de la création du rôle : " + e);
+                    session.setAttribute("erreur", "problème lors de la création du rôle. ");
                 }finally {
                     if (transaction.isActive()) {
-                        logger.warn("Rollback de la creation du role.");
+                        logger.warn("Rollback de la création du rôle.");
                         transaction.rollback();
                     }
                 }
@@ -164,15 +164,15 @@ public class GestionRolePermissionServlet extends HttpServlet {
             try {
                 role = roleService.trouver(Integer.parseInt(request.getParameter( "idRole")));
                 if(logger.isInfoEnabled()){
-                    logger.info("Recherche du role a supprimer : " + role.getRoleDescription());
+                    logger.info("Recherche du rôle a supprimer : " + role.getRoleDescription());
                 }
             } catch (ServiceException e) {
-                logger.warn("Probleme lors de la suppression du role : " + role.getRoleDescription() + ". " + e);
-                session.setAttribute("erreur", "Porbleme lors de la suppression du role.");
+                logger.warn("Problème lors de la suppression du rôle : " + role.getRoleDescription() + ". " + e);
+                session.setAttribute("erreur", "Problème lors de la suppression du rôle.");
             }
             try {
                 if(logger.isInfoEnabled()){
-                    logger.info("Debut de la transaction de suppression de role.");
+                    logger.info("Début de la transaction de suppression de rôle.");
                 }
 
                 if(!role.getRoleDescription().equals("admin")){
@@ -181,17 +181,17 @@ public class GestionRolePermissionServlet extends HttpServlet {
                     roleService.supprimer(role);
                     transaction.commit();
                 }else{
-                    logger.info("tentative d'effacer le role admin");
-                    session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le role 'admin'");
+                    logger.info("tentative d'effacer le rôle 'admin'");
+                    session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le rôle 'admin'");
                 }
 
             }catch (Exception e){
-                logger.warn("Probleme lors de la suppression du role : " + role.getRoleDescription() + ". " + e);
+                logger.warn("Problème lors de la suppression du rôle : " + role.getRoleDescription() + ". " + e);
                 session.setAttribute("erreur", "Impossible de supprimer ce role car il est relié à au moins un utilisateur.");
                 session.setAttribute("retour", "/gestionRolePermission");
             }finally {
                 if (transaction.isActive()) {
-                    logger.warn("Rollback de la suppression du role : " + role.getRoleDescription());
+                    logger.warn("Rollback de la suppression du rôle : " + role.getRoleDescription());
                     transaction.rollback();
                 }
             }
@@ -205,43 +205,43 @@ public class GestionRolePermissionServlet extends HttpServlet {
             if(!autoriseService.checkAutorise(ajoutIdRole, idPermission)){
                 try {
                     if(logger.isInfoEnabled()){
-                        logger.info("Debut de la recherche de permission. " + idPermission);
+                        logger.info("Début de la recherche de permission. " + idPermission);
                     }
                     permission = permissionService.trouver(idPermission);
                 } catch (ServiceException e) {
-                    logger.warn("Probleme lors de la recherche de permission. " + e);
-                    session.setAttribute("erreur","Probleme lors de la recherche d'une permission. ");
+                    logger.warn("Problème lors de la recherche de permission. " + e);
+                    session.setAttribute("erreur","Problème lors de la recherche d'une permission. ");
                 }
                 try {
                     if(logger.isInfoEnabled()){
-                        logger.info("Debut de la recherche de role. " + ajoutIdRole);
+                        logger.info("Début de la recherche de rôle. " + ajoutIdRole);
                     }
                     role = roleService.trouver(ajoutIdRole);
                 } catch (ServiceException e) {
-                    logger.warn("Probleme lors de la recherche de role : " + ajoutIdRole + ". " + e);
-                    session.setAttribute("erreur","Probleme lors de la recherche d'un role. ");
+                    logger.warn("Problème lors de la recherche de rôle : " + ajoutIdRole + ". " + e);
+                    session.setAttribute("erreur","Problème lors de la recherche d'un rôle. ");
                 }
                 Autorise autorise = new Autorise(permission,role);
                 try {
                     if(logger.isInfoEnabled()){
-                        logger.info("Debut de la transaction persist autorise.");
+                        logger.info("Début de la transaction persist autorise.");
                     }
                     transaction.begin();
                     em.persist(autorise);
                     transaction.commit();
                 } catch (Exception e) {
-                    logger.warn("Probleme lors de l'insertion en db de l autorisation. " + e);
+                    logger.warn("Problème lors de l'insertion en db de l'autorisation. " + e);
                     session.setAttribute("erreur", "Erreur lors de la persistance de 'autorise'. ");
                 }finally {
                     if (transaction.isActive()) {
-                        logger.warn("Rollback de l insertion de autorise.");
+                        logger.warn("Rollback de l' 'insertion de autorise.");
                         transaction.rollback();
                     }
 
                 }
             }else{
                 if(logger.isInfoEnabled()){
-                    logger.info("La permission existe deja sur ce role.");
+                    logger.info("La permission existe déjà sur ce rôle.");
                 }
                 session.setAttribute("retour", "/gestionRolePermission");
                 session.setAttribute("erreur", "Cette permission existe déjà sur ce role ! ");
@@ -258,11 +258,11 @@ public class GestionRolePermissionServlet extends HttpServlet {
 
         try{
             if(logger.isInfoEnabled()){
-                logger.info("Import de la liste autorise.");
+                logger.info("Import de la liste 'autorise'.");
             }
             autoriseList = autoriseService1.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de la liste d autorisation. " + e);
+            logger.warn("Problème lors de l' 'import de la liste 'autorisation. " + e);
             session.setAttribute("erreur", "erreur lors de l'import de la liste d'autorisations'. ");
         }
 
@@ -272,18 +272,18 @@ public class GestionRolePermissionServlet extends HttpServlet {
             }
             permissionList = permissionService1.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de la liste de permission. " + e);
+            logger.warn("Problème lors de l' 'import de la liste de permission. " + e);
             session.setAttribute("erreur", "erreur lors de l'import de la liste de permission. ");
         }
 
         try {
             if(logger.isInfoEnabled()){
-                logger.info("Import de la liste de role.");
+                logger.info("Import de la liste de rôle.");
             }
             roleList = roleService1.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de la liste de role. " + e);
-            session.setAttribute("erreur", "Erreur lors de l'import de la liste des roles.");
+            logger.warn("Probleme lors de l' 'import de la liste des rôles. " + e);
+            session.setAttribute("erreur", "Erreur lors de l'import de la liste des rôles.");
         }
 
         em1.close();

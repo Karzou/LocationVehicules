@@ -16,8 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
+
+/**
+ * @author Vanconingsloo Kevin
+ */
 
 @WebServlet(name = "/motDePasseOublie")
 public class MotDePasseOublieServlet extends HttpServlet {
@@ -26,14 +30,17 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        logger.info("Appel de la methode doPost de MotDePasseOublieServlet.");
+
         String message = "";
         String mail = request.getParameter("mail");
 
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
-
         Utilisateur utilisateur = new Utilisateur();
         UtilisateurService utilisateurService = new UtilisateurService(em);
+        Mail email = new Mail();
+        HttpSession session = request.getSession();
 
         if(!utilisateurService.mailExist(mail)){
             message = "Votre mail n'existe pas. ";
@@ -41,13 +48,15 @@ public class MotDePasseOublieServlet extends HttpServlet {
             try {
                 utilisateur = utilisateurService.trouverParEmail(mail);
             } catch (ServiceException e) {
-                e.printStackTrace();
+                e.getMessage();
+                session.setAttribute("errMessage", message);
             }
             try {
 
 
             transaction.begin();
 
+            // on peut fairer un random aussi.
             utilisateur.setMotDePasse("0000");
 
             utilisateurService.update(utilisateur);
@@ -55,28 +64,23 @@ public class MotDePasseOublieServlet extends HttpServlet {
             transaction.commit();
 
             } catch ( Exception e ) {
-            logger.warn("Probleme lors de la transaction de creation utilisateur. " + e);
+            logger.warn("Problème lors de la transaction de l'update mot de passe utilisateur. " + e);
         } finally {
             if (transaction.isActive()) {
-                logger.warn("Rollback de la creation d utilisateur.");
+                logger.warn("Rollback de l'update mot de passe utilisateur.");
                 transaction.rollback();
             }
             em.close();
 
+            email.setMsgBody("Votre mot de passe a été réinitialisé à 0000. Veuillez changer votre mot de passe lors de votre prochaine connection. ");
+            email.setFrom("kvanconingsloo@gmail.com");
+            email.setSubject("Réinitialisation mot de passe.");
+            email.setNick("Locacar");
+            email.setReplyTo(utilisateur.getEmail());
+            email.setEncodeUTF8(true);
+            email.getListTo().add(utilisateur.getEmail());
 
-
-                Mail email = new Mail();
-                email.setMsgBody("Votre mot de passe a été réinitialisé à 0000. Veuillez changer votre mot de passe lors de votre prochaine connection. ");
-                email.setFrom("kvanconingsloo@gmail.com");
-                email.setSubject("Réinitialisation mot de passe.");
-                email.setNick("Locacar");
-                email.setReplyTo(utilisateur.getEmail());
-                email.setEncodeUTF8(true);
-                email.getListTo().add(utilisateur.getEmail());
-
-
-                MailSender.sendMail(email);
-
+            MailSender.sendMail(email);
 
             response.sendRedirect("login");
 
@@ -85,6 +89,8 @@ public class MotDePasseOublieServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        logger.info("Appel de la methode doGet de MotDePasseOublieServlet.");
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/motDePasseOublie.jsp").forward( request, response );
     }

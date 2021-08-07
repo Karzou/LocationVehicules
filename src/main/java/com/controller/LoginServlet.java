@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("Appelle de la methode doGet servletLogin");
+            logger.info("Appel de la methode doGet servletLogin");
         }
 
         EntityManager em = EMF.getEM();
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         try {
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme avec l import des villes. " + e);
+            logger.warn("Problème avec l' 'import des villes. " + e);
         }
 
         request.setAttribute("errMessage", null);
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("Appelle de la methode doPost servletLogin");
+            logger.info("Appel de la methode doPost servletLogin");
         }
 
         EntityManager em = EMF.getEM();
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
         try {
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import des villes. " + e);
+            logger.warn("Problème lors de l'import des villes. " + e);
         }
 
         request.setAttribute("villes", villeList);
@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 utilisateur = utilisateurService.trouverParEmail(userName);
             } catch ( ServiceException e) {
-                logger.warn("Probleme de trouver le mail " + userName + " en db. " + e);
+                logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
             } finally {
 
                 em.close();
@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             if(logger.isInfoEnabled()){
-                logger.info("Probleme du mail ou password erronne. " + userName);
+                logger.info("Problème du mail ou password erronné. " + userName);
             }
 
             request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");

@@ -51,33 +51,33 @@ public class SupUtilisateurServlet extends HttpServlet {
             Utilisateur utilisateur = null;
 
             try {
-                logger.info("Import de l utilisateur : " + idSup);
+                logger.info("Import de l'utilisateur : " + idSup);
                 utilisateur = utilisateurService.trouver(idSup);
 
             } catch (ServiceException e) {
-                logger.warn("Probleme lors de l import de l utilisateur : " + idSup + ". " + e);
+                logger.warn("Problème lors de l' 'import de l'utilisateur : " + idSup + ". " + e);
                 session.setAttribute("erreur", "erreur lors de l'import de la liste de permission. ");
             }
 
             try {
                 transaction.begin();
-                logger.info("Debut de la transaction de suppression de l utilisateur : " + utilisateur.getEmail());
+                logger.info("Début de la transaction de suppression de l'utilisateur : " + utilisateur.getEmail());
                 utilisateurService.suppressionLogique(utilisateur);
 
                 transaction.commit();
             } catch ( Exception e ) {
-                logger.warn("Probleme lors de la suppression de l utilisateur : " + utilisateur.getEmail() + ". " + e);
+                logger.warn("Problème lors de la suppression de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
                 throw new ServletException( e );
             } finally {
                 if (transaction.isActive()) {
-                    logger.warn("Rollback de la suppression de l utilisateur : " + utilisateur.getEmail());
+                    logger.warn("Rollback de la suppression de l'utilisateur : " + utilisateur.getEmail());
                     transaction.rollback();
                 }
                 em.close();
             }
             response.sendRedirect("gestionUtilisateur");
         } else {
-            logger.info("Permissions non accordée pour la suppression d utilisateur.");
+            logger.info("Permissions non accordée pour la suppression d'utilisateur.");
 
             String message = "Vous n'avez pas les permissions pour supprimer un utilisateur !";
             request.setAttribute("errorMessage", message);

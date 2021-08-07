@@ -52,7 +52,7 @@ public class GestionDroitServlet extends HttpServlet {
 
             roleList = roleService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme avec l import de a liste de role. " + e);
+            logger.warn("Problème avec l'import de la liste de rôle. " + e);
         }
 
         int id = Integer.parseInt(request.getParameter("idSup"));
@@ -62,7 +62,7 @@ public class GestionDroitServlet extends HttpServlet {
             utilisateur = utilisateurService.trouver(id);
             autorise = autoriseService.listerParIdRole(idRole);
         } catch (ServiceException e) {
-            logger.warn("Probleme avec l import de la liste des autorisation par role. " + e);
+            logger.warn("Problème avec l'import de la liste des autorisations par rôle. " + e);
         }
         em.close();
 
@@ -93,22 +93,22 @@ public class GestionDroitServlet extends HttpServlet {
         try {
             utilisateur = utilisateurService.trouver(idUtilisateur);
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de la recherche de l idUtilisateur : " + idUtilisateur + ". " + e);
+            logger.warn("Problème lors de la recherche de l'idUtilisateur : " + idUtilisateur + ". " + e);
         }
 
         try {
             role = roleService.trouver(idRole);
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de la recherche de role par idRole : " + idRole + ". " + e);
+            logger.warn("Problème lors de la recherche de rôle par idRole : " + idRole + ". " + e);
         }
         try {
             utilisateur.setRolesByIdRole(role);
         } catch (Exception e){
-            logger.warn("Probleme lors de la mise a jour du role de l utilisateur : " + utilisateur.getEmail() + ". " + e);
+            logger.warn("Problème lors de la mise à jour du rôle de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
         }
         try {
             if(logger.isInfoEnabled()){
-                logger.info("Debut de la transaction de la mise a jour des droits de l utilisateur : " + utilisateur.getEmail());
+                logger.info("Début de la transaction de la mise à jour des droits de l'utilisateur : " + utilisateur.getEmail());
             }
 
             transaction.begin();
@@ -116,7 +116,7 @@ public class GestionDroitServlet extends HttpServlet {
             transaction.commit();
         }finally {
             if (transaction.isActive()) {
-                logger.warn("Rollback de la mise a jour des droits de " + utilisateur.getEmail());
+                logger.warn("Rollback de la mise à jour des droits de " + utilisateur.getEmail());
                 transaction.rollback();
             }
             em.close();

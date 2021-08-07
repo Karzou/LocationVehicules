@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Vanconingsloo Kevin
+ */
+
 @WebServlet("/changerMotDePasse")
 public class ChangerMotDePasseServlet extends HttpServlet {
 
@@ -27,7 +31,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
 
         if(logger.isInfoEnabled()){
 
-            logger.info("Appelle de la methode doPost ChangerMotDePasseServlet");
+            logger.info("Appelle de la méthode doPost ChangerMotDePasseServlet");
         }
 
         HttpSession session = request.getSession();
@@ -36,23 +40,23 @@ public class ChangerMotDePasseServlet extends HttpServlet {
         String idModif = request.getParameter("idModif");
 
         int idUtilisateur = Integer.parseInt(idModif);
-        String message ="";
+        String message = "";
 
         if(!Validation.validationPassword(password)){
             if(logger.isInfoEnabled()){
 
                 logger.info("Problème lors de la validation de mot de passe");
             }
-            message = ("Le mot de passe doit etre de minimum 4 caractères ! ");
+            message = ("Le mot de passe doit être de minimum 4 caractères ! ");
             session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }else{
             if(!confirmPassword.equals(password)){
                 if(logger.isInfoEnabled()){
 
-                    logger.info("Problème, les 2 mots de passe ne sont pas identique. ");
+                    logger.info("Problème, les 2 mots de passe ne sont pas identiques. ");
                 }
-                session.setAttribute("erreur", "Les mots de passes ne sont pas identiques ! ");
+                session.setAttribute("erreur", "Les 2 mots de passes ne sont pas identiques ! ");
                 this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
             }else{
                 EntityManager em = EMF.getEM();
@@ -78,9 +82,9 @@ public class ChangerMotDePasseServlet extends HttpServlet {
                     em.close();
                 }
                 request.setAttribute("utilisateur", utilisateur);
-                request.setAttribute("succes", "Votre mot de passe a été changé avec succes ! ");
+                request.setAttribute("succes", "Votre mot de passe a été changé avec succès ! ");
                 if(logger.isInfoEnabled()){
-                    logger.info("Mot de passe changé avec succes. " + idUtilisateur);
+                    logger.info("Mot de passe changé avec succès. " + idUtilisateur);
                 }
                 this.getServletContext().getRequestDispatcher( "/WEB-INF/view/profil.jsp" ).forward( request, response );
             }
@@ -92,7 +96,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
 
         if(logger.isInfoEnabled()){
 
-            logger.info("Appelle de la methode doGet ChangerMotDePasseServlet");
+            logger.info("Appelle de la méthode doGet ChangerMotDePasseServlet");
         }
 
         EntityManager em = EMF.getEM();
@@ -107,7 +111,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
         } catch (ServiceException e) {
             if(logger.isInfoEnabled()){
 
-                logger.info("Probleme lors de la recherche de l utilisateur : " + session.getAttribute("idUtilisateur"));
+                logger.info("Problème lors de la recherche de l'utilisateur : " + session.getAttribute("idUtilisateur"));
             }
             session.setAttribute("erreur", "Problème avec le chargement de l'utilisateur. " + e.getMessage());
         }

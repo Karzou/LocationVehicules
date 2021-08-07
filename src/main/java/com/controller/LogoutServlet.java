@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(logger.isInfoEnabled()){
-            logger.info("Appelle de la methode doGet servletLogout");
+            logger.info("Appel de la methode doGet servletLogout");
         }
 
         HttpSession session = request.getSession(false);
@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
             }
 
             session.invalidate();
-            request.setAttribute("errMessage", "Vous etes bien deconnecté");
+            request.setAttribute("errMessage", "Vous êtes bien déconnecté");
 
             response.sendRedirect("login");
         }

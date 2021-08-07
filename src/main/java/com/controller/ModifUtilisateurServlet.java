@@ -53,16 +53,16 @@ public class ModifUtilisateurServlet extends HttpServlet {
             logger.info("Import de la liste ville.");
             villeList = villeService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de la liste ville. " + e);
-            session.setAttribute("erreur", "Probleme avec le chargement de la liste de ville. ");
+            logger.warn("Problème lors de l' 'import de la liste ville. " + e);
+            session.setAttribute("erreur", "Problème avec le chargement de la liste de ville. ");
         }
 
         try {
-            logger.info("Import de l utilisateur : " + id);
+            logger.info("Import de l' 'utilisateur : " + id);
             utilisateur = utilisateurService.trouver(id);
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de l utilisateur : " + e);
-            session.setAttribute("erreur", "Probleme avec le chargement de l'utilisateur'.");
+            logger.warn("Problème lors de l' 'import de l' 'utilisateur : " + e);
+            session.setAttribute("erreur", "Problème avec le chargement de l'utilisateur'.");
         } finally {
             em.close();
         }
@@ -77,7 +77,7 @@ public class ModifUtilisateurServlet extends HttpServlet {
             response.sendRedirect("erreur");
         }else{
             logger.info("Tout ok redirection vers modifUtilisateur.");
-            session.setAttribute("succes", "Modfications faites avec succes. ");
+            session.setAttribute("succes", "Modfications faites avec succès. ");
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifUtilisateur.jsp" ).forward( request, response );
         }
     }

@@ -29,7 +29,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (logger.isInfoEnabled()){
-            logger.info("Appel du doGet la servlet CreationUtilisateur");
+            logger.info("Appel du doGet de la servlet CreationUtilisateur");
         }
 
         HttpSession session = request.getSession(false);
@@ -81,14 +81,14 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 || datePermisInput.trim().isEmpty()
                 ) {
             if(logger.isInfoEnabled()){
-                logger.info("Tous les champs du formulaire creation utilisateur ne sont pas remplis.");
+                logger.info("Tous les champs du formulaire de création d'utilisateur ne sont pas remplis.");
             }
 
             request.setAttribute("errMessage", "Veuillez remplir tous les champs");
             this.getServletContext().getRequestDispatcher("/login").forward( request, response );
         } else {
             if(logger.isInfoEnabled()){
-                logger.info("Les champs du formulaire creation utilisateur sont bien remplis");
+                logger.info("Les champs du formulaire de création d'utilisateur sont bien remplis");
             }
 
             int idVille = Integer.parseInt(idVilleInput);
@@ -107,7 +107,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if(!Validation.validationPassword(password.trim())){
 
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation du password : " + password);
+                        logger.info("Problème avec la validation du password : " + password);
                     }
 
                     request.setAttribute("erreurPassword", "Veuillez entrer un mot de passe d'au moins 4 caractères !");
@@ -116,7 +116,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if(!Validation.validationEmail(mail.trim())){
 
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation du mail : " + mail);
+                        logger.info("Problème avec la validation du mail : " + mail);
                     }
 
                     request.setAttribute("erreurMail", "Veuillez entrer un mail valide !");
@@ -125,7 +125,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if(!Validation.validationPrenom(nom)) {
 
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation du nom : " + nom);
+                        logger.info("Problème avec la validation du nom : " + nom);
                     }
 
                     request.setAttribute("erreurNom", "Veuillez entrer un nom avec au moins 2 caractères !");
@@ -133,7 +133,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 }
                 if(!Validation.validationPrenom(prenom)) {
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation du prenom : " + prenom);
+                        logger.info("Problème avec la validation du prénom : " + prenom);
                     }
 
                     request.setAttribute("erreurPrenom", "Veuillez entrer un prénom avec au moins 2 carcatères");
@@ -142,7 +142,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if(!Validation.validationTelephone(telephone.trim())){
 
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation du telephone : " + telephone);
+                        logger.info("Problème avec la validation du téléphone : " + telephone);
                     }
 
                     request.setAttribute("erreurTelephone", "Veuillez entrer que des chiffres ! ");
@@ -152,7 +152,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if(!Validation.validationAdresse(rue.trim())){
 
                     if(logger.isInfoEnabled()){
-                        logger.info("Probleme avec la validation de l adresse : " + rue);
+                        logger.info("Problème avec la validation de l'adresse : " + rue);
                     }
 
                     request.setAttribute("erreurAdresse", "Veuillez entrer une adresse d'au moins 6 caractères ! ");
@@ -161,7 +161,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                 if( ! erreurFlag ) {
                     try {
                         if(logger.isInfoEnabled()){
-                            logger.info("Debut de la transaction CreationUtilisateur");
+                            logger.info("Début de la transaction CreationUtilisateur");
                         }
 
                         transaction.begin();
@@ -169,7 +169,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                             ville = villeService.trouver(idVille);
                             role = roleService.trouverParNom("client");
                         } catch (ServiceException e) {
-                            logger.warn("Probleme de recherche de ville et de role client :" + idVille + " " + e);
+                            logger.warn("Problème de recherche de ville et de role client :" + idVille + " " + e);
                         }
                         Adresse adresse = new Adresse(rue.trim(), numero.trim(), boite.trim(), ville);
                         Utilisateur utilisateur = new Utilisateur(
@@ -189,7 +189,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
                             try {
                                 if(logger.isInfoEnabled()){
-                                    logger.info("Début de la creation de l utilisateur " + utilisateur.getEmail());
+                                    logger.info("Début de la création de l'utilisateur " + utilisateur.getEmail());
                                 }
 
                                 utilisateurService.creer(utilisateur);
@@ -197,25 +197,25 @@ public class CreationUtilisateurServlet extends HttpServlet {
                                 TelephoneService telephoneService = new TelephoneService(em);
                                 Telephone telephoneDb = new Telephone(telephone, utilisateur1);
                                 telephoneService.creer(telephoneDb);
-                                request.setAttribute("succes", "L'utilisateur a été créé avec succes.");
+                                request.setAttribute("succes", "L'utilisateur a été créé avec succès.");
                             } catch (ServiceException e) {
-                                logger.warn("Probleme de creation de l utilisateur " + utilisateur.getEmail() + " " + e);
+                                logger.warn("Problème de création de l'utilisateur " + utilisateur.getEmail() + " " + e);
                             }
                         } else {
                             request.setAttribute("errMessagePass", "Vos mots de passe ne sont pas identiques");
                         }
                         transaction.commit();
                     } catch ( Exception e ) {
-                        logger.warn("Probleme lors de la transaction de creation utilisateur. " + e);
+                        logger.warn("Problème lors de la transaction de création utilisateur. " + e);
                     } finally {
                         if (transaction.isActive()) {
-                            logger.warn("Rollback de la creation d utilisateur.");
+                            logger.warn("Rollback de la création d'utilisateur.");
                             transaction.rollback();
                         }
                         em.close();
                     }
                 }else {
-                    logger.info("Erreur lors de la creation utilisateur.");
+                    logger.info("Erreur lors de la création utilisateur.");
                     request.setAttribute("erreurFlag", true);
                 }
             }

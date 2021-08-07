@@ -47,7 +47,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
             utilisateurList = utilisateurService.lister();
         } catch (ServiceException e) {
-            logger.warn("Probleme lors de l import de la lite utilisateur. " + e);
+            logger.warn("Problème lors de l' 'import de la lite utilisateur. " + e);
         }
 
         request.setAttribute("utilisateurList", utilisateurList);
@@ -92,25 +92,25 @@ public class GestionUtilisateurServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
                 if(!Validation.validationPrenom(nom)) {
-                    message += "Veuillez entrer un nom avec au moins 2 caracteres ! ";
+                    message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
                     erreurFlag = true;
                 }
                 if(!Validation.validationPrenom(prenom)) {
-                    message += "Veuillez entrer un prenom avec au moins 2 carcateres ! ";
+                    message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
                     erreurFlag = true;
                 }
                 if(!Validation.validationTelephone(telephone)){
-                    message += "Veuillez entrer que des chiffres ! ";
+                    message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
                     erreurFlag = true;
                 }
 
                 if(!Validation.validationAdresse(rue)){
-                    message += "Veuillez entrer une adresse d'au moins 6 caracteres et maximum 99 catactères ! ";
+                    message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
                     erreurFlag = true;
                 }
 
                 if(!Validation.validationNumAdresse(numero)){
-                    message += "Veuillez entrer un numéro valide ! ";
+                    message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
                     erreurFlag = true;
                 }
                 if(!erreurFlag) {
@@ -122,17 +122,17 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         }
                         ville = villeService.trouver(idVille);
                     } catch (ServiceException e) {
-                        logger.warn("Probleme avec l import de la ville: " + e);
+                        logger.warn("Problème avec l import de la ville: " + e);
                     }
                     try {
                         utilisateur = utilisateurService.trouver(id);
                     } catch (ServiceException e) {
-                        logger.warn("Probleme avec l import de l utilisateur : " + id + ". " + e);
+                        logger.warn("Problème avec l' 'import de l' 'utilisateur : " + id + ". " + e);
                     }
                    try {
                         transaction.begin();
                         if(logger.isInfoEnabled()){
-                            logger.info("Debut de la transaction de l update utilisateur. " + utilisateur.getEmail());
+                            logger.info("Début de la transaction de l'update utilisateur. " + utilisateur.getEmail());
                         }
 
                         utilisateur.setNomUtilisateur(nom);
@@ -148,18 +148,18 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
                         transaction.commit();
                     } catch (Exception e) {
-                       logger.warn("Probleme lors de la mise a jour de l utilisateur. " + e);
+                       logger.warn("Problème lors de la mise à jour de l' 'utilisateur. " + e);
                         session.setAttribute("erreur", "Une erreur est survenue lors de l'insertion en db !" );
                     } finally {
                         if (transaction.isActive()) {
-                            logger.warn("Rollback de la misa a jour de l utilisateur. " + utilisateur.getEmail());
+                            logger.warn("Rollback de la mise à jour de l'utilisateur. " + utilisateur.getEmail());
                             transaction.rollback();
                         }
                         em.close();
                     }
                 }else {
                     if(logger.isInfoEnabled()){
-                        logger.info("Les champs de la mise a jour utilisateur ne sont pas remplis. " + message);
+                        logger.info("Les champs de la mise à jour utilisateur ne sont pas remplis. " + message);
                     }
 
                     session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
