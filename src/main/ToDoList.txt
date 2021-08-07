@@ -78,6 +78,7 @@ Kevin
 - envoi mail avec nouveau password.
 - changer mot de passe.
 - Message de succes / erreur
+- interdiction de sup admin + message erreur
 
 Jerome
 ----------------------
