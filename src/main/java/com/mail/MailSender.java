@@ -50,8 +50,8 @@ public class MailSender {
         */
 		boolean sendFlag = false;
 		
-		final String username = "kvanconingsloo@gmail.com";
-        final String password = "Carz4719";
+		final String username = "locacarprojetsgbd@gmail.com";
+        final String password = "projetsgbd";
 		
 		// Check nick and replyTo
 		if(mail.getNick() == null || mail.getNick().equals(""))
