@@ -31,7 +31,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
 
         if(logger.isInfoEnabled()){
 
-            logger.info("Appelle de la méthode doPost ChangerMotDePasseServlet");
+            logger.info("Appel de la méthode doPost ChangerMotDePasseServlet");
         }
 
         HttpSession session = request.getSession();
@@ -57,6 +57,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
                     logger.info("Problème, les 2 mots de passe ne sont pas identiques. ");
                 }
                 session.setAttribute("erreur", "Les 2 mots de passes ne sont pas identiques ! ");
+                session.setAttribute("retour", "/changerMotDePasse");
                 this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
             }else{
                 EntityManager em = EMF.getEM();

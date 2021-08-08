@@ -166,11 +166,17 @@ public class GestionUtilisateurServlet extends HttpServlet {
                 }
 
                 if(session.getAttribute("erreur") != null){
-                    session.setAttribute("retour", "/gestionUtilisateur");
+                    if(profilFlag != null){
+                        session.setAttribute("retour", "/profil");
+                    }else{
+                        session.setAttribute("retour", "/gestionUtilisateur");
+                    }
+
                     response.sendRedirect("erreur");
                 }else{
+                    session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
                     if(! (profilFlag == null)){
-                        session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
+
                         response.sendRedirect("profil");
                     }else{
                         response.sendRedirect("gestionUtilisateur");

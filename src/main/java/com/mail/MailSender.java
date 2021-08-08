@@ -100,7 +100,7 @@ public class MailSender {
             msg.setSubject(mail.getSubject());
             msg.setText(mail.getMsgBody());
             Transport.send(msg);
-            
+
             sendFlag = true;
             
         } catch (AddressException e) {

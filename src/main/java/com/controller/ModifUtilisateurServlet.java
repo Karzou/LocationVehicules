@@ -40,7 +40,6 @@ public class ModifUtilisateurServlet extends HttpServlet {
 
         EntityManager em = EMF.getEM();
 
-
         int id = Integer.parseInt(request.getParameter("idModif"));
         String profilFlag = request.getParameter("profilFlag"); // pour envoyer au profil si on vient du profil
 
@@ -73,11 +72,12 @@ public class ModifUtilisateurServlet extends HttpServlet {
         }
 
         if(!(session.getAttribute("erreur") == null)){
+
             session.setAttribute("retour", "/gestionUtilisateur");
             response.sendRedirect("erreur");
         }else{
             logger.info("Tout ok redirection vers modifUtilisateur.");
-            session.setAttribute("succes", "Modfications faites avec succès. ");
+
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifUtilisateur.jsp" ).forward( request, response );
         }
     }

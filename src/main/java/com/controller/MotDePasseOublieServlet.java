@@ -73,7 +73,7 @@ public class MotDePasseOublieServlet extends HttpServlet {
             em.close();
 
             email.setMsgBody("Votre mot de passe a été réinitialisé à 0000. Veuillez changer votre mot de passe lors de votre prochaine connection. ");
-            email.setFrom("kvanconingsloo@gmail.com");
+            email.setFrom("locacarprojetsgbd@gmail.com");
             email.setSubject("Réinitialisation mot de passe.");
             email.setNick("Locacar");
             email.setReplyTo(utilisateur.getEmail());
