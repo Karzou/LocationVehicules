@@ -3,6 +3,7 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.Couleur;
 import com.entity.Facture;
+import com.entity.Reservation;
 import com.exception.ServiceException;
 import com.service.CouleurService;
 import com.service.FactureService;
@@ -15,8 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @WebServlet("/facture")
 public class FactureServlet extends HttpServlet {
@@ -41,15 +46,35 @@ public class FactureServlet extends HttpServlet {
         //null = on crée une liste null
         //lorsuq'il contiendra des factures (donc plus null)=> sera un objet de type Liste
         List<Facture> factureList = null;
+        List<Facture> myFactureList = null;
 
+        HttpSession session = request.getSession();
+        Integer idUtilisateur = (Integer) session.getAttribute("idUtilisateur");
         try {
             factureList = factureService.findAll();
+            Set<Integer> myFactureIds = new HashSet<>();
+
+            for (Facture facture: factureList) {
+                List<Reservation> reservationsByIdContrat = facture.getContratsByIdContrat().getReservationsByIdContrat();
+                for (Reservation reservation: reservationsByIdContrat) {
+                    if(reservation.getUtilisateursByIdUtilisateur().getIdUtilisateur() == idUtilisateur){
+                        myFactureIds.add(facture.getIdFacture());
+                    }
+                }
+            }
+
+            myFactureList = factureList.stream().filter(f ->
+                    myFactureIds.contains(f.getIdFacture())
+            ).collect(Collectors.toList());
         }
+
 
         catch (ServiceException e)
         {
             e.printStackTrace();
         }
+
+
         //finally, il passe d'office par là
         //dans ce cas, il ajoute une information dans le fichier log et il clos la connexion à la DB
         finally {
@@ -58,9 +83,10 @@ public class FactureServlet extends HttpServlet {
             }
             em.close();
         }
-
-        //ajout d'un attribut s:"factureList sur la réponse de la requête précédente'
-        request.setAttribute("factureList", factureList);
+        //factureList.get(0).getContratsByIdContrat().getReservationsByIdContrat().get(0).getDateDebutLocation();
+ //factureList.get(0).getContratsByIdContrat().getReservationsByIdContrat().
+        // ajout d'un attribut s:"factureList sur la réponse de la requête précédente'
+        request.setAttribute("factureList", myFactureList);
 
         //Affichage de la page avec deux élements request, reponse
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/facture.jsp" ).forward( request, response );

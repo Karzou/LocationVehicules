@@ -1,17 +1,16 @@
 package com.enumeration;
 
 /**
- * @author Wets Jeoffroy
+ * @author Jerôme Deschamps 
  */
 
 public enum Etat {
-
-    SIGNE("Signé"),
-    PAYE("Payé");
+    signe("signe"),
+    paye("paye");
 
     private String etat;
 
-    private Etat(String etat) {
+    Etat(String etat) {
         this.etat = etat;
     }
 

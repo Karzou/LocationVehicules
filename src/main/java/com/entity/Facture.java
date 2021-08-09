@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
- * @authors Wets Jeoffroy / Vanconingsloo Kevin
+ * @authors Jérôme Deschamps
  */
  
 @Entity
@@ -18,7 +18,8 @@ public class Facture {
     private Date dateFacture;
     private float prixFacture;
     private Contrat contratsByIdContrat;
-
+    private Vehicule vehicule ;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_facture", nullable = false)

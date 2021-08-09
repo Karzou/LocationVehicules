@@ -24,4 +24,14 @@ public class FactureService {
         TypedQuery<Facture> factureTypedQuery = em.createNamedQuery("Facture.getAll", Facture.class);
         return factureTypedQuery.getResultList();
     }
+
+    public Facture findById(int id) throws ServiceException {
+        try {
+            LOGGER.info("recherche facture " + id);
+            return em.find(Facture.class, id);
+        } catch (Exception e) {
+            LOGGER.error("erreur : " + e);
+            throw new ServiceException(e);
+        }
+    }
 }
