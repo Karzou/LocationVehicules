@@ -67,6 +67,17 @@ public class CreationUtilisateurServlet extends HttpServlet {
         String datePermisInput = request.getParameter("datePermis");
         String confirmPassword = request.getParameter("confirmPassword");
 
+        request.setAttribute("nom", nom);
+        request.setAttribute("prenom", prenom);
+        request.setAttribute("password", password);
+        request.setAttribute("confirmPassword", confirmPassword);
+        request.setAttribute("mail", mail);
+        request.setAttribute("telephone", telephone);
+        request.setAttribute("rue", rue);
+        request.setAttribute("numero", numero);
+        request.setAttribute("boite", boite);
+
+
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
         VilleService villeService = new VilleService(em);
@@ -74,6 +85,9 @@ public class CreationUtilisateurServlet extends HttpServlet {
         Role role = null;
         Ville ville = null;
         boolean erreurFlag = false;
+        HttpSession session = request.getSession();
+
+        session.setAttribute("creation", " ok ");
 
         //Traitement
         if ( nom.trim().isEmpty() || prenom.trim().isEmpty() || telephone.trim().isEmpty() || password.trim().isEmpty()
@@ -85,6 +99,8 @@ public class CreationUtilisateurServlet extends HttpServlet {
             }
 
             request.setAttribute("errMessage", "Veuillez remplir tous les champs");
+            request.setAttribute("erreurFlag", true);
+
             this.getServletContext().getRequestDispatcher("/login").forward( request, response );
         } else {
             if(logger.isInfoEnabled()){
@@ -202,6 +218,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                                 logger.warn("Problème de création de l'utilisateur " + utilisateur.getEmail() + " " + e);
                             }
                         } else {
+                            request.setAttribute("erreurFlag", true);
                             request.setAttribute("errMessagePass", "Vos mots de passe ne sont pas identiques");
                         }
                         transaction.commit();

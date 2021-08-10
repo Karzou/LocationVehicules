@@ -26,12 +26,12 @@
                     </div>
                     <c:if test="${empty succes}">
                         <div class="login-div-error">
-                            <span style="color:red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+                            <span style="color:#ff0000"><c:out value="${errMessage}"></c:out></span>
                         </div>
                     </c:if>
 
                     <div class="login-div-success">
-                        <span style="color:green"><%=(request.getAttribute("succes") == null) ? "" : request.getAttribute("succes")%></span>
+                        <span style="color:green"><c:out value="${succes}"></c:out></span>
                     </div>
 
                     <div>
@@ -54,43 +54,47 @@
             </div>
         </div>
 
-        <div class="container-register" id="container-register" style="display: ${(empty erreurFlag) ? 'none': 'block'};">
+        <div class="container-register" id="container-register"
+        <c:choose>
+            <c:when test="${empty erreurFlag}">style="display: none"</c:when>
+            <c:otherwise>style="display: block"</c:otherwise>
+        </c:choose>>
             <div class="content-register">
                 <form name="createUser" action="<c:url value="/creationUtilisateur"/>" method="post">
                     <div class="register-div">
                         <label for="register-nom">Nom</label>
-                        <input type="text" class="register-input" id="register-nom" name="nom"/>
+                        <input type="text" class="register-input" id="register-nom" name="nom" value="<c:out value="${nom}"></c:out>"/>
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurNom") == null) ? "" : request.getAttribute("erreurNom")%></span>
+                        <span style="color:red"><c:out value="${erreurNom}"></c:out></span>
                     </br>
                     </div>
 
 
                     <div class="register-div">
                         <label for="register-prenom">Prénom</label>
-                        <input type="text" class="register-input" id="register-prenom" name="prenom"/>
+                        <input type="text" class="register-input" id="register-prenom" name="prenom"value="<c:out value="${prenom}"></c:out>" />
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurPrenom") == null) ? "" : request.getAttribute("erreurPrenom")%></span>
+                        <span style="color:red"><c:out value="${erreurPrenom}"></c:out></span>
                         </br>
                     </div>
 
                     <div class="register-div">
                         <label for="register-mail">Email</label>
-                        <input type="mail" class="register-input" id="register-mail" name="mail"/>
+                        <input type="mail" class="register-input" id="register-mail" name="mail" value="<c:out value="${mail}"></c:out>"/>
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurMail") == null) ? "" : request.getAttribute("erreurMail")%></span>
+                        <span style="color:red"><c:out value="${erreurMail}"></c:out></span>
                         </br>
                     </div>
 
                     <div class="register-div">
                         <label for="register-password">Mot de passe</label>
-                        <input type="password" class="register-input" id="register-password" name="password"/>
+                        <input type="password" class="register-input" id="register-password" name="password" value="<c:out value="${password}"></c:out>"/>
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurPassword") == null) ? "" : request.getAttribute("erreurPassword")%></span>
+                        <span style="color:red"><c:out value="${erreurPassword}"></c:out></span>
                         </br>
                     </div>
 
@@ -98,33 +102,37 @@
                         <label for="register-confirmPassword">Confirmation</label>
                         <input type="password" class="register-input" id="register-confirmPassword" name="confirmPassword"/>
                     </div>
+                    <div class="login-div-error">
+                        <span style="color:red"><c:out value="${errMessagePass}"></c:out></span>
+                        </br>
+                    </div>
 
                     <div class="register-div">
                         <label for="register-telephone">Téléphone</label>
-                        <input type="text" class="register-input" id="register-telephone" name="telephone"/>
+                        <input type="text" class="register-input" id="register-telephone" name="telephone" value="<c:out value="${telephone}"></c:out>"/>
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurTelephone") == null) ? "" : request.getAttribute("erreurTelephone")%></span>
+                        <span style="color:red"><c:out value="${erreurTelephone}"></c:out></span>
                         </br>
                     </div>
 
                     <div class="register-div">
                         <label for="register-rue">Rue</label>
-                        <input type="text" class="register-input" id="register-rue" name="rue"/>
+                        <input type="text" class="register-input" id="register-rue" name="rue" value="<c:out value="${rue}"></c:out>"/>
                     </div>
                     <div class="login-div-error">
-                        <span style="color:red"><%=(request.getAttribute("erreurAdresse") == null) ? "" : request.getAttribute("erreurAdresse")%></span>
+                        <span style="color:red"><c:out value="${erreurAdresse}"></c:out></span>
                         </br>
                     </div>
 
                     <div class="register-div">
                         <label for="register-numero">Numéro</label>
-                        <input type="text" class="register-input" id="register-numero" name="numero"/>
+                        <input type="text" class="register-input" id="register-numero" name="numero" value="<c:out value="${numero}"></c:out>"/>
                     </div>
 
                     <div class="register-div">
                         <label for="register-boite">Boite</label>
-                        <input type="text" class="register-input" id="register-boite" name="boite"/>
+                        <input type="text" class="register-input" id="register-boite" name="boite" value="<c:out value="${boite}"></c:out>"/>
                     </div>
 
                     <div class="register-div">
@@ -151,8 +159,9 @@
                         <input type="reset"class="btn-reset" value="Reset">
                     </div>
                 <c:if test="${empty succes}">
-					<div class="login-div-error">
-                    	<span style="color:#ff0000"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span>
+                    <div class="login-div-error">
+                        <span style="color:red"><c:out value="${erreurMessage}"></c:out></span>
+                        </br>
                     </div>
                 </c:if>
                 </form>

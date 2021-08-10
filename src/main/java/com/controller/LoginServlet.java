@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             logger.warn("Problème avec l' 'import des villes. " + e);
         }
 
-        request.setAttribute("errMessage", null);
+        request.removeAttribute("errMessage");
         request.setAttribute("villes", villeList);
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/login.jsp" ).forward( request, response );
@@ -55,6 +55,8 @@ public class LoginServlet extends HttpServlet {
         if(logger.isInfoEnabled()){
             logger.info("Appel de la methode doPost servletLogin");
         }
+
+        HttpSession session = request.getSession();
 
         EntityManager em = EMF.getEM();
 
@@ -73,37 +75,41 @@ public class LoginServlet extends HttpServlet {
         }
 
         request.setAttribute("villes", villeList);
+        if (session.getAttribute("creation") == null ){
+            logger.warn("Je passe par la");
+            if(utilisateurService.checkLogin(userName, password)) {
+                if (logger.isInfoEnabled()) {
+                    logger.info("CheckLogin OK " + userName);
+                }
 
-        if(utilisateurService.checkLogin(userName, password)) {
-            if(logger.isInfoEnabled()){
-                logger.info("CheckLogin OK " + userName);
-            }
+                try {
+                    utilisateur = utilisateurService.trouverParEmail(userName);
+                } catch (ServiceException e) {
+                    logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
+                } finally {
 
-            try {
-                utilisateur = utilisateurService.trouverParEmail(userName);
-            } catch ( ServiceException e) {
-                logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
-            } finally {
+                    em.close();
+                }
 
-                em.close();
-            }
+                session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
+                session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
+                session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
+                session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
 
-            HttpSession session = request.getSession();
+                response.sendRedirect("accueil");
 
-            session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
-            session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
-            session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
-            session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
-
-            response.sendRedirect("accueil");
 
         } else {
-            if(logger.isInfoEnabled()){
-                logger.info("Problème du mail ou password erronné. " + userName);
+                if (logger.isInfoEnabled()) {
+                    logger.info("Problème du mail ou password erronné. " + userName);
+                }
+                request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");
+                request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
             }
-
-            request.setAttribute("errMessage", "Votre mail ou mot de passe est erroné.");
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+        } else {
+                request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+        }
+        session.removeAttribute("creation");
         }
     }
-}
+
