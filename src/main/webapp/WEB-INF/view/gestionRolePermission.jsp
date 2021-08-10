@@ -14,7 +14,7 @@
             <div class="content-global">
                 <h2>Ajout de rôle</h2>
 
-                <span style="color:red"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
+                <span style="color:red">${sessionScope.erreur}</span>
 
                 <form action="<c:url value="/gestionRolePermission"/>" method="post">
                     <div class="div-input-modif">

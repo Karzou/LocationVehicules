@@ -176,10 +176,18 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 }
 
                 if(!role.getRoleDescription().equals("admin")){
-                    transaction.begin();
-                    autoriseService.supprimerParRole(role.getIdRole());
-                    roleService.supprimer(role);
-                    transaction.commit();
+                    if(!role.getRoleDescription().equals("client")){
+
+                        transaction.begin();
+                        autoriseService.supprimerParRole(role.getIdRole());
+                        roleService.supprimer(role);
+                        transaction.commit();
+
+                    }else{
+                        logger.info("tentative d'effacer le rôle 'client'");
+                        session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le rôle 'client'");
+                    }
+
                 }else{
                     logger.info("tentative d'effacer le rôle 'admin'");
                     session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le rôle 'admin'");

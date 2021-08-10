@@ -34,7 +34,6 @@
                         <th scope="col">Mes factures</th>
                         <th scope="col">Modification</th>
                         </thead>
-
                         <tbody>
                             <td><c:out value="${utilisateur.nomUtilisateur}"/></td>
                             <td><c:out value="${utilisateur.prenomUtilisateur}"/></td>
@@ -55,8 +54,6 @@
                                 </form>
                             </td>
                         </tbody>
-
-
             <c:import url="footer.jsp"/>
         </div>
     </body>

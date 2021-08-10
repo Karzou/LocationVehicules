@@ -20,7 +20,7 @@
                     </div>
                 </c:if>
 
-                <span style="color:#ff0000"><%=(session.getAttribute("erreur") == null) ? "" : session.getAttribute("erreur")%></span>
+                <span style="color:#ff0000">${sessionScope.erreur}</span>
 
                 <div>
                     <table class="table-custom">

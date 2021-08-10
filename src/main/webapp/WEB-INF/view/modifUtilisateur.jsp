@@ -25,10 +25,6 @@
                         <label>Prenom : </label>
                         <input class="input-modif" type="text" name="prenom" value="${utilisateur.prenomUtilisateur}">
                     </div>
-                 <!--   <div class="form-group"id="form-modif11">
-                        <label>Email : ${utilisateur.email}</label> </br>
-                        <input class="input-modif" type="text" name="email" value="${utilisateur.email}">
-                   </div> -->
 
                     <c:forEach items="${utilisateur.telephonesByIdUtilisateur}" var="telephone">
                     <div class="form-group"id="form-modif11">
@@ -43,7 +39,9 @@
                             <option value="${utilisateur.motDePasse}">${utilisateur.motDePasse}</option>
                             <option value="0000">Reset</option>
                         </select>
-                        <a href="changerMotDePasse">Changer mot de passe</a>
+                        <c:if test="${sessionScope.role == utilisateur.rolesByIdRole.roleDescription}">
+                            <a href="changerMotDePasse">Changer mot de passe</a>
+                        </c:if>
                     </div>
                     <div class="form-group"id="form-modif9">
                         <label>Date de naissance : </label>
@@ -53,10 +51,7 @@
                         <label>Permis : </label>
                         <input class="input-modif" type="date" name="datePermis" value="${utilisateur.datePermis}">
                     </div>
-                 <!--   <div class="form-group"id="form-modif3">
-                        <label>Statut actif : </label>
-                        <input class="input-modif" type="text" name="actif" value="${utilisateur.actifUtilisateur}">
-                    </div>  -->
+
                     <div class="form-group"id="form-modif4">
                         <label>Rue : </label>
                         <input class="input-modif" type="text" name="rue" value="${utilisateur.adressesByIdAdresse.rue}">
@@ -81,7 +76,6 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
-
 
                     <c:if test="${sessionScope.role eq 'employe'}">
                         <input type="hidden" name="role" value="${utilisateur.rolesByIdRole.idRole}">

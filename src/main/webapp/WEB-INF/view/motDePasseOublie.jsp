@@ -19,7 +19,7 @@
         <input type="mail" class="register-input" id="register-mail" name="mail"/>
     </div>
     <div class="login-div-error">
-        <span style="color:red"><%=(request.getAttribute("erreurMail") == null) ? "" : request.getAttribute("erreurMail")%></span>
+        <span style="color:red">${erreurMail}</span>
         </br>
     </div>
     <div class="register-button-div">
