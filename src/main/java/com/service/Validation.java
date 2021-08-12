@@ -71,4 +71,24 @@ public class Validation {
 
         return Date.valueOf(date);
     }
+
+    public static boolean checkColorLenght(String couleur) {
+
+        if (couleur.length() < 2 || couleur.length() > 50) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkColorIsEmpty(String couleur) {
+
+        if (couleur.isEmpty()) {
+
+            return false;
+        }
+
+        return true;
+    }
 }

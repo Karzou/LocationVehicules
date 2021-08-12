@@ -33,7 +33,7 @@
                                         <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
                                     </div>
                                     <div class="error-message-accueil-title-txt">
-                                        <p>L'erreur suivante est survenue</p>
+                                        <p>Une erreur est survenue</p>
                                     </div>
                                 </div>
                                 <div class="error-message-accueil-body">
