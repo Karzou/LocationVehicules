@@ -47,7 +47,7 @@ public class AjoutCouleurServlet extends HttpServlet {
         // Récupération des données
         String nomCouleur = request.getParameter("nomCouleur");
 
-        if (!Validation.checkColorIsEmpty(nomCouleur)) {
+        if (Validation.checkColorIsEmpty(nomCouleur)) {
 
             HttpSession session = request.getSession();
 
@@ -62,7 +62,6 @@ public class AjoutCouleurServlet extends HttpServlet {
             session.setAttribute("errMessage", "Le nom de la couleur doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
 
             response.sendRedirect("gestionCouleur");
-
         } else {
 
             nomCouleur = Validation.ucFirst(nomCouleur);
@@ -95,6 +94,10 @@ public class AjoutCouleurServlet extends HttpServlet {
                 }
 
                 em.close();
+
+                HttpSession session = request.getSession();
+
+                session.setAttribute("succMessage", "La couleur '" + nomCouleur + "' a été ajouté avec succès");
             }
 
             response.sendRedirect("gestionCouleur");

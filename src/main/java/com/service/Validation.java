@@ -72,6 +72,16 @@ public class Validation {
         return Date.valueOf(date);
     }
 
+    public static boolean checkColorIsEmpty(String couleur) {
+
+        if (couleur.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
     public static boolean checkColorLenght(String couleur) {
 
         if (couleur.length() < 2 || couleur.length() > 50) {
@@ -82,9 +92,114 @@ public class Validation {
         return true;
     }
 
-    public static boolean checkColorIsEmpty(String couleur) {
+    public static boolean checkNomEntrepotIsEmpty(String nomEntrepot) {
 
-        if (couleur.isEmpty()) {
+        if (nomEntrepot.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkNomEntrepotLenght(String nomEntrepot) {
+
+        if (nomEntrepot.length() < 2 || nomEntrepot.length() > 50) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkNombrePlaceEntrepotIsEmpty(String nombrePlaceEntrepot) {
+
+        if (nombrePlaceEntrepot.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkNombrePlaceEntrepotIsZero(String nombrePlaceEntrepot) {
+
+        if (nombrePlaceEntrepot.matches("\\d+$")) {
+
+            int result = Integer.parseInt(nombrePlaceEntrepot);
+
+            if (result == 0) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean checkNombrePlaceEntrepotIsNumeric(String nombrePlaceEntrepot) {
+
+        if (nombrePlaceEntrepot.matches("\\d+$")) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkNombrePlaceEntrepotLenght(String nombrePlaceEntrepot) {
+
+        if (nombrePlaceEntrepot.length() > 10) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkRueEntrepotIsEmpty(String rueEntrepot) {
+
+        if (rueEntrepot.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkRueEntrepotLenght(String rueEntrepot) {
+
+        if (rueEntrepot.length() < 2 || rueEntrepot.length() > 100) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkNumeroEntrepotIsEmpty(String numeroEntrepot) {
+
+        if (numeroEntrepot.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkNumeroEntrepotLenght(String numeroEntrepot) {
+
+        if (numeroEntrepot.length() > 10) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkBoiteEntrepotLenght(String boiteEntrepot) {
+
+        if (boiteEntrepot.length() > 10) {
 
             return false;
         }

@@ -27,13 +27,30 @@
                                     <p>Une erreur est survenue</p>
                                 </div>
                             </div>
-                            <div class="error-message-admin-body">
-                                <div class="error-message-admin-body-txt">
-                                    <p>${errMessage}</p>
-                                </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage}</div>
                             </div>
                         </div>
                         <c:remove var="errMessage" scope="session" />
+                    </c:if>
+                </div>
+
+                <div>
+                    <c:if test="${sessionScope.succMessage != null}">
+                        <div class="success-message-admin">
+                            <div class="success-message-admin-title">
+                                <div class="success-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                                </div>
+                                <div class="success-message-admin-title-txt">
+                                    <p>Félicitation</p>
+                                </div>
+                            </div>
+                            <div class="success-message-admin-body-txt">
+                                <div>${succMessage}</div>
+                            </div>
+                        </div>
+                        <c:remove var="succMessage" scope="session" />
                     </c:if>
                 </div>
 
