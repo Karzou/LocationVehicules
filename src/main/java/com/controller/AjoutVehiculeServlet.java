@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Set;
@@ -157,6 +158,10 @@ public class AjoutVehiculeServlet extends HttpServlet {
             }
 
             em.close();
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("succMessage", "Le véhicule immatriculé '" + immatriculation + "' a été ajouté avec succès");
         }
 
         response.sendRedirect("gestionVehicule");

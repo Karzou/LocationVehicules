@@ -206,4 +206,53 @@ public class Validation {
 
         return true;
     }
+
+    public static String wordUppercase(String s) {
+
+        String[] words = s.split(" ");
+
+        for (int i = 0; i < words.length; i++) words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+
+        return String.join(" ", words);
+    }
+
+    public static boolean checkMarqueIsEmpty(String marque) {
+
+        if (marque.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkMarqueLenght(String marque) {
+
+        if (marque.length() < 2 || marque.length() > 50) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkModeleIsEmpty(String modele) {
+
+        if (modele.isEmpty()) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkModeleLenght(String modele) {
+
+        if (modele.length() < 2 || modele.length() > 50) {
+
+            return false;
+        }
+
+        return true;
+    }
 }

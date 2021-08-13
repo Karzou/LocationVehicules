@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "marques", schema = "location_vehicules")
 @NamedQueries({
+        @NamedQuery(name = "Marque.checkMarqueExist", query = "SELECT COUNT(ma) FROM Marque ma WHERE ma.nomMarque = :nomMarque"),
         @NamedQuery(name = "Marque.trouverParNom", query = "SELECT ma FROM Marque ma WHERE ma.nomMarque = :nomMarque"),
         @NamedQuery(name = "Marque.lister", query = "SELECT ma FROM Marque ma ORDER BY ma.nomMarque"),
 })

@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "couleurs", schema = "location_vehicules")
 @NamedQueries({
+        @NamedQuery(name = "Couleur.checkCouleurExist", query = "SELECT COUNT(c) FROM Couleur c WHERE c.nomCouleur = :nomCouleur"),
         @NamedQuery(name = "Couleur.trouverParNom", query = "SELECT c FROM Couleur c WHERE c.nomCouleur = :nomCouleur"),
         @NamedQuery(name = "Couleur.lister", query = "SELECT c FROM Couleur c GROUP BY c.nomCouleur"),
 })

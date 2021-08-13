@@ -3,8 +3,10 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.Marque;
 import com.entity.Modele;
+import com.exception.ServiceException;
 import com.service.MarqueService;
 import com.service.ModeleService;
+import com.service.Validation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -15,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -48,46 +51,85 @@ public class AjoutModeleServlet extends HttpServlet {
         int idMarque = Integer.parseInt(request.getParameter("idMarque"));
         String nomModele = request.getParameter("nomModele");
 
-        // Instanciation
-        MarqueService marqueService = new MarqueService(em);
-        ModeleService modeleService = new ModeleService(em);
-        Marque marque = null;
+        if (Validation.checkModeleIsEmpty(nomModele)) {
 
-        try {
+            HttpSession session = request.getSession();
 
-            marque = marqueService.trouver(idMarque);
-        } catch ( Exception e ) {
+            session.setAttribute("errMessage2", "Veuillez insérer un modèle");
 
-            throw new ServletException( e );
-        }
+            response.sendRedirect("gestionMarqueModele");
 
-        Modele modele = new Modele(nomModele, marque);
+        } else if (!Validation.checkModeleLenght(nomModele)) {
 
-        try {
+            HttpSession session = request.getSession();
 
-            transaction.begin();
+            session.setAttribute("errMessage2", "Le modèle doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
 
-            modeleService.creer(modele);
+            response.sendRedirect("gestionMarqueModele");
+        } else {
 
-            transaction.commit();
-        } catch ( Exception e ) {
+            // Instanciation
+            MarqueService marqueService = new MarqueService(em);
+            ModeleService modeleService = new ModeleService(em);
 
-            throw new ServletException( e );
-        } finally {
+            if (modeleService.checkModeleExist(nomModele)) {
 
-            if (transaction.isActive()) {
+                HttpSession session = request.getSession();
 
-                transaction.rollback();
+                session.setAttribute("errMessage2", "Le modèle '" + nomModele + "' existe déjà");
+            } else {
+
+                Marque marque = null;
+
+                try {
+
+                    marque = marqueService.trouver(idMarque);
+                } catch (ServiceException e) {
+
+                    e.printStackTrace();
+                }
+
+                Modele modele = new Modele(nomModele, marque);
+
+                try {
+
+                    transaction.begin();
+
+                    modeleService.creer(modele);
+
+                    transaction.commit();
+                } catch (ServiceException e) {
+
+                    e.printStackTrace();
+                } finally {
+
+                    if (transaction.isActive()) {
+
+                        transaction.rollback();
+                    }
+
+                    if (logger.isInfoEnabled()) {
+
+                        logger.info("Fermeture de l'EntityManager");
+                    }
+
+                    em.close();
+                }
+
+                String strMarque;
+
+                HttpSession session = request.getSession();
+
+                if (marque == null) {
+                    strMarque = "inconnue";
+                } else {
+                    strMarque = marque.getNomMarque();
+                }
+
+                session.setAttribute("succMessage2", "Le modèle '" + nomModele + "' a été ajouté à la marque '" + strMarque + "' avec succès");
             }
 
-            if(logger.isInfoEnabled()) {
-
-                logger.info("Fermeture de l'EntityManager");
-            }
-
-            em.close();
+            response.sendRedirect("gestionMarqueModele");
         }
-
-        response.sendRedirect("gestionMarqueModele");
     }
 }

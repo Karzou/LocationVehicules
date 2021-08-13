@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -100,6 +101,16 @@ public class CouleurService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public boolean checkCouleurExist(String nomCouleur) {
+
+        Query query = em.createNamedQuery("Couleur.checkCouleurExist", Couleur.class);
+        query.setParameter("nomCouleur", nomCouleur);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
     }
 
     public void suppressionLogique(Couleur couleur) throws ServiceException {

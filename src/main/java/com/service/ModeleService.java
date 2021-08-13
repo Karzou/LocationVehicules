@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -100,6 +101,16 @@ public class ModeleService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public boolean checkModeleExist(String nomModele) {
+
+        Query query = em.createNamedQuery("Modele.checkModeleExist", Modele.class);
+        query.setParameter("nomModele", nomModele);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
     }
 
     public void suppression(Modele modele) throws ServiceException {

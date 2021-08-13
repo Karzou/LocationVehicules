@@ -2,6 +2,7 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Marque;
+import com.exception.ServiceException;
 import com.service.MarqueService;
 import com.service.Validation;
 import org.apache.log4j.LogManager;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -44,37 +46,70 @@ public class AjoutMarqueServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données
-        String nomMarque = Validation.ucFirst(request.getParameter("nomMarque"));
+        String nomMarque = request.getParameter("nomMarque");
 
-        // Instanciation
-        MarqueService marqueService = new MarqueService(em);
-        Marque marque = new Marque(nomMarque);
+        if (Validation.checkMarqueIsEmpty(nomMarque)) {
 
-        try {
+            HttpSession session = request.getSession();
 
-            transaction.begin();
+            session.setAttribute("errMessage1", "Veuillez insérer une marque");
 
-            marqueService.creer(marque);
+            response.sendRedirect("gestionMarqueModele");
 
-            transaction.commit();
-        } catch ( Exception e ) {
+        } else if (!Validation.checkMarqueLenght(nomMarque)) {
 
-            throw new ServletException( e );
-        } finally {
+            HttpSession session = request.getSession();
 
-            if (transaction.isActive()) {
+            session.setAttribute("errMessage1", "La marque doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
 
-                transaction.rollback();
+            response.sendRedirect("gestionMarqueModele");
+        } else {
+
+            nomMarque = nomMarque.toUpperCase();
+
+            // Instanciation
+            MarqueService marqueService = new MarqueService(em);
+
+            if (marqueService.checkMarqueExist(nomMarque)) {
+
+                HttpSession session = request.getSession();
+
+                session.setAttribute("errMessage1", "La marque '" + nomMarque + "' existe déjà");
+            } else {
+
+                Marque marque = new Marque(nomMarque);
+
+                try {
+
+                    transaction.begin();
+
+                    marqueService.creer(marque);
+
+                    transaction.commit();
+                } catch (ServiceException e) {
+
+                    e.printStackTrace();
+                } finally {
+
+                    if (transaction.isActive()) {
+
+                        transaction.rollback();
+                    }
+
+                    if (logger.isInfoEnabled()) {
+
+                        logger.info("Fermeture de l'EntityManager");
+                    }
+
+                    em.close();
+                }
+
+                HttpSession session = request.getSession();
+
+                session.setAttribute("succMessage1", "La marque '" + nomMarque + "' a été ajouté avec succès");
             }
 
-            if(logger.isInfoEnabled()) {
-
-                logger.info("Fermeture de l'EntityManager");
-            }
-
-            em.close();
+            response.sendRedirect("gestionMarqueModele");
         }
-
-        response.sendRedirect("gestionMarqueModele");
     }
 }

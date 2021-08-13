@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -100,6 +101,16 @@ public class MarqueService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public boolean checkMarqueExist(String nomMarque) {
+
+        Query query = em.createNamedQuery("Marque.checkMarqueExist", Marque.class);
+        query.setParameter("nomMarque", nomMarque);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
     }
 }
 
