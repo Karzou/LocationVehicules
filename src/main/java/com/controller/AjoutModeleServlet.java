@@ -48,25 +48,42 @@ public class AjoutModeleServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données
-        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+        String stridMarque = request.getParameter("idMarque");
         String nomModele = request.getParameter("nomModele");
+
+        boolean errFlag = true;
+
+        if (Validation.checkMarqueIsEmptyorNull(stridMarque)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage2", "Veuillez selectionner une marque");
+
+            errFlag = false;
+        }
 
         if (Validation.checkModeleIsEmpty(nomModele)) {
 
             HttpSession session = request.getSession();
 
-            session.setAttribute("errMessage2", "Veuillez insérer un modèle");
+            session.setAttribute("errMessage3", "Veuillez insérer un modèle");
 
-            response.sendRedirect("gestionMarqueModele");
-
+            errFlag = false;
         } else if (!Validation.checkModeleLenght(nomModele)) {
 
             HttpSession session = request.getSession();
 
-            session.setAttribute("errMessage2", "Le modèle doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
+            session.setAttribute("errMessage3", "Le modèle doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
+
+            errFlag = false;
+        }
+
+        if (!errFlag) {
 
             response.sendRedirect("gestionMarqueModele");
         } else {
+
+            int idMarque = Integer.parseInt(stridMarque);
 
             // Instanciation
             MarqueService marqueService = new MarqueService(em);
@@ -76,7 +93,7 @@ public class AjoutModeleServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
 
-                session.setAttribute("errMessage2", "Le modèle '" + nomModele + "' existe déjà");
+                session.setAttribute("errMessage2", "Le modèle '" + nomModele + "' existe déjà pour cette marque");
             } else {
 
                 Marque marque = null;

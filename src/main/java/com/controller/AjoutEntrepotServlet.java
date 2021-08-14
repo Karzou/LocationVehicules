@@ -54,7 +54,7 @@ public class AjoutEntrepotServlet extends HttpServlet {
         String rueEntrepot = request.getParameter("rue");
         String numeroEntrepot = request.getParameter("numero");
         String boiteEntrepot = request.getParameter("boite");
-        int idVilleEntrepot = Integer.parseInt(request.getParameter("idVille"));
+        String stridVilleEntrepot = request.getParameter("idVille");
 
         // Instanciation
         EntrepotService entrepotService = new EntrepotService(em);
@@ -70,7 +70,6 @@ public class AjoutEntrepotServlet extends HttpServlet {
             session.setAttribute("errMessage1", "Veuillez insérer un nom pour l'entrepôt");
 
             errFlag = false;
-
         } else if (!Validation.checkNomEntrepotLenght(nomEntrepot)) {
 
             HttpSession session = request.getSession();
@@ -151,6 +150,15 @@ public class AjoutEntrepotServlet extends HttpServlet {
             errFlag = false;
         }
 
+        if (Validation.checkVilleEntrepotIsEmptyorNull(stridVilleEntrepot)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage6", "Veuillez selectionner une ville");
+
+            errFlag = false;
+        }
+
         if (!errFlag) {
 
             response.sendRedirect("gestionEntrepot");
@@ -158,6 +166,7 @@ public class AjoutEntrepotServlet extends HttpServlet {
 
             nomEntrepot = Validation.upperCase(nomEntrepot);
             int nombrePlaceEntrepot2 = Integer.parseInt(nombrePlaceEntrepot);
+            int idVilleEntrepot = Integer.parseInt(stridVilleEntrepot);
 
             try {
 

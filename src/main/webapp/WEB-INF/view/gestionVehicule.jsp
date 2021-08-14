@@ -15,6 +15,60 @@
             <div class="content-global">
                 <h2>Ajout de véhicule</h2>
 
+                <div>
+                    <c:if test="${(sessionScope.errMessage1 != null) or (sessionScope.errMessage2 != null) or (sessionScope.errMessage3 != null) or (sessionScope.errMessage4 != null) or (sessionScope.errMessage5 != null)}">
+                        <div class="error-message-admin">
+                            <div class="error-message-admin-title">
+                                <div class="error-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                </div>
+                                <div class="error-message-admin-title-txt">
+                                    <p>Une erreur est survenue</p>
+                                </div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage1}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage2}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage3}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage4}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage5}</div>
+                            </div>
+                        </div>
+                        <c:remove var="errMessage1" scope="session" />
+                        <c:remove var="errMessage2" scope="session" />
+                        <c:remove var="errMessage3" scope="session" />
+                        <c:remove var="errMessage4" scope="session" />
+                        <c:remove var="errMessage5" scope="session" />
+                    </c:if>
+                </div>
+
+                <div>
+                    <c:if test="${sessionScope.succMessage != null}">
+                        <div class="success-message-admin">
+                            <div class="success-message-admin-title">
+                                <div class="success-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                                </div>
+                                <div class="success-message-admin-title-txt">
+                                    <p>Félicitation</p>
+                                </div>
+                            </div>
+                            <div class="success-message-admin-body-txt">
+                                <div>${succMessage}</div>
+                            </div>
+                        </div>
+                        <c:remove var="succMessage" scope="session" />
+                    </c:if>
+                </div>
+
                 <form action="<c:url value="/ajoutVehicule"/>" method="post">
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
@@ -34,6 +88,7 @@
                         <div class="div-input-modif-select">
                             <label class="label-input">Modèle : </label>
                             <select class="select-modif" name="idModele">
+                                <option value="" disabled selected>Choisissez un modèle</option>
                                 <c:forEach var="modeleList" items="${modeleList}">
                                     <c:choose>
                                         <c:when test="${modifFlag == true}">
@@ -93,6 +148,7 @@
                         <div class="div-input-modif-select">
                             <label class="label-input">Couleur : </label>
                             <select class="select-modif" name="idCouleur">
+                                <option value="" disabled selected>Choisissez une couleur</option>
                                 <c:forEach var="couleurList" items="${couleurList}">
                                     <option value="${couleurList.idCouleur}">${couleurList.nomCouleur}</option>
                                 </c:forEach>
@@ -106,6 +162,7 @@
                         <div class="div-input-modif-select">
                             <label class="label-input">Entrepot : </label>
                             <select class="select-modif" name="idEntrepot">
+                                <option value="" disabled selected>Choisissez un entrepôt</option>
                                 <c:forEach var="entrepotList" items="${entrepotList}">
                                     <c:if test="${entrepotList.actifEntrepot}">
                                         <option value="${entrepotList.idEntrepot}">${entrepotList.nomEntrepot} >> ${entrepotList.adressesByIdAdresse.rue} ${entrepotList.adressesByIdAdresse.numero} - ${entrepotList.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepotList.adressesByIdAdresse.villesByIdVille.nomVille}</option>

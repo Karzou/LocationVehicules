@@ -68,7 +68,7 @@
                 <h2>Ajout de modèle</h2>
 
                 <div>
-                    <c:if test="${sessionScope.errMessage2 != null}">
+                    <c:if test="${(sessionScope.errMessage2 != null) or (sessionScope.errMessage3 != null)}">
                         <div class="error-message-admin">
                             <div class="error-message-admin-title">
                                 <div class="error-message-admin-title-img">
@@ -81,8 +81,12 @@
                             <div class="error-message-admin-body-txt">
                                 <div>${errMessage2}</div>
                             </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage3}</div>
+                            </div>
                         </div>
                         <c:remove var="errMessage2" scope="session" />
+                        <c:remove var="errMessage3" scope="session" />
                     </c:if>
                 </div>
 
@@ -108,9 +112,10 @@
                 <form action="<c:url value="/ajoutModele"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>
-                        <select class="select-modif" id="modif-modele" name="idMarque" value="">
-                            <c:forEach var="marque" items="${marqueList}">
-                                <option value="${marque.idMarque}">${marque.nomMarque}</option>
+                        <select class="select-modif" name="idMarque">
+                            <option value="" disabled selected>Choisissez une marque</option>
+                            <c:forEach var="marqueList" items="${marqueList}">
+                                <option value="${marqueList.idMarque}">${marqueList.nomMarque}</option>
                             </c:forEach>
                         </select>
                     </div>

@@ -1,11 +1,11 @@
 package com.service;
 
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  * @author Vanconingsloo Kevin
  */
+
 public class Validation {
 
     public static boolean validationPrenom( String prenom ){
@@ -207,6 +207,16 @@ public class Validation {
         return true;
     }
 
+    public static boolean checkVilleEntrepotIsEmptyorNull(String idvilleEntrepot) {
+
+        if (idvilleEntrepot == null || idvilleEntrepot == "") {
+
+            return true;
+        }
+
+        return false;
+    }
+
     public static String wordUppercase(String s) {
 
         String[] words = s.split(" ");
@@ -234,6 +244,16 @@ public class Validation {
         }
 
         return true;
+    }
+
+    public static boolean checkMarqueIsEmptyorNull(String idmarque) {
+
+        if (idmarque == null || idmarque == "") {
+
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean checkModeleIsEmpty(String modele) {
