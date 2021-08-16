@@ -23,6 +23,11 @@
     </filter>
 
     <filter>
+        <filter-name>employeFiltre</filter-name>
+        <filter-class>com.filtre.EmployeFiltre</filter-class>
+    </filter>
+
+    <filter>
         <filter-name>adminFiltre</filter-name>
         <filter-class>com.filtre.AdminFiltre</filter-class>
     </filter>
@@ -34,19 +39,22 @@
         <url-pattern>/gestionEntrepot</url-pattern>
         <url-pattern>/gestionUtilisateur</url-pattern>
         <url-pattern>/gestionReservation</url-pattern>
-        <url-pattern>/gestionVehicule</url-pattern>
         <url-pattern>/modifEntrepot</url-pattern>
         <url-pattern>/modifUtilisateur</url-pattern>
         <url-pattern>/modifVehicule</url-pattern>
         <url-pattern>/optionSup</url-pattern>
         <url-pattern>/ajoutEntrepot</url-pattern>
         <url-pattern>/ajoutVehicule</url-pattern>
-        <url-pattern>/supEntrepot</url-pattern>
-        <url-pattern>/supUtilisateur</url-pattern>
-        <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/vehicule</url-pattern>
         <url-pattern>/gestionRolePermission</url-pattern>
         <url-pattern>/facture</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>employeFiltre</filter-name>
+        <url-pattern>/supUtilisateur</url-pattern>
+        <url-pattern>/supVehicule</url-pattern>
+        <url-pattern>/supEntrepot</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
