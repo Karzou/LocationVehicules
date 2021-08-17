@@ -48,15 +48,14 @@ public class AjoutCouleurServlet extends HttpServlet {
         // Récupération des données
         String nomCouleur = request.getParameter("nomCouleur");
 
-        if (Validation.checkColorIsEmpty(nomCouleur)) {
+        if (Validation.checkValueIsEmpty(nomCouleur)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage", "Veuillez insérer un nom de couleur");
 
             response.sendRedirect("gestionCouleur");
-
-        } else if (!Validation.checkColorLenght(nomCouleur)) {
+        } else if (!Validation.checkValueLenght(nomCouleur,2, 50)) {
 
             HttpSession session = request.getSession();
 

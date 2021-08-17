@@ -30,6 +30,33 @@ public class ModifCouleurServlet extends HttpServlet {
 
             logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifCouleurServlet\"");
         }
+
+        EntityManager em = EMF.getEM();
+
+        int id = (int) request.getSession().getAttribute("id");
+
+        CouleurService couleurService = new CouleurService(em);
+        Couleur couleur = null;
+
+        try {
+
+            couleur = couleurService.trouver(id);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
+        }
+
+        request.setAttribute("couleur", couleur);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifCouleur.jsp" ).forward( request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -34,18 +34,35 @@ public class ModifVehiculeServlet extends HttpServlet {
 
         EntityManager em = EMF.getEM();
 
-        int id = Integer.parseInt(request.getParameter("idModif"));
-        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+        boolean checkModifVehicule = (boolean) request.getSession().getAttribute("checkModifVehicule");
+        int idModif;
+        int idMarque;
+
+        if (checkModifVehicule) {
+
+            idModif = (int) request.getSession().getAttribute("idModif");
+            idMarque = (int) request.getSession().getAttribute("idMarque");
+        } else {
+
+            idModif = Integer.parseInt(request.getParameter("idModif"));
+            idMarque = Integer.parseInt(request.getParameter("idMarque"));
+        }
 
         VehiculeService vehiculeService = new VehiculeService(em);
         OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
         MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
+        ContientService contientService = new ContientService(em);
+        EntrepotService entrepotService = new EntrepotService(em);
+        CouleurService couleurService = new CouleurService(em);
         Vehicule vehicule = null;
         List<OptionVehicule> optionVehiculesList = null;
         Marque marque = null;
         List<Marque> marqueList = null;
         List<Modele> modeleList = null;
+        List<Contient> contientList = null;
+        List<Entrepot> entrepotList = null;
+        List<Couleur> couleurList = null;
 
         try {
 
@@ -81,7 +98,31 @@ public class ModifVehiculeServlet extends HttpServlet {
 
         try {
 
-            vehicule = vehiculeService.trouver(id);
+            contientList = contientService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            couleurList = couleurService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            entrepotList = entrepotService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            vehicule = vehiculeService.trouver(idModif);
         } catch (ServiceException e) {
 
             e.printStackTrace();
@@ -99,6 +140,9 @@ public class ModifVehiculeServlet extends HttpServlet {
         request.setAttribute("marqueList", marqueList);
         request.setAttribute("modeleList", modeleList);
         request.setAttribute("optionVehiculesList", optionVehiculesList);
+        request.setAttribute("contientList", contientList);
+        request.setAttribute("entrepotList", entrepotList);
+        request.setAttribute("couleurList", couleurList);
         request.setAttribute("vehicule", vehicule);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifVehicule.jsp").forward(request, response);
@@ -113,7 +157,7 @@ public class ModifVehiculeServlet extends HttpServlet {
 
         EntityManager em = EMF.getEM();
 
-        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idModif = Integer.parseInt(request.getParameter("idModif"));
         int idMarque = Integer.parseInt(request.getParameter("idMarque"));
         boolean modifFlag = Boolean.parseBoolean(request.getParameter("modifFlag"));
 
@@ -191,7 +235,7 @@ public class ModifVehiculeServlet extends HttpServlet {
 
         try {
 
-            vehicule = vehiculeService.trouver(id);
+            vehicule = vehiculeService.trouver(idModif);
         } catch (ServiceException e) {
 
             e.printStackTrace();

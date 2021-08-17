@@ -51,34 +51,34 @@ public class AjoutModeleServlet extends HttpServlet {
         String stridMarque = request.getParameter("idMarque");
         String nomModele = request.getParameter("nomModele");
 
-        boolean errFlag = true;
+        boolean errFlag = false;
 
-        if (Validation.checkMarqueIsEmptyorNull(stridMarque)) {
+        if (Validation.checkValueIsEmptyorNull(stridMarque)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Veuillez selectionner une marque");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (Validation.checkModeleIsEmpty(nomModele)) {
+        if (Validation.checkValueIsEmpty(nomModele)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage3", "Veuillez insérer un modèle");
 
-            errFlag = false;
-        } else if (!Validation.checkModeleLenght(nomModele)) {
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(nomModele, 2, 50)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage3", "Le modèle doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (!errFlag) {
+        if (errFlag) {
 
             response.sendRedirect("gestionMarqueModele");
         } else {

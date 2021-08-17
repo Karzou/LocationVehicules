@@ -11,8 +11,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "entrepots", schema = "location_vehicules")
 @NamedQueries({
+        @NamedQuery(name = "Entrepot.checkEntrepotExist", query = "SELECT COUNT(e) FROM Entrepot e WHERE e.nomEntrepot = :nomEntrepot"),
+        @NamedQuery(name = "Entrepot.checkOtherEntrepotExist", query = "SELECT COUNT(e) FROM Entrepot e WHERE e.nomEntrepot = :nomEntrepot AND e.idEntrepot != :idEntrepot"),
         @NamedQuery(name = "Entrepot.trouverParNom", query = "SELECT e FROM Entrepot e WHERE e.nomEntrepot = :nom"),
-        @NamedQuery(name = "Entrepot.lister", query = "SELECT e FROM Entrepot e JOIN e.adressesByIdAdresse a JOIN a.villesByIdVille v"),
+        @NamedQuery(name = "Entrepot.lister", query = "SELECT e FROM Entrepot e JOIN e.adressesByIdAdresse a JOIN a.villesByIdVille v ORDER BY e.nomEntrepot"),
 })
 public class Entrepot {
     private int idEntrepot;

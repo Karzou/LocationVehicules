@@ -30,6 +30,33 @@ public class ModifMarqueServlet extends HttpServlet {
 
             logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifMarqueServlet\"");
         }
+
+        EntityManager em = EMF.getEM();
+
+        int id = (int) request.getSession().getAttribute("idMarque");
+
+        MarqueService marqueService = new MarqueService(em);
+        Marque marque = null;
+
+        try {
+
+            marque = marqueService.trouver(id);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
+        }
+
+        request.setAttribute("marque", marque);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifMarque.jsp" ).forward( request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

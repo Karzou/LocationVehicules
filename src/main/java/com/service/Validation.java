@@ -72,9 +72,11 @@ public class Validation {
         return Date.valueOf(date);
     }
 
-    public static boolean checkColorIsEmpty(String couleur) {
 
-        if (couleur.isEmpty()) {
+    //------------------------------------------------------------------------------------------------------------------
+    public static boolean checkValueIsEmpty(String value) {
+
+        if (value.isEmpty()) {
 
             return true;
         }
@@ -82,9 +84,9 @@ public class Validation {
         return false;
     }
 
-    public static boolean checkColorLenght(String couleur) {
+    public static boolean checkValueLenght(String value, int min, int max) {
 
-        if (couleur.length() < 2 || couleur.length() > 50) {
+        if (value.length() < min || value.length() > max) {
 
             return false;
         }
@@ -92,19 +94,9 @@ public class Validation {
         return true;
     }
 
-    public static boolean checkNomEntrepotIsEmpty(String nomEntrepot) {
+    public static boolean checkValueLenghtMax(String value, int max) {
 
-        if (nomEntrepot.isEmpty()) {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkNomEntrepotLenght(String nomEntrepot) {
-
-        if (nomEntrepot.length() < 2 || nomEntrepot.length() > 50) {
+        if (value.length() > max) {
 
             return false;
         }
@@ -112,21 +104,11 @@ public class Validation {
         return true;
     }
 
-    public static boolean checkNombrePlaceEntrepotIsEmpty(String nombrePlaceEntrepot) {
+    public static boolean checkValueIsZero(String value) {
 
-        if (nombrePlaceEntrepot.isEmpty()) {
+        if (value.matches("\\d+$")) {
 
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkNombrePlaceEntrepotIsZero(String nombrePlaceEntrepot) {
-
-        if (nombrePlaceEntrepot.matches("\\d+$")) {
-
-            int result = Integer.parseInt(nombrePlaceEntrepot);
+            int result = Integer.parseInt(value);
 
             if (result == 0) {
 
@@ -137,29 +119,9 @@ public class Validation {
         return false;
     }
 
-    public static boolean checkNombrePlaceEntrepotIsNumeric(String nombrePlaceEntrepot) {
+    public static boolean checkValueIsInteger(String value) {
 
-        if (nombrePlaceEntrepot.matches("\\d+$")) {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkNombrePlaceEntrepotLenght(String nombrePlaceEntrepot) {
-
-        if (nombrePlaceEntrepot.length() > 10) {
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean checkRueEntrepotIsEmpty(String rueEntrepot) {
-
-        if (rueEntrepot.isEmpty()) {
+        if (value.matches("\\d+$")) {
 
             return true;
         }
@@ -167,112 +129,13 @@ public class Validation {
         return false;
     }
 
-    public static boolean checkRueEntrepotLenght(String rueEntrepot) {
+    public static boolean checkValueIsEmptyorNull(String value) {
 
-        if (rueEntrepot.length() < 2 || rueEntrepot.length() > 100) {
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean checkNumeroEntrepotIsEmpty(String numeroEntrepot) {
-
-        if (numeroEntrepot.isEmpty()) {
+        if (value == null || value == "") {
 
             return true;
         }
 
         return false;
-    }
-
-    public static boolean checkNumeroEntrepotLenght(String numeroEntrepot) {
-
-        if (numeroEntrepot.length() > 10) {
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean checkBoiteEntrepotLenght(String boiteEntrepot) {
-
-        if (boiteEntrepot.length() > 10) {
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean checkVilleEntrepotIsEmptyorNull(String idvilleEntrepot) {
-
-        if (idvilleEntrepot == null || idvilleEntrepot == "") {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static String wordUppercase(String s) {
-
-        String[] words = s.split(" ");
-
-        for (int i = 0; i < words.length; i++) words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
-
-        return String.join(" ", words);
-    }
-
-    public static boolean checkMarqueIsEmpty(String marque) {
-
-        if (marque.isEmpty()) {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkMarqueLenght(String marque) {
-
-        if (marque.length() < 2 || marque.length() > 50) {
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean checkMarqueIsEmptyorNull(String idmarque) {
-
-        if (idmarque == null || idmarque == "") {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkModeleIsEmpty(String modele) {
-
-        if (modele.isEmpty()) {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean checkModeleLenght(String modele) {
-
-        if (modele.length() < 2 || modele.length() > 50) {
-
-            return false;
-        }
-
-        return true;
     }
 }

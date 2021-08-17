@@ -61,110 +61,116 @@ public class AjoutEntrepotServlet extends HttpServlet {
         VilleService villeService = new VilleService(em);
         Ville ville = null;
 
-        boolean errFlag = true;
+        boolean errFlag = false;
 
-        if (Validation.checkNomEntrepotIsEmpty(nomEntrepot)) {
+        if (Validation.checkValueIsEmpty(nomEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage1", "Veuillez insérer un nom pour l'entrepôt");
 
-            errFlag = false;
-        } else if (!Validation.checkNomEntrepotLenght(nomEntrepot)) {
+            errFlag = true;
+        } else if (entrepotService.checkEntrepotExist(nomEntrepot)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage1", "Ce nom d'entrepôt existe déjà");
+
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(nomEntrepot, 2, 50)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage1", "Le nom de l'entrepôt doit être composé d'au minimum 2 caractères et au maximum 50 caractères");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (Validation.checkNombrePlaceEntrepotIsEmpty(nombrePlaceEntrepot)) {
+        if (Validation.checkValueIsEmpty(nombrePlaceEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Veuillez insérer le nombre de place de l'entrepôt");
 
-            errFlag = false;
-        } else if (Validation.checkNombrePlaceEntrepotIsZero(nombrePlaceEntrepot)) {
+            errFlag = true;
+        } else if (Validation.checkValueIsZero(nombrePlaceEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Veuillez insérer un nombre supérieur à 0 pour le nombre de place de l'entrepôt");
 
-            errFlag = false;
-        } else if (!Validation.checkNombrePlaceEntrepotIsNumeric(nombrePlaceEntrepot)) {
+            errFlag = true;
+        } else if (!Validation.checkValueIsInteger(nombrePlaceEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Le nombre de place de l'entrepôt doit être une valeur numérique");
 
-            errFlag = false;
-        } else if (!Validation.checkNombrePlaceEntrepotLenght(nomEntrepot)) {
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(nombrePlaceEntrepot, 2, 50)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Le nombre de place de l'entrepôt doit contenir au maximum 10 chiffres");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (Validation.checkRueEntrepotIsEmpty(rueEntrepot)) {
+        if (Validation.checkValueIsEmpty(rueEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage3", "Veuillez insérer le nom de la rue de l'entrepôt");
 
-            errFlag = false;
-        } else if (!Validation.checkRueEntrepotLenght(rueEntrepot)) {
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(rueEntrepot, 2, 100)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage3", "Le nom de la rue de l'entrepôt doit être composé d'au minimum 2 caractères et au maximum 100 caractères");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (Validation.checkNumeroEntrepotIsEmpty(numeroEntrepot)) {
+        if (Validation.checkValueIsEmpty(numeroEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage4", "Veuillez insérer le numéro de la rue de l'entrepôt");
 
-            errFlag = false;
-        } else if (!Validation.checkNumeroEntrepotLenght(numeroEntrepot)) {
+            errFlag = true;
+        } else if (!Validation.checkValueLenghtMax(numeroEntrepot, 10)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage4", "Le numéro de la rue de l'entrepôt doit être composé d'au maximum 10 caractères");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (!Validation.checkBoiteEntrepotLenght(boiteEntrepot)) {
+        if (!Validation.checkValueLenghtMax(boiteEntrepot, 10)) {
 
             HttpSession session = request.getSession();
 
-            session.setAttribute("errMessage5", "Le boîte de l'entrepôt doit être composé d'au maximum 10 caractères");
+            session.setAttribute("errMessage5", "La boîte de l'entrepôt doit être composé d'au maximum 10 caractères");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (Validation.checkVilleEntrepotIsEmptyorNull(stridVilleEntrepot)) {
+        if (Validation.checkValueIsEmptyorNull(stridVilleEntrepot)) {
 
             HttpSession session = request.getSession();
 
             session.setAttribute("errMessage6", "Veuillez selectionner une ville");
 
-            errFlag = false;
+            errFlag = true;
         }
 
-        if (!errFlag) {
+        if (errFlag) {
 
             response.sendRedirect("gestionEntrepot");
         } else {
 
-            nomEntrepot = Validation.upperCase(nomEntrepot);
             int nombrePlaceEntrepot2 = Integer.parseInt(nombrePlaceEntrepot);
             int idVilleEntrepot = Integer.parseInt(stridVilleEntrepot);
 

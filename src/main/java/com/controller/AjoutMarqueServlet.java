@@ -48,7 +48,7 @@ public class AjoutMarqueServlet extends HttpServlet {
         // Récupération des données
         String nomMarque = request.getParameter("nomMarque");
 
-        if (Validation.checkMarqueIsEmpty(nomMarque)) {
+        if (Validation.checkValueIsEmpty(nomMarque)) {
 
             HttpSession session = request.getSession();
 
@@ -56,7 +56,7 @@ public class AjoutMarqueServlet extends HttpServlet {
 
             response.sendRedirect("gestionMarqueModele");
 
-        } else if (!Validation.checkMarqueLenght(nomMarque)) {
+        } else if (!Validation.checkValueLenght(nomMarque, 2, 50)) {
 
             HttpSession session = request.getSession();
 

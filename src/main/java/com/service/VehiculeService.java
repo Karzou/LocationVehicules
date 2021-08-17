@@ -1,11 +1,13 @@
 package com.service;
 
+import com.entity.Entrepot;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.util.List;
@@ -103,6 +105,27 @@ public class VehiculeService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public boolean checkNumeroChassisExist(String numChassis) {
+
+        Query query = em.createNamedQuery("Vehicule.checkNumeroChassisExist", Vehicule.class);
+        query.setParameter("numChassis", numChassis);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
+    }
+
+    public boolean checkOtherNumeroChassisExist(String numChassis, int idVehicule) {
+
+        Query query = em.createNamedQuery("Vehicule.checkOtherNumeroChassisExist", Vehicule.class);
+        query.setParameter("numChassis", numChassis);
+        query.setParameter("idVehicule", idVehicule);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
     }
 
     public void suppressionLogique(Vehicule vehicule) throws ServiceException {

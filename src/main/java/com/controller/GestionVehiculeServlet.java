@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -144,11 +145,20 @@ public class GestionVehiculeServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
+        // Récupération des données
         int idVehicule = Integer.parseInt(request.getParameter("idModif"));
         int idModele = Integer.parseInt(request.getParameter("idModele"));
         int idCouleur = Integer.parseInt(request.getParameter("idCouleur"));
         int idEntrepot = Integer.parseInt(request.getParameter("idEntrepot"));
+        String strcylindree = request.getParameter("cylindree");
+        String strpuissance = request.getParameter("puissance");
+        String numChassis = request.getParameter("numChassis");
+        String immatriculation = request.getParameter("immatriculation");
+        String strdateAchat = request.getParameter("dateAchat");
+        String strprixJournalier = request.getParameter("prixJournalier");
         String status = request.getParameter("actifVehicule");
+
+        boolean checkModifVehicule = true;
 
         VehiculeService vehiculeService = new VehiculeService(em);
         ModeleService modeleService = new ModeleService(em);
@@ -163,113 +173,273 @@ public class GestionVehiculeServlet extends HttpServlet {
 
         try {
 
-            modele = modeleService.trouver(idModele);
-        } catch (ServiceException e) {
-
-            e.printStackTrace();
-        }
-
-        try {
-
             vehicule = vehiculeService.trouver(idVehicule);
         } catch (ServiceException e) {
 
             e.printStackTrace();
         }
 
-        try {
+        boolean errFlag = false;
 
-            couleur = couleurService.trouver(idCouleur);
-        } catch (ServiceException e) {
+        if (Validation.checkValueIsEmpty(strcylindree)) {
 
-            e.printStackTrace();
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage1", "Veuillez insérer la cylindrée du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (Validation.checkValueIsZero(strcylindree)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage1", "Veuillez insérer un nombre supérieur à 0 pour la cylindrée du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (!Validation.checkValueIsInteger(strcylindree)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage1", "La cylindrée du véhicule doit être une valeur numérique");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(strcylindree, 2, 10)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage1", "La cylindrée du véhicule doit contenir au maximum 10 chiffres");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
         }
 
-        try {
+        if (Validation.checkValueIsEmpty(strpuissance)) {
 
-            entrepot = entrepotService.trouver(idEntrepot);
-        } catch (ServiceException e) {
+            HttpSession session = request.getSession();
 
-            e.printStackTrace();
+            session.setAttribute("errMessage2", "Veuillez insérer la puissance du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (Validation.checkValueIsZero(strpuissance)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage2", "Veuillez insérer un nombre supérieur à 0 pour la puissance du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (!Validation.checkValueIsInteger(strpuissance)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage2", "La puissance du véhicule doit être une valeur numérique");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (!Validation.checkValueLenght(strpuissance, 2, 10)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage2", "La puissance du véhicule doit contenir au maximum 10 chiffres");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
         }
 
-        try {
+        if (Validation.checkValueIsEmpty(numChassis)) {
 
-            transaction.begin();
+            HttpSession session = request.getSession();
 
-            vehicule.setModelesByIdModele(modele);
-            vehicule.setPuissance(Integer.parseInt(request.getParameter("puissance")));
-            vehicule.setCylindree(Integer.parseInt(request.getParameter("cylindree")));
-            vehicule.setImmatriculation(request.getParameter("immatriculation"));
-            vehicule.setDateAchat(Date.valueOf(request.getParameter("dateAchat")));
-            vehicule.setNumChassis(request.getParameter("numChassis"));
-            vehicule.setPrixJournalier(Float.parseFloat(request.getParameter("prixJournalier")));
-            vehicule.setCouleursByIdCouleur(couleur);
-            vehicule.setEntrepotsByIdEntrepot(entrepot);
+            session.setAttribute("errMessage3", "Veuillez insérer le numéro de chassis du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
 
-            if (status == null) {
-                vehicule.setActifVehicule(false);
-            } else {
-                vehicule.setActifVehicule(true);
+            errFlag = true;
+        } else if (vehiculeService.checkOtherNumeroChassisExist(numChassis, idVehicule)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage3", "Ce numéro de chassis existe déjà");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        } else if (Validation.checkValueLenght(numChassis, 14, 14)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage3", "Le numéro de chassis doit contenir 14 caractères");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        }
+
+        if (Validation.checkValueIsEmpty(immatriculation)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage4", "Veuillez insérer l'immatriculation du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        }
+
+        if (Validation.checkValueIsEmptyorNull(strdateAchat)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage5", "Veuillez selectionner la date d'achat du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        }
+
+        if (Validation.checkValueIsEmpty(strprixJournalier)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage6", "Veuillez insérer un prix journalier pour la location du véhicule");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
+        }
+
+        if (errFlag) {
+
+            response.sendRedirect("modifVehicule");
+        } else {
+
+            try {
+
+                modele = modeleService.trouver(idModele);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
             }
 
-            vehiculeService.update(vehicule);
+            try {
 
-            contientList = contientService.lister();
+                couleur = couleurService.trouver(idCouleur);
+            } catch (ServiceException e) {
 
-            for (Contient contient: contientList) {
+                e.printStackTrace();
+            }
 
-                if (contient.getVehiculesByIdVehicule().getIdVehicule() == idVehicule) {
+            try {
 
-                    contientService.supprimer(contient);
+                entrepot = entrepotService.trouver(idEntrepot);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            }
+
+            try {
+
+                transaction.begin();
+
+                vehicule.setModelesByIdModele(modele);
+                vehicule.setPuissance(Integer.parseInt(strpuissance));
+                vehicule.setCylindree(Integer.parseInt(strcylindree));
+                vehicule.setImmatriculation(immatriculation);
+                vehicule.setDateAchat(Date.valueOf(strdateAchat));
+                vehicule.setNumChassis(numChassis);
+                vehicule.setPrixJournalier(Float.parseFloat(strprixJournalier));
+                vehicule.setCouleursByIdCouleur(couleur);
+                vehicule.setEntrepotsByIdEntrepot(entrepot);
+
+                if (status == null) {
+                    vehicule.setActifVehicule(false);
+                } else {
+                    vehicule.setActifVehicule(true);
                 }
-            }
 
-            // get all parameter names
-            Set<String> paramNames = request.getParameterMap().keySet();
+                vehiculeService.update(vehicule);
 
-            // iterating over parameter names and get its value
-            for (String name : paramNames) {
+                contientList = contientService.lister();
 
-                if (name.contains("option")) {
+                for (Contient contient : contientList) {
 
-                    int idOption = Integer.parseInt(request.getParameter(name));
-                    OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
-                    OptionVehicule optionVehicule;
+                    if (contient.getVehiculesByIdVehicule().getIdVehicule() == idVehicule) {
 
-                    try {
-
-                        optionVehicule = optionVehiculeService.trouver(idOption);
-                    } catch ( Exception e ) {
-
-                        throw new ServletException( e );
+                        contientService.supprimer(contient);
                     }
-
-                    Contient contient = new Contient(optionVehicule, vehicule);
-
-                    contientService.creer(contient);
                 }
+
+                // get all parameter names
+                Set<String> paramNames = request.getParameterMap().keySet();
+
+                // iterating over parameter names and get its value
+                for (String name : paramNames) {
+
+                    if (name.contains("option")) {
+
+                        int idOption = Integer.parseInt(request.getParameter(name));
+                        OptionVehiculeService optionVehiculeService = new OptionVehiculeService(em);
+                        OptionVehicule optionVehicule;
+
+                        try {
+
+                            optionVehicule = optionVehiculeService.trouver(idOption);
+                        } catch (Exception e) {
+
+                            throw new ServletException(e);
+                        }
+
+                        Contient contient = new Contient(optionVehicule, vehicule);
+
+                        contientService.creer(contient);
+                    }
+                }
+
+                transaction.commit();
+            } catch (Exception e) {
+
+                throw new ServletException(e);
+            } finally {
+
+                if (transaction.isActive()) {
+
+                    transaction.rollback();
+                }
+
+                if (logger.isInfoEnabled()) {
+
+                    logger.info("Fermeture de l'EntityManager");
+                }
+
+                em.close();
             }
 
-            transaction.commit();
-        } catch ( Exception e ) {
-
-            throw new ServletException( e );
-        } finally {
-
-            if (transaction.isActive()) {
-
-                transaction.rollback();
-            }
-
-            if(logger.isInfoEnabled()) {
-
-                logger.info("Fermeture de l'EntityManager");
-            }
-
-            em.close();
+            response.sendRedirect("gestionVehicule");
         }
-
-        response.sendRedirect("gestionVehicule");
     }
 }

@@ -104,7 +104,7 @@ li {
 
 .dropbtn {
     right: 0;
-    border: 2px solid white;
+    border: 3px solid white;
     border-radius: 5px;
     color: white;
     font-size: 16px;
@@ -119,6 +119,7 @@ li {
     display: none;
     position: absolute;
     background-color: white;
+    box-shadow: 0 0 1px 1px gray;
     min-width: 150px;
     z-index: 1;
 }
@@ -131,7 +132,7 @@ li {
 }
 
 .dropdown-content a:hover {
-    background-color: #f5f5f5;
+    background-color: #c5c5c5;
 }
 
 .dropdown:hover .dropdown-content {
@@ -140,7 +141,7 @@ li {
 
 .dropdown:hover .dropbtn {
     background-color: green;
-    border: 2px solid gold;
+    border: 3px solid gold;
 }
 
 .header .banner2 {

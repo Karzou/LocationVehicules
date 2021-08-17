@@ -33,6 +33,55 @@ public class ModifEntrepotServlet extends HttpServlet {
 
             logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifEntrepotServlet\"");
         }
+
+        EntityManager em = EMF.getEM();
+
+        int idModif = (int) request.getSession().getAttribute("idModif");
+        int idVille = (int) request.getSession().getAttribute("idVille");
+
+        EntrepotService entrepotService = new EntrepotService(em);
+        VilleService villeService = new VilleService(em);
+        Entrepot entrepot = null;
+        Ville ville = null;
+        List<Ville> villeList = null;
+
+        try {
+
+            villeList = villeService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            ville = villeService.trouver(idVille);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            entrepot = entrepotService.trouver(idModif);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
+        }
+
+        request.setAttribute("entrepot", entrepot);
+        request.setAttribute("ville", ville);
+        request.setAttribute("villeList", villeList);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifEntrepot.jsp" ).forward( request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

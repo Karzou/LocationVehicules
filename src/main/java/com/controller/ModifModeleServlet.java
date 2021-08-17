@@ -33,6 +33,46 @@ public class ModifModeleServlet extends HttpServlet {
 
             logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifModeleServlet\"");
         }
+
+        EntityManager em = EMF.getEM();
+
+        int id = (int) request.getSession().getAttribute("idMarque");
+
+        logger.info("test: " + id);
+
+        MarqueService marqueService = new MarqueService(em);
+        ModeleService modeleService = new ModeleService(em);
+        Marque marque = null;
+        List<Modele> modeleList = null;
+
+        try {
+
+            marque = marqueService.trouver(id);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            modeleList = modeleService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            if(logger.isInfoEnabled()) {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
+        }
+
+        request.setAttribute("marque", marque);
+        request.setAttribute("modeleList", modeleList);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifModele.jsp" ).forward( request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

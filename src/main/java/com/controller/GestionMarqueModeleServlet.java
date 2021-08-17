@@ -6,6 +6,7 @@ import com.entity.Modele;
 import com.exception.ServiceException;
 import com.service.MarqueService;
 import com.service.ModeleService;
+import com.service.Validation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -82,88 +84,164 @@ public class GestionMarqueModeleServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        int id = Integer.parseInt(request.getParameter("idModif"));
+        int idModif = Integer.parseInt(request.getParameter("idModif"));
+        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+        String nomMarque = request.getParameter("nomMarque");
+        String nomModele = request.getParameter("nomModele");
         boolean flagModifMarque = Boolean.parseBoolean(request.getParameter("flagModifMarque"));
 
         MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
         Marque marque = null;
         Modele modele = null;
+        List<Modele> modeleList = null;
+
+        try {
+
+            marque = marqueService.trouver(idModif);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            modele = modeleService.trouver(idModif);
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+
+            modeleList = modeleService.lister();
+        } catch (ServiceException e) {
+
+            e.printStackTrace();
+        }
 
         if(flagModifMarque) {
 
-            try {
+            if (Validation.checkValueIsEmpty(nomMarque)) {
 
-                marque = marqueService.trouver(id);
-            } catch (ServiceException e) {
+                HttpSession session = request.getSession();
 
-                e.printStackTrace();
-            }
+                session.setAttribute("errMessage", "Veuillez insérer une marque");
+                session.setAttribute("idMarque", idModif);
 
-            try {
+                response.sendRedirect("modifMarque");
+            } else if (!Validation.checkValueLenght(nomMarque,2, 50)) {
 
-                marque.setNomMarque(request.getParameter("nomMarque"));
+                HttpSession session = request.getSession();
 
-                transaction.begin();
+                session.setAttribute("errMessage", "La marque doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
+                session.setAttribute("idMarque", idModif);
 
-                marqueService.update(marque);
+                response.sendRedirect("modifMarque");
+            } else {
 
-                transaction.commit();
-            } catch ( Exception e ) {
+                nomMarque = nomMarque.toUpperCase();
 
-                throw new ServletException( e );
-            } finally {
+                if (marqueService.checkMarqueExist(nomMarque)) {
 
-                if (transaction.isActive()) {
+                    HttpSession session = request.getSession();
 
-                    transaction.rollback();
+                    session.setAttribute("errMessage", "Cette marque existe déjà");
+                    session.setAttribute("idMarque", idModif);
+
+                    response.sendRedirect("modifMarque");
+                } else {
+
+                    try {
+
+                        marque.setNomMarque(nomMarque);
+
+                        transaction.begin();
+
+                        marqueService.update(marque);
+
+                        transaction.commit();
+                    } catch (Exception e) {
+
+                        throw new ServletException(e);
+                    } finally {
+
+                        if (transaction.isActive()) {
+
+                            transaction.rollback();
+                        }
+
+                        if (logger.isInfoEnabled()) {
+
+                            logger.info("Fermeture de l'EntityManager");
+                        }
+
+                        em.close();
+                    }
+
+                    response.sendRedirect("gestionMarqueModele");
                 }
-
-                if(logger.isInfoEnabled()) {
-
-                    logger.info("Fermeture de l'EntityManager");
-                }
-
-                em.close();
             }
         } else {
 
-            try {
+            if (Validation.checkValueIsEmpty(nomModele)) {
 
-                modele = modeleService.trouver(id);
-            } catch (ServiceException e) {
+                HttpSession session = request.getSession();
 
-                e.printStackTrace();
-            }
+                session.setAttribute("errMessage", "Veuillez insérer un modèle");
+                session.setAttribute("idMarque", idMarque);
 
-            try {
+                response.sendRedirect("modifModele");
+            } else if (!Validation.checkValueLenght(nomModele,2, 50)) {
 
-                modele.setNomModele(request.getParameter("nomModele"));
+                HttpSession session = request.getSession();
 
-                transaction.begin();
+                session.setAttribute("errMessage", "Le modèle doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
+                session.setAttribute("idMarque", idMarque);
 
-                modeleService.update(modele);
+                response.sendRedirect("modifModele");
+            } else {
 
-                transaction.commit();
-            } catch ( Exception e ) {
+                if (modeleService.checkModeleExist(nomModele)) {
 
-                throw new ServletException( e );
-            } finally {
+                    HttpSession session = request.getSession();
 
-                if (transaction.isActive()) {
+                    session.setAttribute("errMessage", "Ce modèle existe déjà");
+                    session.setAttribute("idMarque", idMarque);
 
-                    transaction.rollback();
+                    response.sendRedirect("modifModele");
+                } else {
+
+                    try {
+
+                        modele.setNomModele(nomModele);
+
+                        transaction.begin();
+
+                        modeleService.update(modele);
+
+                        transaction.commit();
+                    } catch (Exception e) {
+
+                        throw new ServletException(e);
+                    } finally {
+
+                        if (transaction.isActive()) {
+
+                            transaction.rollback();
+                        }
+
+                        if (logger.isInfoEnabled()) {
+
+                            logger.info("Fermeture de l'EntityManager");
+                        }
+
+                        em.close();
+                    }
+
+                    response.sendRedirect("gestionMarqueModele");
                 }
-
-                if(logger.isInfoEnabled()) {
-
-                    logger.info("Fermeture de l'EntityManager");
-                }
-
-                em.close();
             }
         }
-
-        response.sendRedirect("gestionMarqueModele");
     }
 }

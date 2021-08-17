@@ -16,7 +16,7 @@
                 <h2>Ajout de véhicule</h2>
 
                 <div>
-                    <c:if test="${(sessionScope.errMessage1 != null) or (sessionScope.errMessage2 != null) or (sessionScope.errMessage3 != null) or (sessionScope.errMessage4 != null) or (sessionScope.errMessage5 != null)}">
+                    <c:if test="${(sessionScope.errMessage1 != null) or (sessionScope.errMessage2 != null) or (sessionScope.errMessage3 != null) or (sessionScope.errMessage4 != null) or (sessionScope.errMessage5 != null) or (sessionScope.errMessage6 != null) or (sessionScope.errMessage7 != null) or (sessionScope.errMessage8 != null) or (sessionScope.errMessage9 != null) or (sessionScope.errMessage10 != null)}">
                         <div class="error-message-admin">
                             <div class="error-message-admin-title">
                                 <div class="error-message-admin-title-img">
@@ -41,12 +41,32 @@
                             <div class="error-message-admin-body-txt">
                                 <div>${errMessage5}</div>
                             </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage6}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage7}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage8}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage9}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage10}</div>
+                            </div>
                         </div>
                         <c:remove var="errMessage1" scope="session" />
                         <c:remove var="errMessage2" scope="session" />
                         <c:remove var="errMessage3" scope="session" />
                         <c:remove var="errMessage4" scope="session" />
                         <c:remove var="errMessage5" scope="session" />
+                        <c:remove var="errMessage6" scope="session" />
+                        <c:remove var="errMessage7" scope="session" />
+                        <c:remove var="errMessage8" scope="session" />
+                        <c:remove var="errMessage9" scope="session" />
+                        <c:remove var="errMessage10" scope="session" />
                     </c:if>
                 </div>
 
@@ -215,13 +235,13 @@
                                         <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
                                         <input type="hidden" name="idMarque" value="${vehicule.modelesByIdModele.marquesByIdMarque.idMarque}"/>
                                         <input type="hidden" name="modifFlag" value="true"/>
-                                        <button class="btn-modif" name="idModif" type="submit">Modifier</button>
+                                        <input type="submit" class="btn-modif" value="Modifier"/>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="<c:url value="/supVehicule"/>" method="post">
                                         <input type="hidden" name="idSup" value="${vehicule.idVehicule}"/>
-                                        <button class="btn-sup" name="idSup" type="submit" value="supprimer">Supprimer</button>
+                                        <input type="submit" class="btn-sup" value="supprimer"/>
                                     </form>
                                 </td>
                             </tr>

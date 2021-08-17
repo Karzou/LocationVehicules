@@ -1,11 +1,13 @@
 package com.service;
 
+import com.entity.Couleur;
 import com.entity.Entrepot;
 import com.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -83,6 +85,27 @@ public class EntrepotService {
 
             throw new ServiceException(e);
         }
+    }
+
+    public boolean checkEntrepotExist(String nomEntrepot) {
+
+        Query query = em.createNamedQuery("Entrepot.checkEntrepotExist", Entrepot.class);
+        query.setParameter("nomEntrepot", nomEntrepot);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
+    }
+
+    public boolean checkOtherEntrepotExist(String nomEntrepot, int idEntrepot) {
+
+        Query query = em.createNamedQuery("Entrepot.checkOtherEntrepotExist", Entrepot.class);
+        query.setParameter("nomEntrepot", nomEntrepot);
+        query.setParameter("idEntrepot", idEntrepot);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
     }
 
     public void suppressionLogique(Entrepot entrepot) throws ServiceException {

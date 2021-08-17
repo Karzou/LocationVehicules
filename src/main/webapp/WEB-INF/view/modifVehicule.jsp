@@ -15,6 +15,45 @@
             <div class="content-global">
                 <h2>Modification véhicule</h2>
 
+                <div>
+                    <c:if test="${(sessionScope.errMessage1 != null) or (sessionScope.errMessage2 != null) or (sessionScope.errMessage3 != null) or (sessionScope.errMessage4 != null) or (sessionScope.errMessage5 != null) or (sessionScope.errMessage6 != null)}">
+                        <div class="error-message-admin">
+                            <div class="error-message-admin-title">
+                                <div class="error-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                </div>
+                                <div class="error-message-admin-title-txt">
+                                    <p>Une erreur est survenue</p>
+                                </div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage1}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage2}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage3}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage4}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage5}</div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage6}</div>
+                            </div>
+                        </div>
+                        <c:remove var="errMessage1" scope="session" />
+                        <c:remove var="errMessage2" scope="session" />
+                        <c:remove var="errMessage3" scope="session" />
+                        <c:remove var="errMessage4" scope="session" />
+                        <c:remove var="errMessage5" scope="session" />
+                        <c:remove var="errMessage6" scope="session" />
+                    </c:if>
+                </div>
+
                 <form action="<c:url value="/gestionVehicule"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>

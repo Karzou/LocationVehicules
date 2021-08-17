@@ -15,6 +15,25 @@
             <div class="content-global">
                 <h2>Modification marque</h2>
 
+                <div>
+                    <c:if test="${sessionScope.errMessage != null}">
+                        <div class="error-message-admin">
+                            <div class="error-message-admin-title">
+                                <div class="error-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                </div>
+                                <div class="error-message-admin-title-txt">
+                                    <p>Une erreur est survenue</p>
+                                </div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage}</div>
+                            </div>
+                        </div>
+                        <c:remove var="errMessage" scope="session" />
+                    </c:if>
+                </div>
+
                 <form action="<c:url value="/gestionMarqueModele"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>
