@@ -24,6 +24,11 @@
                     <div class="password-login-div">
                         <input type="password" class="password-login" name="password" id="password" placeholder="Mot de passe"/>
                     </div>
+
+                    <div class="reset-password-login-div">
+                        <a href="motDePasseOublie" >Mot de passe oublié ? </a>
+                    </div>
+
                     <c:if test="${empty succes}">
                         <div class="login-div-error">
                             <span style="color:#ff0000"><c:out value="${errMessage}"></c:out></span>
@@ -37,11 +42,6 @@
                     <div>
                         <input type="submit" class="btn-login" value="Connexion">
                     </div>
-
-                    <div>
-                        <a href="motDePasseOublie" >Mot de passe oublié ? </a>
-                    </div>
-
 
                     <div>
                         <p>Vous êtes nouveau ici ? Cliquez ci-dessous pour vous enregistrer !</p>
