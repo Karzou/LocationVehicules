@@ -331,6 +331,16 @@ public class GestionVehiculeServlet extends HttpServlet {
             session.setAttribute("checkModifVehicule", checkModifVehicule);
 
             errFlag = true;
+        } else if (!Validation.checkValueIsIFloat(strprixJournalier)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage6", "Le prix journalier pour la location du véhicule doit être un nombre décimal");
+            session.setAttribute("idModif", idVehicule);
+            session.setAttribute("idMarque", vehicule.getModelesByIdModele().getMarquesByIdMarque().getIdMarque());
+            session.setAttribute("checkModifVehicule", checkModifVehicule);
+
+            errFlag = true;
         }
 
         if (errFlag) {

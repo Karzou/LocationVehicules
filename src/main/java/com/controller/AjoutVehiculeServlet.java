@@ -197,6 +197,13 @@ public class AjoutVehiculeServlet extends HttpServlet {
             session.setAttribute("errMessage8", "Veuillez insérer un prix journalier pour la location du véhicule");
 
             errFlag = true;
+        } else if (!Validation.checkValueIsIFloat(strprixJournalier)) {
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("errMessage8", "Le prix journalier pour la location du véhicule doit être un nombre décimal");
+
+            errFlag = true;
         }
 
         if (Validation.checkValueIsEmptyorNull(stridCouleur)) {

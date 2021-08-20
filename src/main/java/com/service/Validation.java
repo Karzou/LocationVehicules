@@ -129,6 +129,16 @@ public class Validation {
         return false;
     }
 
+    public static boolean checkValueIsIFloat(String value) {
+
+        if (value.matches("([0-9]*[.])?[0-9]+")) {
+
+            return true;
+        }
+
+        return false;
+    }
+
     public static boolean checkValueIsEmptyorNull(String value) {
 
         if (value == null || value == "") {
