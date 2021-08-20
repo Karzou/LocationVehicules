@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.connection.EMF;
+import com.entity.Telephone;
 import com.entity.Utilisateur;
 import com.entity.Ville;
 import com.exception.ServiceException;
@@ -86,6 +87,8 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
+        TelephoneService telephoneService = new TelephoneService(em);
+        Telephone telephone1 = new Telephone();
         VilleService villeService = new VilleService(em);
         Utilisateur utilisateur = null;
         Ville ville = null;
@@ -135,6 +138,8 @@ public class GestionUtilisateurServlet extends HttpServlet {
                             logger.info("Début de la transaction de l'update utilisateur. " + utilisateur.getEmail());
                         }
 
+                        telephone1 = telephoneService.trouver(utilisateur.getTelephonesByIdUtilisateur().get(0).getIdTelephone());
+                        telephone1.setNumero(telephone);
                         utilisateur.setNomUtilisateur(nom);
                         utilisateur.setPrenomUtilisateur(prenom);
                         utilisateur.setDateNaissance(dateNaissance);
@@ -144,6 +149,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         utilisateur.getAdressesByIdAdresse().setNumero(numero);
                         utilisateur.getAdressesByIdAdresse().setRue(rue);
                         utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
+                        telephoneService.update(telephone1);
                         utilisateurService.update(utilisateur);
 
                         transaction.commit();

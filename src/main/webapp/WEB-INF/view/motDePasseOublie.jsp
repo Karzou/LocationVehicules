@@ -15,7 +15,7 @@
 <body>
 <form action="<c:url value="motDePasseOublie"/>" method="post">
     <div class="register-div">
-        <label for="register-mail">Entrez votre email</label>
+        <label for="register-mail">Veuillez entrer votre email</label>
         <input type="mail" class="register-input" id="register-mail" name="mail"/>
     </div>
     <div class="login-div-error">
@@ -23,7 +23,7 @@
         </br>
     </div>
     <div class="register-button-div">
-        <input type="submit" class="btn-register" value="Envoi du mail de changement de mot de passe">
+        <input type="submit" class="btn-register" value="Reset mot de passe">
     </div>
 </form>
 

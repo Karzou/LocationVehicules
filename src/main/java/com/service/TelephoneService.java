@@ -45,5 +45,9 @@ public class TelephoneService {
             throw new ServiceException(e);
         }
     }
+
+    public void update (Telephone telephone){
+        em.merge(telephone);
+    }
 }
 
