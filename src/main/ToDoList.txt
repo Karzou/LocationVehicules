@@ -8,12 +8,8 @@ Toutes les validations partie véhicule (JO)
 
 Kevin
 -------------------------------------------
-- Page erreur si pas de co bdd
-- telephone dans modif utilisateur
-- checks actifs.
 - ajouter "enlever permission sur ce role".
 - ajouter permission (pdf, read unique,...).
-- filtre employé.
 - validation js.
 - faire les tests.
 - hasPermission pour les autres.
@@ -45,6 +41,9 @@ Gestion/modification modèle
 
 Kevin
 --------------
+- Page erreur si pas de co bdd
+- telephone dans modif utilisateurs
+- filtre employé.
 - Page login + validation bdd
 - Page creation user + verif bdd + ecriture bdd
 - Page profil + modif profil
@@ -79,6 +78,7 @@ Kevin
 - changer mot de passe.
 - Message de succes / erreur
 - interdiction de sup admin + message erreur
+- checks actifs.
 
 Jerome
 ----------------------
