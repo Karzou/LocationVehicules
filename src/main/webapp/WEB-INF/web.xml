@@ -63,7 +63,7 @@
         <url-pattern>/supUtilisateur</url-pattern>
         <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/gestionRolePermission</url-pattern>
-        <url-pattern>/facture</url-pattern>
+        <url-pattern>/gestionFacture</url-pattern>
     </filter-mapping>
 
     <error-page>

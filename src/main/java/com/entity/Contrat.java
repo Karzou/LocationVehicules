@@ -12,6 +12,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "contrats", schema = "location_vehicules")
+@NamedQueries({
+        @NamedQuery(name = "Contrat.getAll", query = "SELECT c FROM Contrat c")})
+
 public class Contrat {
     private int idContrat;
     private float acompte;
