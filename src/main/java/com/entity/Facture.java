@@ -2,6 +2,7 @@ package com.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 /**
@@ -35,6 +36,10 @@ public class Facture {
     @Column(name = "Date_facture", nullable = false)
     public Date getDateFacture() {
         return dateFacture;
+    }
+    public String formatDateFacture() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(dateFacture);
     }
 
     public void setDateFacture(Date dateFacture) {
