@@ -42,8 +42,8 @@
                             <td><c:out value="${facture.prixFacture}"/></td>
                             <td>
                                 <form action="<c:url value="/modifFacture"/>" method="post">
-                                    <input type="hidden" name="idModif" value="${facture.idFacture}"/>
-                                    <button type="submit" class="btn-modif" name="idModif">Modifier</button>
+                                   <input type="hidden" name="idModif" value="${facture.idFacture}"/>
+                                   <button type="submit" class="btn-modif" name="idModif">Modifier</button>
                                 </form>
                             </td>
 

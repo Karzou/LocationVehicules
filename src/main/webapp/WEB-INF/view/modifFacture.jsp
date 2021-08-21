@@ -22,8 +22,33 @@
     <div class="content-global">
         <h2>Modification Facture</h2>
 
+        <div>
+            <c:if test="${(sessionScope.errMessage1 != null) or (sessionScope.errMessage2 != null)}">
+                <div class="error-message-admin">
+                    <div class="error-message-admin-title">
+                        <div class="error-message-admin-title-img">
+                            <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                        </div>
+                        <div class="error-message-admin-title-txt">
+                            <p>Une erreur est survenue</p>
+                        </div>
+                    </div>
+                    <div class="error-message-admin-body-txt">
+                        <div>${errMessage1}</div>
+                    </div>
+                    <div class="error-message-admin-body-txt">
+                        <div>${errMessage2}</div>
+                    </div>
 
-        <form action="<c:url value="/modifFacture"/>" method="post">
+                </div>
+                <c:remove var="errMessage1" scope="session" />
+                <c:remove var="errMessage2" scope="session" />
+
+            </c:if>
+        </div>
+
+
+        <form action="<c:url value="/gestionFacture"/>" method="post">
 
             <!-- Le champ numéro de facture est en readonly-->
             <div class="div-input-modif">
@@ -40,7 +65,7 @@
             </div>
 
             <input type="hidden" name="idModif" value="${facture.idFacture}">
-            <input type="hidden" name="flagModifFActure" value="true">
+
             <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
             <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionFacture">
         </form>

@@ -12,6 +12,11 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * @author Deschamps Jérôme
+ */
+
+
 public class FactureService {
     private static final Logger LOGGER = LogManager.getLogger(FactureService.class);
 
@@ -41,10 +46,9 @@ public class FactureService {
         try {
             LOGGER.info("Mise à jour des infos de la facture ayant l'id: " + facture.getIdFacture());
 
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
+
             em.merge(facture);
-            transaction.commit();
+
         } catch (Exception e) {
             LOGGER.warn("Impossible de mettre à jour les infos de la marque ayant l'id: " + facture.getIdFacture());
             throw new ServiceException(e);
