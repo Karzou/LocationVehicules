@@ -40,6 +40,7 @@
         <url-pattern>/gestionUtilisateur</url-pattern>
         <url-pattern>/gestionReservation</url-pattern>
         <url-pattern>/modifEntrepot</url-pattern>
+        <url-pattern>/modifFacture</url-pattern>
         <url-pattern>/modifUtilisateur</url-pattern>
         <url-pattern>/modifVehicule</url-pattern>
         <url-pattern>/optionSup</url-pattern>
