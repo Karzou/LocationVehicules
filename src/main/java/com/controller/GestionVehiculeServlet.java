@@ -431,9 +431,9 @@ public class GestionVehiculeServlet extends HttpServlet {
                 }
 
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (ServiceException e) {
 
-                throw new ServletException(e);
+                e.printStackTrace();
             } finally {
 
                 if (transaction.isActive()) {
