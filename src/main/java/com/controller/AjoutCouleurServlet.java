@@ -55,7 +55,6 @@ public class AjoutCouleurServlet extends HttpServlet {
             session.setAttribute("errMessage", "Veuillez insérer un nom de couleur");
 
             response.sendRedirect("gestionCouleur");
-
         } else if (!Validation.checkValueLenght(nomCouleur,2, 50)) {
 
             HttpSession session = request.getSession();
