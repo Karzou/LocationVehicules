@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class GestionDroitServlet extends HttpServlet {
         if(logger.isInfoEnabled()){
             logger.info("Appel du doPost de la servlet GestionDroit.");
         }
-
+        HttpSession session = request.getSession();
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
@@ -89,39 +90,48 @@ public class GestionDroitServlet extends HttpServlet {
         UtilisateurService  utilisateurService = new UtilisateurService(em);
         RoleService roleService = new RoleService(em);
         Role role = null;
+        AutoriseService autoriseService = new AutoriseService(em);
 
-        try {
-            utilisateur = utilisateurService.trouver(idUtilisateur);
-        } catch (ServiceException e) {
-            logger.warn("Problème lors de la recherche de l'idUtilisateur : " + idUtilisateur + ". " + e);
-        }
-
-        try {
-            role = roleService.trouver(idRole);
-        } catch (ServiceException e) {
-            logger.warn("Problème lors de la recherche de rôle par idRole : " + idRole + ". " + e);
-        }
-        try {
-            utilisateur.setRolesByIdRole(role);
-        } catch (Exception e){
-            logger.warn("Problème lors de la mise à jour du rôle de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
-        }
-        try {
-            if(logger.isInfoEnabled()){
-                logger.info("Début de la transaction de la mise à jour des droits de l'utilisateur : " + utilisateur.getEmail());
+        if( !autoriseService.hasPermission((int)session.getAttribute("idRole"), "all" )){
+            logger.info("hasPermission non OK " + utilisateur.getEmail());
+            session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
+            session.setAttribute("retour", "/gestionDroit");
+            this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
+        }else{
+            try {
+                utilisateur = utilisateurService.trouver(idUtilisateur);
+            } catch (ServiceException e) {
+                logger.warn("Problème lors de la recherche de l'idUtilisateur : " + idUtilisateur + ". " + e);
             }
 
-            transaction.begin();
-            utilisateurService.update(utilisateur);
-            transaction.commit();
-        }finally {
-            if (transaction.isActive()) {
-                logger.warn("Rollback de la mise à jour des droits de " + utilisateur.getEmail());
-                transaction.rollback();
+            try {
+                role = roleService.trouver(idRole);
+            } catch (ServiceException e) {
+                logger.warn("Problème lors de la recherche de rôle par idRole : " + idRole + ". " + e);
             }
-            em.close();
+            try {
+                utilisateur.setRolesByIdRole(role);
+            } catch (Exception e){
+                logger.warn("Problème lors de la mise à jour du rôle de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
+            }
+            try {
+                if(logger.isInfoEnabled()){
+                    logger.info("Début de la transaction de la mise à jour des droits de l'utilisateur : " + utilisateur.getEmail());
+                }
+
+                transaction.begin();
+                utilisateurService.update(utilisateur);
+                transaction.commit();
+            }finally {
+                if (transaction.isActive()) {
+                    logger.warn("Rollback de la mise à jour des droits de " + utilisateur.getEmail());
+                    transaction.rollback();
+                }
+            }
+
+            response.sendRedirect("gestionUtilisateur");
         }
 
-        response.sendRedirect("gestionUtilisateur");
+        em.close();
     }
 }

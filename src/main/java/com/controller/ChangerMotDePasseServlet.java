@@ -3,6 +3,7 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.Utilisateur;
 import com.exception.ServiceException;
+import com.service.AutoriseService;
 import com.service.UtilisateurService;
 import com.service.Validation;
 import org.apache.log4j.LogManager;
@@ -65,13 +66,23 @@ public class ChangerMotDePasseServlet extends HttpServlet {
 
                 UtilisateurService utilisateurService = new UtilisateurService(em);
                 Utilisateur utilisateur = new Utilisateur();
+                AutoriseService autoriseService = new AutoriseService(em);
 
                 try {
                     utilisateur = utilisateurService.trouver(idUtilisateur);
 
-                    transaction.begin();
-                    utilisateur.setMotDePasse(password.trim());
-                    transaction.commit();
+                    if(autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == utilisateur.getIdUtilisateur()){
+                        logger.info("hasPermission OK " + utilisateur.getEmail());
+                        transaction.begin();
+                        utilisateur.setMotDePasse(password.trim());
+                        transaction.commit();
+
+                    }else{
+                        logger.info("hasPermission non OK " + utilisateur.getEmail());
+                        session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
+                        session.setAttribute("retour", "/changerMotDePasse");
+                        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
+                    }
 
                 } catch (ServiceException e) {
                     e.printStackTrace();
