@@ -34,10 +34,10 @@
                         </div>
                     </div>
                     <div class="error-message-admin-body-txt">
-                        <div>${errMessage1}</div>
+                        <div>${sessionScope.errMessage1}</div>
                     </div>
                     <div class="error-message-admin-body-txt">
-                        <div>${errMessage2}</div>
+                        <div>${sessionScope.errMessage2}</div>
                     </div>
 
                 </div>
@@ -51,18 +51,37 @@
         <form action="<c:url value="/gestionFacture"/>" method="post">
 
             <!-- Le champ numéro de facture est en readonly-->
+            <fieldset disabled>
+                <legend><b>   Données non modifiables   </b></legend>
+                <br />
             <div class="div-input-modif">
                 <label class="label-input">Numéro Facture : </label>
                 <input class="input-modif" type="int" name="idFacture" value="${facture.idFacture}" readonly>
             </div>
+                <div class="div-input-modif">
+                    <label class="label-input">Nom et prénom : </label>
+                    <input class="input-modif" type="text" name="idFacture" value="${facture.getContratsByIdContrat().getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getNomUtilisateur()} ${facture.getContratsByIdContrat().getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}" readonly>
+                </div>
+            </fieldset>
+            <br />
+            <br />
+
+            <fieldset>
+                <legend><b>   Données modifiables   </b></legend>
+                <br />
             <div class="div-input-modif">
                 <label class="label-input">Date Facture : </label>
                 <input class="input-modif" type="date" name="dateFacture" value="${facture.formatDateFacture()}">
             </div>
             <div class="div-input-modif">
-                <label class="label-input">Prix Facture : </label>
+                <label class="label-input">Prix Facture ( &euro; ) : </label>
                 <input class="input-modif" type="text" name="prixFacture" value="${facture.prixFacture}">
             </div>
+
+            </fieldset>
+            <br />
+            <br />
+
 
             <input type="hidden" name="idModif" value="${facture.idFacture}">
 

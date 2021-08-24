@@ -2,6 +2,7 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Contrat;
+import com.entity.Facture;
 import com.entity.Marque;
 import com.entity.Modele;
 import com.exception.ServiceException;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,60 +39,92 @@ public class ModifContratServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
         if (logger.isInfoEnabled())
         {
-
             logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifContratServlet\"");
         }
+
+        EntityManager em = EMF.getEM();
+        //faire rollback si transaction se passe pas correctement
+        EntityTransaction transaction = em.getTransaction();
+
+        // Récupération des données du champ de la jsp
+        HttpSession session = request.getSession();
+        int idContrat = (int) session.getAttribute("idModif");
+
+
+
+        // Instanciation
+        //appel toutes les méthodes dans facture service
+        ContratService contratService = new ContratService(em);
+        Contrat contrat = null;
+
+        try
+        {
+            contrat = contratService.findById(idContrat);
+        }
+        catch (ServiceException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (logger.isInfoEnabled())
+            {
+                logger.info("Fermeture de l'EntityManager");
+            }
+            em.close();
+        }
+
+        request.setAttribute("contrat", contrat);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifContrat.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (logger.isInfoEnabled()) {
-            logger.info("Appel de la methode doPost de ModifContratServlet.");
+        if (logger.isInfoEnabled())
+        {
+            logger.info("Appel de la methode doPost de ModifFactureServlet.");
+        }
 
-    }
-    EntityManager em = EMF.getEM();
+        EntityManager em = EMF.getEM();
+        //faire rollback si transaction se passe pas correctement
+        EntityTransaction transaction = em.getTransaction();
 
-    int id = Integer.parseInt(request.getParameter("idModif"));
+        // Récupération des données du champ de la jsp
+        String strIdModif = request.getParameter("idModif");
 
 
+        // Instanciation
+        //appel toutes les méthodes dans facture service
         ContratService contratService = new ContratService(em);
-    Contrat contract = null;
+        Contrat contrat = null;
 
         try
         {
-            contract = contratService.findById(id);
-
-        if (request.getParameterMap().containsKey("acompte"))
+            int idContrat = Integer.parseInt(strIdModif);
+            contrat = contratService.findById(idContrat);
+        }
+        catch (ServiceException e)
         {
-            Float acompte = Float.parseFloat(request.getParameter("acompte"));
-            contract.setAcompte(acompte);
+            e.printStackTrace();
+        }
+        finally
+        {
+
+            if (logger.isInfoEnabled())
+            {
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
         }
 
-
-        if (request.getParameterMap().containsKey("acompte")) {
-            contratService.update(contract);
-        }
-    } catch (ServiceException e) {
-        e.printStackTrace();
-    } finally {
-
-        if (logger.isInfoEnabled()) {
-
-            logger.info("Fermeture de l'EntityManager");
-        }
-
-        em.close();
-    }
-
-        request.setAttribute("contract", contract);
+        request.setAttribute("contrat", contrat);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifContrat.jsp").forward(request, response);
 
+    }
 }
-
-
-
-        }

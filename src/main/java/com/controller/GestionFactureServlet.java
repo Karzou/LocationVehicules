@@ -80,14 +80,17 @@ public class GestionFactureServlet extends HttpServlet {
         // Instanciation
         //appel toutes les méthodes dans facture service
         FactureService factureService = new FactureService(em);
-        int strIdModif1 = Integer.parseInt(strIdModif);
+        int idModif = Integer.parseInt(strIdModif);
+        HttpSession session = request.getSession();
+        session.setAttribute("idModif", idModif);
 
+        //objet facture de l'entity Facture à null
         Facture facture = null;
 
         try
         {
 
-            facture = factureService.findById(strIdModif1);
+            facture = factureService.findById(idModif);
 
         }catch (Exception e){}
 
@@ -96,7 +99,7 @@ public class GestionFactureServlet extends HttpServlet {
         if (Validation.checkValueIsEmptyorNull(strDateFacture))
         {
 
-            HttpSession session = request.getSession();
+           // HttpSession session = request.getSession();
 
             session.setAttribute("errMessage1", "Veuillez insérer une date pour la facture");
 
@@ -105,7 +108,7 @@ public class GestionFactureServlet extends HttpServlet {
 
         if (Validation.checkValueIsEmpty(strPrixFacture))
         {
-            HttpSession session = request.getSession();
+            //HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Veuillez insérer un prix");
 
@@ -114,7 +117,7 @@ public class GestionFactureServlet extends HttpServlet {
         }
         else if (!Validation.checkValueIsIFloat(strPrixFacture))
         {
-            HttpSession session = request.getSession();
+            //HttpSession session = request.getSession();
 
             session.setAttribute("errMessage2", "Le prix doit être une valeur décimale");
 
@@ -125,6 +128,7 @@ public class GestionFactureServlet extends HttpServlet {
         {
             response.sendRedirect("modifFacture");
         }
+
         else
         {
             Date dateFacture = Validation.dateFormat(strDateFacture);

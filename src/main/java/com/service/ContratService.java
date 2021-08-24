@@ -43,10 +43,8 @@ public class ContratService {
         try {
             LOGGER.info("Mise à jour des infos du contrat ayant l'id: " + contrat.getIdContrat());
 
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
             em.merge(contrat);
-            transaction.commit();
+
         } catch (Exception e) {
             LOGGER.warn("Impossible de mettre à jour les infos du contrat ayant l'id: " + contrat.getIdContrat());
             throw new ServiceException(e);

@@ -23,7 +23,7 @@
                 <th scope="col">N° de facture</th>
                 <th>Nom</th>
                 <th scope="col">Date facture</th>
-                <th scope="col">Prix facture</th>
+                <th scope="col">Prix facture ( &euro; ) </th>
                 <th scope="col">Modification facture</th>
 
                 </thead>

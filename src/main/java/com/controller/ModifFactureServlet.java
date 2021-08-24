@@ -42,11 +42,53 @@ public class ModifFactureServlet extends HttpServlet {
 
         if (logger.isInfoEnabled())
         {
-
-            logger.info("Appel de la méthode \"doGet\" de la servlet \"ModifFactureServlet\"");
+            logger.info("Appel de la methode doGet de ModifFactureServlet.");
         }
 
+        EntityManager em = EMF.getEM();
+        //faire rollback si transaction se passe pas correctement
+        EntityTransaction transaction = em.getTransaction();
+
+        // Récupération des données du champ de la jsp
+        HttpSession session = request.getSession();
+        int idFacture = (int) session.getAttribute("idModif");
+
+        // Instanciation
+        //appel toutes les méthodes dans facture service
+        FactureService factureService = new FactureService(em);
+        Facture facture = null;
+
+        try
+        {
+
+            facture = factureService.findById(idFacture);
+            session.removeAttribute("idModif");
+        }
+        catch (ServiceException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+
+            if (logger.isInfoEnabled())
+            {
+
+                logger.info("Fermeture de l'EntityManager");
+            }
+
+            em.close();
+        }
+
+        request.setAttribute("facture", facture);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifFacture.jsp").forward(request, response);
+
+
+
     }
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
