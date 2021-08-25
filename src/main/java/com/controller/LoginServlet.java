@@ -4,6 +4,7 @@ import com.connection.EMF;
 import com.entity.Utilisateur;
 import com.entity.Ville;
 import com.exception.ServiceException;
+import com.service.AutoriseService;
 import com.service.UtilisateurService;
 import com.service.VilleService;
 import org.apache.log4j.LogManager;
@@ -68,6 +69,8 @@ public class LoginServlet extends HttpServlet {
 
         VilleService villeService = new VilleService(em);
         List<Ville> villeList = null;
+
+        AutoriseService autoriseService = new AutoriseService(em);
         try {
             villeList = villeService.lister();
         } catch (ServiceException e) {
@@ -76,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 
         request.setAttribute("villes", villeList);
         if (session.getAttribute("creation") == null ){
-            logger.warn("Je passe par la");
+
             if(utilisateurService.checkLogin(userName, password)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("CheckLogin OK " + userName);
@@ -86,15 +89,24 @@ public class LoginServlet extends HttpServlet {
                     utilisateur = utilisateurService.trouverParEmail(userName);
                 } catch (ServiceException e) {
                     logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
-                } finally {
-
-                    em.close();
                 }
 
                 session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
                 session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
                 session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
                 session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
+
+                if(autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:admin")){
+                    session.setAttribute("menu", "admin");
+                }
+                else if(autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:employe")){
+                    session.setAttribute("menu", "employe");
+                }
+                else{
+                    session.setAttribute("menu", "client");
+                }
+
+                em.close();
 
                 response.sendRedirect("accueil");
 
