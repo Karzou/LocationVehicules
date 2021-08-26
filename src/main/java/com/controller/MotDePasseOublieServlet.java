@@ -41,6 +41,10 @@ public class MotDePasseOublieServlet extends HttpServlet {
         UtilisateurService utilisateurService = new UtilisateurService(em);
         Mail email = new Mail();
         HttpSession session = request.getSession();
+        int randomInt = (int)(Math.random() * (9999 - 1000) + 1000);
+        String randomPassword = String.valueOf(randomInt);
+
+
 
         if(!utilisateurService.mailExist(mail)){
             message = "Votre mail n'existe pas. ";
@@ -52,12 +56,10 @@ public class MotDePasseOublieServlet extends HttpServlet {
                 session.setAttribute("errMessage", message);
             }
             try {
-
-
-            transaction.begin();
+                transaction.begin();
 
             // on peut fairer un random aussi.
-            utilisateur.setMotDePasse("0000");
+            utilisateur.setMotDePasse(randomPassword);
 
             utilisateurService.update(utilisateur);
 
@@ -72,7 +74,7 @@ public class MotDePasseOublieServlet extends HttpServlet {
             }
             em.close();
 
-            email.setMsgBody("Votre mot de passe a été réinitialisé à 0000. Veuillez changer votre mot de passe lors de votre prochaine connection. ");
+            email.setMsgBody("Votre mot de passe a été réinitialisé à " + randomPassword + ". Veuillez changer votre mot de passe lors de votre prochaine connection. ");
             email.setFrom("locacarprojetsgbd@gmail.com");
             email.setSubject("Réinitialisation mot de passe.");
             email.setNick("Locacar");
@@ -82,7 +84,9 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
             MailSender.sendMail(email);
 
-            response.sendRedirect("login");
+            request.setAttribute("succes", "Un mail vous a été envoyé avec votre mot de passe.");
+
+                this.getServletContext().getRequestDispatcher("/login").forward( request, response );
 
             }
         }

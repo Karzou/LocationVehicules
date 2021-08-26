@@ -12,7 +12,6 @@ Kevin
 - ajouter permission (pdf, read unique,...).
 - validation js.
 - faire les tests.
-- hasPermission pour les autres.
 
 
 
@@ -79,6 +78,9 @@ Kevin
 - Message de succes / erreur
 - interdiction de sup admin + message erreur
 - checks actifs.
+- hasPermission.
+- randomPassword pour le mot de passe perdu.
+- enlever changer de mot de passe si pas user
 
 Jerome
 ----------------------

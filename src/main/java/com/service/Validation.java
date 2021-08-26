@@ -1,5 +1,6 @@
 package com.service;
 
+import javax.persistence.EntityManager;
 import java.sql.Date;
 
 /**

@@ -39,7 +39,7 @@
                             <option value="${utilisateur.motDePasse}">${utilisateur.motDePasse}</option>
                             <option value="0000">Reset</option>
                         </select>
-                        <c:if test="${sessionScope.role == utilisateur.rolesByIdRole.roleDescription}">
+                        <c:if test="${sessionScope.idUtilisateur == utilisateur.idUtilisateur}">
                             <a href="changerMotDePasse">Changer mot de passe</a>
                         </c:if>
                     </div>

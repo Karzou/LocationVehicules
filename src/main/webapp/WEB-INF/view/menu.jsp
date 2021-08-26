@@ -14,7 +14,7 @@
                     <a href="${pageContext.request.contextPath}/profil">Mon profil</a>
                     <a href="${pageContext.request.contextPath}/facture">Mes contrats et factures</a>
                     <c:choose>
-                        <c:when test="${sessionScope.role == 'admin'}">
+                        <c:when test="${sessionScope.menu == 'admin'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
                             <a href="${pageContext.request.contextPath}/gestionRolePermission">Gestion roles et permissions</a>
                             <a href="${pageContext.request.contextPath}/gestionMarqueModele">Gestion marque et modèle</a>
@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/gestionFacture">Gestion facture</a>
                             <a href="${pageContext.request.contextPath}/gestionContrat">Gestion contrat</a>
                     </c:when>
-                        <c:when test="${sessionScope.role == 'employe'}">
+                        <c:when test="${sessionScope.menu == 'employe'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
                             <a href="">Gestion réservation</a>
                             <a href="${pageContext.request.contextPath}/gestionFacture">Gestion facture</a>

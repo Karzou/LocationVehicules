@@ -88,108 +88,116 @@ public class GestionUtilisateurServlet extends HttpServlet {
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
         TelephoneService telephoneService = new TelephoneService(em);
+        AutoriseService autoriseService = new AutoriseService(em);
         Telephone telephone1 = new Telephone();
         VilleService villeService = new VilleService(em);
         Utilisateur utilisateur = null;
         Ville ville = null;
         HttpSession session = request.getSession();
 
-                if(!Validation.validationPrenom(nom)) {
-                    message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
-                    erreurFlag = true;
-                }
-                if(!Validation.validationPrenom(prenom)) {
-                    message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
-                    erreurFlag = true;
-                }
-                if(!Validation.validationTelephone(telephone)){
-                    message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
-                    erreurFlag = true;
-                }
+        if ( autoriseService.hasPermission((int)session.getAttribute("idRole"), "all") || autoriseService.hasPermission((int)session.getAttribute("idRole"), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == id){
+            if(!Validation.validationPrenom(nom)) {
+                message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
+                erreurFlag = true;
+            }
+            if(!Validation.validationPrenom(prenom)) {
+                message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
+                erreurFlag = true;
+            }
+            if(!Validation.validationTelephone(telephone)){
+                message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
+                erreurFlag = true;
+            }
 
-                if(!Validation.validationAdresse(rue)){
-                    message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
-                    erreurFlag = true;
-                }
+            if(!Validation.validationAdresse(rue)){
+                message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
+                erreurFlag = true;
+            }
 
-                if(!Validation.validationNumAdresse(numero)){
-                    message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
-                    erreurFlag = true;
-                }
-                if(!erreurFlag) {
-                    nom = Validation.ucFirst(nom);
-                    prenom = Validation.ucFirst(prenom);
-                    try {
-                        if(logger.isInfoEnabled()){
-                            logger.info("Import de la ville : " + idVille);
-                        }
-                        ville = villeService.trouver(idVille);
-                    } catch (ServiceException e) {
-                        logger.warn("Problème avec l import de la ville: " + e);
-                    }
-                    try {
-                        utilisateur = utilisateurService.trouver(id);
-                    } catch (ServiceException e) {
-                        logger.warn("Problème avec l' 'import de l' 'utilisateur : " + id + ". " + e);
-                    }
-                   try {
-                        transaction.begin();
-                        if(logger.isInfoEnabled()){
-                            logger.info("Début de la transaction de l'update utilisateur. " + utilisateur.getEmail());
-                        }
-
-                        telephone1 = telephoneService.trouver(utilisateur.getTelephonesByIdUtilisateur().get(0).getIdTelephone());
-                        telephone1.setNumero(telephone);
-                        utilisateur.setNomUtilisateur(nom);
-                        utilisateur.setPrenomUtilisateur(prenom);
-                        utilisateur.setDateNaissance(dateNaissance);
-                        utilisateur.setMotDePasse(password);
-                        utilisateur.setDatePermis(datePermis);
-                        utilisateur.getAdressesByIdAdresse().setBoite(boite);
-                        utilisateur.getAdressesByIdAdresse().setNumero(numero);
-                        utilisateur.getAdressesByIdAdresse().setRue(rue);
-                        utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
-                        telephoneService.update(telephone1);
-                        utilisateurService.update(utilisateur);
-
-                        transaction.commit();
-                    } catch (Exception e) {
-                       logger.warn("Problème lors de la mise à jour de l' 'utilisateur. " + e);
-                        session.setAttribute("erreur", "Une erreur est survenue lors de l'insertion en db !" );
-                    } finally {
-                        if (transaction.isActive()) {
-                            logger.warn("Rollback de la mise à jour de l'utilisateur. " + utilisateur.getEmail());
-                            transaction.rollback();
-                        }
-                        em.close();
-                    }
-                }else {
+            if(!Validation.validationNumAdresse(numero)){
+                message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
+                erreurFlag = true;
+            }
+            if(!erreurFlag) {
+                nom = Validation.ucFirst(nom);
+                prenom = Validation.ucFirst(prenom);
+                try {
                     if(logger.isInfoEnabled()){
-                        logger.info("Les champs de la mise à jour utilisateur ne sont pas remplis. " + message);
+                        logger.info("Import de la ville : " + idVille);
+                    }
+                    ville = villeService.trouver(idVille);
+                } catch (ServiceException e) {
+                    logger.warn("Problème avec l import de la ville: " + e);
+                }
+                try {
+                    utilisateur = utilisateurService.trouver(id);
+                } catch (ServiceException e) {
+                    logger.warn("Problème avec l' 'import de l' 'utilisateur : " + id + ". " + e);
+                }
+                try {
+                    transaction.begin();
+                    if(logger.isInfoEnabled()){
+                        logger.info("Début de la transaction de l'update utilisateur. " + utilisateur.getEmail());
                     }
 
-                    session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
+                    telephone1 = telephoneService.trouver(utilisateur.getTelephonesByIdUtilisateur().get(0).getIdTelephone());
+                    telephone1.setNumero(telephone);
+                    utilisateur.setNomUtilisateur(nom);
+                    utilisateur.setPrenomUtilisateur(prenom);
+                    utilisateur.setDateNaissance(dateNaissance);
+                    utilisateur.setMotDePasse(password);
+                    utilisateur.setDatePermis(datePermis);
+                    utilisateur.getAdressesByIdAdresse().setBoite(boite);
+                    utilisateur.getAdressesByIdAdresse().setNumero(numero);
+                    utilisateur.getAdressesByIdAdresse().setRue(rue);
+                    utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
+                    telephoneService.update(telephone1);
+                    utilisateurService.update(utilisateur);
+
+                    transaction.commit();
+                } catch (Exception e) {
+                    logger.warn("Problème lors de la mise à jour de l' 'utilisateur. " + e);
+                    session.setAttribute("erreur", "Une erreur est survenue lors de l'insertion en db !" );
+                } finally {
+                    if (transaction.isActive()) {
+                        logger.warn("Rollback de la mise à jour de l'utilisateur. " + utilisateur.getEmail());
+                        transaction.rollback();
+                    }
+                }
+            }else {
+                if(logger.isInfoEnabled()){
+                    logger.info("Les champs de la mise à jour utilisateur ne sont pas remplis. " + message);
                 }
 
-                if(session.getAttribute("erreur") != null){
-                    if(profilFlag != null){
-                        session.setAttribute("retour", "/profil");
-                    }else{
-                        session.setAttribute("retour", "/gestionUtilisateur");
-                    }
+                session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
+            }
 
-                    response.sendRedirect("erreur");
+            if(session.getAttribute("erreur") != null){
+                if(profilFlag != null){
+                    session.setAttribute("retour", "/profil");
                 }else{
-                    session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
-                    if(! (profilFlag == null)){
-
-                        response.sendRedirect("profil");
-                    }else{
-                        response.sendRedirect("gestionUtilisateur");
-                    }
+                    session.setAttribute("retour", "/gestionUtilisateur");
                 }
+
+                response.sendRedirect("erreur");
+            }else{
+                session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
+                if(! (profilFlag == null)){
+
+                    response.sendRedirect("profil");
+                }else{
+                    response.sendRedirect("gestionUtilisateur");
+                }
+            }
+        }else{
+            logger.info("hasPermission non OK " );
+            session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
+            session.setAttribute("retour", "/gestionDroit");
+            this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
+        em.close();
     }
+}
 
 
 
