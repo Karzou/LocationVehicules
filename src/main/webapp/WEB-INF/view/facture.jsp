@@ -45,9 +45,17 @@
                                     <td><c:out value="${facture.prixFacture}"/></td>
                                     <td><c:out value="${facture.getContratsByIdContrat().getEtat().toString()}"/></td>
                                     <td><c:out value="${facture.getContratsByIdContrat().getIdContrat()}"/></td>
-                                    <td><a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${facture.getContratsByIdContrat().getIdContrat()}">pdf</a></td>
+                                    <td class="align-center">
+                                        <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${facture.getContratsByIdContrat().getIdContrat()}">
+                                        <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                                        </a>
+                                    </td>
                                     <td><c:out value="${facture.idFacture}"/></td>
-                                    <td > <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=facture&factureId=${facture.getIdFacture()}">pdf</a></td>
+                                    <td class="align-center">
+                                        <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=facture&factureId=${facture.getIdFacture()}">
+                                            <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </c:when>

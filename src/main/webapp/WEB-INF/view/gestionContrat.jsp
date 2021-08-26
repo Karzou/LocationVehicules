@@ -25,6 +25,7 @@
                 <th scope="col">Acompte</th>
                 <th scope="col">Caution</th>
                 <th scope="col">Etat</th>
+                <th scope="col">Pdf Contrat</th>
                 <th scope="col">Modification Contrat</th>
 
                 </thead>
@@ -39,6 +40,11 @@
                         <td><c:out value="${contrat.getAcompte()}"/></td>
                         <td><c:out value="${contrat.getCaution()}"/></td>
                         <td><c:out value="${contrat.getEtat().toString()}"/></td>
+                        <td class="align-center">
+                            <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${contrat.getIdContrat()}">
+                            <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                            </a>
+                        </td>
                         <td>
                             <form action="<c:url value="/modifContrat"/>" method="post">
                                 <input type="hidden" name="idModif" value="${contrat.getIdContrat()}"/>
