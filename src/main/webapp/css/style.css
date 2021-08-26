@@ -12,6 +12,14 @@ body {
     padding:0;
 }
 
+.align-center {
+    text-align: center!important;
+}
+.pdfLogo-content-img {
+    width: 32px;
+    height: 30px;
+}
+
 .content-global {
     background-color: white;
     border-radius: 5px;
@@ -1348,6 +1356,7 @@ li {
 .btn-table-perm:hover {
     background-color: #F1C40F;
 }
+
 
 /* Gestion Entrepot ------------------------------------------------------------------------------------------------- */
 
