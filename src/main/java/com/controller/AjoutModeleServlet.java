@@ -4,6 +4,7 @@ import com.connection.EMF;
 import com.entity.Marque;
 import com.entity.Modele;
 import com.exception.ServiceException;
+import com.service.AutoriseService;
 import com.service.MarqueService;
 import com.service.ModeleService;
 import com.service.Validation;
@@ -47,106 +48,111 @@ public class AjoutModeleServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        // Récupération des données
-        String stridMarque = request.getParameter("idMarque");
-        String nomModele = request.getParameter("nomModele");
+        HttpSession session = request.getSession();
+        AutoriseService autoriseService = new AutoriseService(em);
 
-        boolean errFlag = false;
+        if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "modeles:write"))) {
 
-        if (Validation.checkValueIsEmptyorNull(stridMarque)) {
+            // Récupération des données
+            String stridMarque = request.getParameter("idMarque");
+            String nomModele = request.getParameter("nomModele");
 
-            HttpSession session = request.getSession();
+            boolean errFlag = false;
 
-            session.setAttribute("errMessage2", "Veuillez selectionner une marque");
+            if (Validation.checkValueIsEmptyorNull(stridMarque)) {
 
-            errFlag = true;
-        }
+                session.setAttribute("errMessage2", "Veuillez selectionner une marque");
 
-        if (Validation.checkValueIsEmpty(nomModele)) {
-
-            HttpSession session = request.getSession();
-
-            session.setAttribute("errMessage3", "Veuillez insérer un modèle");
-
-            errFlag = true;
-        } else if (!Validation.checkValueLenght(nomModele, 2, 50)) {
-
-            HttpSession session = request.getSession();
-
-            session.setAttribute("errMessage3", "Le modèle doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
-
-            errFlag = true;
-        }
-
-        if (errFlag) {
-
-            response.sendRedirect("gestionMarqueModele");
-        } else {
-
-            int idMarque = Integer.parseInt(stridMarque);
-
-            // Instanciation
-            MarqueService marqueService = new MarqueService(em);
-            ModeleService modeleService = new ModeleService(em);
-
-            if (modeleService.checkModeleExist(nomModele)) {
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("errMessage2", "Le modèle '" + nomModele + "' existe déjà pour cette marque");
-            } else {
-
-                Marque marque = null;
-
-                try {
-
-                    marque = marqueService.trouver(idMarque);
-                } catch (ServiceException e) {
-
-                    e.printStackTrace();
-                }
-
-                Modele modele = new Modele(nomModele, marque);
-
-                try {
-
-                    transaction.begin();
-
-                    modeleService.creer(modele);
-
-                    transaction.commit();
-                } catch (ServiceException e) {
-
-                    e.printStackTrace();
-                } finally {
-
-                    if (transaction.isActive()) {
-
-                        transaction.rollback();
-                    }
-
-                    if (logger.isInfoEnabled()) {
-
-                        logger.info("Fermeture de l'EntityManager");
-                    }
-
-                    em.close();
-                }
-
-                String strMarque;
-
-                HttpSession session = request.getSession();
-
-                if (marque == null) {
-                    strMarque = "inconnue";
-                } else {
-                    strMarque = marque.getNomMarque();
-                }
-
-                session.setAttribute("succMessage2", "Le modèle '" + nomModele + "' a été ajouté à la marque '" + strMarque + "' avec succès");
+                errFlag = true;
             }
 
-            response.sendRedirect("gestionMarqueModele");
+            if (Validation.checkValueIsEmpty(nomModele)) {
+
+                session.setAttribute("errMessage3", "Veuillez insérer un modèle");
+
+                errFlag = true;
+            } else if (!Validation.checkValueLenght(nomModele, 2, 50)) {
+
+                session.setAttribute("errMessage3", "Le modèle doit être composé d'au minimum 2 caractères et de maximum 50 caractères");
+
+                errFlag = true;
+            }
+
+            if (errFlag) {
+
+                response.sendRedirect("gestionMarqueModele");
+            } else {
+
+                int idMarque = Integer.parseInt(stridMarque);
+
+                // Instanciation
+                MarqueService marqueService = new MarqueService(em);
+                ModeleService modeleService = new ModeleService(em);
+
+                if (modeleService.checkModeleExist(nomModele)) {
+
+                    session.setAttribute("errMessage2", "Le modèle '" + nomModele + "' existe déjà pour cette marque");
+                } else {
+
+                    Marque marque = null;
+
+                    try {
+
+                        marque = marqueService.trouver(idMarque);
+                    } catch (ServiceException e) {
+
+                        e.printStackTrace();
+                    }
+
+                    Modele modele = new Modele(nomModele, marque);
+
+                    try {
+
+                        transaction.begin();
+
+                        modeleService.creer(modele);
+
+                        transaction.commit();
+                    } catch (ServiceException e) {
+
+                        e.printStackTrace();
+                    } finally {
+
+                        if (transaction.isActive()) {
+
+                            transaction.rollback();
+                        }
+
+                        if (logger.isInfoEnabled()) {
+
+                            logger.info("Fermeture de l'EntityManager");
+                        }
+
+                        em.close();
+                    }
+
+                    String strMarque;
+
+                    if (marque == null) {
+                        strMarque = "inconnue";
+                    } else {
+                        strMarque = marque.getNomMarque();
+                    }
+
+                    session.setAttribute("succMessage2", "Le modèle '" + nomModele + "' a été ajouté à la marque '" + strMarque + "' avec succès");
+                }
+
+                response.sendRedirect("gestionMarqueModele");
+            }
+        } else {
+
+            logger.info("hasPermission non OK");
+
+            session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
+            session.setAttribute("retour", "/gestionMarqueModele");
+
+            response.sendRedirect("erreur");
+            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

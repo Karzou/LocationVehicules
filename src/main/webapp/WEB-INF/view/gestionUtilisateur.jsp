@@ -93,9 +93,28 @@
                             </c:forEach>
                         </tbody>
                     </table>
+
                     <c:if test="${sessionScope.role eq 'admin'}">
                         <h2>Liste des utilisateurs inactifs </h2>
+
                         <table class="table-custom">
+                            <thead>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prenom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telephone</th>
+                                <th scope="col">Rue</th>
+                                <th scope="col">Numéro</th>
+                                <th scope="col">Boite</th>
+                                <th scope="col">Code postal</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Rôles</th>
+                                <th scope="col">Autorisation</th>
+                                <th scope="col">Réservation</th>
+                                <th scope="col">Modification</th>
+                                <th scope="col">Activation</th>
+                            </thead>
+
                             <tbody>
                             <c:forEach var="user" items="${utilisateurList}">
                                 <tr>
@@ -103,6 +122,9 @@
                                         <td><c:out value="${user.nomUtilisateur}"/></td>
                                         <td><c:out value="${user.prenomUtilisateur}"/></td>
                                         <td><c:out value="${user.email}"/></td>
+                                        <c:forEach var="telephone" items="${user.telephonesByIdUtilisateur}">
+                                            <td><c:out value="${telephone.numero}"></c:out></td>
+                                        </c:forEach>
                                         <td><c:out value="${user.adressesByIdAdresse.rue}"/>
                                         <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                         <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>

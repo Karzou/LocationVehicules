@@ -3,6 +3,7 @@ package com.controller;
 import com.connection.EMF;
 import com.entity.Marque;
 import com.exception.ServiceException;
+import com.service.AutoriseService;
 import com.service.MarqueService;
 import com.service.Validation;
 import org.apache.log4j.LogManager;
@@ -45,71 +46,78 @@ public class AjoutMarqueServlet extends HttpServlet {
         EntityManager em = EMF.getEM();
         EntityTransaction transaction = em.getTransaction();
 
-        // Récupération des données
-        String nomMarque = request.getParameter("nomMarque");
+        HttpSession session = request.getSession();
+        AutoriseService autoriseService = new AutoriseService(em);
 
-        if (Validation.checkValueIsEmpty(nomMarque)) {
+        if (!(autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "marques:write"))) {
 
-            HttpSession session = request.getSession();
+            // Récupération des données
+            String nomMarque = request.getParameter("nomMarque");
 
-            session.setAttribute("errMessage1", "Veuillez insérer une marque");
+            if (Validation.checkValueIsEmpty(nomMarque)) {
 
-            response.sendRedirect("gestionMarqueModele");
+                session.setAttribute("errMessage1", "Veuillez insérer une marque");
 
-        } else if (!Validation.checkValueLenght(nomMarque, 2, 50)) {
+                response.sendRedirect("gestionMarqueModele");
 
-            HttpSession session = request.getSession();
+            } else if (!Validation.checkValueLenght(nomMarque, 2, 50)) {
 
-            session.setAttribute("errMessage1", "La marque doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
+                session.setAttribute("errMessage1", "La marque doit etre composé d'au minimum 2 caractères et de maximum 50 caractères");
 
-            response.sendRedirect("gestionMarqueModele");
-        } else {
-
-            nomMarque = nomMarque.toUpperCase();
-
-            // Instanciation
-            MarqueService marqueService = new MarqueService(em);
-
-            if (marqueService.checkMarqueExist(nomMarque)) {
-
-                HttpSession session = request.getSession();
-
-                session.setAttribute("errMessage1", "La marque '" + nomMarque + "' existe déjà");
+                response.sendRedirect("gestionMarqueModele");
             } else {
 
-                Marque marque = new Marque(nomMarque);
+                nomMarque = nomMarque.toUpperCase();
 
-                try {
+                // Instanciation
+                MarqueService marqueService = new MarqueService(em);
 
-                    transaction.begin();
+                if (marqueService.checkMarqueExist(nomMarque)) {
 
-                    marqueService.creer(marque);
+                    session.setAttribute("errMessage1", "La marque '" + nomMarque + "' existe déjà");
+                } else {
 
-                    transaction.commit();
-                } catch (ServiceException e) {
+                    Marque marque = new Marque(nomMarque);
 
-                    e.printStackTrace();
-                } finally {
+                    try {
 
-                    if (transaction.isActive()) {
+                        transaction.begin();
 
-                        transaction.rollback();
+                        marqueService.creer(marque);
+
+                        transaction.commit();
+                    } catch (ServiceException e) {
+
+                        e.printStackTrace();
+                    } finally {
+
+                        if (transaction.isActive()) {
+
+                            transaction.rollback();
+                        }
+
+                        if (logger.isInfoEnabled()) {
+
+                            logger.info("Fermeture de l'EntityManager");
+                        }
+
+                        em.close();
                     }
 
-                    if (logger.isInfoEnabled()) {
-
-                        logger.info("Fermeture de l'EntityManager");
-                    }
-
-                    em.close();
+                    session.setAttribute("succMessage1", "La marque '" + nomMarque + "' a été ajouté avec succès");
                 }
 
-                HttpSession session = request.getSession();
-
-                session.setAttribute("succMessage1", "La marque '" + nomMarque + "' a été ajouté avec succès");
+                response.sendRedirect("gestionMarqueModele");
             }
+        } else {
 
-            response.sendRedirect("gestionMarqueModele");
+            logger.info("hasPermission non OK");
+
+            session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
+            session.setAttribute("retour", "/gestionMarqueModele");
+
+            response.sendRedirect("erreur");
+            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }
