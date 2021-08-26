@@ -13,10 +13,10 @@
     <div class="container">
         <c:import url="menu.jsp"/>
 
+        <div class="content-global">
+            <h2>Mes contrats et factures</h2>
 
-    <div class="content-global">
-
-        <table class="table-custom">
+            <table class="table-custom">
                 <thead>
                     <tr>
                         <th scope="col">Date de départ</th>
@@ -76,9 +76,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-
-
-</div>
-<c:import url="footer.jsp"/>
-</body>
+    </div>
+    <c:import url="footer.jsp"/>
+    </body>
 </html>
