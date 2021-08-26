@@ -49,7 +49,7 @@ public class AjoutMarqueServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AutoriseService autoriseService = new AutoriseService(em);
 
-        if (!(autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "marques:write"))) {
+        if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "marques:write"))) {
 
             // Récupération des données
             String nomMarque = request.getParameter("nomMarque");

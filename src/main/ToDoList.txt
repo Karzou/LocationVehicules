@@ -3,8 +3,8 @@
 ---------------
 JO
 -------------------------------------------
-Toutes les validations partie véhicule (JO)
-- Page erreur si pas de co bdd (car pour le moment c est une page 500)
+- Vérification de tout le code + optimisation
+- CSS sur toutes les pages (affichage correct)
 
 Kevin
 -------------------------------------------
@@ -12,8 +12,7 @@ Kevin
 - ajouter permission (pdf, read unique,...).
 - validation js.
 - faire les tests.
-
-
+- ajout bouton réactivation utilisateur dans liste utilisateurs inactifs
 
 Jerome
 ---------------------------
@@ -25,18 +24,30 @@ Jerome
 - FactureService => on va t aider
 - sortie pdf facture / contrat
 ------------------------------------------------------------------------------------------------------------------------
+
 ------------
 |  Fait :  |
 ------------
 JO
 ------------
-Page accueil
-Page recherche véhicule
-Gestion/modification Entrepot
-Gestion/modification Véhicule
-Gestion/modification couleur
-Gestion/modification marque
-Gestion/modification modèle
+- Page accueil
+- Page recherche véhicule
+- Page gestion véhicule
+- Page gestion entrepot
+- Page gestion marque et modèle
+- Page gestion couleur
+- Page ajout couleur
+- Page ajout véhicule
+- Page ajout entrepôt
+- Page ajout marque
+- Page ajout modèle
+- Page modif véhicule
+- Page modif entrepôt
+- Page modif marque
+- Page modif modèle
+- Page modif couleur
+- Ajout validations
+- Ajout hasPermission
 
 Kevin
 --------------
