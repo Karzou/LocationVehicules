@@ -48,9 +48,11 @@
                                     <td><c:out value="${user.nomUtilisateur}"/></td>
                                     <td><c:out value="${user.prenomUtilisateur}"/></td>
                                     <td><c:out value="${user.email}"/></td>
-                                    <c:forEach var="telephone" items="${user.telephonesByIdUtilisateur}">
-                                    <td><c:out value="${telephone.numero}"></c:out></td>
+                                    <td>
+                                    <c:forEach var="tel" items="${user.telephonesByIdUtilisateur}">
+                                        <c:out value="${tel.numero}"></c:out>
                                     </c:forEach>
+                                    </td>
                                     <td><c:out value="${user.adressesByIdAdresse.rue}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
@@ -70,20 +72,20 @@
                                         <td>
                                             <form action="<c:url value="/reservation"/>" method="post">
                                                 <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
-                                                <button type="submit" class="btn-reserv" name="idSup" value="réservations">Réservations client</button>
+                                                <input type="submit" class="btn-reserv" value="Réservations client"/>
                                             </form>
                                         </td>
                                         <td>
                                             <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                                 <input type="hidden" name="idModif" value="${user.idUtilisateur}"/>
-                                                <button type="submit" class="btn-modif" name="idModif">Modifier</button>
+                                                <input type="submit" class="btn-modif" value="Modifier"/>
                                             </form>
                                         </td>
                                         <td>
                                             <c:if test="${(sessionScope.role == 'admin')}">
                                                 <form action="<c:url value="/supUtilisateur"/>" method="post">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
-                                                    <button type="submit" class="btn-sup" name="idSup" value="supprimer">Supprimer</button>
+                                                    <input type="submit" class="btn-sup" value="Désactiver"/>
                                                 </form>
                                             </c:if>
                                         </td>
@@ -122,9 +124,11 @@
                                         <td><c:out value="${user.nomUtilisateur}"/></td>
                                         <td><c:out value="${user.prenomUtilisateur}"/></td>
                                         <td><c:out value="${user.email}"/></td>
-                                        <c:forEach var="telephone" items="${user.telephonesByIdUtilisateur}">
-                                            <td><c:out value="${telephone.numero}"></c:out></td>
+                                        <td>
+                                        <c:forEach var="tel" items="${user.telephonesByIdUtilisateur}">
+                                            <c:out value="${tel.numero}"></c:out>
                                         </c:forEach>
+                                        </td>
                                         <td><c:out value="${user.adressesByIdAdresse.rue}"/>
                                         <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                         <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>
@@ -137,21 +141,29 @@
                                                     <form action="<c:url value="/gestionDroit"/>" method="get">
                                                         <input type="hidden" name="idSup" value="${user.idUtilisateur}">
                                                         <input type="hidden" name="idRole" value="${user.rolesByIdRole.idRole}">
-                                                        <button class="btn-right" name="idSup" type="submit" value="supprimer">Gestion des droits</button>
+                                                        <input type="submit" class="btn-right" value="Gestion des droits"/>
                                                     </form>
                                                 </c:if>
                                             </td>
                                             <td>
                                                 <form action="<c:url value="/reservation"/>" method="post">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}">
-                                                    <button class="btn-reserv" name="idSup" type="submit" value="reservation">Réservations client</button>
+                                                    <input type="submit" class="btn-reserv" value="Réservations client"/>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                                     <input type="hidden" name="idModif" value="${user.idUtilisateur}">
-                                                    <button class="btn-modif" name="idModif" type="submit">Modifier</button>
+                                                    <input type="submit" class="btn-modif" value="Modifier"/>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <c:if test="${(sessionScope.role == 'admin')}">
+                                                    <form action="<c:url value="/reactiveUtilisateur"/>" method="post">
+                                                        <input type="hidden" name="idModif" value="${user.idUtilisateur}">
+                                                        <input type="submit" class="btn-modif" value="Réactiver"/>
+                                                    </form>
+                                                </c:if>
                                             </td>
                                         </c:if>
                                     </c:if>

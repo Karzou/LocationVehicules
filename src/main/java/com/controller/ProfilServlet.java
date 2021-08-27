@@ -21,13 +21,10 @@ public class ProfilServlet extends HttpServlet {
 
     final static Logger logger = LogManager.getLogger(ProfilServlet.class);
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
+
             logger.info("Appel de la methode doGet de ProfilServlet");
         }
 
@@ -35,26 +32,36 @@ public class ProfilServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.removeAttribute("erreur");
-        Utilisateur utilisateur = null;
+
         UtilisateurService utilisateurService = new UtilisateurService(em);
+        Utilisateur utilisateur = null;
 
         try {
-            utilisateur = utilisateurService.trouver((Integer)session.getAttribute("idUtilisateur"));
+
+            utilisateur = utilisateurService.trouver((int)session.getAttribute("idUtilisateur"));
         } catch (ServiceException e) {
+
             session.setAttribute("erreur", "Problème avec le chargement de l'utilisateur. " + e.getMessage());
         }
 
         request.setAttribute("utilisateur", utilisateur);
 
-        if(session.getAttribute("erreur") != null){
+        if (session.getAttribute("erreur") != null){
+
             session.setAttribute("retour", "/profil");
             response.sendRedirect("erreur");
-        }else{
+        } else {
 
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/profil.jsp" ).forward( request, response );
-            if(session.getAttribute("succes") != null){
+
+            if (session.getAttribute("succes") != null) {
+
                 session.removeAttribute("succes");
             }
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

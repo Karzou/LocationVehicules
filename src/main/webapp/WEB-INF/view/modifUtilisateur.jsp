@@ -14,8 +14,6 @@
             <div class="content-global">
                 <h2>Modification utilisateur</h2>
 
-
-
                 <form action="<c:url value="/gestionUtilisateur"/>" method="post">
                     <div class="form-group"id="form-modif">
                         <label>Nom : </label>

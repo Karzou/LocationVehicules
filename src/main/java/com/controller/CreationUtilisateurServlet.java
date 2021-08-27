@@ -21,6 +21,7 @@ import java.sql.Date;
 /**
  * @author Vanconingsloo Kevin
  */
+
 @WebServlet("/creationUtilisateur")
 public class CreationUtilisateurServlet extends HttpServlet {
 
@@ -28,16 +29,20 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
+
             logger.info("Appel du doGet de la servlet CreationUtilisateur");
         }
 
         HttpSession session = request.getSession(false);
 
-        if(session != null) {
-            if (logger.isInfoEnabled()){
+        if (session != null) {
+
+            if (logger.isInfoEnabled()) {
+
                 logger.info("Pas de session ==> redirection login.");
             }
+
             response.sendRedirect("login");
         } else {
 
@@ -46,7 +51,8 @@ public class CreationUtilisateurServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
+
             logger.info("Appel du doPost la servlet CreationUtilisateur");
         }
 
@@ -85,8 +91,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
         Ville ville = null;
 
         HttpSession session = request.getSession();
-
-        session.setAttribute("creation", "ok");
 
         boolean errFlag = false;
 
@@ -270,8 +274,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
                     logger.info("Début de la transaction CreationUtilisateur");
                 }
 
-                transaction.begin();
-
                 try {
 
                     ville = villeService.trouver(idVille);
@@ -307,23 +309,26 @@ public class CreationUtilisateurServlet extends HttpServlet {
                             logger.info("Début de la création de l'utilisateur " + utilisateur.getEmail());
                         }
 
+                        transaction.begin();
+
                         utilisateurService.creer(utilisateur);
-                        Utilisateur utilisateur1 = utilisateurService.trouverParNom(utilisateur.getNomUtilisateur());
+
+                        Utilisateur utilisateur1 = utilisateurService.trouverParEmail(utilisateur.getEmail());
                         TelephoneService telephoneService = new TelephoneService(em);
                         Telephone telephoneDb = new Telephone(telephone, utilisateur1);
+
                         telephoneService.creer(telephoneDb);
+
+                        transaction.commit();
                     } catch (ServiceException e) {
 
                         logger.warn("Problème de création de l'utilisateur " + utilisateur.getEmail() + " " + e);
                     }
                 } else {
 
-                    session.setAttribute("errMessagePass", "Vos mots de passe ne sont pas identiques");
-
+                    session.setAttribute("errRegister4", "les mots de passe ne sont pas identiques");
                     session.setAttribute("erreurFlag", true);
                 }
-
-                transaction.commit();
             } catch ( Exception e ) {
 
                 logger.warn("Problème lors de la transaction de création utilisateur. " + e);
