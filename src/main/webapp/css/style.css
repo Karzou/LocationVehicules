@@ -522,18 +522,19 @@ li {
     background-color: white;
     border-radius: 5px;
     width: 660px;
-    height: 530px;
+    height: auto;
     margin: 7em auto 30px;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    padding-bottom: 70px;
 }
 
 .container-register {
     background-color: white;
     border-radius: 5px;
-    width: 600px;
-    height: 1290px;
+    width: 660px;
+    height: auto;
     margin: 30px auto 50px;
-    padding: 30px;
+    padding-bottom: 50px;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     display: none;
 }
@@ -596,7 +597,7 @@ li {
 
 .content-login {
     width: 400px;
-    height: 300px;
+    height: auto;
     padding-top: 70px;
     margin: auto;
 }
@@ -668,6 +669,7 @@ li {
     width: 400px;
     padding-top: 20px;
     margin: auto;
+    height: auto;
 }
 
 .register-div {
@@ -740,24 +742,25 @@ li {
 }
 
 .btn-register {
-    width: 190px;
+    width: 100%;
     height: 50px;
-    background-color: green;
+    background-color: gold;
     border-radius: 5px;
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 15px;
     border: 0;
     color: white;
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
 .btn-register:hover {
-    background-color: darkgreen;
+    background-color: #F1C40F;
     cursor: pointer;
 }
 
 .btn-reset {
-    width: 190px;
+    width: 100%;
     height: 50px;
     background-color: green;
     border-radius: 5px;

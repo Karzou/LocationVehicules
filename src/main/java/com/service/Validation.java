@@ -31,12 +31,13 @@ public class Validation {
         return false;
     }
 
-    public static boolean validationTelephone( String telephone ){
+    public static boolean validationTelephone( String telephone ) {
         if ( telephone != null  && telephone.matches( "^\\d+$" ) &&  telephone.length() > 7  && telephone.length() < 51) {
               return true;
         }
         return false;
     }
+
     public static boolean validationEmail( String email ){
         if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) && email.length() < 101 ) {
             return false;
@@ -143,6 +144,26 @@ public class Validation {
     public static boolean checkValueIsEmptyorNull(String value) {
 
         if (value == null || value == "") {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkTelephoneFormat(String telephone) {
+
+        if (telephone.matches("\\+?[0-9]*")) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkEmailFormat(String email) {
+
+        if (email != null && email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)") && email.length() <= 100 ) {
 
             return true;
         }

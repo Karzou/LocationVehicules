@@ -14,7 +14,7 @@
         <c:import url="menu.jsp"/>
 
         <div class="content-global">
-            <h2>Mes contrats et factures</h2>
+            <h1>Mes contrats et factures</h1>
 
             <table class="table-custom">
                 <thead>
