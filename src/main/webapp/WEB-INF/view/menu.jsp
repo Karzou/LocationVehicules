@@ -23,7 +23,8 @@
                             <a href="${pageContext.request.contextPath}/gestionReservation">Gestion réservation</a>
                             <a href="${pageContext.request.contextPath}/gestionFacture">Gestion facture</a>
                             <a href="${pageContext.request.contextPath}/gestionContrat">Gestion contrat</a>
-                    </c:when>
+                        </c:when>
+
                         <c:when test="${sessionScope.menu == 'employe'}">
                             <a href="${pageContext.request.contextPath}/gestionUtilisateur">Gestion utilisateur</a>
                             <a href="">Gestion réservation</a>

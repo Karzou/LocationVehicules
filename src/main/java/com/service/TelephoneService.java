@@ -3,6 +3,8 @@ package com.service;
 import com.entity.Telephone;
 import com.entity.Utilisateur;
 import com.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -13,6 +15,8 @@ import java.util.List;
  */
 
 public class TelephoneService {
+
+    private static final Logger LOGGER = LogManager.getLogger(AdresseService.class);
 
     EntityManager em;
 
@@ -30,8 +34,14 @@ public class TelephoneService {
 
     public void creer(Telephone telephone) throws ServiceException {
         try {
+
+            LOGGER.info("Création du numéro de téléphone");
+
             em.persist(telephone);
         } catch (Exception e) {
+
+            LOGGER.warn("Problème lors de la création du numéro de téléphone : " + e);
+
             throw new ServiceException(e);
         }
     }

@@ -9,7 +9,9 @@ import java.util.Objects;
  
 @Entity
 @Table(name = "telephones", schema = "location_vehicules")
-@NamedQuery(name = "Telephone.lister", query = "SELECT t FROM Telephone t WHERE t.utilisateursByIdUtilisateur =:utilisateur")
+@NamedQueries({
+        @NamedQuery(name = "Telephone.lister", query = "SELECT t FROM Telephone t WHERE t.utilisateursByIdUtilisateur = :utilisateur"),
+})
 public class Telephone {
     private int idTelephone;
     private String numero;

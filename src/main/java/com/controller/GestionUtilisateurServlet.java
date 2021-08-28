@@ -24,6 +24,7 @@ import java.util.List;
 /**
  * @author Vanconingsloo Kevin
  */
+
 @WebServlet("/gestionUtilisateur")
 public class GestionUtilisateurServlet extends HttpServlet {
 
@@ -31,23 +32,27 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
+
             logger.info("Appel du doGet de la servlet GestionUtilisateurServlet.");
         }
 
         EntityManager em = EMF.getEM();
         HttpSession session = request.getSession();
 
-        List<Utilisateur> utilisateurList = null;
         UtilisateurService utilisateurService = new UtilisateurService(em);
+        List<Utilisateur> utilisateurList = null;
 
         try {
-            if(logger.isInfoEnabled()){
+
+            if (logger.isInfoEnabled()) {
+
                 logger.info("Importation de la liste utilisateur.");
             }
 
             utilisateurList = utilisateurService.lister();
         } catch (ServiceException e) {
+
             logger.warn("Problème lors de l' 'import de la lite utilisateur. " + e);
         }
 
@@ -55,7 +60,8 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
 
-        if(session.getAttribute("succes") != null){
+        if (session.getAttribute("succes") != null) {
+
             session.removeAttribute("succes");
         }
     }
@@ -89,35 +95,45 @@ public class GestionUtilisateurServlet extends HttpServlet {
         UtilisateurService utilisateurService = new UtilisateurService(em);
         TelephoneService telephoneService = new TelephoneService(em);
         AutoriseService autoriseService = new AutoriseService(em);
-        Telephone telephone1 = new Telephone();
         VilleService villeService = new VilleService(em);
+        Telephone telephone1 = new Telephone();
         Utilisateur utilisateur = null;
         Ville ville = null;
+
         HttpSession session = request.getSession();
 
-        if ( autoriseService.hasPermission((int)session.getAttribute("idRole"), "all") || autoriseService.hasPermission((int)session.getAttribute("idRole"), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == id){
+        if (autoriseService.hasPermission((int)session.getAttribute("idRole"), "all") || autoriseService.hasPermission((int)session.getAttribute("idRole"), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == id){
+
             if(!Validation.validationPrenom(nom)) {
+
                 message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
+
             if(!Validation.validationPrenom(prenom)) {
+
                 message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
+
             if(!Validation.validationTelephone(telephone)){
+
                 message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
                 erreurFlag = true;
             }
 
             if(!Validation.validationAdresse(rue)){
+
                 message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
                 erreurFlag = true;
             }
 
             if(!Validation.validationNumAdresse(numero)){
+
                 message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
                 erreurFlag = true;
             }
+
             if(!erreurFlag) {
                 nom = Validation.ucFirst(nom);
                 prenom = Validation.ucFirst(prenom);
