@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Gestion contrat</title>
     <c:import url="head.jsp"/>
 </head>
@@ -22,6 +22,8 @@
             <table class="table-custom">
                 <thead>
                 <th scope="col">N° de contrat</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
                 <th scope="col">Acompte</th>
                 <th scope="col">Caution</th>
                 <th scope="col">Etat</th>
@@ -31,29 +33,32 @@
                 </thead>
 
                 <tbody>
-                <%--création d'une variable temporaire nommée "facture" (uniquement présente dans le foreach)--%>
-                <%--items="${factureList} provient de FactureServlet => request.setAttribute("factureList", factureList);--%>
+                <%--création d'une variable temporaire nommée "contrat" (uniquement présente dans le foreach)--%>
+                <%--items="${contratList} provient de ContratServlet => request.setAttribute("contratList", contratList);--%>
                 <c:forEach var="contrat" items="${contratList}">
-
                     <tr>
                         <td><c:out value="${contrat.getIdContrat()}"/></td>
+                        <td><c:out
+                                value="${contrat.getReservation().getUtilisateursByIdUtilisateur().getNomUtilisateur()}"></c:out></td>
+                        <td><c:out
+                                value="${contrat.getReservation().getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}"></c:out></td>
                         <td><c:out value="${contrat.getAcompte()}"/></td>
                         <td><c:out value="${contrat.getCaution()}"/></td>
                         <td><c:out value="${contrat.getEtat().toString()}"/></td>
                         <td class="align-center">
-                            <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${contrat.getIdContrat()}">
-                            <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                            <a target="_blank"
+                               href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${contrat.getIdContrat()}">
+                                <img class="pdfLogo-content-img"
+                                     src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
                             </a>
                         </td>
-                        <td>
+                        <td class="align-center">
                             <form action="<c:url value="/modifContrat"/>" method="post">
                                 <input type="hidden" name="idModif" value="${contrat.getIdContrat()}"/>
                                 <button type="submit" class="btn-modif" name="idModif">Modifier</button>
                             </form>
                         </td>
-
                     </tr>
-
                 </c:forEach>
                 </tbody>
             </table>

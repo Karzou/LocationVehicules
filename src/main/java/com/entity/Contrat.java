@@ -21,7 +21,7 @@ public class Contrat {
     private float caution;
     private Etat etat;
     private List<Facture> facturesByIdContrat;
-    private List<Reservation> reservationsByIdContrat;
+    private Reservation reservation;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,12 +73,12 @@ public class Contrat {
                 Float.compare(contrat.caution, caution) == 0 &&
                 etat == contrat.etat &&
                 Objects.equals(facturesByIdContrat, contrat.facturesByIdContrat) &&
-                Objects.equals(reservationsByIdContrat, contrat.reservationsByIdContrat);
+                Objects.equals(reservation, contrat.reservation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idContrat, acompte, caution, etat, facturesByIdContrat, reservationsByIdContrat);
+        return Objects.hash(idContrat, acompte, caution, etat, facturesByIdContrat, reservation);
     }
 
     @OneToMany(mappedBy = "contratsByIdContrat")
@@ -90,12 +90,12 @@ public class Contrat {
         this.facturesByIdContrat = facturesByIdContrat;
     }
 
-    @OneToMany(mappedBy = "contratsByIdContrat")
-    public List<Reservation> getReservationsByIdContrat() {
-        return reservationsByIdContrat;
+    @OneToOne(mappedBy = "contratsByIdContrat")
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setReservationsByIdContrat(List<Reservation> reservationsByIdContrat) {
-        this.reservationsByIdContrat = reservationsByIdContrat;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 }

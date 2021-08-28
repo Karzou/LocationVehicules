@@ -60,7 +60,7 @@
             </div>
             <div class="div-input-modif">
                 <label class="label-input">Nom et prénom : </label>
-                <input class="input-modif" type="text" name="idFacture" value="${contrat.getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getNomUtilisateur()} ${contrat.getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}" readonly>
+                <input class="input-modif" type="text" name="idFacture" value="${contrat.getReservation().getUtilisateursByIdUtilisateur().getNomUtilisateur()} ${contrat.getReservation().getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}" readonly>
             </div>
 
             </fieldset>

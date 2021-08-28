@@ -47,10 +47,9 @@
             </c:if>
         </div>
 
+                <form action="<c:url value="/gestionFacture"/>" method="post">
 
-        <form action="<c:url value="/gestionFacture"/>" method="post">
-
-            <!-- Le champ numéro de facture est en readonly-->
+                       <!-- Le champ numéro de facture est en readonly-->
             <fieldset disabled>
                 <legend><b>   Données non modifiables   </b></legend>
                 <br />
@@ -59,9 +58,13 @@
                 <input class="input-modif" type="int" name="idFacture" value="${facture.idFacture}" readonly>
             </div>
                 <div class="div-input-modif">
+
+
                     <label class="label-input">Nom et prénom : </label>
-                    <input class="input-modif" type="text" name="idFacture" value="${facture.getContratsByIdContrat().getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getNomUtilisateur()} ${facture.getContratsByIdContrat().getReservationsByIdContrat().get(0).getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}" readonly>
-                </div>
+                    <input class="input-modif" type="text" name="idFacture" value="${facture.getContratsByIdContrat().getReservation().getUtilisateursByIdUtilisateur().getNomUtilisateur()} ${facture.getContratsByIdContrat().getReservation().getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}" readonly disabled>
+
+
+                 </div>
             </fieldset>
             <br />
             <br />
@@ -87,7 +90,11 @@
 
             <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
             <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionFacture">
+
+
         </form>
+
+
     </div>
 
     <c:import url="footer.jsp"/>

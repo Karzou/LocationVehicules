@@ -54,23 +54,17 @@ public class FactureServlet extends HttpServlet {
             factureList = factureService.findAll();
             Set<Integer> myFactureIds = new HashSet<>();
 
-            for (Facture facture: factureList) {
-                List<Reservation> reservationsByIdContrat = facture.getContratsByIdContrat().getReservationsByIdContrat();
-                for (Reservation reservation: reservationsByIdContrat) {
-                    if(reservation.getUtilisateursByIdUtilisateur().getIdUtilisateur() == idUtilisateur){
-                        myFactureIds.add(facture.getIdFacture());
-                    }
+            for (Facture facture : factureList) {
+                Reservation reservation = facture.getContratsByIdContrat().getReservation();
+                if (reservation.getUtilisateursByIdUtilisateur().getIdUtilisateur() == idUtilisateur) {
+                    myFactureIds.add(facture.getIdFacture());
                 }
             }
 
             myFactureList = factureList.stream().filter(f ->
                     myFactureIds.contains(f.getIdFacture())
             ).collect(Collectors.toList());
-        }
-
-
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
 
@@ -78,18 +72,18 @@ public class FactureServlet extends HttpServlet {
         //finally, il passe d'office par là
         //dans ce cas, il ajoute une information dans le fichier log et il clos la connexion à la DB
         finally {
-            if(logger.isInfoEnabled()) {
+            if (logger.isInfoEnabled()) {
                 logger.info("Fermeture de l'EntityManager");
             }
             em.close();
         }
         //factureList.get(0).getContratsByIdContrat().getReservationsByIdContrat().get(0).getDateDebutLocation();
- //factureList.get(0).getContratsByIdContrat().getReservationsByIdContrat().
+        //factureList.get(0).getContratsByIdContrat().getReservationsByIdContrat().
         // ajout d'un attribut s:"factureList sur la réponse de la requête précédente'
         request.setAttribute("factureList", myFactureList);
 
         //Affichage de la page avec deux élements request, reponse
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/facture.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/facture.jsp").forward(request, response);
     }
 
     //utiliser pour un formulaires avec le submit

@@ -47,7 +47,7 @@ public class PdfServlet extends HttpServlet {
                 inputStream = pdfGeneratorService.generateContratPdf(Integer.valueOf(contratId));
             } else
             {
-                throw new Exception("The task to do is unknow!!!");
+                throw new Exception("La tâche à faire est inconnue!");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -132,7 +132,7 @@ public class Reservation {
         this.paiementsByIdPaiement = paiementsByIdPaiement;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Id_contrat", referencedColumnName = "Id_contrat", nullable = false)
     public Contrat getContratsByIdContrat() {
         return contratsByIdContrat;

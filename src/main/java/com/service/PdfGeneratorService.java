@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PdfGeneratorService {
     private static final Logger LOGGER = LogManager.getLogger(PdfGeneratorService.class);
@@ -47,7 +46,7 @@ public class PdfGeneratorService {
 // Start a new content stream which will "hold" the to be created content
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        mangaReservation(font, contentStream, facture.getContratsByIdContrat());
+        manageReservation(font, contentStream, facture.getContratsByIdContrat());
 
         contentStream.beginText();
         contentStream.setFont(font, 12);
@@ -64,7 +63,7 @@ public class PdfGeneratorService {
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 600);
-        contentStream.drawString("Date facture : " + String.valueOf(facture.getPrixFacture()));
+        contentStream.drawString("Prix : " + String.valueOf(facture.getPrixFacture()) + " €");
         contentStream.endText();
 
 // Make sure that the content stream is closed:
@@ -82,37 +81,30 @@ public class PdfGeneratorService {
         return inputStream;
     }
 
-    private void mangaReservation(PDFont font, PDPageContentStream contentStream, Contrat contratsByIdContrat) throws IOException {
-        List<Reservation> reservationsByIdContratList = contratsByIdContrat.getReservationsByIdContrat();
-        if (reservationsByIdContratList != null && reservationsByIdContratList.size() > 0) {
-            //reservationsByIdContratList va etre mis dans reservationsByIdContrat de type objet Reservation
-            for (Reservation reservationsByIdContrat : reservationsByIdContratList) {
-                //Continuation du chemin
-                final Utilisateur utilisateursByIdUtilisateur = reservationsByIdContrat.getUtilisateursByIdUtilisateur();
+    private void manageReservation(PDFont font, PDPageContentStream contentStream, Contrat contratsByIdContrat) throws IOException {
+        final Reservation reservation = contratsByIdContrat.getReservation();
+        //Continuation du chemin
+        final Utilisateur utilisateursByIdUtilisateur = reservation.getUtilisateursByIdUtilisateur();
 
-                contentStream.beginText();
-                contentStream.setFont(font, 12);
-                contentStream.moveTextPositionByAmount(100, 700);
-                contentStream.drawString("Nom : " + String.valueOf(utilisateursByIdUtilisateur.getNomUtilisateur()));
-                contentStream.endText();
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 700);
+        contentStream.drawString("Nom : " + String.valueOf(utilisateursByIdUtilisateur.getNomUtilisateur()));
+        contentStream.endText();
 
-                contentStream.beginText();
-                contentStream.setFont(font, 12);
-                contentStream.moveTextPositionByAmount(100, 680);
-                contentStream.drawString("Prénom : " + String.valueOf(utilisateursByIdUtilisateur.getPrenomUtilisateur()));
-                contentStream.endText();
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 680);
+        contentStream.drawString("Prénom : " + String.valueOf(utilisateursByIdUtilisateur.getPrenomUtilisateur()));
+        contentStream.endText();
 
-                final Adresse adressesByIdAdresse = utilisateursByIdUtilisateur.getAdressesByIdAdresse();
+        final Adresse adressesByIdAdresse = utilisateursByIdUtilisateur.getAdressesByIdAdresse();
 
-                contentStream.beginText();
-                contentStream.setFont(font, 12);
-                contentStream.moveTextPositionByAmount(100, 660);
-                contentStream.drawString("Adresse : " + String.valueOf(adressesByIdAdresse.getRue() + adressesByIdAdresse.getNumero()));
-                contentStream.endText();
-
-            }
-// Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
-        }
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 660);
+        contentStream.drawString("Adresse : " + String.valueOf(adressesByIdAdresse.getRue() + " " + adressesByIdAdresse.getNumero()));
+        contentStream.endText();
     }
 
 
@@ -133,23 +125,29 @@ public class PdfGeneratorService {
 // Start a new content stream which will "hold" the to be created content
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        mangaReservation(font, contentStream, contrat);
+        manageReservation(font, contentStream, contrat);
 
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 640);
-        contentStream.drawString("Acompte : " + String.valueOf(contrat.getAcompte()));
+        contentStream.drawString("Numéro de contrat : " + String.valueOf(contrat.getIdContrat()));
         contentStream.endText();
 
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 620);
-        contentStream.drawString("Caution : " + String.valueOf(contrat.getCaution()));
+        contentStream.drawString("Acompte : " + String.valueOf(contrat.getAcompte()) + " €");
         contentStream.endText();
 
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 600);
+        contentStream.drawString("Caution : " + String.valueOf(contrat.getCaution()) + " €");
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 580);
         contentStream.drawString("Etat: " + String.valueOf(contrat.getEtat()));
         contentStream.endText();
 

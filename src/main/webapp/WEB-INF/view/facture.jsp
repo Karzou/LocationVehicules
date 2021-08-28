@@ -35,45 +35,27 @@
                 <%--création d'une variable temporaire nommée "facture" (uniquement présente dans le foreach)--%>
                 <%--items="${factureList} provient de FactureServlet => request.setAttribute("factureList", factureList);--%>
                 <c:forEach var="facture" items="${factureList}">
-                    <c:choose>
-                        <c:when test="${facture.getContratsByIdContrat().getReservationsByIdContrat().size()>0}">
-                            <c:forEach var="reservation" items="${facture.getContratsByIdContrat().getReservationsByIdContrat()}">
-                                <tr>
-                                    <td><c:out value="${reservation.getDateDebutLocation().toString()}"/></td>
-                                    <td><c:out value="${reservation.getDateFinLocation().toString()}"/></td>
-                                    <td><c:out value="${reservation.getVehiculesByIdVehicule().getModelesByIdModele().getNomModele()}"/></td>
-                                    <td><c:out value="${facture.prixFacture}"/></td>
-                                    <td><c:out value="${facture.getContratsByIdContrat().getEtat().toString()}"/></td>
-                                    <td><c:out value="${facture.getContratsByIdContrat().getIdContrat()}"/></td>
-                                    <td class="align-center">
-                                        <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${facture.getContratsByIdContrat().getIdContrat()}">
-                                        <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
-                                        </a>
-                                    </td>
-                                    <td><c:out value="${facture.idFacture}"/></td>
-                                    <td class="align-center">
-                                        <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=facture&factureId=${facture.getIdFacture()}">
-                                            <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><c:out value="${facture.prixFacture}"/></td>
-                                <td><c:out value="${facture.getContratsByIdContrat().getEtat().toString()}"/></td>
-                                <td><c:out value="${facture.getContratsByIdContrat().getIdContrat()}"/></td>
-                                <td><a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${facture.getContratsByIdContrat().getIdContrat()}">pdf</a></td>
-                                <td><c:out value="${facture.idFacture}"/></td>
-                                <td > <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=facture&factureId=${facture.getIdFacture()}">pdf</a></td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
+                    <tr>
+                        <td><c:out value="${facture.getContratsByIdContrat().getReservation().getDateDebutLocation().toString()}"/></td>
+                        <td><c:out value="${facture.getContratsByIdContrat().getReservation().getDateFinLocation().toString()}"/></td>
+                        <td><c:out value="${facture.getContratsByIdContrat().getReservation().getVehiculesByIdVehicule().getModelesByIdModele().getNomModele()}"/></td>
+                        <td><c:out value="${facture.prixFacture}"/></td>
+                        <td><c:out value="${facture.getContratsByIdContrat().getEtat().toString()}"/></td>
+                        <td><c:out value="${facture.getContratsByIdContrat().getIdContrat()}"/></td>
+                        <td class="align-center">
+                            <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=contrat&contratId=${facture.getContratsByIdContrat().getIdContrat()}">
+                            <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                            </a>
+                        </td>
+                        <td><c:out value="${facture.idFacture}"/></td>
+                        <td class="align-center">
+                            <a target="_blank" href="${pageContext.request.contextPath}/pdf?type=facture&factureId=${facture.getIdFacture()}">
+                                <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
+                            </a>
+                        </td>
+                    </tr>
                 </c:forEach>
+
                 </tbody>
             </table>
 

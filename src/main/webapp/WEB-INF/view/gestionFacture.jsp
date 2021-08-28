@@ -23,7 +23,8 @@
             <table class="table-custom">
                 <thead>
                 <th scope="col">N° de facture</th>
-                <th>Nom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
                 <th scope="col">Date facture</th>
                 <th scope="col">Prix facture ( &euro; ) </th>
                 <th scope="col">Pdf facture</th>
@@ -35,12 +36,12 @@
                 <%--création d'une variable temporaire nommée "facture" (uniquement présente dans le foreach)--%>
                 <%--items="${factureList} provient de FactureServlet => request.setAttribute("factureList", factureList);--%>
                 <c:forEach var="facture" items="${factureList}">
-                <c:forEach var="contrat" items="${facture.getContratsByIdContrat().getReservationsByIdContrat()}">
 
                 <tr>
                             <td><c:out value="${facture.idFacture}"/></td>
 
-                            <td><c:out value="${contrat.getUtilisateursByIdUtilisateur().getNomUtilisateur()}"></c:out></td>
+                            <td><c:out value="${facture.getContratsByIdContrat().getReservation().getUtilisateursByIdUtilisateur().getNomUtilisateur()}"></c:out></td>
+                            <td><c:out value="${facture.getContratsByIdContrat().getReservation().getUtilisateursByIdUtilisateur().getPrenomUtilisateur()}"></c:out></td>
                             <td><c:out value="${facture.dateFacture}"/></td>
                             <td><c:out value="${facture.prixFacture}"/></td>
                             <td class="align-center">
@@ -48,7 +49,7 @@
                                  <img class="pdfLogo-content-img" src="${pageContext.request.contextPath}/images/pdfLogo.png" alt="logo"/>
                                  </a>
                             </td>
-                            <td>
+                            <td class="align-center">
                                 <form action="<c:url value="/modifFacture"/>" method="post">
                                    <input type="hidden" name="idModif" value="${facture.idFacture}"/>
                                    <button type="submit" class="btn-modif" name="idModif">Modifier</button>
@@ -56,7 +57,6 @@
                             </td>
 
                 </tr>
-                </c:forEach>
                 </c:forEach>
                 </tbody>
             </table>
