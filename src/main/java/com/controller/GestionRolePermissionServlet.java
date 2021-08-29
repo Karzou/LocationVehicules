@@ -136,10 +136,9 @@ public class GestionRolePermissionServlet extends HttpServlet {
         session.setAttribute("retour", null);
 
         if(ajoutRoleFlag != null){
-
             String nomRole = request.getParameter("nomRole").trim();
 
-            if( !Validation.checkValueLenght(nomRole, 1, 50) && !Validation.checkValueIsEmpty(nomRole)){
+            if( !Validation.checkValueLenght(nomRole, 1, 50) || Validation.checkValueIsEmpty(nomRole)){
                 if(logger.isInfoEnabled()){
                     logger.info("Nom du role pas valide: " + nomRole);
                 }
@@ -325,8 +324,8 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 logger.info("Redirection vers erreur.");
             }
             session.setAttribute("retour", "/gestionRolePermission");
-            response.sendRedirect("erreur");
-
+           // response.sendRedirect("erreur");
+            this.getServletContext().getRequestDispatcher("/WEB-INF/view/gestionRolePermission.jsp").forward( request, response );
         }else {
             if(logger.isInfoEnabled()){
                 logger.info("OK");
