@@ -14,10 +14,11 @@
             <div class="content-global">
                 <h2>Modification utilisateur</h2>
 
-                <form action="<c:url value="/gestionUtilisateur"/>" method="post">
+                <form action="<c:url value="/gestionUtilisateur"/>" id="modifUser" name="modifUser" method="post" onsubmit="return validateModifUser()">
                     <div class="form-group"id="form-modif">
                         <label>Nom : </label>
-                        <input class="input-modif" type="text" name="nom" value="${utilisateur.nomUtilisateur}">
+                        <input class="input-modif" type="text" name="nom" id="nom" value="${utilisateur.nomUtilisateur}">
+                        <span class="error" id="errorNomModif"></span></p>
                     </div>
                     <div class="form-group"id="form-modif2">
                         <label>Prenom : </label>

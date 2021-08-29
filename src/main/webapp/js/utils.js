@@ -117,7 +117,7 @@ function resetInputDateDepart() {
     if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value == "" || heureDepart.value == null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une heure de départ";
+        error.innerHTML = "Veuillez choisir une heure de dï¿½part";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
@@ -134,7 +134,7 @@ function resetInputHeureDepart() {
     if (((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une date de départ";
+        error.innerHTML = "Veuillez choisir une date de dï¿½part";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
@@ -188,7 +188,7 @@ function validateSearchVehicle() {
     const heureRetour = document.forms["searchVehicle"]["heureRetour"];
 
     if (lieuDepart.value == "" || lieuDepart.value == null) {
-        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de départ";
+        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de dï¿½part";
         LieuDepart.style.border = "1px solid red";
         LieuDepart.style.boxShadow = "0 0 1px 2px red";
 
@@ -210,7 +210,7 @@ function validateSearchVehicle() {
     }
 
     if ((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value == "" || heureDepart.value == null)) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de départ";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de dï¿½part";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.style.border = "1px solid red";
@@ -218,14 +218,14 @@ function validateSearchVehicle() {
 
         result = false;
     } else if (dateDepart.value == "" || dateDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de départ";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de dï¿½part";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.removeAttribute('style');
 
         result = false;
     } else if (heureDepart.value == "" || heureDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de départ";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de dï¿½part";
         heureDepart.style.border = "1px solid red";
         heureDepart.style.boxShadow = "0 0 1px 2px red";
         dateDepart.removeAttribute('style');
@@ -266,4 +266,20 @@ function validateSearchVehicle() {
     }
 
     return result;
+}
+
+function validateModifUser(){
+    var name = document.forms["modifUser"]["nom"]
+    var inputName = document.getElementById("nom")
+    var result = true
+    window.alert("coucou")
+    if (name.value == "" || name.value.length < 2){
+        var e = document.getElementById("errorNomModif");
+        e.innerHTML ="Veuillez entrer un nom valide."
+        name.focus()
+        result = false;
+    }else{
+        document.getElementById("errorNomModif").innerHTML = "";
+    }
+    return result
 }

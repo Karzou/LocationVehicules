@@ -17,9 +17,20 @@
                 <h1>Mon profil</h1>
 
                 <c:if test="${not empty succes}">
-                    <div class="login-div-success">
-                        <span style="color:green">${succes}</span>
+                    <div class="success-message-admin">
+                        <div class="success-message-admin-title">
+                            <div class="success-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                            </div>
+                            <div class="success-message-admin-title-txt">
+                                <p>Félicitation</p>
+                            </div>
+                        </div>
+                        <div class="success-message-admin-body-txt">
+                            <div>${succes}</div>
+                        </div>
                     </div>
+                    <c:remove var="succes" scope="session" />
                 </c:if>
 
                 <table class="table-custom">
