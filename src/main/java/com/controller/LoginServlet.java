@@ -66,8 +66,8 @@ public class LoginServlet extends HttpServlet {
         if(logger.isInfoEnabled()){
             logger.info("Ouverture em gestion utilisateur do post");
         }
-        String userName = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
         UtilisateurService utilisateurService = new UtilisateurService(em);
         Utilisateur utilisateur = null;
         VilleService villeService = new VilleService(em);
@@ -82,52 +82,54 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("villes", villeList);
         boolean errFlag = false;
 
-        if (Validation.checkValueIsEmpty(userName)) {
-            session.setAttribute("errLogin1", "Veuillez insérer votre email");
-            errFlag = true;
-        }
-        if (Validation.checkValueIsEmpty(password)) {
-            session.setAttribute("errLogin2", "Veuillez insérer votre password");
-            errFlag = true;
-        }
-        if (errFlag) {
-            response.sendRedirect("login");
-        } else {
-            if (utilisateurService.checkLogin(userName, password)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("CheckLogin OK " + userName);
-                }
-
-                try {
-                    utilisateur = utilisateurService.trouverParEmail(userName);
-                } catch (ServiceException e) {
-                    logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
-                }
-                session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
-                session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
-                session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
-                session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
-
-                if (autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:admin")) {
-                    session.setAttribute("menu", "admin");
-                } else if (autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:employe")) {
-                    session.setAttribute("menu", "employe");
-                } else {
-                    session.setAttribute("menu", "client");
-                }
-                em.close();
-                if(logger.isInfoEnabled()){
-                    logger.info("Fermeture em gestion utilisateur do post");
-                }
-                response.sendRedirect("accueil");
-            } else {
-                if (logger.isInfoEnabled()) {
-                    logger.info("Problème du mail ou password erronné. " + userName);
-                }
-                session.setAttribute("errLogin", "Email ou mot de passe incorrect");
-                response.sendRedirect("login");
+            if (Validation.checkValueIsEmpty(userName)) {
+                session.setAttribute("errLogin1", "Veuillez insérer votre email");
+                errFlag = true;
             }
-        }
+            if (Validation.checkValueIsEmpty(password)) {
+                session.setAttribute("errLogin2", "Veuillez insérer votre password");
+                errFlag = true;
+            }
+            if (errFlag) {
+                response.sendRedirect("login");
+            } else {
+                if (utilisateurService.checkLogin(userName, password)) {
+                    if (logger.isInfoEnabled()) {
+                        logger.info("CheckLogin OK " + userName);
+                    }
+                    try {
+                        utilisateur = utilisateurService.trouverParEmail(userName);
+                    } catch (ServiceException e) {
+                        logger.warn("Problème lors de la recherche du mail " + userName + " en db. " + e);
+                    }
+                    session.setAttribute("role", utilisateur.getRolesByIdRole().getRoleDescription());
+                    session.setAttribute("prenomUtilisateur", utilisateur.getPrenomUtilisateur());
+                    session.setAttribute("idRole", utilisateur.getRolesByIdRole().getIdRole());
+                    session.setAttribute("idUtilisateur", utilisateur.getIdUtilisateur());
+
+                    if (autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:admin")) {
+                        session.setAttribute("menu", "admin");
+                    } else if (autoriseService.hasPermission(utilisateur.getRolesByIdRole().getIdRole(), "menu:employe")) {
+                        session.setAttribute("menu", "employe");
+                    } else {
+                        session.setAttribute("menu", "client");
+                    }
+                    em.close();
+                    if(logger.isInfoEnabled()){
+                        logger.info("Fermeture em gestion utilisateur do post");
+                    }
+                    response.sendRedirect("accueil");
+                } else {
+                    if (logger.isInfoEnabled()) {
+                        logger.info("Problème du mail ou password erronné. " + userName);
+                    }
+                    session.setAttribute("errLogin", "Email ou mot de passe incorrect");
+                    response.sendRedirect("login");
+                }
+
+            }
+
     }
 }
+
 

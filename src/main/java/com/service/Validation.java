@@ -34,7 +34,7 @@ public class Validation {
 
     public static boolean checkValueIsEmpty(String value) {
 
-        if (value.isEmpty()) {
+        if (checkValueIsEmptyorNull(value)) {
 
             return true;
         }

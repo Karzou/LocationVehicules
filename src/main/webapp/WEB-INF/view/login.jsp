@@ -17,7 +17,7 @@
 
             <div class="content-login">
                 <div>
-                    <c:if test="${(sessionScope.errLogin != null) or (sessionScope.errLogin1 != null) or (sessionScope.errLogin2 != null)}">
+                    <c:if test="${empty sessionScope.success and ((sessionScope.errLogin != null) or (sessionScope.errLogin1 != null) or (sessionScope.errLogin2 != null))}">
                         <div class="error-message-admin">
                             <div class="error-message-admin-title">
                                 <div class="error-message-admin-title-img">

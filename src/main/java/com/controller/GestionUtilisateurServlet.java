@@ -113,11 +113,11 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
         if (autoriseService.hasPermission((int)session.getAttribute("idRole"), "all") || autoriseService.hasPermission((int)session.getAttribute("idRole"), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == id){
 
-            if(!Validation.checkValueIsEmpty(nom) && !Validation.checkValueLenght(nom, 2, 50)) {
+            if(Validation.checkValueIsEmpty(nom) || !Validation.checkValueLenght(nom, 2, 50)) {
                 message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
-            if(!Validation.checkValueIsEmpty(prenom) && !Validation.checkValueLenght(prenom, 2, 50)) {
+            if(Validation.checkValueIsEmpty(prenom) || !Validation.checkValueLenght(prenom, 2, 50)) {
                 message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
@@ -126,12 +126,12 @@ public class GestionUtilisateurServlet extends HttpServlet {
                 message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
                 erreurFlag = true;
             }
-            if(!Validation.checkValueIsEmpty(rue) && !Validation.checkValueLenght(rue, 6, 100)){
+            if(Validation.checkValueIsEmpty(rue) && !Validation.checkValueLenght(rue, 6, 100)){
                 message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
                 erreurFlag = true;
             }
 
-            if(!Validation.checkValueLenght(numero, 1, 10) && !Validation.checkValueIsEmpty(rue)){
+            if(!Validation.checkValueLenght(numero, 1, 10) || Validation.checkValueIsEmpty(rue)){
                 message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
                 erreurFlag = true;
             }

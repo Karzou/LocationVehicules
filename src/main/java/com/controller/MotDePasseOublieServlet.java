@@ -88,8 +88,8 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
             MailSender.sendMail(email);
 
-            request.setAttribute("succes", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail() + " .");
-
+            session.setAttribute("success", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail() + " .");
+            request.setAttribute("forgotFlag", "OK");
             this.getServletContext().getRequestDispatcher("/login").forward( request, response );
             }
         }
