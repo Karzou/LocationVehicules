@@ -14,7 +14,21 @@
             <div class="content-global">
                 <h2>Ajout de rôle</h2>
 
-                <span style="color:red">${sessionScope.erreur}</span>
+                <c:if test="${not empty sessionScope.erreur}">
+                    <div class="error-message-admin">
+                        <div class="error-message-admin-title">
+                            <div class="error-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                            </div>
+                            <div class="error-message-admin-title-txt">
+                                <p>Une erreur est survenue</p>
+                            </div>
+                        </div>
+                        <div class="error-message-admin-body-txt">
+                            <div>${sessionScope.erreur}</div>
+                        </div>
+                    </div>
+                </c:if>
 
                 <form action="<c:url value="/gestionRolePermission"/>" method="post">
                     <div class="div-input-modif">
@@ -31,7 +45,19 @@
                 <h2>Liste des rôles et permissions</h2>
 
                 <c:if test="${not empty sessionScope.adminSafe}">
-                    <span style="color:red">${sessionScope.adminSafe}</span>
+                    <div class="error-message-admin">
+                        <div class="error-message-admin-title">
+                            <div class="error-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                            </div>
+                            <div class="error-message-admin-title-txt">
+                                <p>Une erreur est survenue</p>
+                            </div>
+                        </div>
+                        <div class="error-message-admin-body-txt">
+                            <div>${sessionScope.adminSafe}</div>
+                        </div>
+                    </div>
                 </c:if>
 
                 <div>

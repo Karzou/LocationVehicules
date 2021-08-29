@@ -15,33 +15,58 @@
                 <h2>Liste des utilisateurs actifs</h2>
 
                 <c:if test="${not empty succes}">
-                    <div class="login-div-success">
-                        <span style="color:green">${succes}</span>
+                    <div class="success-message-admin">
+                        <div class="success-message-admin-title">
+                            <div class="success-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                            </div>
+                            <div class="success-message-admin-title-txt">
+                                <p>Félicitation</p>
+                            </div>
+                        </div>
+                        <div class="success-message-admin-body-txt">
+                            <div>${succes}</div>
+                        </div>
+                    </div>
+                    <c:remove var="succes" scope="session" />
+                </c:if>
+
+                <c:if test="${not empty sessionScope.erreur}">
+                    <div class="error-message-admin">
+                        <div class="error-message-admin-title">
+                            <div class="error-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                            </div>
+                            <div class="error-message-admin-title-txt">
+                                <p>Une erreur est survenue</p>
+                            </div>
+                        </div>
+                        <div class="error-message-admin-body-txt">
+                            <div>${sessionScope.erreur}</div>
+                        </div>
                     </div>
                 </c:if>
 
-                <span style="color:#ff0000">${sessionScope.erreur}</span>
+                <table class="table-custom">
+                    <thead>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telephone</th>
+                        <th scope="col">Rue</th>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Boite</th>
+                        <th scope="col">Code postal</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Rôles</th>
+                        <th scope="col">Autorisation</th>
+                        <th scope="col">Réservation</th>
+                        <th scope="col">Modification</th>
+                        <th scope="col">Activation</th>
+                    </thead>
 
-                    <table class="table-custom">
-                        <thead>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Prenom</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telephone</th>
-                            <th scope="col">Rue</th>
-                            <th scope="col">Numéro</th>
-                            <th scope="col">Boite</th>
-                            <th scope="col">Code postal</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Rôles</th>
-                            <th scope="col">Autorisation</th>
-                            <th scope="col">Réservation</th>
-                            <th scope="col">Modification</th>
-                            <th scope="col">Activation</th>
-                        </thead>
-
-                        <tbody>
-                            <c:forEach var="user" items="${utilisateurList}">
+                    <tbody>
+                        <c:forEach var="user" items="${utilisateurList}">
                             <tr>
                                 <c:if test="${user.actifUtilisateur}">
                                     <td><c:out value="${user.nomUtilisateur}"/></td>
