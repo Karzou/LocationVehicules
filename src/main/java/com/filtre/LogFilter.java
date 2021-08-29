@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
 public class LogFilter implements Filter {
 
     public void init( FilterConfig config ) throws ServletException {
@@ -26,7 +25,7 @@ public class LogFilter implements Filter {
           l'utilisateur n'est pas connecté.
          */
         if ( session.getAttribute( "idUtilisateur" ) == null ) {
-            /* Redirection vers la page publique */
+            /* Redirection vers la page login */
             response.sendRedirect("login");
         } else {
             /* Affichage de la page restreinte */

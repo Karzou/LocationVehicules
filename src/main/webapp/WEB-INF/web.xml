@@ -7,7 +7,7 @@
     <welcome-file-list>
         <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
     </welcome-file-list>
-    
+
     <servlet>
         <servlet-name>MotDePasseOublieServlet</servlet-name>
         <servlet-class>com.controller.MotDePasseOublieServlet</servlet-class>
@@ -35,31 +35,30 @@
     <filter-mapping>
         <filter-name>logFilter</filter-name>
         <url-pattern>/accueil</url-pattern>
-        <url-pattern>/gestionDroit</url-pattern>
-        <url-pattern>/gestionEntrepot</url-pattern>
-        <url-pattern>/gestionUtilisateur</url-pattern>
-        <url-pattern>/gestionReservation</url-pattern>
-        <url-pattern>/modifEntrepot</url-pattern>
         <url-pattern>/modifFacture</url-pattern>
         <url-pattern>/modifUtilisateur</url-pattern>
-        <url-pattern>/modifVehicule</url-pattern>
         <url-pattern>/optionSup</url-pattern>
-        <url-pattern>/ajoutEntrepot</url-pattern>
-        <url-pattern>/ajoutVehicule</url-pattern>
         <url-pattern>/vehicule</url-pattern>
-        <url-pattern>/gestionRolePermission</url-pattern>
         <url-pattern>/facture</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
         <filter-name>employeFiltre</filter-name>
-        <url-pattern>/supUtilisateur</url-pattern>
-        <url-pattern>/supVehicule</url-pattern>
-        <url-pattern>/supEntrepot</url-pattern>
+        <url-pattern>/gestionReservation</url-pattern>
+        <url-pattern>/gestionUtilisateur</url-pattern>
+        <url-pattern>/gestionFacture</url-pattern>
+        <url-pattern>/gestionContrat</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
         <filter-name>adminFiltre</filter-name>
+        <url-pattern>/supVehicule</url-pattern>
+        <url-pattern>/supEntrepot</url-pattern>
+        <url-pattern>/modifVehicule</url-pattern>
+        <url-pattern>/modifEntrepot</url-pattern>
+        <url-pattern>/ajoutVehicule</url-pattern>
+        <url-pattern>/ajoutEntrepot</url-pattern>
+        <url-pattern>/gestionEntrepot</url-pattern>
         <url-pattern>/gestionDroit</url-pattern>
         <url-pattern>/supUtilisateur</url-pattern>
         <url-pattern>/supVehicule</url-pattern>

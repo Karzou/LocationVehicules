@@ -22,7 +22,6 @@
 
                 <span style="color:#ff0000">${sessionScope.erreur}</span>
 
-                <div>
                     <table class="table-custom">
                         <thead>
                             <th scope="col">Nom</th>
@@ -96,7 +95,7 @@
                         </tbody>
                     </table>
 
-                    <c:if test="${sessionScope.role eq 'admin'}">
+                    <c:if test="${sessionScope.menu eq 'admin'}">
                         <h2>Liste des utilisateurs inactifs </h2>
 
                         <table class="table-custom">
@@ -159,8 +158,8 @@
                                             </td>
                                             <td>
                                                 <c:if test="${(sessionScope.role == 'admin')}">
-                                                    <form action="<c:url value="/reactiveUtilisateur"/>" method="post">
-                                                        <input type="hidden" name="idModif" value="${user.idUtilisateur}">
+                                                    <form action="<c:url value="/supUtilisateur"/>" method="post">
+                                                        <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
                                                         <input type="submit" class="btn-modif" value="Réactiver"/>
                                                     </form>
                                                 </c:if>

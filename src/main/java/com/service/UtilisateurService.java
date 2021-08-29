@@ -42,7 +42,7 @@ public class UtilisateurService {
         query.setParameter("email", email);
 
         try {
-            Utilisateur u = query.getSingleResult();
+            query.getSingleResult();
             LOGGER.info("recherche mail " + email);
             return true;
         } catch(javax.persistence.NoResultException e) {
@@ -108,6 +108,13 @@ public class UtilisateurService {
         LOGGER.info("Suppression logique de l utilisateur : " + utilisateur.getEmail());
 
         utilisateur.setActifUtilisateur(false);
+        em.persist(utilisateur);
+    }
+
+    public void activationLogique (Utilisateur utilisateur){
+        LOGGER.info("activation logique de l utilisateur : " + utilisateur.getEmail());
+
+        utilisateur.setActifUtilisateur(true);
         em.persist(utilisateur);
     }
 }

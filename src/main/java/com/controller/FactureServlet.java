@@ -1,11 +1,9 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Couleur;
 import com.entity.Facture;
 import com.entity.Reservation;
 import com.exception.ServiceException;
-import com.service.CouleurService;
 import com.service.FactureService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

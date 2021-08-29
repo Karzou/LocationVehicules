@@ -150,7 +150,7 @@ public class Utilisateur {
         this.reservationsByIdUtilisateur = reservationsByIdUtilisateur;
     }
 
-    @OneToMany(mappedBy = "utilisateursByIdUtilisateur", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Telephone.class ,mappedBy = "utilisateursByIdUtilisateur", cascade = CascadeType.ALL)
     public List<Telephone> getTelephonesByIdUtilisateur() {
         return telephonesByIdUtilisateur;
     }

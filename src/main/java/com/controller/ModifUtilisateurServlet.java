@@ -28,28 +28,35 @@ public class ModifUtilisateurServlet extends HttpServlet {
     final static Logger logger = LogManager.getLogger(ModifUtilisateurServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.info("Appel de la methode doGet de ModifUtilisateurServlet.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel de la méthode doget de ModifUtilisateurServlet");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Appel de la methode doPost de ModifUtilisateurServlet.");
+        if(logger.isInfoEnabled()){
+            logger.info("Appel de la méthode dopost de ModifUtilisateurServlet");
+        }
 
         HttpSession session = request.getSession();
         session.removeAttribute("erreur");
 
         EntityManager em = EMF.getEM();
-
+        if(logger.isInfoEnabled()){
+            logger.info("Ouverture em Modif utilisateur dopost");
+        }
         int id = Integer.parseInt(request.getParameter("idModif"));
-        String profilFlag = request.getParameter("profilFlag"); // pour envoyer au profil si on vient du profil
-
+        String profilFlag = request.getParameter("profilFlag");
         UtilisateurService utilisateurService = new UtilisateurService(em);
         VilleService villeService = new VilleService(em);
         List<Ville> villeList = null;
         Utilisateur utilisateur = null;
 
         try {
-            logger.info("Import de la liste ville.");
+            if(logger.isInfoEnabled()){
+                logger.info("Import de la liste ville");
+            }
             villeList = villeService.lister();
         } catch (ServiceException e) {
             logger.warn("Problème lors de l' 'import de la liste ville. " + e);
@@ -57,13 +64,18 @@ public class ModifUtilisateurServlet extends HttpServlet {
         }
 
         try {
-            logger.info("Import de l' 'utilisateur : " + id);
+            if(logger.isInfoEnabled()){
+                logger.info("Imprt de l'utilisateur : " + id);
+            }
             utilisateur = utilisateurService.trouver(id);
         } catch (ServiceException e) {
             logger.warn("Problème lors de l' 'import de l' 'utilisateur : " + e);
             session.setAttribute("erreur", "Problème avec le chargement de l'utilisateur'.");
         } finally {
             em.close();
+            if(logger.isInfoEnabled()){
+                logger.info("Fermeture em gestion utilisateur do post");
+            }
         }
         request.setAttribute("villes", villeList);
         request.setAttribute("utilisateur", utilisateur);
@@ -72,12 +84,12 @@ public class ModifUtilisateurServlet extends HttpServlet {
         }
 
         if(!(session.getAttribute("erreur") == null)){
-
             session.setAttribute("retour", "/gestionUtilisateur");
             response.sendRedirect("erreur");
         }else{
-            logger.info("Tout ok redirection vers modifUtilisateur.");
-
+            if(logger.isInfoEnabled()){
+                logger.info("Tout ok redirection vers modifUtilisateur");
+            }
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/modifUtilisateur.jsp" ).forward( request, response );
         }
     }

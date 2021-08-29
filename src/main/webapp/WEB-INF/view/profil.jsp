@@ -33,8 +33,7 @@
                         <th scope="col">Code postal</th>
                         <th scope="col">Ville</th>
                         <th scope="col">Mes réservations</th>
-                        <th scope="col">Mes contrats</th>
-                        <th scope="col">Mes factures</th>
+                        <th scope="col">Mes contrats et factures</th>
                         <th scope="col">Modification</th>
                     </thead>
 
@@ -48,8 +47,10 @@
                         <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
                         <td>En cours (shahin)</td>
-                        <td>En cours (Jerome)</td>
-                        <td>En cours (Jerome)</td>
+                        <td><form action="<c:url value="/facture"/>" method="get">
+                            <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
+                            <button class="btn-modif" name="idModif" type="submit">Mes contrats et factures</button>
+                        </form></td>
                         <td>
                             <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                 <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">

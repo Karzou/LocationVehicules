@@ -8,7 +8,6 @@ import com.exception.ServiceException;
 import com.service.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
@@ -33,26 +32,30 @@ public class GestionUtilisateurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (logger.isInfoEnabled()) {
-
             logger.info("Appel du doGet de la servlet GestionUtilisateurServlet.");
         }
 
         EntityManager em = EMF.getEM();
+        if(logger.isInfoEnabled()){
+            logger.info("Ouverture em gestion utilisateur do get");
+        }
         HttpSession session = request.getSession();
-
         UtilisateurService utilisateurService = new UtilisateurService(em);
         List<Utilisateur> utilisateurList = null;
+        TelephoneService telephoneService = new TelephoneService(em);
 
         try {
-
             if (logger.isInfoEnabled()) {
-
                 logger.info("Importation de la liste utilisateur.");
             }
-
             utilisateurList = utilisateurService.lister();
-        } catch (ServiceException e) {
 
+            for (Utilisateur utilisateur:utilisateurList) {
+                List<Telephone> telephoneList = null;
+                telephoneList = telephoneService.lister(utilisateur);
+                utilisateur.setTelephonesByIdUtilisateur(telephoneList);
+            }
+        } catch (ServiceException e) {
             logger.warn("Problème lors de l' 'import de la lite utilisateur. " + e);
         }
 
@@ -64,6 +67,10 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
             session.removeAttribute("succes");
         }
+        em.close();
+        if(logger.isInfoEnabled()){
+            logger.info("Fermeture em gestion utilisateur do get");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,17 +80,20 @@ public class GestionUtilisateurServlet extends HttpServlet {
         }
 
         EntityManager em = EMF.getEM();
+        if(logger.isInfoEnabled()){
+            logger.info("Ouverture em gestion utilisateur do post");
+        }
         EntityTransaction transaction = em.getTransaction();
 
         // recuperation des donnees des champs
         int id = Integer.parseInt(request.getParameter("idModif")) ;
-        String nom = request.getParameter("nom");
-        String password = request.getParameter("password");
-        String prenom = request.getParameter("prenom");
-        String telephone = request.getParameter("telephone");
-        String rue = request.getParameter("rue");
-        String numero = request.getParameter("numero");
-        String boite = request.getParameter("boite");
+        String nom = request.getParameter("nom").trim();
+        String password = request.getParameter("password").trim();
+        String prenom = request.getParameter("prenom").trim();
+        String telephone = request.getParameter("telephone").trim();
+        String rue = request.getParameter("rue").trim();
+        String numero = request.getParameter("numero").trim();
+        String boite = request.getParameter("boite").trim();
         String profilFlag = request.getParameter("profilFlag");
         int idVille = Integer.parseInt(request.getParameter("ville"));
         Date dateNaissance = Validation.dateFormat(request.getParameter("dateNaissance"));
@@ -99,37 +109,29 @@ public class GestionUtilisateurServlet extends HttpServlet {
         Telephone telephone1 = new Telephone();
         Utilisateur utilisateur = null;
         Ville ville = null;
-
         HttpSession session = request.getSession();
 
         if (autoriseService.hasPermission((int)session.getAttribute("idRole"), "all") || autoriseService.hasPermission((int)session.getAttribute("idRole"), "utilisateurs:write") || (int)session.getAttribute("idUtilisateur") == id){
 
-            if(!Validation.validationPrenom(nom)) {
-
+            if(!Validation.checkValueIsEmpty(nom) && !Validation.checkValueLenght(nom, 2, 50)) {
                 message += "Veuillez entrer un nom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
-
-            if(!Validation.validationPrenom(prenom)) {
-
+            if(!Validation.checkValueIsEmpty(prenom) && !Validation.checkValueLenght(prenom, 2, 50)) {
                 message += "Veuillez entrer un prénom d'une longueur entre 2 et 50 caractères ! ";
                 erreurFlag = true;
             }
 
             if(!Validation.validationTelephone(telephone)){
-
                 message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
                 erreurFlag = true;
             }
-
-            if(!Validation.validationAdresse(rue)){
-
+            if(!Validation.checkValueIsEmpty(rue) && !Validation.checkValueLenght(rue, 6, 100)){
                 message += "Veuillez entrer une adresse d'au moins 6 caractères et maximum 100 catactères ! ";
                 erreurFlag = true;
             }
 
-            if(!Validation.validationNumAdresse(numero)){
-
+            if(!Validation.checkValueLenght(numero, 1, 10) && !Validation.checkValueIsEmpty(rue)){
                 message += "Veuillez entrer un numéro d'adresse valide entre 1 et 10 caractères ! ";
                 erreurFlag = true;
             }
@@ -184,34 +186,35 @@ public class GestionUtilisateurServlet extends HttpServlet {
                 if(logger.isInfoEnabled()){
                     logger.info("Les champs de la mise à jour utilisateur ne sont pas remplis. " + message);
                 }
-
                 session.setAttribute("erreur", "Veuillez remplir tous les champs convenablement! " + message);
             }
-
             if(session.getAttribute("erreur") != null){
                 if(profilFlag != null){
                     session.setAttribute("retour", "/profil");
                 }else{
                     session.setAttribute("retour", "/gestionUtilisateur");
                 }
-
                 response.sendRedirect("erreur");
             }else{
                 session.setAttribute("succes", "Vos données ont été changé avec succes ! ");
                 if(! (profilFlag == null)){
-
                     response.sendRedirect("profil");
                 }else{
                     response.sendRedirect("gestionUtilisateur");
                 }
             }
         }else{
-            logger.info("hasPermission non OK " );
+            if(logger.isInfoEnabled()){
+                logger.info("hasPermission non OK");
+            }
             session.setAttribute("erreur", "Vous n'avez pas les droits requis ! ");
             session.setAttribute("retour", "/gestionDroit");
             this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
         em.close();
+        if(logger.isInfoEnabled()){
+            logger.info("Fermeture em gestion utilisateur do post");
+        }
     }
 }
 

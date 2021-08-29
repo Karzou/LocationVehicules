@@ -2,8 +2,8 @@ package com.service;
 
 import com.entity.Autorise;
 import com.exception.ServiceException;
-
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 /**
@@ -40,7 +40,7 @@ public class AutoriseService {
         query.setParameter("permission", permission);
 
         try {
-            Autorise a = query.getSingleResult();
+            query.getSingleResult();
             return true;
         } catch(javax.persistence.NoResultException e) {
             return false;
@@ -50,7 +50,6 @@ public class AutoriseService {
     public List<Autorise> lister() throws ServiceException {
         try {
             TypedQuery<Autorise> query = em.createNamedQuery("Autorise.lister", Autorise.class);
-           // query.setParameter("idRole", idRole);
             return query.getResultList();
         } catch (Exception e) {
             throw new ServiceException(e);
@@ -73,7 +72,7 @@ public class AutoriseService {
         query.setParameter("idPermission", idPermission);
 
         try {
-            Autorise a = query.getSingleResult();
+            query.getSingleResult();
             return true;
         } catch(javax.persistence.NoResultException e) {
             return false;
@@ -81,10 +80,10 @@ public class AutoriseService {
     }
 
     public void supprimerParRole (int idRole) {
-        TypedQuery query = em.createNamedQuery("Autorise.effacerParRole", Autorise.class);
+        Query query = em.createNamedQuery("Autorise.effacerParRole", Autorise.class);
         query.setParameter("idRole", idRole);
 
-        int row = query.executeUpdate();
+        query.executeUpdate();
     }
 
     public void supprimer (Autorise autorise){

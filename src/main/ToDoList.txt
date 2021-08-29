@@ -5,14 +5,13 @@ JO
 -------------------------------------------
 - Vérification de tout le code + optimisation
 - CSS sur toutes les pages (affichage correct)
+- attention lors de la suppression de marque et modele.. Si c est relié a un vehicule ==> plante
 
 Kevin
 -------------------------------------------
 - ajouter "enlever permission sur ce role".
-- ajouter permission (pdf, read unique,...).
-- validation js.
 - faire les tests.
-- ajout bouton réactivation utilisateur dans liste utilisateurs inactifs
+- verif les logs et la cohésion
 
 Jerome
 ---------------------------
@@ -23,6 +22,7 @@ Jerome
 - ContratService => on va t'aider
 - FactureService => on va t aider
 - sortie pdf facture / contrat
+- attention prix facture
 ------------------------------------------------------------------------------------------------------------------------
 
 ------------
@@ -51,6 +51,7 @@ JO
 
 Kevin
 --------------
+- ajout bouton réactivation utilisateur dans liste utilisateurs inactifs
 - Page erreur si pas de co bdd
 - telephone dans modif utilisateurs
 - filtre employé.

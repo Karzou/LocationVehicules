@@ -19,7 +19,6 @@ public class VilleService {
         this.em = em;
     }
 
-    // jamais utilisée
     public Ville trouver(int id) throws ServiceException {
         try {
             return em.find(Ville.class, id);
@@ -28,18 +27,6 @@ public class VilleService {
         }
     }
 
-    public Ville trouverParVille(String nomVille) {
-        TypedQuery<Ville> query = em.createNamedQuery("Ville.trouverParNomVille", Ville.class);
-        query.setParameter("nomVille", nomVille);
-
-        if(query.getSingleResult() != null) {
-            return query.getSingleResult();
-        } else {
-            return null;
-        }
-    }
-
-    // jamais utilisé
     public void creer(Ville ville) throws ServiceException {
         try {
             em.persist(ville);

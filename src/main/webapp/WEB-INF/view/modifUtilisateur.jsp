@@ -25,10 +25,10 @@
                     </div>
 
                     <c:forEach items="${utilisateur.telephonesByIdUtilisateur}" var="telephone">
-                    <div class="form-group"id="form-modif11">
-                        <label>Telephone : </label>
-                        <input class="input-modif" type="text" name="telephone" value="${telephone.numero}">
-                    </div>
+                        <div class="form-group"id="form-modif11">
+                            <label>Telephone : </label>
+                            <input class="input-modif" type="text" name="telephone" value="${telephone.numero}">
+                        </div>
                     </c:forEach>
 
                     <div class="form-group"id="form-modif12">

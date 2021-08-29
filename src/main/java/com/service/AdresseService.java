@@ -4,10 +4,12 @@ import com.entity.Adresse;
 import com.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
+
+// Ce service n'est actuellement pas nécessaire mais existe pour une éventuelle mise à jour future.
+
 /**
  * @author Vanconingsloo Kevin
  */
@@ -17,7 +19,6 @@ public class AdresseService {
 
     EntityManager em;
 
-    //si pas utilise, a enlever
     public AdresseService(EntityManager em) {
         this.em = em;
     }
@@ -35,7 +36,6 @@ public class AdresseService {
     public void creer(Adresse adresse) throws ServiceException {
         try {
             LOGGER.info("Creation d une adresse.");
-
             em.persist(adresse);
         } catch (Exception e) {
             LOGGER.warn("Probleme lors de la creation d une adresse : " + e);
