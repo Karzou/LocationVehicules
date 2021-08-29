@@ -58,7 +58,7 @@ public class UtilisateurService {
 
         try {
             LOGGER.info("recherche login + password " + email + " / " + password );
-            Utilisateur u = query.getSingleResult();
+            query.getSingleResult();
             return true;
         } catch(javax.persistence.NoResultException e) {
             LOGGER.info("login pas trouvé.");
