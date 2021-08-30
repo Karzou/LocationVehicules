@@ -269,8 +269,8 @@ function validateSearchVehicle() {
 }
 
 function validateModifUser(){
-    var name = document.forms["modifUser"]["nom"];
-    var inputName = document.getElementById("nom");
+    var nom = document.forms["modifUser"]["nom"];
+    var inputNom = document.getElementById("nom");
     var prenom = document.forms["modifUser"]["prenom"];
     var inputPrenom = document.getElementById("prenom");
     var telephone = document.forms["modifUser"]["telephone"];
@@ -281,67 +281,257 @@ function validateModifUser(){
     var inputNumero = document.getElementById("numero");
     var boite = document.forms["modifUser"]["boite"];
     var inputBoite = document.getElementById("boite");
-    var result = true;
 
-    if (name.value == "" || name.value.length < 2 || prenom.value.length > 100){
-        var e = document.getElementById("errorNomModif");
-        e.fontcolor("red");
+    if (nom.value == "" || nom.value.length < 2 || nom.value.length > 100){
+        let e = document.getElementById("errorNomModif");
+        inputNom.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
-        name.focus();
-        result = false;
+        nom.focus();
+        return false;
     }else{
+        inputNom.style.borderColor = "green";
         document.getElementById("errorNomModif").innerHTML = "";
-
     }
     if (prenom.value == "" || prenom.value.length < 2 || prenom.value.length > 100){
-        var e = document.getElementById("errorPrenomModif");
-        e.fontcolor("red");
+        let e = document.getElementById("errorPrenomModif");
+        inputPrenom.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
+        prenom.focus();
+        return false;
+    }else{
+        inputPrenom.style.borderColor = "green";
+        document.getElementById("errorPrenomModif").innerHTML = "";
+    }
+    if (telephone.value == "" || telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")){
+        let e = document.getElementById("errorTelephoneModif");
+        inputTelephone.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
+        telephone.focus();
+        return false;
+    }else{
+        inputTelephone.style.borderColor = "green";
+        document.getElementById("errorTelephoneModif").innerHTML = "";
+    }
+    if (rue.value == "" || rue.value.length <= 6 || rue.value.length > 100){
+        let e = document.getElementById("errorRueModif");
+        inputRue.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer une rue valide entre 6 et 100 caracteres.";
+        rue.focus();
+        return false;
+    }else{
+        inputRue.style.borderColor = "green";
+        document.getElementById("errorRueModif").innerHTML = "";
+    }
+    if (numero.value == "" || numero.value.length <= 1 || numero.value.length > 10 ){
+        let e = document.getElementById("errorNumModif");
+        inputNumero.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un numero valide entre 1 et 10 caracteres.";
+        numero.focus();
+        return false;
+    }else{
+        inputNumero.style.borderColor = "green";
+        document.getElementById("errorNumModif").innerHTML = "";
+    }
+    if (boite.value.length > 50 ){
+        let e = document.getElementById("errorBoiteModif");
+        inputBoite.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
+        boite.focus();
+        return false;
+    }else{
+        inputBoite.style.borderColor = "green";
+        document.getElementById("errorBoiteModif").innerHTML = "";
+    }
+    return (true);
+}
+
+function validateLogin(){
+    var mail = document.forms["form"]["username"];
+    var password = document.forms["form"]["password"];
+    var inputMail = document.getElementById("username");
+    var inputPassword = document.getElementById("password");
+    var result = true;
+
+    if (mail.value == "" || mail.value.length > 100 || mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
+        inputMail.style.borderColor = "red";
+        let e = document.getElementById("errorMailLogin");
+        e.style.color="red";
+        e.innerHTML = "Veuillez entrer un mail valide.";
+        mail.focus();
+        result = false;
+    }else{
+        inputPassword.style.borderColor = "green";
+        document.getElementById("errorMailLogin").innerHTML = "";
+    }
+    if (password.value == "" || password.value.length < 4 || password.value.length > 256 ){
+        inputPassword.style.borderColor = "red";
+        let e = document.getElementById("errorPasswordLogin");
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un mot de passe valide entre 4 et 256 caracteres.";
+        password.focus();
+        result = false;
+    }
+    else{
+        inputPassword.style.borderColor = "green";
+        document.getElementById("errorPasswordLogin").innerHTML = "";
+    }
+    return result;
+}
+
+function validateCreationUtilisateur (){
+    var nom = document.forms["createUser"]["register-nom"];
+    var inputNom = document.getElementById("register-nom")
+    var prenom = document.forms["createUser"]["register-prenom"];
+    var inputPrenom = document.getElementById("register-prenom")
+    var mail = document.forms["createUser"]["register-mail"];
+    var inputMail = document.getElementById("register-mail")
+    var password = document.forms["createUser"]["register-password"];
+    var inputPassword = document.getElementById("register-password");
+    var confirmPassword = document.forms["createUser"]["register-confirmPassword"];
+    var inputConfirmPassword = document.getElementById("register-confirmPassword")
+    var telephone = document.forms["createUser"]["register-telephone"];
+    var inputTelephone = document.getElementById("register-telephone")
+    var rue = document.forms["createUser"]["register-rue"];
+    var inputRue = document.getElementById("register-rue");
+    var numero = document.forms["createUser"]["register-numero"];
+    var inputNumero = document.getElementById("register-numero");
+    var boite = document.forms["createUser"]["register-boite"];
+    var inputBoite = document.getElementById("register-boite");
+    var ville = document.forms["createUser"]["register-ville"];
+    var inputVille = document.getElementById("register-ville")
+    var dateNaissance = document.forms["createUser"]["register-dateNaissance"];
+    var inputDateNaissance = document.getElementById("register-dateNaissance")
+    var datePermis = document.forms["createUser"]["register-datePermis"];
+    var inputDatePermis = document.getElementById("register-datePermis")
+    var result = true;
+
+    if (nom.value == "" || nom.value.length < 2 || nom.value.length > 100){
+        let e = document.getElementById("errorNomCreate");
+        inputNom.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
+        nom.focus();
+        result = false;
+    }else{
+        inputNom.style.borderColor = "green";
+        document.getElementById("errorNomCreate").innerHTML = "";
+    }
+    if (prenom.value == "" || prenom.value.length < 2 || prenom.value.length > 100){
+        let e = document.getElementById("errorPrenomCreate");
+        inputPrenom.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer un prenom valide entre 2 et 100 caracteres.";
         prenom.focus();
         result = false;
     }else{
-        document.getElementById("errorPrenomModif").innerHTML = "";
+        inputPrenom.style.borderColor = "green";
+        document.getElementById("errorPrenomCreate").innerHTML = "";
+    }
+    if (mail.value == "" || mail.value.length > 100 || mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
+        let e = document.getElementById("errorMailCreate");
+        inputMail.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML = "Veuillez entrer un mail valide.";
+        mail.focus();
+        result = false;
+    }else{
+        inputMail.style.borderColor = "green";
+        document.getElementById("errorMailCreate").innerHTML = "";
+    }
+    if (password.value == "" || password.value.length < 4 || password.value.length > 256 ){
+        let e = document.getElementById("errorPasswordCreate");
+        inputPassword.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez entrer un mot de passe valide entre 4 et 256 caracteres.";
+        password.focus();
+        result = false;
+    }
+    else{
+        inputPassword.style.borderColor = "green";
+        document.getElementById("errorPasswordCreate").innerHTML = "";
     }
     if (telephone.value == "" || telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")){
-        var e = document.getElementById("errorTelephoneModif");
-        e.fontcolor("red");
+        let e = document.getElementById("errorTelephoneCreate");
+        inputTelephone.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
         telephone.focus();
         result = false;
     }else{
-        document.getElementById("errorTelephoneModif").innerHTML = "";
+        inputTelephone.style.borderColor = "green";
+        document.getElementById("errorTelephoneCreate").innerHTML = "";
     }
-    if (rue.value == "" || rue.value.length <= 6 || telephone.value.length > 100){
-        var e = document.getElementById("errorRueModif");
-        e.fontcolor("red");
+    if (rue.value == "" || rue.value.length <= 6 || rue.value.length > 100){
+        let e = document.getElementById("errorRueCreate");
+        inputRue.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer une rue valide entre 6 et 100 caracteres.";
         rue.focus();
         result = false;
     }else{
-        document.getElementById("errorRueModif").innerHTML = "";
+        inputRue.style.borderColor = "green";
+        document.getElementById("errorRueCreate").innerHTML = "";
     }
     if (numero.value == "" || numero.value.length <= 1 || numero.value.length > 10 ){
-        var e = document.getElementById("errorNumModif");
-        e.fontcolor("red");
+        let e = document.getElementById("errorNumeroCreate");
+        inputNumero.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer un numero valide entre 1 et 10 caracteres.";
         numero.focus();
         result = false;
     }else{
-        document.getElementById("errorNumModif").innerHTML = "";
+        inputNumero.style.borderColor = "green";
+        document.getElementById("errorNumeroCreate").innerHTML = "";
     }
     if (boite.value.length > 50 ){
-        var e = document.getElementById("errorBoiteModif");
-        e.fontcolor("red");
+        let e = document.getElementById("errorBoiteCreate");
+        inputBoite.style.borderColor = "red";
+        e.style.color="red";
         e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
         boite.focus();
         result = false;
     }else{
-        document.getElementById("errorBoiteModif").innerHTML = "";
+        inputBoite.style.borderColor = "green";
+        document.getElementById("errorBoiteCreate").innerHTML = "";
     }
-
-    if (!result){
-        window.alert("Vous n'avez pas bien rempli les champs.");
+    if (ville.value ==""){
+        let e = document.getElementById("errorVilleCreate");
+        inputVille.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez selectionner une ville.";
+        ville.focus();
+        result = false;
+    }else{
+        inputVille.style.borderColor = "green";
+        document.getElementById("errorVilleCreate").innerHTML = "";
     }
-
+    if (dateNaissance.value ==""){
+        let e = document.getElementById("errorDateCreate");
+        inputDateNaissance.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez selectionner une date.";
+        dateNaissance.focus();
+        result = false;
+    }else{
+        inputDateNaissance.style.borderColor = "green";
+        document.getElementById("errorDateCreate").innerHTML = "";
+    }
+    if (datePermis.value ==""){
+        let e = document.getElementById("errorPermisCreate");
+        inputDatePermis.style.borderColor = "red";
+        e.style.color="red";
+        e.innerHTML ="Veuillez selectionner une date.";
+        datePermis.focus();
+        result = false;
+    }else{
+        inputDatePermis.style.borderColor = "green";
+        document.getElementById("errorPermisCreate").innerHTML = "";
+    }
     return result;
 }

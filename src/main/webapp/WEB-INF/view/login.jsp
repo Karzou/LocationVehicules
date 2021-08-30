@@ -17,7 +17,7 @@
 
             <div class="content-login">
                 <div>
-                    <c:if test="${empty sessionScope.success and ((sessionScope.errLogin != null) or (sessionScope.errLogin1 != null) or (sessionScope.errLogin2 != null))}">
+                    <c:if test="${(empty sessionScope.success and (empty sessionScope.forgotFlag)) and ((sessionScope.errLogin != null) or (sessionScope.errLogin1 != null) or (sessionScope.errLogin2 != null))}">
                         <div class="error-message-admin">
                             <div class="error-message-admin-title">
                                 <div class="error-message-admin-title-img">
@@ -43,6 +43,24 @@
                     </c:if>
                 </div>
 
+                <c:if test="${not empty sessionScope.forgotFlag}">
+                    <div class="error-message-admin">
+                        <div class="error-message-admin-title">
+                            <div class="error-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                            </div>
+                            <div class="error-message-admin-title-txt">
+                                <p>Une erreur est survenue</p>
+                            </div>
+                        </div>
+                        <div class="error-message-admin-body-txt">
+                            <div>${sessionScope.forgotFlag}</div>
+                        </div>
+                    </div>
+                    <c:remove var="forgotFlag" scope="session" />
+                </c:if>
+
+
                 <div>
                     <c:if test="${sessionScope.success != null}">
                         <div class="success-message-admin">
@@ -62,14 +80,18 @@
                     </c:if>
                 </div>
 
-                <form name="form" action="<c:url value="/login"/>" method="post">
+                <form name="form" action="<c:url value="/login"/>" method="post" onsubmit="return validateLogin()">
                     <div class="username-login-div">
                         <input type="text" class="username-login" name="username" id="username" placeholder="Email"/>
                     </div>
 
+                    <span class="error" id="errorMailLogin"></span></p>
+
                     <div class="password-login-div">
                         <input type="password" class="password-login" name="password" id="password" placeholder="Mot de passe"/>
                     </div>
+
+                    <span class="error" id="errorPasswordLogin"></span></p>
 
                     <div class="reset-password-login-div">
                         <a href="motDePasseOublie" >Mot de passe oublié ? </a>
@@ -160,26 +182,29 @@
                     </c:if>
                 </div>
 
-                <form name="createUser" action="<c:url value="/creationUtilisateur"/>" method="post">
+                <form name="createUser" action="<c:url value="/creationUtilisateur"/>" method="post" onsubmit="return validateCreationUtilisateur()">
                     <div class="register-div">
                         <label for="register-nom">Nom</label>
                         <input type="text" class="register-input" id="register-nom" name="nom" value="<c:out value="${nom}"></c:out>"/>
                     </div>
+                    <span class="error" id="errorNomCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-prenom">Prénom</label>
                         <input type="text" class="register-input" id="register-prenom" name="prenom"value="<c:out value="${prenom}"></c:out>" />
                     </div>
+                    <span class="error" id="errorPrenomCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-mail">Email</label>
                         <input type="mail" class="register-input" id="register-mail" name="mail" value="<c:out value="${mail}"></c:out>"/>
                     </div>
-
+                    <span class="error" id="errorMailCreate"></span></p>
                     <div class="register-div">
                         <label for="register-password">Mot de passe</label>
                         <input type="password" class="register-input" id="register-password" name="password" value="<c:out value="${password}"></c:out>"/>
                     </div>
+                    <span class="error" id="errorPasswordCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-confirmPassword">Confirmation</label>
@@ -190,22 +215,22 @@
                         <label for="register-telephone">Téléphone</label>
                         <input type="text" class="register-input" id="register-telephone" name="telephone" value="<c:out value="${telephone}"></c:out>"/>
                     </div>
-
+                    <span class="error" id="errorTelephoneCreate"></span></p>
                     <div class="register-div">
                         <label for="register-rue">Rue</label>
                         <input type="text" class="register-input" id="register-rue" name="rue" value="<c:out value="${rue}"></c:out>"/>
                     </div>
-
+                    <span class="error" id="errorRueCreate"></span></p>
                     <div class="register-div">
                         <label for="register-numero">Numéro</label>
                         <input type="text" class="register-input" id="register-numero" name="numero" value="<c:out value="${numero}"></c:out>"/>
                     </div>
-
+                    <span class="error" id="errorNumeroCreate"></span></p>
                     <div class="register-div">
                         <label for="register-boite">Boite</label>
                         <input type="text" class="register-input" id="register-boite" name="boite" value="<c:out value="${boite}"></c:out>"/>
                     </div>
-
+                    <span class="error" id="errorBoiteCreate"></span></p>
                     <div class="register-div">
                         <label for="register-ville">Ville</label>
                         <select class="register-input" id="register-ville" name="ville">
@@ -215,17 +240,17 @@
                             </c:forEach>
                         </select>
                     </div>
-
+                    <span class="error" id="errorVilleCreate"></span></p>
                     <div class="register-div">
                         <label for="register-dateNaissance">Date de naissance</label>
                         <input type="date" class="register-input" id="register-dateNaissance" name="dateNaissance"/>
                     </div>
-
+                    <span class="error" id="errorDateCreate"></span></p>
                     <div class="register-div">
                         <label for="register-datePermis">Date de permis</label>
                         <input type="date" class="register-input" id="register-datePermis" name="datePermis"/>
                     </div>
-
+                    <span class="error" id="errorPermisCreate"></span></p>
                     <div class="register-button-div">
                         <input type="submit" class="btn-register" value="S'enregistrer">
                     </div>
