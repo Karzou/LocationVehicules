@@ -20,10 +20,10 @@ import java.io.IOException;
  * @author Wets Jeoffroy
  */
 
-@WebServlet("/actEntrepot")
-public class ActEntrepotServlet extends HttpServlet {
+@WebServlet("/reactiveEntrepot")
+public class ReactiveEntrepotServlet extends HttpServlet {
 
-    final static Logger logger = LogManager.getLogger(ActEntrepotServlet.class);
+    final static Logger logger = LogManager.getLogger(ReactiveEntrepotServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

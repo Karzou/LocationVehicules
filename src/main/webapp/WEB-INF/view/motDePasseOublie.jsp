@@ -12,9 +12,51 @@
             <div class="content-global">
                 <h2>Vous avez oublié votre mot de passe ?</h2>
 
+                <p>Si vous avez oublié votre mot de passe, complètez le champs<br />
+                    ci-dessous avec votre email et appuyé sur le bouton envoyer.<br />
+                    Vous recevrez alors votre nouveau mot de passe par email.</p>
+
+                <div>
+                    <c:if test="${sessionScope.errMessage != null}">
+                        <div class="error-message-admin">
+                            <div class="error-message-admin-title">
+                                <div class="error-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                </div>
+                                <div class="error-message-admin-title-txt">
+                                    <p>Une erreur est survenue</p>
+                                </div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage}</div>
+                            </div>
+                        </div>
+                        <c:remove var="errMessage" scope="session" />
+                    </c:if>
+                </div>
+
+                <div>
+                    <c:if test="${sessionScope.succMessage != null}">
+                        <div class="success-message-admin">
+                            <div class="success-message-admin-title">
+                                <div class="success-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                                </div>
+                                <div class="success-message-admin-title-txt">
+                                    <p>Félicitation</p>
+                                </div>
+                            </div>
+                            <div class="success-message-admin-body-txt">
+                                <div>${succMessage}</div>
+                            </div>
+                        </div>
+                        <c:remove var="succMessage" scope="session" />
+                    </c:if>
+                </div>
+
                 <form action="<c:url value="/motDePasseOublie"/>" method="post">
                     <div class="register-div">
-                        <label for="reset-password-input">Veuillez entrer votre email</label>
+                        <label class="reset-password-label">Veuillez entrer votre email</label>
                         <input type="mail" class="reset-password-input" id="reset-password-input" name="mail"/>
                     </div>
                     <div class="login-div-error">

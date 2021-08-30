@@ -750,8 +750,11 @@ li {
 }
 
 .reset-password-button-div {
-    width: 100%;
     display: inline-block;
+}
+
+.reset-password-label {
+    font-weight: bold;
 }
 
 .btn-reset-password {

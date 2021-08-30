@@ -289,7 +289,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="<c:url value="/actVehicule"/>" method="post">
+                                    <form action="<c:url value="/reactiveVehicule"/>" method="post">
                                         <input type="hidden" name="idSup" value="${vehicule.idVehicule}"/>
                                         <input type="submit" class="btn-sup" value="Réactiver"/>
                                     </form>

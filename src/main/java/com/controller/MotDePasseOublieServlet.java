@@ -6,6 +6,7 @@ import com.exception.ServiceException;
 import com.mail.Mail;
 import com.mail.MailSender;
 import com.service.UtilisateurService;
+import com.service.Validation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
@@ -29,16 +30,19 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(logger.isInfoEnabled()){
-            logger.info("Appel de la methode dopost de la servlet MotDePasseOublie.");
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Appel de la methode dopost de la servlet MotDePasseOublie");
         }
 
-        String message = "";
         String mail = request.getParameter("mail").trim();
         EntityManager em = EMF.getEM();
-        if(logger.isInfoEnabled()){
+
+        if (logger.isInfoEnabled()) {
+
             logger.info("Ouverture em MotDePasseOublie dopost");
         }
+
         EntityTransaction transaction = em.getTransaction();
         Utilisateur utilisateur = new Utilisateur();
         UtilisateurService utilisateurService = new UtilisateurService(em);
@@ -47,17 +51,41 @@ public class MotDePasseOublieServlet extends HttpServlet {
         int randomInt = (int)(Math.random() * (9999 - 1000) + 1000);
         String randomPassword = String.valueOf(randomInt);
 
-        if(!utilisateurService.mailExist(mail)){
-            message = "Votre mail n'existe pas. ";
-            session.setAttribute("errMessage", message);
-        }else {
+        if (Validation.checkValueIsEmpty(mail)) {
+
+            session.setAttribute("errMessage", "Veuillez insérer votre adresse email");
+
+            logger.info("Aucun mail inséré");
+
+            response.sendRedirect("motDePasseOublie");
+        } else if (!Validation.checkEmailFormat(mail)) {
+
+            session.setAttribute("errMessage", "Veuillez insérer une adresse email valid");
+
+            logger.info("Format d'email non valid");
+
+            response.sendRedirect("motDePasseOublie");
+        } else if (!utilisateurService.mailExist(mail)) {
+
+            session.setAttribute("errMessage", "Cette adresse email n'existe pas");
+
+            logger.info("Email introuvable");
+
+            response.sendRedirect("motDePasseOublie");
+        } else {
+
             try {
+
                 utilisateur = utilisateurService.trouverParEmail(mail);
             } catch (ServiceException e) {
+
                 e.getMessage();
-                session.setAttribute("errMessage", message);
+
+                session.setAttribute("errMessage", "");
             }
+
             try {
+
                 transaction.begin();
 
                 utilisateur.setMotDePasse(randomPassword);
@@ -66,38 +94,47 @@ public class MotDePasseOublieServlet extends HttpServlet {
                 transaction.commit();
 
             } catch ( Exception e ) {
-            logger.warn("Problème lors de la transaction de l'update mot de passe utilisateur. " + e);
-        } finally {
-            if (transaction.isActive()) {
-                logger.warn("Rollback de l'update mot de passe utilisateur.");
-                transaction.rollback();
-            }
-            em.close();
-            if(logger.isInfoEnabled()){
-                logger.info("Fermeture em gestion utilisateur do get");
-            }
 
-            //Préparation et envoi de mail.
-            email.setMsgBody("Votre mot de passe a été réinitialisé à " + randomPassword + ". Veuillez changer votre mot de passe lors de votre prochaine connection. ");
-            email.setFrom("locacarprojetsgbd@gmail.com");
-            email.setSubject("Réinitialisation mot de passe.");
-            email.setNick("Locacar");
-            email.setReplyTo(utilisateur.getEmail());
-            email.setEncodeUTF8(true);
-            email.getListTo().add(utilisateur.getEmail());
+                logger.warn("Problème lors de la transaction de l'update du mot de passe utilisateur. " + e);
+            } finally {
 
-            MailSender.sendMail(email);
+                if (transaction.isActive()) {
 
-            session.setAttribute("success", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail() + " .");
-            request.setAttribute("forgotFlag", "OK");
-            this.getServletContext().getRequestDispatcher("/login").forward( request, response );
+                    logger.warn("Rollback de l'update du mot de passe utilisateur.");
+
+                    transaction.rollback();
+                }
+
+                em.close();
+
+                if (logger.isInfoEnabled()) {
+
+                    logger.info("Fermeture em gestion utilisateur do get");
+                }
+
+                //Préparation et envoi de mail.
+                email.setMsgBody("Votre mot de passe a été réinitialisé à " + randomPassword + ". Veuillez utiliser ce nouveau mot de passe pour votre prochaine connection.");
+                email.setFrom("locacarprojetsgbd@gmail.com");
+                email.setSubject("Réinitialisation mot de passe.");
+                email.setNick("Locacar");
+                email.setReplyTo(utilisateur.getEmail());
+                email.setEncodeUTF8(true);
+                email.getListTo().add(utilisateur.getEmail());
+
+                MailSender.sendMail(email);
+
+                session.setAttribute("success", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail());
+                request.setAttribute("forgotFlag", "OK");
+
+                this.getServletContext().getRequestDispatcher("/login").forward( request, response );
             }
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
+
             logger.info("Appel de la méthode doget de la servlet MotDePasseOublie");
         }
 
