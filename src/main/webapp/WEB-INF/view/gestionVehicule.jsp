@@ -200,7 +200,7 @@
             </div>
 
             <div class="content-global">
-                <h2>Liste des véhicules actif</h2>
+                <h2>Liste des véhicules</h2>
 
                 <div class="content-global-overflow">
                     <table class="table-custom">
@@ -213,6 +213,7 @@
                             <th scope="col">Immatriculation</th>
                             <th scope="col">Date achat</th>
                             <th scope="col">Prix journalier</th>
+                            <th scope="col">Actif</th>
                             <th scope="col">Modification</th>
                             <th scope="col">Activation</th>
                         </thead>
@@ -220,7 +221,6 @@
                         <tbody>
                             <c:forEach var="vehicule" items="${vehiculeList}">
                             <tr>
-                                <c:if test="${vehicule.actifVehicule}">
                                 <td><c:out value="${vehicule.modelesByIdModele.marquesByIdMarque.nomMarque}"/></td>
                                 <td><c:out value="${vehicule.modelesByIdModele.nomModele}"/></td>
                                 <td><c:out value="${vehicule.cylindree}"/></td>
@@ -229,6 +229,7 @@
                                 <td><c:out value="${vehicule.immatriculation}"/></td>
                                 <td><c:out value="${vehicule.dateAchat}"/></td>
                                 <td><c:out value="${vehicule.prixJournalier}"/></td>
+                                <td><c:out value="${vehicule.actifVehicule}"/></td>
                                 <td>
                                     <form action="<c:url value="/modifVehicule"/>" method="post">
                                         <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
@@ -240,67 +241,14 @@
                                 <td>
                                     <form action="<c:url value="/supVehicule"/>" method="post">
                                         <input type="hidden" name="idSup" value="${vehicule.idVehicule}"/>
-                                        <input type="submit" class="btn-sup" value="Désactiver"/>
+                                        <input type="submit" class="btn-sup" value="supprimer"/>
                                     </form>
                                 </td>
-                                </c:if>
                             </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                 </div>
-
-                <c:if test="${sessionScope.menu eq 'admin'}">
-                <h2>Liste des véhicules inactif</h2>
-
-                <div class="content-global-overflow">
-                    <table class="table-custom">
-                        <thead>
-                        <th scope="col">Marque</th>
-                        <th scope="col">Modèle</th>
-                        <th scope="col">Cylindrée</th>
-                        <th scope="col">Puissance</th>
-                        <th scope="col">Num Chassis</th>
-                        <th scope="col">Immatriculation</th>
-                        <th scope="col">Date achat</th>
-                        <th scope="col">Prix journalier</th>
-                        <th scope="col">Modification</th>
-                        <th scope="col">Activation</th>
-                        </thead>
-
-                        <tbody>
-                        <c:forEach var="vehicule" items="${vehiculeList}">
-                            <tr>
-                                <c:if test="${!vehicule.actifVehicule}">
-                                <td><c:out value="${vehicule.modelesByIdModele.marquesByIdMarque.nomMarque}"/></td>
-                                <td><c:out value="${vehicule.modelesByIdModele.nomModele}"/></td>
-                                <td><c:out value="${vehicule.cylindree}"/></td>
-                                <td><c:out value="${vehicule.puissance}"/></td>
-                                <td><c:out value="${vehicule.numChassis}"/></td>
-                                <td><c:out value="${vehicule.immatriculation}"/></td>
-                                <td><c:out value="${vehicule.dateAchat}"/></td>
-                                <td><c:out value="${vehicule.prixJournalier}"/></td>
-                                <td>
-                                    <form action="<c:url value="/modifVehicule"/>" method="post">
-                                        <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
-                                        <input type="hidden" name="idMarque" value="${vehicule.modelesByIdModele.marquesByIdMarque.idMarque}"/>
-                                        <input type="hidden" name="modifFlag" value="true"/>
-                                        <input type="submit" class="btn-modif" value="Modifier"/>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="<c:url value="/actVehicule"/>" method="post">
-                                        <input type="hidden" name="idSup" value="${vehicule.idVehicule}"/>
-                                        <input type="submit" class="btn-sup" value="Réactiver"/>
-                                    </form>
-                                </td>
-                                </c:if>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                </c:if>
             </div>
 
             <c:import url="footer.jsp"/>

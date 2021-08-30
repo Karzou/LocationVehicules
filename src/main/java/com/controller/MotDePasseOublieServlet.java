@@ -47,9 +47,9 @@ public class MotDePasseOublieServlet extends HttpServlet {
         int randomInt = (int)(Math.random() * (9999 - 1000) + 1000);
         String randomPassword = String.valueOf(randomInt);
 
-        if(!utilisateurService.mailExist(mail)){
+        if(!utilisateurService.mailExist(mail) || mail.isEmpty()){
             message = "Votre mail n'existe pas. ";
-            session.setAttribute("errMessage", message);
+            session.setAttribute("forgotFlag", message);
         }else {
             try {
                 utilisateur = utilisateurService.trouverParEmail(mail);
@@ -90,9 +90,10 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
             session.setAttribute("success", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail() + " .");
             request.setAttribute("forgotFlag", "OK");
-            this.getServletContext().getRequestDispatcher("/login").forward( request, response );
+
             }
         }
+        this.getServletContext().getRequestDispatcher("/login").forward( request, response );
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
