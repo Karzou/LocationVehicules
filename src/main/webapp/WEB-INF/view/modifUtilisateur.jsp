@@ -22,13 +22,15 @@
                     </div>
                     <div class="form-group"id="form-modif2">
                         <label>Prenom : </label>
-                        <input class="input-modif" type="text" name="prenom" value="${utilisateur.prenomUtilisateur}">
+                        <input class="input-modif" type="text" id="prenom" name="prenom" value="${utilisateur.prenomUtilisateur}">
+                        <span class="error" id="errorPrenomModif"></span></p>
                     </div>
 
                     <c:forEach items="${utilisateur.telephonesByIdUtilisateur}" var="telephone">
                         <div class="form-group"id="form-modif11">
                             <label>Telephone : </label>
-                            <input class="input-modif" type="text" name="telephone" value="${telephone.numero}">
+                            <input class="input-modif" type="text" id="telephone" name="telephone" value="${telephone.numero}">
+                            <span class="error" id="errorTelephoneModif"></span></p>
                         </div>
                     </c:forEach>
 
@@ -53,15 +55,18 @@
 
                     <div class="form-group"id="form-modif4">
                         <label>Rue : </label>
-                        <input class="input-modif" type="text" name="rue" value="${utilisateur.adressesByIdAdresse.rue}">
+                        <input class="input-modif" type="text" id="rue" name="rue" value="${utilisateur.adressesByIdAdresse.rue}">
+                        <span class="error" id="errorRueModif"></span></p>
                     </div>
                     <div class="form-group"id="form-modif5">
                         <label>Numero : </label>
-                        <input class="input-modif" type="text" name="numero" value="${utilisateur.adressesByIdAdresse.numero}">
+                        <input class="input-modif" type="text" id="numero" name="numero" value="${utilisateur.adressesByIdAdresse.numero}">
+                        <span class="error" id="errorNumModif"></span></p>
                     </div>
                     <div class="form-group"id="form-modif6">
                         <label>Boite : </label>
-                        <input class="input-modif" type="text" name="boite" value="${utilisateur.adressesByIdAdresse.boite}">
+                        <input class="input-modif" type="text" id="boite" name="boite" value="${utilisateur.adressesByIdAdresse.boite}">
+                        <span class="error" id="errorBoiteModif"></span></p>
                     </div>
 
                     <div class="register-div">
