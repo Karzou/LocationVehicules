@@ -110,7 +110,7 @@
             </div>
 
             <div class="content-global">
-                <h2>Liste des entrepots</h2>
+                <h2>Liste des entrepots actifs</h2>
 
                 <div class="content-global-overflow">
                     <table class="table-custom">
@@ -122,7 +122,6 @@
                             <th scope="col">Boite</th>
                             <th scope="col">Code postal</th>
                             <th scope="col">Ville</th>
-                            <th scope="col">Actif</th>
                             <th scope="col">Modification</th>
                             <th scope="col">Activation</th>
                         </thead>
@@ -130,6 +129,7 @@
                         <tbody>
                             <c:forEach var="entrepot" items="${entrepotList}">
                             <tr>
+                                <c:if test="${entrepot.actifEntrepot}">
                                 <td><c:out value="${entrepot.nomEntrepot}"/></td>
                                 <td><c:out value="${entrepot.nombrePlace}"/></td>
                                 <td><c:out value="${entrepot.adressesByIdAdresse.rue}"/></td>
@@ -137,26 +137,76 @@
                                 <td><c:out value="${entrepot.adressesByIdAdresse.boite}"/></td>
                                 <td><c:out value="${entrepot.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
                                 <td><c:out value="${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
-                                <td><c:out value="${entrepot.actifEntrepot}"/></td>
 
                                 <td>
                                     <form action="<c:url value="/modifEntrepot"/>" method="post">
                                         <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"/>
                                         <input type="hidden" name="idVille" value="${entrepot.adressesByIdAdresse.villesByIdVille.idVille}"/>
-                                        <button class="btn-modif" name="idModif" type="submit">Modifier</button>
+                                        <input type="submit" class="btn-modif" value="Modifier"/>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="<c:url value="/supEntrepot"/>" method="post">
                                         <input type="hidden" name="idSup" value="${entrepot.idEntrepot}"/>
-                                        <button class="btn-sup" name="idSup" type="submit" value="supprimer">Supprimer</button>
+                                        <input type="submit" class="btn-sup" value="Désactiver"/>
                                     </form>
                                 </td>
+                                </c:if>
                             </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                 </div>
+
+                <c:if test="${sessionScope.menu eq 'admin'}">
+                <h2>Liste des entrepots inactifs</h2>
+
+                <div class="content-global-overflow">
+                    <table class="table-custom">
+                        <thead>
+                        <th scope="col">Nom entrepot</th>
+                        <th scope="col">Nombre place</th>
+                        <th scope="col">Rue</th>
+                        <th scope="col">Numéro</th>
+                        <th scope="col">Boite</th>
+                        <th scope="col">Code postal</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Modification</th>
+                        <th scope="col">Activation</th>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach var="entrepot" items="${entrepotList}">
+                            <tr>
+                                <c:if test="${!entrepot.actifEntrepot}">
+                                <td><c:out value="${entrepot.nomEntrepot}"/></td>
+                                <td><c:out value="${entrepot.nombrePlace}"/></td>
+                                <td><c:out value="${entrepot.adressesByIdAdresse.rue}"/></td>
+                                <td><c:out value="${entrepot.adressesByIdAdresse.numero}"/></td>
+                                <td><c:out value="${entrepot.adressesByIdAdresse.boite}"/></td>
+                                <td><c:out value="${entrepot.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
+                                <td><c:out value="${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
+
+                                <td>
+                                    <form action="<c:url value="/modifEntrepot"/>" method="post">
+                                        <input type="hidden" name="idModif" value="${entrepot.idEntrepot}"/>
+                                        <input type="hidden" name="idVille" value="${entrepot.adressesByIdAdresse.villesByIdVille.idVille}"/>
+                                        <input type="submit" class="btn-modif" value="Modifier"/>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="<c:url value="/actEntrepot"/>" method="post">
+                                        <input type="hidden" name="idSup" value="${entrepot.idEntrepot}"/>
+                                        <input type="submit" class="btn-sup" value="Réactiver"/>
+                                    </form>
+                                </td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                </c:if>
             </div>
 
             <c:import url="footer.jsp"/>

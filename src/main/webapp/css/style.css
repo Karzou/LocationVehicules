@@ -411,16 +411,20 @@ li {
     width: 100%;
 }
 
+.table-custom thead {
+    height: 45px;
+}
+
 .table-custom td,
 .table-custom th {
     border: 1px solid #ddd;
+    white-space: nowrap;
 }
 
 .table-custom th {
     text-align: left;
     background-color: green;
     color: white;
-    height: 30px;
     padding: 8px;
 }
 
@@ -428,7 +432,6 @@ li {
     text-align: left;
     height: 30px;
     padding: 0 8px 0 8px;
-    white-space: nowrap;
 }
 
 .btn-modif {

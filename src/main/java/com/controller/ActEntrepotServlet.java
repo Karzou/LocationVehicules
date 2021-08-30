@@ -20,16 +20,16 @@ import java.io.IOException;
  * @author Wets Jeoffroy
  */
 
-@WebServlet("/supEntrepot")
-public class SupEntrepotServlet extends HttpServlet {
+@WebServlet("/actEntrepot")
+public class ActEntrepotServlet extends HttpServlet {
 
-    final static Logger logger = LogManager.getLogger(SupEntrepotServlet.class);
+    final static Logger logger = LogManager.getLogger(ActEntrepotServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (logger.isInfoEnabled()) {
 
-            logger.info("Appel de la méthode \"doGet\" de la servlet \"SupEntrepotServlet\"");
+            logger.info("Appel de la méthode \"doGet\" de la servlet \"ActEntrepotServlet\"");
         }
     }
 
@@ -37,7 +37,7 @@ public class SupEntrepotServlet extends HttpServlet {
 
         if (logger.isInfoEnabled()) {
 
-            logger.info("Appel de la méthode \"doPost\" de la servlet \"SupEntrepotServlet\"");
+            logger.info("Appel de la méthode \"doPost\" de la servlet \"ActEntrepotServlet\"");
         }
 
         EntityManager em = EMF.getEM();
@@ -61,7 +61,8 @@ public class SupEntrepotServlet extends HttpServlet {
 
             transaction.begin();
 
-            entrepotService.suppressionLogique(entrepot);
+            entrepot.setActifEntrepot(true);
+            entrepotService.update(entrepot);
 
             transaction.commit();
         } catch ( Exception e ) {
