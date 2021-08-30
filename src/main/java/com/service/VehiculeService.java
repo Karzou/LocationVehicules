@@ -117,6 +117,16 @@ public class VehiculeService {
         return count > 0;
     }
 
+    public boolean checkModeleExist(int idModele) {
+
+        Query query = em.createNamedQuery("Vehicule.checkModeleExist", Vehicule.class);
+        query.setParameter("idModele", idModele);
+
+        int count = ((Number)query.getSingleResult()).intValue();
+
+        return count > 0;
+    }
+
     public boolean checkOtherNumeroChassisExist(String numChassis, int idVehicule) {
 
         Query query = em.createNamedQuery("Vehicule.checkOtherNumeroChassisExist", Vehicule.class);

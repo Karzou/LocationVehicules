@@ -13,6 +13,7 @@ import java.util.Objects;
 @Table(name = "vehicules", schema = "location_vehicules")
 @NamedQueries({
         @NamedQuery(name = "Vehicule.checkNumeroChassisExist", query = "SELECT COUNT(v) FROM Vehicule v WHERE v.numChassis = :numChassis"),
+        @NamedQuery(name = "Vehicule.checkModeleExist", query = "SELECT COUNT(v) FROM Vehicule v WHERE v.modelesByIdModele.idModele = :idModele"),
         @NamedQuery(name = "Vehicule.checkOtherNumeroChassisExist", query = "SELECT COUNT(v) FROM Vehicule v WHERE v.numChassis = :numChassis AND v.idVehicule != :idVehicule"),
         @NamedQuery(name = "Vehicule.trouverParMarque", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.marquesByIdMarque.nomMarque = :marque"),
         @NamedQuery(name = "Vehicule.trouverParModele", query = "SELECT v FROM Vehicule v WHERE v.modelesByIdModele.nomModele = :modele"),

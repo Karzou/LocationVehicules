@@ -131,6 +131,44 @@
             <div class="content-global">
                 <h2>Liste des marques et modèles</h2>
 
+                <div>
+                    <c:if test="${sessionScope.errMessage4 != null}">
+                        <div class="error-message-admin">
+                            <div class="error-message-admin-title">
+                                <div class="error-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/error.png" alt="error" />
+                                </div>
+                                <div class="error-message-admin-title-txt">
+                                    <p>Une erreur est survenue</p>
+                                </div>
+                            </div>
+                            <div class="error-message-admin-body-txt">
+                                <div>${errMessage4}</div>
+                            </div>
+                        </div>
+                        <c:remove var="errMessage4" scope="session" />
+                    </c:if>
+                </div>
+
+                <div>
+                    <c:if test="${sessionScope.succMessage3 != null}">
+                        <div class="success-message-admin">
+                            <div class="success-message-admin-title">
+                                <div class="success-message-admin-title-img">
+                                    <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                                </div>
+                                <div class="success-message-admin-title-txt">
+                                    <p>Félicitation</p>
+                                </div>
+                            </div>
+                            <div class="success-message-admin-body-txt">
+                                <div>${succMessage3}</div>
+                            </div>
+                        </div>
+                        <c:remove var="succMessage3" scope="session" />
+                    </c:if>
+                </div>
+
                 <div class="content-global-overflow">
                     <table class="table-custom">
                         <thead>
