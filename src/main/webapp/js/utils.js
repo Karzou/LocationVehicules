@@ -269,17 +269,79 @@ function validateSearchVehicle() {
 }
 
 function validateModifUser(){
-    var name = document.forms["modifUser"]["nom"]
-    var inputName = document.getElementById("nom")
-    var result = true
-    window.alert("coucou")
-    if (name.value == "" || name.value.length < 2){
+    var name = document.forms["modifUser"]["nom"];
+    var inputName = document.getElementById("nom");
+    var prenom = document.forms["modifUser"]["prenom"];
+    var inputPrenom = document.getElementById("prenom");
+    var telephone = document.forms["modifUser"]["telephone"];
+    var inputTelephone = document.getElementById("telephone");
+    var rue = document.forms["modifUser"]["rue"];
+    var inputRue = document.getElementById("rue");
+    var numero = document.forms["modifUser"]["numero"];
+    var inputNumero = document.getElementById("numero");
+    var boite = document.forms["modifUser"]["boite"];
+    var inputBoite = document.getElementById("boite");
+    var result = true;
+
+    if (name.value == "" || name.value.length < 2 || prenom.value.length > 100){
         var e = document.getElementById("errorNomModif");
-        e.innerHTML ="Veuillez entrer un nom valide."
-        name.focus()
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
+        name.focus();
         result = false;
     }else{
         document.getElementById("errorNomModif").innerHTML = "";
+
     }
-    return result
+    if (prenom.value == "" || prenom.value.length < 2 || prenom.value.length > 100){
+        var e = document.getElementById("errorPrenomModif");
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer un prenom valide entre 2 et 100 caracteres.";
+        prenom.focus();
+        result = false;
+    }else{
+        document.getElementById("errorPrenomModif").innerHTML = "";
+    }
+    if (telephone.value == "" || telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")){
+        var e = document.getElementById("errorTelephoneModif");
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
+        telephone.focus();
+        result = false;
+    }else{
+        document.getElementById("errorTelephoneModif").innerHTML = "";
+    }
+    if (rue.value == "" || rue.value.length <= 6 || telephone.value.length > 100){
+        var e = document.getElementById("errorRueModif");
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer une rue valide entre 6 et 100 caracteres.";
+        rue.focus();
+        result = false;
+    }else{
+        document.getElementById("errorRueModif").innerHTML = "";
+    }
+    if (numero.value == "" || numero.value.length <= 1 || numero.value.length > 10 ){
+        var e = document.getElementById("errorNumModif");
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer un numero valide entre 1 et 10 caracteres.";
+        numero.focus();
+        result = false;
+    }else{
+        document.getElementById("errorNumModif").innerHTML = "";
+    }
+    if (boite.value.length > 50 ){
+        var e = document.getElementById("errorBoiteModif");
+        e.fontcolor("red");
+        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
+        boite.focus();
+        result = false;
+    }else{
+        document.getElementById("errorBoiteModif").innerHTML = "";
+    }
+
+    if (!result){
+        window.alert("Vous n'avez pas bien rempli les champs.");
+    }
+
+    return result;
 }
