@@ -27,6 +27,10 @@ body {
     margin: 30px;
 }
 
+.content-global-overflow {
+    overflow: auto;
+}
+
 form {
     margin: 0;
     padding: 0;
@@ -410,7 +414,6 @@ li {
 .table-custom td,
 .table-custom th {
     border: 1px solid #ddd;
-    padding: 8px;
 }
 
 .table-custom th {
@@ -418,12 +421,14 @@ li {
     background-color: green;
     color: white;
     height: 30px;
+    padding: 8px;
 }
 
 .table-custom td {
     text-align: left;
     height: 30px;
-    padding: 0 0 0 8px;
+    padding: 0 8px 0 8px;
+    white-space: nowrap;
 }
 
 .btn-modif {

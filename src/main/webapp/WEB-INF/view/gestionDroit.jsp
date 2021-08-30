@@ -13,7 +13,7 @@
 
             <h2>Gestion des droits utilisateur</h2>
 
-            <div>
+            <div class="content-global-overflow">
                 <table class="table-custom">
                     <thead>
                         <th scope="col">Nom</th>

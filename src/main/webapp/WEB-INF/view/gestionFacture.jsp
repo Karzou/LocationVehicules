@@ -19,7 +19,7 @@
     <div class="content-global">
         <h2>Liste des Factures</h2>
 
-        <div>
+        <div class="content-global-overflow">
             <table class="table-custom">
                 <thead>
                 <th scope="col">N° de facture</th>
