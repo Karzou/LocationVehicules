@@ -123,7 +123,7 @@ public class MotDePasseOublieServlet extends HttpServlet {
 
                 MailSender.sendMail(email);
 
-                session.setAttribute("success", "Un mail a été envoyé avec votre nouveau mot de passe à l'email suivant : " + utilisateur.getEmail());
+                session.setAttribute("success", "Un message vous a été envoyé avec votre nouveau mot de passe à l'adresse email suivant : <br />" + utilisateur.getEmail());
                 request.setAttribute("forgotFlag", "OK");
 
                 this.getServletContext().getRequestDispatcher("/login").forward( request, response );

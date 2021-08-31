@@ -117,7 +117,7 @@ function resetInputDateDepart() {
     if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value == "" || heureDepart.value == null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une heure de d�part";
+        error.innerHTML = "Veuillez choisir une heure de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
@@ -134,7 +134,7 @@ function resetInputHeureDepart() {
     if (((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une date de d�part";
+        error.innerHTML = "Veuillez choisir une date de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
@@ -188,7 +188,7 @@ function validateSearchVehicle() {
     const heureRetour = document.forms["searchVehicle"]["heureRetour"];
 
     if (lieuDepart.value == "" || lieuDepart.value == null) {
-        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de d�part";
+        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de départ";
         LieuDepart.style.border = "1px solid red";
         LieuDepart.style.boxShadow = "0 0 1px 2px red";
 
@@ -210,7 +210,7 @@ function validateSearchVehicle() {
     }
 
     if ((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value == "" || heureDepart.value == null)) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de d�part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.style.border = "1px solid red";
@@ -218,14 +218,14 @@ function validateSearchVehicle() {
 
         result = false;
     } else if (dateDepart.value == "" || dateDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de d�part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.removeAttribute('style');
 
         result = false;
     } else if (heureDepart.value == "" || heureDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de d�part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de départ";
         heureDepart.style.border = "1px solid red";
         heureDepart.style.boxShadow = "0 0 1px 2px red";
         dateDepart.removeAttribute('style');
@@ -351,36 +351,61 @@ function validateModifUser(){
     return (true);
 }
 
-function validateLogin(){
-    var mail = document.forms["form"]["username"];
-    var password = document.forms["form"]["password"];
-    var inputMail = document.getElementById("username");
-    var inputPassword = document.getElementById("password");
-    var result = true;
+function ValidateEmail(inputText)
+{
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (mail.value == "" || mail.value.length > 100 || mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
-        inputMail.style.borderColor = "red";
-        let e = document.getElementById("errorMailLogin");
-        e.style.color="red";
-        e.innerHTML = "Veuillez entrer un mail valide.";
-        mail.focus();
+    if(inputText.value.match(mailformat))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function validateLogin() {
+
+    let result = true;
+
+    const mail = document.forms["form"]["username"];
+    const password = document.forms["form"]["password"];
+
+    if (mail.value == "" || mail.value == null) {
+        document.getElementById('errorMailLogin').innerHTML = "Veuillez entrer une adresse email";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputPassword.style.borderColor = "green";
-        document.getElementById("errorMailLogin").innerHTML = "";
-    }
-    if (password.value == "" || password.value.length < 4 || password.value.length > 256 ){
-        inputPassword.style.borderColor = "red";
-        let e = document.getElementById("errorPasswordLogin");
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un mot de passe valide entre 4 et 256 caracteres.";
-        password.focus();
+    } else if (mail.value.length > 100 || !ValidateEmail(mail)) {
+        document.getElementById('errorMailLogin').innerHTML = "Veuillez entrer un email valide";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
+    } else {
+        document.getElementById('errorMailLogin').innerHTML = "";
+        mail.removeAttribute('style');
     }
-    else{
-        inputPassword.style.borderColor = "green";
-        document.getElementById("errorPasswordLogin").innerHTML = "";
+
+    if (password.value == "" || password.value == null) {
+        document.getElementById('errorPasswordLogin').innerHTML = "Veuillez entrer un mot de passe";
+        password.style.border = "1px solid red";
+        password.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (password.value == "" || password.value.length < 4 || password.value.length > 256 ) {
+        document.getElementById('errorPasswordLogin').innerHTML = "Veuillez entrer un mot de passe valide entre 4 et 256 caracteres";
+        password.style.border = "1px solid red";
+        password.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById('errorPasswordLogin').innerHTML = "";
+        password.removeAttribute('style');
     }
+
     return result;
 }
 

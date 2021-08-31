@@ -83,21 +83,16 @@
                 <form name="form" action="<c:url value="/login"/>" method="post" onsubmit="return validateLogin()">
                     <div class="username-login-div">
                         <input type="text" class="username-login" name="username" id="username" placeholder="Email"/>
+                        <span class="span-error" id="errorMailLogin"></span>
                     </div>
-
-                    <span class="error" id="errorMailLogin"></span></p>
 
                     <div class="password-login-div">
                         <input type="password" class="password-login" name="password" id="password" placeholder="Mot de passe"/>
+                        <span class="span-error3" id="errorPasswordLogin"></span>
+                        <a href="motDePasseOublie" >Mot de passe oublié ?</a>
                     </div>
 
-                    <span class="error" id="errorPasswordLogin"></span></p>
-
-                    <div class="reset-password-login-div">
-                        <a href="motDePasseOublie" >Mot de passe oublié ? </a>
-                    </div>
-
-                    <div>
+                    <div class="password-login-button-div">
                         <input type="submit" class="btn-login" value="Connexion">
                     </div>
 

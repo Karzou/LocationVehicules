@@ -612,6 +612,7 @@ li {
 
 .username-login-div {
     height: 70px;
+    margin-bottom: 15px;
 }
 
 .username-login-div input {
@@ -622,7 +623,6 @@ li {
     width: 394px;
     color: black;
     font-weight: bold;
-    margin-bottom: 60px;
 }
 
 .username-login-div input:hover {
@@ -641,11 +641,11 @@ li {
 }
 
 .password-login-div {
-    height: 55px;
+    height: auto;
 }
 
-.reset-password-login-div {
-    height: 40px;
+.password-login-button-div {
+    margin-top: 25px;
 }
 
 .password-login-div input {
@@ -1069,6 +1069,7 @@ li {
     color: red;
     margin-top: 3px;
     font-size: 14px;
+    width: 100%;
 }
 
 .span-error2 {
@@ -1078,6 +1079,16 @@ li {
     color: red;
     margin-top: 3px;
     font-size: 14px;
+}
+
+.span-error3 {
+    float: left;
+    text-align: left;
+    color: red;
+    margin-top: 3px;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .box div.submitButton {
