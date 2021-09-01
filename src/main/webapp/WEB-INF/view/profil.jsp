@@ -51,22 +51,24 @@
                     <tbody>
                         <td><c:out value="${utilisateur.nomUtilisateur}"/></td>
                         <td><c:out value="${utilisateur.prenomUtilisateur}"/></td>
-                        <td><c:out value="${utilisateur.email}"></c:out> </td>
+                        <td><c:out value="${utilisateur.email}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.rue}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.numero}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.boite}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
                         <td><c:out value="${utilisateur.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
                         <td>En cours (shahin)</td>
-                        <td><form action="<c:url value="/facture"/>" method="get">
-                            <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
-                            <button class="btn-modif" name="idModif" type="submit">Mes contrats et factures</button>
-                        </form></td>
+                        <td>
+                            <form action="<c:url value="/facture"/>" method="get">
+                                <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
+                                <input type="submit" class="btn-modif" value="Consulter">
+                            </form>
+                        </td>
                         <td>
                             <form action="<c:url value="/modifUtilisateur"/>" method="post">
                                 <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
-                                <button class="btn-modif" name="idModif" type="submit">Modifier</button>
                                 <input type="hidden" name="profilFlag" value="ok">
+                                <input type="submit" class="btn-modif" value="Modifier">
                             </form>
                         </td>
                     </tbody>
