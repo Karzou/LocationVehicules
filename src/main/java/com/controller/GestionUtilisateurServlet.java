@@ -43,7 +43,6 @@ public class GestionUtilisateurServlet extends HttpServlet {
         List<Utilisateur> utilisateurList = null;
         AutoriseService autoriseService = new AutoriseService(em);
 
-
         if ( autoriseService.hasPermission((int)session.getAttribute("idRole"), "menu:employe")
                 || autoriseService.hasPermission((int)session.getAttribute("idRole"), "menu:admin")){
 

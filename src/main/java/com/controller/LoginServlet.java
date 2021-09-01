@@ -119,6 +119,15 @@ public class LoginServlet extends HttpServlet {
                     logger.info("Fermeture em gestion utilisateur do post");
                 }
                 response.sendRedirect("accueil");
+                session.removeAttribute("nom");
+                session.removeAttribute("prenom");
+                session.removeAttribute("password");
+                session.removeAttribute("confirmPassword");
+                session.removeAttribute("mail");
+                session.removeAttribute("telephone");
+                session.removeAttribute("rue");
+                session.removeAttribute("numero");
+                session.removeAttribute("boite");
             } else {
                 if (logger.isInfoEnabled()) {
                     logger.info("Problème du mail ou password erronné. " + userName);

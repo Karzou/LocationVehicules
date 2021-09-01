@@ -60,7 +60,6 @@
                     <c:remove var="forgotFlag" scope="session" />
                 </c:if>
 
-
                 <div>
                     <c:if test="${sessionScope.success != null}">
                         <div class="success-message-admin">
@@ -180,25 +179,25 @@
                 <form name="createUser" action="<c:url value="/creationUtilisateur"/>" method="post" onsubmit="return validateCreationUtilisateur()">
                     <div class="register-div">
                         <label for="register-nom">Nom</label>
-                        <input type="text" class="register-input" id="register-nom" name="nom" value="<c:out value="${nom}"></c:out>"/>
+                        <input type="text" class="register-input" id="register-nom" name="nom" value="<c:out value="${sessionScope.nom}"></c:out>"/>
                         <span class="span-error" id="errorNomCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-prenom">Prénom</label>
-                        <input type="text" class="register-input" id="register-prenom" name="prenom"value="<c:out value="${prenom}"></c:out>" />
+                        <input type="text" class="register-input" id="register-prenom" name="prenom"value="<c:out value="${sessionScope.prenom}"></c:out>" />
                         <span class="span-error" id="errorPrenomCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-mail">Email</label>
-                        <input type="mail" class="register-input" id="register-mail" name="mail" value="<c:out value="${mail}"></c:out>"/>
+                        <input type="mail" class="register-input" id="register-mail" name="mail" value="<c:out value="${sessionScope.mail}"></c:out>"/>
                         <span class="span-error" id="errorMailCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-password">Mot de passe</label>
-                        <input type="password" class="register-input" id="register-password" name="password" value="<c:out value="${password}"></c:out>"/>
+                        <input type="password" class="register-input" id="register-password" name="password" value="<c:out value="${sessionScope.password}"></c:out>"/>
                         <span class="span-error" id="errorPasswordCreate"></span>
                     </div>
 
@@ -210,25 +209,25 @@
 
                     <div class="register-div">
                         <label for="register-telephone">Téléphone</label>
-                        <input type="text" class="register-input" id="register-telephone" name="telephone" value="<c:out value="${telephone}"></c:out>"/>
+                        <input type="text" class="register-input" id="register-telephone" name="telephone" value="<c:out value="${sessionScope.telephone}"></c:out>"/>
                         <span class="span-error" id="errorTelephoneCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-rue">Rue</label>
-                        <input type="text" class="register-input" id="register-rue" name="rue" value="<c:out value="${rue}"></c:out>"/>
+                        <input type="text" class="register-input" id="register-rue" name="rue" value="<c:out value="${sessionScope.rue}"></c:out>"/>
                         <span class="span-error" id="errorRueCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-numero">Numéro</label>
-                        <input type="text" class="register-input" id="register-numero" name="numero" value="<c:out value="${numero}"></c:out>"/>
+                        <input type="text" class="register-input" id="register-numero" name="numero" value="<c:out value="${sessionScope.numero}"></c:out>"/>
                         <span class="span-error" id="errorNumeroCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-boite">Boite</label>
-                        <input type="text" class="register-input" id="register-boite" name="boite" value="<c:out value="${boite}"></c:out>"/>
+                        <input type="text" class="register-input" id="register-boite" name="boite" value="<c:out value="${sessionScope.boite}"></c:out>"/>
                         <span class="span-error" id="errorBoiteCreate"></span>
                     </div>
 
