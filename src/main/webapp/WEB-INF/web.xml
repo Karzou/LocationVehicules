@@ -35,6 +35,7 @@
     <filter-mapping>
         <filter-name>logFilter</filter-name>
         <url-pattern>/accueil</url-pattern>
+        <url-pattern>/gestionUtilisateur</url-pattern>
         <url-pattern>/modifFacture</url-pattern>
         <url-pattern>/modifUtilisateur</url-pattern>
         <url-pattern>/optionSup</url-pattern>
@@ -45,7 +46,6 @@
     <filter-mapping>
         <filter-name>employeFiltre</filter-name>
         <url-pattern>/gestionReservation</url-pattern>
-        <url-pattern>/gestionUtilisateur</url-pattern>
         <url-pattern>/gestionFacture</url-pattern>
         <url-pattern>/gestionContrat</url-pattern>
     </filter-mapping>

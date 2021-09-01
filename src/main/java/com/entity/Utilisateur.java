@@ -24,21 +24,22 @@ public class Utilisateur {
     private String prenomUtilisateur;
     private String email;
     private String motDePasse;
+    private String telephone;
     private Date dateNaissance;
     private Date datePermis;
     private boolean actifUtilisateur;
     private List<Reservation> reservationsByIdUtilisateur;
-    private List<Telephone> telephonesByIdUtilisateur;
     private Adresse adressesByIdAdresse;
     private Role rolesByIdRole;
 
     public Utilisateur(){}
 
-    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String email, String motDePasse, Date dateNaissance,
+    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String email, String telephone, String motDePasse, Date dateNaissance,
                        Date datePermis, Adresse adresse, Role role){
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.email = email;
+        this.telephone = telephone;
         this.motDePasse = motDePasse;
         this.dateNaissance = dateNaissance;
         this.datePermis = datePermis;
@@ -99,6 +100,17 @@ public class Utilisateur {
     }
 
     @Basic
+    @Column(name = "Telephone", nullable = false, length = 50)
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+
+    @Basic
     @Column(name = "Date_naissance", nullable = false)
     public Date getDateNaissance() {
         return dateNaissance;
@@ -148,15 +160,6 @@ public class Utilisateur {
 
     public void setReservationsByIdUtilisateur(List<Reservation> reservationsByIdUtilisateur) {
         this.reservationsByIdUtilisateur = reservationsByIdUtilisateur;
-    }
-
-    @OneToMany(targetEntity = Telephone.class ,mappedBy = "utilisateursByIdUtilisateur", cascade = CascadeType.ALL)
-    public List<Telephone> getTelephonesByIdUtilisateur() {
-        return telephonesByIdUtilisateur;
-    }
-
-    public void setTelephonesByIdUtilisateur(List<Telephone> telephonesByIdUtilisateur) {
-        this.telephonesByIdUtilisateur = telephonesByIdUtilisateur;
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)

@@ -220,6 +220,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
                         nom,
                         prenom,
                         mail,
+                        telephone,
                         password,
                         dateNaissance,
                         datePermis,
@@ -238,10 +239,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
                         transaction.begin();
 
                         utilisateurService.creer(utilisateur);
-                        Utilisateur utilisateur1 = utilisateurService.trouverParEmail(utilisateur.getEmail());
-                        TelephoneService telephoneService = new TelephoneService(em);
-                        Telephone telephoneDb = new Telephone(telephone, utilisateur1);
-                        telephoneService.creer(telephoneDb);
 
                         transaction.commit();
                     } catch (ServiceException e) {

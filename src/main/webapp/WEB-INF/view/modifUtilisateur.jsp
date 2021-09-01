@@ -27,13 +27,12 @@
                         <div class="span-error-div"><span class="span-error4" id="errorPrenomModif"></span></div>
                     </div>
 
-                    <c:forEach items="${utilisateur.telephonesByIdUtilisateur}" var="telephone">
-                        <div class="div-input-modif">
-                            <label class="label-input">Telephone</label>
-                            <input class="input-modif" type="text" id="modif-telephone" name="telephone" value="${telephone.numero}">
-                            <div class="span-error-div"><span class="span-error4" id="errorTelephoneModif"></span></div>
-                        </div>
-                    </c:forEach>
+                    <div class="div-input-modif">
+                        <label class="label-input">Telephone</label>
+                        <input class="input-modif" type="text" id="modif-telephone" name="telephone" value="${utilisateur.telephone}">
+                        <div class="span-error-div"><span class="span-error4" id="errorTelephoneModif"></span></div>
+                    </div>
+
 
                     <div class="div-input-modif">
                         <label class="label-input">Password</label>

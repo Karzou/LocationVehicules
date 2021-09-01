@@ -73,11 +73,7 @@
                                     <td><c:out value="${user.nomUtilisateur}"/></td>
                                     <td><c:out value="${user.prenomUtilisateur}"/></td>
                                     <td><c:out value="${user.email}"/></td>
-                                    <td>
-                                    <c:forEach var="tel" items="${user.telephonesByIdUtilisateur}">
-                                        <c:out value="${tel.numero}"></c:out>
-                                    </c:forEach>
-                                    </td>
+                                    <td><c:out value="${user.telephone}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.rue}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.numero}"/></td>
                                     <td><c:out value="${user.adressesByIdAdresse.boite}"/></td>

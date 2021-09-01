@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.connection.EMF;
-import com.entity.Telephone;
 import com.entity.Utilisateur;
 import com.entity.Ville;
 import com.exception.ServiceException;
@@ -42,26 +41,33 @@ public class GestionUtilisateurServlet extends HttpServlet {
         HttpSession session = request.getSession();
         UtilisateurService utilisateurService = new UtilisateurService(em);
         List<Utilisateur> utilisateurList = null;
-        TelephoneService telephoneService = new TelephoneService(em);
+        AutoriseService autoriseService = new AutoriseService(em);
 
-        try {
-            if (logger.isInfoEnabled()) {
-                logger.info("Importation de la liste utilisateur.");
-            }
-            utilisateurList = utilisateurService.lister();
 
-            for (Utilisateur utilisateur:utilisateurList) {
-                List<Telephone> telephoneList = null;
-                telephoneList = telephoneService.lister(utilisateur);
-                utilisateur.setTelephonesByIdUtilisateur(telephoneList);
+        if ( autoriseService.hasPermission((int)session.getAttribute("idRole"), "menu:employe")
+                || autoriseService.hasPermission((int)session.getAttribute("idRole"), "menu:admin")){
+
+            try {
+                if (logger.isInfoEnabled()) {
+                    logger.info("Importation de la liste utilisateur.");
+                }
+                utilisateurList = utilisateurService.lister();
+
+            } catch (ServiceException e) {
+                logger.warn("Problème lors de l' 'import de la lite utilisateur. " + e);
             }
-        } catch (ServiceException e) {
-            logger.warn("Problème lors de l' 'import de la lite utilisateur. " + e);
+
+            request.setAttribute("utilisateurList", utilisateurList);
+
+            this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
+
+        }else{
+            String erreur = "Vous n'avez pas les droits pour cette page !";
+            String retour = "/accueil";
+            session.setAttribute("erreur", erreur);
+            session.setAttribute("retour", retour);
+            response.sendRedirect("erreur");
         }
-
-        request.setAttribute("utilisateurList", utilisateurList);
-
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/gestionUtilisateur.jsp" ).forward( request, response );
 
         if (session.getAttribute("succes") != null) {
 
@@ -103,10 +109,8 @@ public class GestionUtilisateurServlet extends HttpServlet {
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
-        TelephoneService telephoneService = new TelephoneService(em);
         AutoriseService autoriseService = new AutoriseService(em);
         VilleService villeService = new VilleService(em);
-        Telephone telephone1 = new Telephone();
         Utilisateur utilisateur = null;
         Ville ville = null;
         HttpSession session = request.getSession();
@@ -158,8 +162,6 @@ public class GestionUtilisateurServlet extends HttpServlet {
                         logger.info("Début de la transaction de l'update utilisateur. " + utilisateur.getEmail());
                     }
 
-                    telephone1 = telephoneService.trouver(utilisateur.getTelephonesByIdUtilisateur().get(0).getIdTelephone());
-                    telephone1.setNumero(telephone);
                     utilisateur.setNomUtilisateur(nom);
                     utilisateur.setPrenomUtilisateur(prenom);
                     utilisateur.setDateNaissance(dateNaissance);
@@ -169,7 +171,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
                     utilisateur.getAdressesByIdAdresse().setNumero(numero);
                     utilisateur.getAdressesByIdAdresse().setRue(rue);
                     utilisateur.getAdressesByIdAdresse().setVillesByIdVille(ville);
-                    telephoneService.update(telephone1);
+                    utilisateur.setTelephone(telephone);
                     utilisateurService.update(utilisateur);
 
                     transaction.commit();
