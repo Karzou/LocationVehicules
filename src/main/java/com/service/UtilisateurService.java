@@ -86,6 +86,7 @@ public class UtilisateurService {
     }
 
     public void creer(Utilisateur utilisateur) throws ServiceException {
+
         LOGGER.info("Creation de l utilisateur " + utilisateur.getEmail());
 
         em.persist(utilisateur);

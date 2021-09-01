@@ -52,6 +52,7 @@ public class CreationUtilisateurServlet extends HttpServlet {
             logger.info("Appel du doPost la servlet CreationUtilisateur");
         }
 
+        HttpSession session = request.getSession();
         EntityManager em = EMF.getEM();
         if(logger.isInfoEnabled()){
             logger.info("Ouverture em creation utilisateur do post");
@@ -72,15 +73,15 @@ public class CreationUtilisateurServlet extends HttpServlet {
         String dateNaissanceInput = request.getParameter("dateNaissance");
         String datePermisInput = request.getParameter("datePermis");
 
-        request.setAttribute("nom", nom);
-        request.setAttribute("prenom", prenom);
-        request.setAttribute("password", password);
-        request.setAttribute("confirmPassword", confirmPassword);
-        request.setAttribute("mail", mail);
-        request.setAttribute("telephone", telephone);
-        request.setAttribute("rue", rue);
-        request.setAttribute("numero", numero);
-        request.setAttribute("boite", boite);
+        session.setAttribute("nom", nom);
+        session.setAttribute("prenom", prenom);
+        session.setAttribute("password", password);
+        session.setAttribute("confirmPassword", confirmPassword);
+        session.setAttribute("mail", mail);
+        session.setAttribute("telephone", telephone);
+        session.setAttribute("rue", rue);
+        session.setAttribute("numero", numero);
+        session.setAttribute("boite", boite);
 
         // instanciations
         UtilisateurService utilisateurService = new UtilisateurService(em);
@@ -88,7 +89,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
         RoleService roleService = new RoleService(em);
         Role role = null;
         Ville ville = null;
-        HttpSession session = request.getSession();
         boolean errFlag = false;
 
         if (Validation.checkValueIsEmpty(nom)) {

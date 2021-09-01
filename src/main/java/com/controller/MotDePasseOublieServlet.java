@@ -60,9 +60,9 @@ public class MotDePasseOublieServlet extends HttpServlet {
             response.sendRedirect("motDePasseOublie");
         } else if (!Validation.checkEmailFormat(mail)) {
 
-            session.setAttribute("errMessage", "Veuillez insérer une adresse email valid");
+            session.setAttribute("errMessage", "Veuillez insérer une adresse email valide");
 
-            logger.info("Format d'email non valid");
+            logger.info("Format d'email non valide");
 
             response.sendRedirect("motDePasseOublie");
         } else if (!utilisateurService.mailExist(mail)) {
