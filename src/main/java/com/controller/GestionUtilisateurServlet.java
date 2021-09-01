@@ -122,7 +122,7 @@ public class GestionUtilisateurServlet extends HttpServlet {
                 erreurFlag = true;
             }
 
-            if(!Validation.validationTelephone(telephone)){
+            if(!Validation.checkTelephoneFormat(telephone)){
                 message += "Veuillez entrer que des chiffres d'une longueur entre 8 et 50 caractères! ";
                 erreurFlag = true;
             }

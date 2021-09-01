@@ -526,16 +526,19 @@ function validateCreationUtilisateur() {
     return result;
 }
 
-function validateModifUser() {
+function validateModifUtilisateur() {
 
     let result = true;
 
-    const nom = document.forms["modifUser"]["nom"];
-    const prenom = document.forms["modifUser"]["prenom"];
-    const telephone = document.forms["modifUser"]["telephone"];
-    const rue = document.forms["modifUser"]["rue"];
-    const numero = document.forms["modifUser"]["numero"];
-    const boite = document.forms["modifUser"]["boite"];
+    const nom = document.forms["modifUser"]["modif-nom"];
+    const prenom = document.forms["modifUser"]["modif-prenom"];
+    const telephone = document.forms["modifUser"]["modif-telephone"];
+    const password = document.forms["modifUser"]["modif-password"];
+    const dateNaissance = document.forms["modifUser"]["modif-password"];
+    const datePermis = document.forms["modifUser"]["modif-password"];
+    const rue = document.forms["modifUser"]["modif-rue"];
+    const numero = document.forms["modifUser"]["modif-numero"];
+    const boite = document.forms["modifUser"]["modif-boite"];
 
     if (nom.value == "" || nom.value == null) {
         document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom";
@@ -544,7 +547,7 @@ function validateModifUser() {
 
         return false;
     } else if (nom.value.length < 2 || nom.value.length > 100) {
-        document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom valide entre 2 et 100 caractères.";
+        document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom valide entre 2 et 100 caractères";
         nom.style.border = "1px solid red";
         nom.style.boxShadow = "0 0 1px 2px red";
 
@@ -588,6 +591,30 @@ function validateModifUser() {
         telephone.removeAttribute('style');
     }
 
+    if (dateNaissance.value == "" || dateNaissance.value == null) {
+        alert("date naissance null ou vide");
+        document.getElementById("errorRueModif").innerHTML = "Veuillez selectionner une date";
+        dateNaissance.style.border = "1px solid red";
+        dateNaissance.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorRueModif").innerHTML = "";
+        dateNaissance.removeAttribute('style');
+    }
+
+    if (datePermis.value == "" || datePermis.value == null) {
+        alert("date permis null ou vide");
+        document.getElementById("errorRueModif").innerHTML = "Veuillez selectionner une date";
+        datePermis.style.border = "1px solid red";
+        datePermis.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorRueModif").innerHTML = "";
+        datePermis.removeAttribute('style');
+    }
+
     if (rue.value == "" || rue.value == null) {
         document.getElementById("errorRueModif").innerHTML = "Veuillez entrer un nom de rue";
         rue.style.border = "1px solid red";
@@ -623,7 +650,7 @@ function validateModifUser() {
     }
 
     if (boite.value.length > 50 ) {
-        document.getElementById("errorBoiteModif").innerHTML = "Veuillez entrer un téléphone valide entre 2 et 50 caractères";
+        document.getElementById("errorBoiteModif").innerHTML = "Veuillez entrer une boite valide entre 2 et 50 caractères";
         boite.style.border = "1px solid red";
         boite.style.boxShadow = "0 0 1px 2px red";
 
