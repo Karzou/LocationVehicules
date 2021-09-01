@@ -117,7 +117,7 @@ function resetInputDateDepart() {
     if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value == "" || heureDepart.value == null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une heure de dÃ©part";
+        error.innerHTML = "Veuillez choisir une heure de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
@@ -134,7 +134,7 @@ function resetInputHeureDepart() {
     if (((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une date de dÃ©part";
+        error.innerHTML = "Veuillez choisir une date de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
@@ -188,7 +188,7 @@ function validateSearchVehicle() {
     const heureRetour = document.forms["searchVehicle"]["heureRetour"];
 
     if (lieuDepart.value == "" || lieuDepart.value == null) {
-        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de dÃ©part";
+        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de départ";
         LieuDepart.style.border = "1px solid red";
         LieuDepart.style.boxShadow = "0 0 1px 2px red";
 
@@ -210,7 +210,7 @@ function validateSearchVehicle() {
     }
 
     if ((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value == "" || heureDepart.value == null)) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de dÃ©part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.style.border = "1px solid red";
@@ -218,14 +218,14 @@ function validateSearchVehicle() {
 
         result = false;
     } else if (dateDepart.value == "" || dateDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de dÃ©part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.removeAttribute('style');
 
         result = false;
     } else if (heureDepart.value == "" || heureDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de dÃ©part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de départ";
         heureDepart.style.border = "1px solid red";
         heureDepart.style.boxShadow = "0 0 1px 2px red";
         dateDepart.removeAttribute('style');
@@ -266,89 +266,6 @@ function validateSearchVehicle() {
     }
 
     return result;
-}
-
-function validateModifUser(){
-    var nom = document.forms["modifUser"]["nom"];
-    var inputNom = document.getElementById("nom");
-    var prenom = document.forms["modifUser"]["prenom"];
-    var inputPrenom = document.getElementById("prenom");
-    var telephone = document.forms["modifUser"]["telephone"];
-    var inputTelephone = document.getElementById("telephone");
-    var rue = document.forms["modifUser"]["rue"];
-    var inputRue = document.getElementById("rue");
-    var numero = document.forms["modifUser"]["numero"];
-    var inputNumero = document.getElementById("numero");
-    var boite = document.forms["modifUser"]["boite"];
-    var inputBoite = document.getElementById("boite");
-
-    if (nom.value == "" || nom.value.length < 2 || nom.value.length > 100){
-        let e = document.getElementById("errorNomModif");
-        inputNom.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
-        nom.focus();
-        return false;
-    }else{
-        inputNom.style.borderColor = "green";
-        document.getElementById("errorNomModif").innerHTML = "";
-    }
-    if (prenom.value == "" || prenom.value.length < 2 || prenom.value.length > 100){
-        let e = document.getElementById("errorPrenomModif");
-        inputPrenom.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
-        prenom.focus();
-        return false;
-    }else{
-        inputPrenom.style.borderColor = "green";
-        document.getElementById("errorPrenomModif").innerHTML = "";
-    }
-    if (telephone.value == "" || telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")){
-        let e = document.getElementById("errorTelephoneModif");
-        inputTelephone.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
-        telephone.focus();
-        return false;
-    }else{
-        inputTelephone.style.borderColor = "green";
-        document.getElementById("errorTelephoneModif").innerHTML = "";
-    }
-    if (rue.value == "" || rue.value.length <= 6 || rue.value.length > 100){
-        let e = document.getElementById("errorRueModif");
-        inputRue.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer une rue valide entre 6 et 100 caracteres.";
-        rue.focus();
-        return false;
-    }else{
-        inputRue.style.borderColor = "green";
-        document.getElementById("errorRueModif").innerHTML = "";
-    }
-    if (numero.value == "" || numero.value.length <= 1 || numero.value.length > 10 ){
-        let e = document.getElementById("errorNumModif");
-        inputNumero.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un numero valide entre 1 et 10 caracteres.";
-        numero.focus();
-        return false;
-    }else{
-        inputNumero.style.borderColor = "green";
-        document.getElementById("errorNumModif").innerHTML = "";
-    }
-    if (boite.value.length > 50 ){
-        let e = document.getElementById("errorBoiteModif");
-        inputBoite.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
-        boite.focus();
-        return false;
-    }else{
-        inputBoite.style.borderColor = "green";
-        document.getElementById("errorBoiteModif").innerHTML = "";
-    }
-    return (true);
 }
 
 function ValidateEmail(inputText)
@@ -409,154 +326,338 @@ function validateLogin() {
     return result;
 }
 
-function validateCreationUtilisateur (){
-    var nom = document.forms["createUser"]["register-nom"];
-    var inputNom = document.getElementById("register-nom")
-    var prenom = document.forms["createUser"]["register-prenom"];
-    var inputPrenom = document.getElementById("register-prenom")
-    var mail = document.forms["createUser"]["register-mail"];
-    var inputMail = document.getElementById("register-mail")
-    var password = document.forms["createUser"]["register-password"];
-    var inputPassword = document.getElementById("register-password");
-    var confirmPassword = document.forms["createUser"]["register-confirmPassword"];
-    var inputConfirmPassword = document.getElementById("register-confirmPassword")
-    var telephone = document.forms["createUser"]["register-telephone"];
-    var inputTelephone = document.getElementById("register-telephone")
-    var rue = document.forms["createUser"]["register-rue"];
-    var inputRue = document.getElementById("register-rue");
-    var numero = document.forms["createUser"]["register-numero"];
-    var inputNumero = document.getElementById("register-numero");
-    var boite = document.forms["createUser"]["register-boite"];
-    var inputBoite = document.getElementById("register-boite");
-    var ville = document.forms["createUser"]["register-ville"];
-    var inputVille = document.getElementById("register-ville")
-    var dateNaissance = document.forms["createUser"]["register-dateNaissance"];
-    var inputDateNaissance = document.getElementById("register-dateNaissance")
-    var datePermis = document.forms["createUser"]["register-datePermis"];
-    var inputDatePermis = document.getElementById("register-datePermis")
-    var result = true;
+function validateCreationUtilisateur() {
 
-    if (nom.value == "" || nom.value.length < 2 || nom.value.length > 100){
-        let e = document.getElementById("errorNomCreate");
-        inputNom.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un nom valide entre 2 et 100 caracteres.";
-        nom.focus();
+    let result = true;
+
+    const nom = document.forms["createUser"]["register-nom"];
+    const prenom = document.forms["createUser"]["register-prenom"];
+    const mail = document.forms["createUser"]["register-mail"];
+    const password = document.forms["createUser"]["register-password"];
+    const confirmPassword = document.forms["createUser"]["register-confirmPassword"];
+    const telephone = document.forms["createUser"]["register-telephone"];
+    const rue = document.forms["createUser"]["register-rue"];
+    const numero = document.forms["createUser"]["register-numero"];
+    const boite = document.forms["createUser"]["register-boite"];
+    const ville = document.forms["createUser"]["register-ville"];
+    const dateNaissance = document.forms["createUser"]["register-dateNaissance"];
+    const datePermis = document.forms["createUser"]["register-datePermis"];
+
+    if (nom.value == "" || nom.value == null) {
+        document.getElementById("errorNomCreate").innerHTML = "Veuillez entrer un nom";
+        nom.style.border = "1px solid red";
+        nom.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputNom.style.borderColor = "green";
+    } else if (nom.value.length < 2 || nom.value.length > 100) {
+        document.getElementById("errorNomCreate").innerHTML = "Veuillez entrer un nom valide entre 2 et 100 caractères";
+        nom.style.border = "1px solid red";
+        nom.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorNomCreate").innerHTML = "";
+        nom.removeAttribute('style');
     }
-    if (prenom.value == "" || prenom.value.length < 2 || prenom.value.length > 100){
-        let e = document.getElementById("errorPrenomCreate");
-        inputPrenom.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un prenom valide entre 2 et 100 caracteres.";
-        prenom.focus();
+
+    if (prenom.value == "" || prenom.value == null) {
+        document.getElementById("errorPrenomCreate").innerHTML = "Veuillez entrer un prénom";
+        prenom.style.border = "1px solid red";
+        prenom.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputPrenom.style.borderColor = "green";
+    } else if (prenom.value.length < 2 || prenom.value.length > 100) {
+        document.getElementById("errorPrenomCreate").innerHTML = "Veuillez entrer un prénom valide entre 2 et 100 caractères";
+        prenom.style.border = "1px solid red";
+        prenom.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorPrenomCreate").innerHTML = "";
+        prenom.removeAttribute('style');
     }
-    if (mail.value == "" || mail.value.length > 100 || mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
-        let e = document.getElementById("errorMailCreate");
-        inputMail.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML = "Veuillez entrer un mail valide.";
-        mail.focus();
+
+    if (mail.value == "" || mail.value == null) {
+        document.getElementById("errorMailCreate").innerHTML = "Veuillez entrer une adresse email";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputMail.style.borderColor = "green";
+    } else if (mail.value.length > 100 || !ValidateEmail(mail)) {
+        document.getElementById("errorMailCreate").innerHTML = "Veuillez entrer un email valide";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorMailCreate").innerHTML = "";
+        mail.removeAttribute('style');
     }
-    if (password.value == "" || password.value.length < 4 || password.value.length > 256 ){
-        let e = document.getElementById("errorPasswordCreate");
-        inputPassword.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un mot de passe valide entre 4 et 256 caracteres.";
-        password.focus();
+
+    if (password.value == "" || password.value == null) {
+        document.getElementById("errorPasswordCreate").innerHTML = "Veuillez entrer un mot de passe";
+        password.style.border = "1px solid red";
+        password.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }
-    else{
-        inputPassword.style.borderColor = "green";
+    } else if (password.value.length < 4 || password.value.length > 256) {
+        document.getElementById("errorPasswordCreate").innerHTML = "Veuillez entrer un mot de passe valide entre 4 et 256 caractères";
+        password.style.border = "1px solid red";
+        password.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorPasswordCreate").innerHTML = "";
+        password.removeAttribute('style');
     }
-    if (telephone.value == "" || telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")){
-        let e = document.getElementById("errorTelephoneCreate");
-        inputTelephone.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
-        telephone.focus();
+
+    if (confirmPassword.value == "" || confirmPassword.value == null) {
+        document.getElementById("errorConfirmPasswordCreate").innerHTML = "Veuillez confirmer le mot de passe";
+        confirmPassword.style.border = "1px solid red";
+        confirmPassword.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputTelephone.style.borderColor = "green";
+    } else if (Password.value !== confirmPassword.value) {
+        document.getElementById("errorConfirmPasswordCreate").innerHTML = "Les mots de passe ne sont pas identiques";
+        confirmPassword.style.border = "1px solid red";
+        confirmPassword.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorConfirmPasswordCreate").innerHTML = "";
+        confirmPassword.removeAttribute('style');
+    }
+
+    if (telephone.value == "" || telephone.value == null) {
+        document.getElementById("errorTelephoneCreate").innerHTML = "Veuillez entrer un numéro de téléphone";
+        telephone.style.border = "1px solid red";
+        telephone.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")) {
+        document.getElementById("errorTelephoneCreate").innerHTML = "Veuillez entrer un téléphone valide entre 2 et 50 caractères";
+        telephone.style.border = "1px solid red";
+        telephone.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorTelephoneCreate").innerHTML = "";
+        telephone.removeAttribute('style');
     }
-    if (rue.value == "" || rue.value.length <= 6 || rue.value.length > 100){
-        let e = document.getElementById("errorRueCreate");
-        inputRue.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer une rue valide entre 6 et 100 caracteres.";
-        rue.focus();
+
+    if (rue.value == "" || rue.value == null) {
+        document.getElementById("errorRueCreate").innerHTML = "Veuillez entrer un nom de rue";
+        rue.style.border = "1px solid red";
+        rue.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputRue.style.borderColor = "green";
+    } else if (rue.value.length <= 6 || rue.value.length > 100) {
+        document.getElementById("errorRueCreate").innerHTML = "Veuillez entrer une rue valide entre 6 et 100 caracteres";
+        rue.style.border = "1px solid red";
+        rue.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorRueCreate").innerHTML = "";
+        rue.removeAttribute('style');
     }
-    if (numero.value == "" || numero.value.length <= 1 || numero.value.length > 10 ){
-        let e = document.getElementById("errorNumeroCreate");
-        inputNumero.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un numero valide entre 1 et 10 caracteres.";
-        numero.focus();
+
+    if (numero.value == "" || numero.value == null) {
+        document.getElementById("errorNumeroCreate").innerHTML = "Veuillez entrer un numéro";
+        numero.style.border = "1px solid red";
+        numero.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputNumero.style.borderColor = "green";
+    } else if (numero.value.length <= 1 || numero.value.length > 10) {
+        document.getElementById("errorNumeroCreate").innerHTML = "Veuillez entrer un numéro valide entre 1 et 10 caractères";
+        numero.style.border = "1px solid red";
+        numero.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
         document.getElementById("errorNumeroCreate").innerHTML = "";
+        numero.removeAttribute('style');
     }
-    if (boite.value.length > 50 ){
-        let e = document.getElementById("errorBoiteCreate");
-        inputBoite.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez entrer un telephone valide entre 2 et 50 caracteres.";
-        boite.focus();
+
+    if (boite.value.length > 50) {
+        document.getElementById("errorBoiteCreate").innerHTML = "Veuillez entrer une boite valide inférieure à 50 caractères";
+        boite.style.border = "1px solid red";
+        boite.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputBoite.style.borderColor = "green";
+    } else {
         document.getElementById("errorBoiteCreate").innerHTML = "";
+        boite.removeAttribute('style');
     }
-    if (ville.value ==""){
-        let e = document.getElementById("errorVilleCreate");
-        inputVille.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez selectionner une ville.";
-        ville.focus();
+
+    if (ville.value == "" || ville.value == null) {
+        document.getElementById("errorVilleCreate").innerHTML = "Veuillez selectionner une ville";
+        ville.style.border = "1px solid red";
+        ville.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputVille.style.borderColor = "green";
+    } else {
         document.getElementById("errorVilleCreate").innerHTML = "";
+        ville.removeAttribute('style');
     }
-    if (dateNaissance.value ==""){
-        let e = document.getElementById("errorDateCreate");
-        inputDateNaissance.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez selectionner une date.";
-        dateNaissance.focus();
+
+    if (dateNaissance.value == "" || dateNaissance.value == null) {
+        document.getElementById("errorDateCreate").innerHTML = "Veuillez selectionner une date";
+        dateNaissance.style.border = "1px solid red";
+        dateNaissance.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputDateNaissance.style.borderColor = "green";
+    } else {
         document.getElementById("errorDateCreate").innerHTML = "";
+        dateNaissance.removeAttribute('style');
     }
-    if (datePermis.value ==""){
-        let e = document.getElementById("errorPermisCreate");
-        inputDatePermis.style.borderColor = "red";
-        e.style.color="red";
-        e.innerHTML ="Veuillez selectionner une date.";
-        datePermis.focus();
+
+    if (datePermis.value == "" || datePermis.value == null) {
+        document.getElementById("errorPermisCreate").innerHTML = "Veuillez selectionner une date";
+        datePermis.style.border = "1px solid red";
+        datePermis.style.boxShadow = "0 0 1px 2px red";
+
         result = false;
-    }else{
-        inputDatePermis.style.borderColor = "green";
-        document.getElementById("errorPermisCreate").innerHTML = "";
+    } else {
+        document.getElementById('errorPasswordLogin').innerHTML = "";
+        datePermis.removeAttribute('style');
     }
+
+    return result;
+}
+
+function validateModifUser() {
+
+    let result = true;
+
+    const nom = document.forms["modifUser"]["nom"];
+    const prenom = document.forms["modifUser"]["prenom"];
+    const telephone = document.forms["modifUser"]["telephone"];
+    const rue = document.forms["modifUser"]["rue"];
+    const numero = document.forms["modifUser"]["numero"];
+    const boite = document.forms["modifUser"]["boite"];
+
+    if (nom.value == "" || nom.value == null) {
+        document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom";
+        nom.style.border = "1px solid red";
+        nom.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else if (nom.value.length < 2 || nom.value.length > 100) {
+        document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom valide entre 2 et 100 caractères.";
+        nom.style.border = "1px solid red";
+        nom.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorNomModif").innerHTML = "";
+        nom.removeAttribute('style');
+    }
+
+    if (prenom.value == "" || prenom.value == null) {
+        document.getElementById("errorPrenomModif").innerHTML = "Veuillez entrer un prénom";
+        prenom.style.border = "1px solid red";
+        prenom.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else if (prenom.value.length < 2 || prenom.value.length > 100) {
+        document.getElementById("errorPrenomModif").innerHTML = "Veuillez entrer un prénom valide entre 2 et 100 caractères.";
+        prenom.style.border = "1px solid red";
+        prenom.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorPrenomModif").innerHTML = "";
+        prenom.removeAttribute('style');
+    }
+
+    if (telephone.value == "" || telephone.value == null) {
+        document.getElementById("errorTelephoneModif").innerHTML = "Veuillez entrer un numéro de téléphone";
+        telephone.style.border = "1px solid red";
+        telephone.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else if (telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")) {
+        document.getElementById("errorTelephoneModif").innerHTML = "Veuillez entrer un téléphone valide entre 2 et 50 caractères";
+        telephone.style.border = "1px solid red";
+        telephone.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorTelephoneModif").innerHTML = "";
+        telephone.removeAttribute('style');
+    }
+
+    if (rue.value == "" || rue.value == null) {
+        document.getElementById("errorRueModif").innerHTML = "Veuillez entrer un nom de rue";
+        rue.style.border = "1px solid red";
+        rue.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else if (rue.value.length <= 6 || rue.value.length > 100) {
+        document.getElementById("errorRueModif").innerHTML = "Veuillez entrer une rue valide entre 6 et 100 caractères";
+        rue.style.border = "1px solid red";
+        rue.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorRueModif").innerHTML = "";
+        rue.removeAttribute('style');
+    }
+
+    if (numero.value == "" || numero.value == null) {
+        document.getElementById("errorNumModif").innerHTML = "Veuillez entrer un numéro";
+        numero.style.border = "1px solid red";
+        numero.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else if (numero.value.length <= 1 || numero.value.length > 10) {
+        document.getElementById("errorNumModif").innerHTML = "Veuillez entrer un numero valide entre 1 et 10 caractères";
+        numero.style.border = "1px solid red";
+        numero.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorNumModif").innerHTML = "";
+        numero.removeAttribute('style');
+    }
+
+    if (boite.value.length > 50 ) {
+        document.getElementById("errorBoiteModif").innerHTML = "Veuillez entrer un téléphone valide entre 2 et 50 caractères";
+        boite.style.border = "1px solid red";
+        boite.style.boxShadow = "0 0 1px 2px red";
+
+        return false;
+    } else {
+        document.getElementById("errorBoiteModif").innerHTML = "";
+        boite.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifMotDePasse() {
+
+    let result = true;
+
+    const mail = document.forms["motDePasseOublie"]["reset-password-input"];
+
+    if (mail.value == "" || mail.value == null) {
+        document.getElementById("errorMotDePasseModif").innerHTML = "Veuillez entrer une adresse email";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (mail.value.length > 100 || !ValidateEmail(mail)) {
+        document.getElementById("errorMotDePasseModif").innerHTML = "Veuillez entrer un email valide";
+        mail.style.border = "1px solid red";
+        mail.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorMotDePasseModif").innerHTML = "";
+        mail.removeAttribute('style');
+    }
+
     return result;
 }

@@ -54,10 +54,11 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/motDePasseOublie"/>" method="post">
+                <form name="motDePasseOublie" action="<c:url value="/motDePasseOublie"/>" method="post" onsubmit="return validateModifMotDePasse()">
+                    <div><label class="reset-password-label">Veuillez entrer votre email</label></div>
                     <div class="register-div">
-                        <label class="reset-password-label">Veuillez entrer votre email</label>
                         <input type="mail" class="reset-password-input" id="reset-password-input" name="mail"/>
+                        <span class="span-error" id="errorMotDePasseModif"></span>
                     </div>
                     <div class="login-div-error">
                         <span style="color:red">${erreurMail}</span>

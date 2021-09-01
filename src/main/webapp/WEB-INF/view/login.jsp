@@ -181,51 +181,57 @@
                     <div class="register-div">
                         <label for="register-nom">Nom</label>
                         <input type="text" class="register-input" id="register-nom" name="nom" value="<c:out value="${nom}"></c:out>"/>
+                        <span class="span-error" id="errorNomCreate"></span>
                     </div>
-                    <span class="error" id="errorNomCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-prenom">Prénom</label>
                         <input type="text" class="register-input" id="register-prenom" name="prenom"value="<c:out value="${prenom}"></c:out>" />
+                        <span class="span-error" id="errorPrenomCreate"></span>
                     </div>
-                    <span class="error" id="errorPrenomCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-mail">Email</label>
                         <input type="mail" class="register-input" id="register-mail" name="mail" value="<c:out value="${mail}"></c:out>"/>
+                        <span class="span-error" id="errorMailCreate"></span>
                     </div>
-                    <span class="error" id="errorMailCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-password">Mot de passe</label>
                         <input type="password" class="register-input" id="register-password" name="password" value="<c:out value="${password}"></c:out>"/>
+                        <span class="span-error" id="errorPasswordCreate"></span>
                     </div>
-                    <span class="error" id="errorPasswordCreate"></span></p>
 
                     <div class="register-div">
                         <label for="register-confirmPassword">Confirmation</label>
                         <input type="password" class="register-input" id="register-confirmPassword" name="confirmPassword"/>
+                        <span class="span-error" id="errorConfirmPasswordCreate"></span>
                     </div>
 
                     <div class="register-div">
                         <label for="register-telephone">Téléphone</label>
                         <input type="text" class="register-input" id="register-telephone" name="telephone" value="<c:out value="${telephone}"></c:out>"/>
+                        <span class="span-error" id="errorTelephoneCreate"></span>
                     </div>
-                    <span class="error" id="errorTelephoneCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-rue">Rue</label>
                         <input type="text" class="register-input" id="register-rue" name="rue" value="<c:out value="${rue}"></c:out>"/>
+                        <span class="span-error" id="errorRueCreate"></span>
                     </div>
-                    <span class="error" id="errorRueCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-numero">Numéro</label>
                         <input type="text" class="register-input" id="register-numero" name="numero" value="<c:out value="${numero}"></c:out>"/>
+                        <span class="span-error" id="errorNumeroCreate"></span>
                     </div>
-                    <span class="error" id="errorNumeroCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-boite">Boite</label>
                         <input type="text" class="register-input" id="register-boite" name="boite" value="<c:out value="${boite}"></c:out>"/>
+                        <span class="span-error" id="errorBoiteCreate"></span>
                     </div>
-                    <span class="error" id="errorBoiteCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-ville">Ville</label>
                         <select class="register-input" id="register-ville" name="ville">
@@ -234,18 +240,21 @@
                                 <option value="${ville.idVille}">${ville.nomVille}</option>
                             </c:forEach>
                         </select>
+                        <span class="span-error" id="errorVilleCreate"></span>
                     </div>
-                    <span class="error" id="errorVilleCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-dateNaissance">Date de naissance</label>
                         <input type="date" class="register-input" id="register-dateNaissance" name="dateNaissance"/>
+                        <span class="span-error" id="errorDateCreate"></span>
                     </div>
-                    <span class="error" id="errorDateCreate"></span></p>
+
                     <div class="register-div">
                         <label for="register-datePermis">Date de permis</label>
                         <input type="date" class="register-input" id="register-datePermis" name="datePermis"/>
+                        <span class="span-error" id="errorPermisCreate"></span>
                     </div>
-                    <span class="error" id="errorPermisCreate"></span></p>
+
                     <div class="register-button-div">
                         <input type="submit" class="btn-register" value="S'enregistrer">
                     </div>

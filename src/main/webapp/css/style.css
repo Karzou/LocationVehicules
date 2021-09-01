@@ -682,10 +682,11 @@ li {
 
 .register-div {
     height: 90px;
+    margin-bottom: 15px;
 }
 
 .register-div label {
-    display: block;
+
 }
 
 .register-div input {
@@ -696,7 +697,6 @@ li {
     width: 394px;
     color: black;
     font-weight: bold;
-    margin-bottom: 60px;
 }
 
 .register-div input[type=date] {
@@ -726,7 +726,6 @@ li {
     width: 400px;
     color: black;
     font-weight: bold;
-    margin-bottom: 60px;
 }
 
 .register-div select:hover {
