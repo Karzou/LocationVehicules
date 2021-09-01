@@ -50,29 +50,34 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/gestionEntrepot"/>" method="post">
+                <form name="modifEntrepot" action="<c:url value="/gestionEntrepot"/>" method="post" onsubmit="return validateModifEntrepot()">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom entrepôt : </label>
-                        <input class="input-modif" type="text" name="nomEntrepot" value="${entrepot.nomEntrepot}">
+                        <label class="label-input">Nom entrepôt</label>
+                        <input class="input-modif" type="text" name="nomEntrepot" id="nomEntrepot-modif-input" value="${entrepot.nomEntrepot}">
+                        <div class="span-error-div"><span class="span-error4" id="errorNomEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Nombre de place : </label>
-                        <input class="input-modif" type="text" name="nombrePlace" value="${entrepot.nombrePlace}">
+                        <label class="label-input">Nombre de place</label>
+                        <input class="input-modif" type="text" name="nombrePlace" id="nombrePlaceEntrepot-modif-input" value="${entrepot.nombrePlace}">
+                        <div class="span-error-div"><span class="span-error4" id="errorPlaceEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Rue : </label>
-                        <input class="input-modif" type="text" name="rue" value="${entrepot.adressesByIdAdresse.rue}">
+                        <label class="label-input">Rue</label>
+                        <input class="input-modif" type="text" name="rue" id="rueEntrepot-modif-input" value="${entrepot.adressesByIdAdresse.rue}">
+                        <div class="span-error-div"><span class="span-error4" id="errorRueEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Numéro : </label>
-                        <input class="input-modif" type="text" name="numero" value="${entrepot.adressesByIdAdresse.numero}">
+                        <label class="label-input">Numéro</label>
+                        <input class="input-modif" type="text" name="numero" id="numeroEntrepot-modif-input" value="${entrepot.adressesByIdAdresse.numero}">
+                        <div class="span-error-div"><span class="span-error4" id="errorNumeroEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Boite : </label>
-                        <input class="input-modif" type="text" name="boite" value="${entrepot.adressesByIdAdresse.boite}">
+                        <label class="label-input">Boite</label>
+                        <input class="input-modif" type="text" name="boite" id="boiteEntrepot-modif-input"  value="${entrepot.adressesByIdAdresse.boite}">
+                        <div class="span-error-div"><span class="span-error4" id="errorBoiteEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Ville : </label>
+                        <label class="label-input">Ville</label>
                         <select class="select-modif" id="modif-ville" name="idVille" value="">
                             <c:forEach var="villeList" items="${villeList}">
                                 <option value="${villeList.idVille}" <c:if test="${ville.idVille == villeList.idVille}">selected</c:if>>${villeList.codePostal} - ${villeList.nomVille}</option>
@@ -80,7 +85,7 @@
                         </select>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Status : </label>
+                        <label class="label-input">Status</label>
                         <input type="checkbox" name="actifEntrepot" id="actifEntrepot" value="ok" <c:if test="${entrepot.actifEntrepot}">checked</c:if>>
                         <label for="actifEntrepot" class="label-checkbox">Actif</label>
                     </div>

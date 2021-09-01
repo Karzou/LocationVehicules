@@ -34,13 +34,15 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/gestionCouleur"/>" method="post">
+                <form name="modifCouleur" action="<c:url value="/gestionCouleur"/>" method="post" onsubmit="return validateModifCouleur()">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom couleur : </label>
-                        <input class="input-modif" type="text" name="nomCouleur" value="${couleur.nomCouleur}">
+                        <label class="label-input">Nom couleur</label>
+                        <input class="input-modif" type="text" name="nomCouleur" id="couleur-modif-input" value="${couleur.nomCouleur}">
+                        <div class="span-error-div"><span class="span-error4" id="errorCouleurModif"></span></div>
                     </div>
+
                     <div class="div-input-modif">
-                        <label class="label-input">Status : </label>
+                        <label class="label-input">Status</label>
                         <input type="checkbox" name="actifCouleur" id="actifCouleur" value="ok" <c:if test="${couleur.actifCouleur}">checked</c:if>>
                         <label for="actifCouleur" class="label-checkbox">Actif</label>
                     </div>

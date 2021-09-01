@@ -688,3 +688,121 @@ function validateModifMotDePasse() {
 
     return result;
 }
+
+function validateModifCouleur() {
+
+    let result = true;
+
+    const couleur = document.forms["modifCouleur"]["couleur-modif-input"];
+
+    if (couleur.value == "" || couleur.value == null) {
+        document.getElementById("errorCouleurModif").innerHTML = "Veuillez entrer une couleur";
+        couleur.style.border = "1px solid red";
+        couleur.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (couleur.value.length < 2 || couleur.value.length > 50 ) {
+        document.getElementById("errorCouleurModif").innerHTML = "Veuillez entrer un nom de couleur valide";
+        couleur.style.border = "1px solid red";
+        couleur.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCouleurModif").innerHTML = "";
+        couleur.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifEntrepot() {
+
+    let result = true;
+
+    const nomEntrepot = document.forms["modifEntrepot"]["nomEntrepot-modif-input"];
+    const nombrePlaceEntrepot = document.forms["modifEntrepot"]["nombrePlaceEntrepot-modif-input"];
+    const rueEntrepot = document.forms["modifEntrepot"]["rueEntrepot-modif-input"];
+    const numeroEntrepot = document.forms["modifEntrepot"]["numeroEntrepot-modif-input"];
+    const boiteEntrepot = document.forms["modifEntrepot"]["boiteEntrepot-modif-input"];
+
+    if (nomEntrepot.value == "" || nomEntrepot.value == null) {
+        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepôt";
+        nomEntrepot.style.border = "1px solid red";
+        nomEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (nomEntrepot.value.length > 10) {
+        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepôt valide";
+        nomEntrepot.style.border = "1px solid red";
+        nomEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNomEntrepotModif").innerHTML = "";
+        couleur.removeAttribute('style');
+    }
+
+    if (nombrePlaceEntrepot.value == "" || nombrePlaceEntrepot.value == null) {
+        document.getElementById("errorPlaceEntrepotModif").innerHTML = "Veuillez entrer un nombre de place";
+        nombrePlaceEntrepot.style.border = "1px solid red";
+        nombrePlaceEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (nombrePlaceEntrepot.value.length < 2 || nombrePlaceEntrepot.value.length > 50 ) {
+        document.getElementById("errorPlaceEntrepotModif").innerHTML = "Veuillez entrer un nombre de place valide";
+        nombrePlaceEntrepot.style.border = "1px solid red";
+        nombrePlaceEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPlaceEntrepotModif").innerHTML = "";
+        nombrePlaceEntrepot.removeAttribute('style');
+    }
+
+    if (rueEntrepot.value == "" || rueEntrepot.value == null) {
+        document.getElementById("errorRueEntrepotModif").innerHTML = "Veuillez entrer un nom de rue";
+        rueEntrepot.style.border = "1px solid red";
+        rueEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (rueEntrepot.value.length < 2 || rueEntrepot.value.length > 50 ) {
+        document.getElementById("errorRueEntrepotModif").innerHTML = "Veuillez entrer un nom de rue valide";
+        rueEntrepot.style.border = "1px solid red";
+        rueEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorRueEntrepotModif").innerHTML = "";
+        rueEntrepot.removeAttribute('style');
+    }
+
+    if (numeroEntrepot.value == "" || numeroEntrepot.value == null) {
+        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numéro";
+        numeroEntrepot.style.border = "1px solid red";
+        numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numeroEntrepot.value.length <= 1 || numeroEntrepot.value.length > 10) {
+        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numéro valide";
+        numeroEntrepot.style.border = "1px solid red";
+        numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumeroEntrepotModif").innerHTML = "";
+        numeroEntrepot.removeAttribute('style');
+    }
+
+    if (boiteEntrepot.value.length > 10 ) {
+        document.getElementById("errorBoiteEntrepotModif").innerHTML = "Veuillez entrer une boite valide";
+        boiteEntrepot.style.border = "1px solid red";
+        boiteEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorBoiteEntrepotModif").innerHTML = "";
+        boiteEntrepot.removeAttribute('style');
+    }
+
+    return result;
+}
