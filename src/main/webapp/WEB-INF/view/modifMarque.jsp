@@ -34,15 +34,16 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/gestionMarqueModele"/>" method="post">
+                <form name="modifMarque" action="<c:url value="/gestionMarqueModele"/>" method="post" onsubmit="return validateModifMarque()">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>
-                        <input class="input-modif" type="text" name="nomMarque" value="${marque.nomMarque}">
+                        <input class="input-modif" type="text" name="nomMarque" id="marque-modif-input" value="${marque.nomMarque}">
+                        <div class="span-error-div"><span class="span-error4" id="errorMarqueModif"></span></div>
                     </div>
 
                     <input type="hidden" name="idModif" value="${marque.idMarque}">
                     <input type="hidden" name="flagModifMarque" value="true">
-                    <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
+                    <input type="submit" class="btn-modif2" value="Modifier">
                     <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionMarqueModele">
                 </form>
             </div>

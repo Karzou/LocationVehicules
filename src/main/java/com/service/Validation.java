@@ -109,7 +109,7 @@ public class Validation {
 
     public static boolean checkTelephoneFormat(String telephone) {
 
-        if (telephone.matches("\\+?[0-9]*")) {
+        if (telephone.matches("\\+?[0-9]+")) {
 
             return true;
         }

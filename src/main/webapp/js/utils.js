@@ -272,12 +272,24 @@ function ValidateEmail(inputText)
 {
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if(inputText.value.match(mailformat))
-    {
+    if(inputText.value.match(mailformat)) {
+
         return true;
+    } else {
+
+        return false;
     }
-    else
-    {
+}
+
+function ValidateTelephone(inputText) {
+
+    let telephoneformat = /^\+?[0-9]+/;
+
+    if(inputText.value.match(telephoneformat)) {
+
+        return true;
+    } else {
+
         return false;
     }
 }
@@ -312,7 +324,7 @@ function validateLogin() {
         password.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
-    } else if (password.value == "" || password.value.length < 4 || password.value.length > 256 ) {
+    } else if (password.value == "" || password.value.length < 4 || password.value.length > 256) {
         document.getElementById('errorPasswordLogin').innerHTML = "Veuillez entrer un mot de passe valide entre 4 et 256 caracteres";
         password.style.border = "1px solid red";
         password.style.boxShadow = "0 0 1px 2px red";
@@ -519,7 +531,7 @@ function validateCreationUtilisateur() {
 
         result = false;
     } else {
-        document.getElementById('errorPasswordLogin').innerHTML = "";
+        document.getElementById("errorPermisCreate").innerHTML = "";
         datePermis.removeAttribute('style');
     }
 
@@ -534,8 +546,8 @@ function validateModifUtilisateur() {
     const prenom = document.forms["modifUser"]["modif-prenom"];
     const telephone = document.forms["modifUser"]["modif-telephone"];
     const password = document.forms["modifUser"]["modif-password"];
-    const dateNaissance = document.forms["modifUser"]["modif-password"];
-    const datePermis = document.forms["modifUser"]["modif-password"];
+    const dateNaissance = document.forms["modifUser"]["modif-dateNaissance"];
+    const datePermis = document.forms["modifUser"]["modif-datePermis"];
     const rue = document.forms["modifUser"]["modif-rue"];
     const numero = document.forms["modifUser"]["modif-numero"];
     const boite = document.forms["modifUser"]["modif-boite"];
@@ -545,13 +557,13 @@ function validateModifUtilisateur() {
         nom.style.border = "1px solid red";
         nom.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else if (nom.value.length < 2 || nom.value.length > 100) {
         document.getElementById("errorNomModif").innerHTML = "Veuillez entrer un nom valide entre 2 et 100 caractères";
         nom.style.border = "1px solid red";
         nom.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
         document.getElementById("errorNomModif").innerHTML = "";
         nom.removeAttribute('style');
@@ -562,13 +574,13 @@ function validateModifUtilisateur() {
         prenom.style.border = "1px solid red";
         prenom.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else if (prenom.value.length < 2 || prenom.value.length > 100) {
         document.getElementById("errorPrenomModif").innerHTML = "Veuillez entrer un prénom valide entre 2 et 100 caractères.";
         prenom.style.border = "1px solid red";
         prenom.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
         document.getElementById("errorPrenomModif").innerHTML = "";
         prenom.removeAttribute('style');
@@ -579,39 +591,43 @@ function validateModifUtilisateur() {
         telephone.style.border = "1px solid red";
         telephone.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
-    } else if (telephone.value.length <= 6 || telephone.value.length > 50 || telephone.matches("\\+?[0-9]*")) {
-        document.getElementById("errorTelephoneModif").innerHTML = "Veuillez entrer un téléphone valide entre 2 et 50 caractères";
+        result = false;
+    } else if (telephone.value.length < 6 || telephone.value.length > 50) {
+        document.getElementById("errorTelephoneModif").innerHTML = "Veuillez entrer un téléphone valide entre 6 et 50 caractères";
         telephone.style.border = "1px solid red";
         telephone.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
+    } else if (!ValidateTelephone(telephone)) {
+        document.getElementById("errorTelephoneModif").innerHTML = "Veuillez entrer un téléphone valide";
+        telephone.style.border = "1px solid red";
+        telephone.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
     } else {
         document.getElementById("errorTelephoneModif").innerHTML = "";
         telephone.removeAttribute('style');
     }
 
     if (dateNaissance.value == "" || dateNaissance.value == null) {
-        alert("date naissance null ou vide");
-        document.getElementById("errorRueModif").innerHTML = "Veuillez selectionner une date";
+        document.getElementById("errorDateNaissanceModif").innerHTML = "Veuillez selectionner une date";
         dateNaissance.style.border = "1px solid red";
         dateNaissance.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
-        document.getElementById("errorRueModif").innerHTML = "";
+        document.getElementById("errorDateNaissanceModif").innerHTML = "";
         dateNaissance.removeAttribute('style');
     }
 
     if (datePermis.value == "" || datePermis.value == null) {
-        alert("date permis null ou vide");
-        document.getElementById("errorRueModif").innerHTML = "Veuillez selectionner une date";
+        document.getElementById("errorDatePermisModif").innerHTML = "Veuillez selectionner une date";
         datePermis.style.border = "1px solid red";
         datePermis.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
-        document.getElementById("errorRueModif").innerHTML = "";
+        document.getElementById("errorDatePermisModif").innerHTML = "";
         datePermis.removeAttribute('style');
     }
 
@@ -620,13 +636,13 @@ function validateModifUtilisateur() {
         rue.style.border = "1px solid red";
         rue.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
-    } else if (rue.value.length <= 6 || rue.value.length > 100) {
+        result = false;
+    } else if (rue.value.length < 6 || rue.value.length > 100) {
         document.getElementById("errorRueModif").innerHTML = "Veuillez entrer une rue valide entre 6 et 100 caractères";
         rue.style.border = "1px solid red";
         rue.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
         document.getElementById("errorRueModif").innerHTML = "";
         rue.removeAttribute('style');
@@ -637,13 +653,13 @@ function validateModifUtilisateur() {
         numero.style.border = "1px solid red";
         numero.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else if (numero.value.length <= 1 || numero.value.length > 10) {
         document.getElementById("errorNumModif").innerHTML = "Veuillez entrer un numero valide entre 1 et 10 caractères";
         numero.style.border = "1px solid red";
         numero.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
         document.getElementById("errorNumModif").innerHTML = "";
         numero.removeAttribute('style');
@@ -654,7 +670,7 @@ function validateModifUtilisateur() {
         boite.style.border = "1px solid red";
         boite.style.boxShadow = "0 0 1px 2px red";
 
-        return false;
+        result = false;
     } else {
         document.getElementById("errorBoiteModif").innerHTML = "";
         boite.removeAttribute('style');
@@ -802,6 +818,32 @@ function validateModifEntrepot() {
     } else {
         document.getElementById("errorBoiteEntrepotModif").innerHTML = "";
         boiteEntrepot.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifMarque() {
+
+    let result = true;
+
+    const marque = document.forms["modifMarque"]["marque-modif-input"];
+
+    if (marque.value == "" || marque.value == null) {
+        document.getElementById("errorMarqueModif").innerHTML = "Veuillez entrer une marque";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (marque.value.length < 2 || marque.value.length > 50 ) {
+        document.getElementById("errorMarqueModif").innerHTML = "Veuillez entrer un nom de marque valide";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorMarqueModif").innerHTML = "";
+        marque.removeAttribute('style');
     }
 
     return result;

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=ISO-8859-1" %>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Modification utilisateur</title>
@@ -93,8 +94,8 @@
                     <c:if test="${!empty profilFlag }">
                         <input type="hidden" name="profilFlag" value="ok">
                     </c:if>
-                    <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}"/>
-                    <input type="submit" class="btn-modif2" value="Modifier"/>
+                    <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
+                    <input type="submit" class="btn-modif2" value="Modifier">
                     <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionUtilisateur">
                 </form>
             </div>
