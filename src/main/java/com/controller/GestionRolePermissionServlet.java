@@ -222,6 +222,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
             int ajoutIdRole = Integer.parseInt( request.getParameter( "ajoutIdRole"));
             Permission permission = null;
             Role role = null;
+
             if(!autoriseService.checkAutorise(ajoutIdRole, idPermission)){
                 try {
                     if(logger.isInfoEnabled()){
@@ -241,22 +242,36 @@ public class GestionRolePermissionServlet extends HttpServlet {
                     logger.warn("Problème lors de la recherche de rôle : " + ajoutIdRole + ". " + e);
                     session.setAttribute("erreur","Problème lors de la recherche d'un rôle. ");
                 }
-                Autorise autorise = new Autorise(permission,role);
-                try {
-                    if(logger.isInfoEnabled()){
-                        logger.info("Début de la transaction persist autorise.");
+                if (!role.getRoleDescription().equals("admin") ){
+                    if (!role.getRoleDescription().equals("client")){
+                       if (!role.getRoleDescription().equals("employe")){
+                           Autorise autorise = new Autorise(permission,role);
+                           try {
+                               if(logger.isInfoEnabled()){
+                                   logger.info("Début de la transaction persist autorise.");
+                               }
+                               transaction.begin();
+                               em.persist(autorise);
+                               transaction.commit();
+                           } catch (Exception e) {
+                               logger.warn("Problème lors de l'insertion en db de l'autorisation. " + e);
+                               session.setAttribute("erreur", "Erreur lors de la persistance de 'autorise'. ");
+                           }finally {
+                               if (transaction.isActive()) {
+                                   logger.warn("Rollback de l' 'insertion de autorise.");
+                                   transaction.rollback();
+                               }
+                           }
+                       } else{
+                           session.setAttribute("adminSafe", "Vous ne pouvez pas modifier les permissions sur le rôle 'employe'");
+                       }
+                    }else{
+                        session.setAttribute("adminSafe", "Vous ne pouvez pas modifier les permissions sur le rôle 'client'");
                     }
-                    transaction.begin();
-                    em.persist(autorise);
-                    transaction.commit();
-                } catch (Exception e) {
-                    logger.warn("Problème lors de l'insertion en db de l'autorisation. " + e);
-                    session.setAttribute("erreur", "Erreur lors de la persistance de 'autorise'. ");
-                }finally {
-                    if (transaction.isActive()) {
-                        logger.warn("Rollback de l' 'insertion de autorise.");
-                        transaction.rollback();
-                    }
+
+
+                }else{
+                    session.setAttribute("adminSafe", "Vous ne pouvez pas modifier les permissions sur le rôle 'admin'");
                 }
             }else{
                 if(logger.isInfoEnabled()){
