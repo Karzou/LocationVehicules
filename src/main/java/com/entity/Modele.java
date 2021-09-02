@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Modele {
     private int idModele;
     private String nomModele;
-    private boolean actifOption;
+    private boolean actifModele;
     private Marque marquesByIdMarque;
     private List<Vehicule> vehiculesByIdModele;
 
@@ -54,13 +54,13 @@ public class Modele {
     }
 
     @Basic
-    @Column(name = "Actif_option", nullable = false)
-    public boolean isActifOption() {
-        return actifOption;
+    @Column(name = "Actif_modele", nullable = false)
+    public boolean isActifModele() {
+        return actifModele;
     }
 
-    public void setActifOption(boolean actifOption) {
-        this.actifOption = actifOption;
+    public void setActifModele(boolean actifModele) {
+        this.actifModele = actifModele;
     }
 
     @Override
@@ -68,12 +68,12 @@ public class Modele {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Modele modele = (Modele) o;
-        return idModele == modele.idModele && actifOption == modele.actifOption && Objects.equals(nomModele, modele.nomModele);
+        return idModele == modele.idModele && actifModele == modele.actifModele && Objects.equals(nomModele, modele.nomModele);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idModele, nomModele, actifOption);
+        return Objects.hash(idModele, nomModele, actifModele);
     }
 
     @ManyToOne

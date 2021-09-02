@@ -28,7 +28,7 @@ public class Paiement {
     }
 
     @Basic
-    @Column(name = "Type_paiement", nullable = true, length = 50)
+    @Column(name = "Type_paiement", nullable = false, length = 50)
     public String getTypePaiement() {
         return typePaiement;
     }
