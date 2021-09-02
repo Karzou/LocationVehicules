@@ -96,7 +96,7 @@
                     </c:if>
                     <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
                     <input type="submit" class="btn-modif2" value="Modifier">
-                    <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionUtilisateur">
+                    <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/accueil">
                 </form>
             </div>
         </div>
