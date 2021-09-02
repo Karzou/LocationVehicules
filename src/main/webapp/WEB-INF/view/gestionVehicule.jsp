@@ -89,16 +89,17 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/ajoutVehicule"/>" method="post">
+                <form name="ajoutVehicule" action="<c:url value="/ajoutVehicule"/>" method="post" onsubmit="return validateAjoutVehicule()">
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
-                            <label class="label-input">Marque : </label>
-                            <select class="select-modif" name="idMarque" onChange="location.href='${pageContext.request.contextPath}/gestionVehicule?idMarque='+this.value+'&newVehicleFlag=true';">
+                            <label class="label-input">Marque</label>
+                            <select class="select-modif" name="idMarque" id="marque-ajout-input" onChange="location.href='${pageContext.request.contextPath}/gestionVehicule?idMarque='+this.value+'&newVehicleFlag=true';">
                                 <option value="" <c:if test="${newVehicleFlag == false}">selected</c:if> disabled>Choisissez une marque</option>
                                 <c:forEach var="marqueList" items="${marqueList}">
                                     <option value="${marqueList.idMarque}" <c:if test="${newVehicleFlag == true && marqueList.idMarque == marque.idMarque}">selected</c:if>>${marqueList.nomMarque}</option>
                                 </c:forEach>
                             </select>
+                            <div class="span-error-div"><span class="span-error4" id="errorMarqueAjout"></span></div>
                         </div>
                         <div class="div-input-modif-button">
                             <input type="button" class="btn-add" value="Ajout marque" onclick=location.href="${pageContext.request.contextPath}/gestionMarqueModele">
@@ -106,8 +107,8 @@
                     </div>
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
-                            <label class="label-input">Modèle : </label>
-                            <select class="select-modif" name="idModele">
+                            <label class="label-input">Modèle</label>
+                            <select class="select-modif" name="idModele" id="modele-ajout-input">
                                 <option value="" disabled selected>Choisissez un modèle</option>
                                 <c:forEach var="modeleList" items="${modeleList}">
                                     <c:choose>
@@ -124,21 +125,24 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
+                            <div class="span-error-div"><span class="span-error4" id="errorModeleAjout"></span></div>
                         </div>
                         <div class="div-input-modif-button">
                             <input type="button" class="btn-add" value="Ajout modèle" onclick=location.href="${pageContext.request.contextPath}/gestionMarqueModele">
                         </div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Cylindrée : </label>
-                        <input class="input-modif" type="text" name="cylindree" value="${vehicule.cylindree}">
+                        <label class="label-input">Cylindrée</label>
+                        <input class="input-modif" type="text" name="cylindree" id="cylindree-ajout-input" value="${vehicule.cylindree}">
+                        <div class="span-error-div"><span class="span-error4" id="errorCylindreeAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Puissance: </label>
-                        <input class="input-modif" type="text" name="puissance" value="${vehicule.puissance}">
+                        <label class="label-input">Puissance</label>
+                        <input class="input-modif" type="text" name="puissance" id="puissance-ajout-input" value="${vehicule.puissance}">
+                        <div class="span-error-div"><span class="span-error4" id="errorPuissanceAjout"></span></div>
                     </div>
                     <div class="div-input-modif2">
-                        <div class="div-input-left"><label class="label-input">Option: </label></div>
+                        <div class="div-input-left"><label class="label-input">Option</label></div>
                         <div class="div-input-right">
                             <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
                                 <div class="div-input-checkbox">
@@ -149,30 +153,35 @@
                         </div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Numéro de chassis: </label>
-                        <input class="input-modif" type="text" name="numChassis" value="${vehicule.numChassis}">
+                        <label class="label-input">Numéro de chassis</label>
+                        <input class="input-modif" type="text" name="numChassis" id="numChassis-ajout-input" value="${vehicule.numChassis}">
+                        <div class="span-error-div"><span class="span-error4" id="errorNumChassisAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Immatriculation : </label>
-                        <input class="input-modif" type="text" name="immatriculation" value="${vehicule.immatriculation}">
+                        <label class="label-input">Immatriculation</label>
+                        <input class="input-modif" type="text" name="immatriculation" id="immatriculation-ajout-input" value="${vehicule.immatriculation}">
+                        <div class="span-error-div"><span class="span-error4" id="errorImmatriculationAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Date achat : </label>
-                        <input class="input-modif" type="date" name="dateAchat" value="${vehicule.dateAchat}">
+                        <label class="label-input">Date achat</label>
+                        <input class="input-modif" type="date" name="dateAchat" id="dateAchat-ajout-input" value="${vehicule.dateAchat}">
+                        <div class="span-error-div"><span class="span-error4" id="errorDateAchatAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Prix journalier : </label>
-                        <input class="input-modif" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
+                        <label class="label-input">Prix journalier</label>
+                        <input class="input-modif" type="text" name="prixJournalier" id="prixJournalier-ajout-input" value="${vehicule.prixJournalier}">
+                        <div class="span-error-div"><span class="span-error4" id="errorPrixJournalierAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
-                            <label class="label-input">Couleur : </label>
-                            <select class="select-modif" name="idCouleur">
+                            <label class="label-input">Couleur</label>
+                            <select class="select-modif" name="idCouleur" id="couleur-ajout-input">
                                 <option value="" disabled selected>Choisissez une couleur</option>
                                 <c:forEach var="couleurList" items="${couleurList}">
                                     <option value="${couleurList.idCouleur}">${couleurList.nomCouleur}</option>
                                 </c:forEach>
                             </select>
+                            <div class="span-error-div"><span class="span-error4" id="errorCouleurAjout"></span></div>
                         </div>
                         <div class="div-input-modif-button">
                             <input type="button" class="btn-add" value="Ajout couleur" onclick=location.href="${pageContext.request.contextPath}/gestionCouleur">
@@ -180,8 +189,8 @@
                     </div>
                     <div class="div-input-modif">
                         <div class="div-input-modif-select">
-                            <label class="label-input">Entrepot : </label>
-                            <select class="select-modif" name="idEntrepot">
+                            <label class="label-input">Entrepot</label>
+                            <select class="select-modif" name="idEntrepot" id="entrepot-ajout-input">
                                 <option value="" disabled selected>Choisissez un entrepôt</option>
                                 <c:forEach var="entrepotList" items="${entrepotList}">
                                     <c:if test="${entrepotList.actifEntrepot}">
@@ -189,6 +198,7 @@
                                     </c:if>
                                 </c:forEach>
                             </select>
+                            <div class="span-error-div"><span class="span-error4" id="errorEntrepotAjout"></span></div>
                         </div>
                         <div class="div-input-modif-button">
                             <input type="button" class="btn-add" value="Ajout entrepot" onclick=location.href="${pageContext.request.contextPath}/gestionEntrepot">

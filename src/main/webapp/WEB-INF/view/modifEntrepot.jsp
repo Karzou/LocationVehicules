@@ -73,7 +73,7 @@
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Boite</label>
-                        <input class="input-modif" type="text" name="boite" id="boiteEntrepot-modif-input"  value="${entrepot.adressesByIdAdresse.boite}">
+                        <input class="input-modif" type="text" name="boite" id="boiteEntrepot-modif-input" value="${entrepot.adressesByIdAdresse.boite}">
                         <div class="span-error-div"><span class="span-error4" id="errorBoiteEntrepotModif"></span></div>
                     </div>
                     <div class="div-input-modif">

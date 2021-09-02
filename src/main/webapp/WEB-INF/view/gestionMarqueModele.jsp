@@ -54,10 +54,11 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/ajoutMarque"/>" method="post">
+                <form name="ajoutMarque" action="<c:url value="/ajoutMarque"/>" method="post" onsubmit="return validateAjoutMarque()">
                     <div class="div-input-modif">
                         <label class="label-input">Marque : </label>
-                        <input class="input-modif" type="text" name="nomMarque">
+                        <input class="input-modif" type="text" name="nomMarque" id="marque-ajout-input">
+                        <div class="span-error-div"><span class="span-error4" id="errorMarqueAjout"></span></div>
                     </div>
 
                     <button type="submit" value="Envoyer" class="btn-modif2">Ajouter</button>
@@ -109,19 +110,21 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/ajoutModele"/>" method="post">
+                <form name="ajoutModele" action="<c:url value="/ajoutModele"/>" method="post" onsubmit="return validateAjoutModele()">
                     <div class="div-input-modif">
-                        <label class="label-input">Marque : </label>
-                        <select class="select-modif" name="idMarque">
+                        <label class="label-input">Marque</label>
+                        <select class="select-modif" name="idMarque" id="marque-ajout-input2">
                             <option value="" disabled selected>Choisissez une marque</option>
                             <c:forEach var="marqueList" items="${marqueList}">
                                 <option value="${marqueList.idMarque}">${marqueList.nomMarque}</option>
                             </c:forEach>
                         </select>
+                        <div class="span-error-div"><span class="span-error4" id="errorMarqueAjout2"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Modèle : </label>
-                        <input class="input-modif" type="text" name="nomModele">
+                        <label class="label-input">Modèle</label>
+                        <input class="input-modif" type="text" name="nomModele" id="modele-ajout-input">
+                        <div class="span-error-div"><span class="span-error4" id="errorModeleAjout"></span></div>
                     </div>
 
                     <button type="submit" value="Envoyer" class="btn-modif2">Ajouter</button>

@@ -54,10 +54,11 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/ajoutCouleur"/>" method="post">
+                <form name="ajoutCouleur" action="<c:url value="/ajoutCouleur"/>" method="post" onsubmit="return validateAjoutCouleur()">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom couleur : </label>
-                        <input class="input-modif" type="text" name="nomCouleur" value="">
+                        <label class="label-input">Nom couleur</label>
+                        <input class="input-modif" type="text" name="nomCouleur" id="couleur-ajout-input" value="">
+                        <div class="span-error-div"><span class="span-error4" id="errorCouleurAjout"></span></div>
                     </div>
 
                     <button type="submit" value="Envoyer" id="bouton-modif" class="btn-modif2">Ajouter</button>
