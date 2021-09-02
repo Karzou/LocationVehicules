@@ -54,7 +54,7 @@ public class Modele {
     }
 
     @Basic
-    @Column(name = "Actif_option", nullable = false)
+    @Column(name = "Actif_modele", nullable = false)
     public boolean isActifOption() {
         return actifOption;
     }

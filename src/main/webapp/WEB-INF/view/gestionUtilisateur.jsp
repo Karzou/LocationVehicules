@@ -60,10 +60,14 @@
                             <th scope="col">Code postal</th>
                             <th scope="col">Ville</th>
                             <th scope="col">Rôles</th>
-                            <th scope="col">Autorisation</th>
+                            <c:if test="${(sessionScope.menu == 'admin')}">
+                                <th scope="col">Autorisation</th>
+                            </c:if>
                             <th scope="col">Réservation</th>
                             <th scope="col">Modification</th>
-                            <th scope="col">Activation</th>
+                            <c:if test="${(sessionScope.menu == 'admin')}">
+                                <th scope="col">Activation</th>
+                            </c:if>
                         </thead>
 
                         <tbody>
@@ -81,15 +85,15 @@
                                     <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
                                     <td><c:out value="${user.rolesByIdRole.roleDescription}"/></td>
                                     <c:if test="${(sessionScope.role == 'admin') || (sessionScope.role == 'employe')}">
-                                        <td>
-                                            <c:if test="${(sessionScope.role == 'admin')}">
+                                        <c:if test="${(sessionScope.menu == 'admin')}">
+                                            <td>
                                                 <form action="<c:url value="/gestionDroit"/>" method="get">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
                                                     <input type="hidden" name="idRole" value="${user.rolesByIdRole.idRole}"/>
                                                     <button type="submit" class="btn-right" name="idSup" value="droits">Gestion des droits</button>
                                                 </form>
-                                            </c:if>
-                                        </td>
+                                            </td>
+                                        </c:if>
                                         <td>
                                             <form action="<c:url value="/reservation"/>" method="post">
                                                 <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
@@ -102,14 +106,14 @@
                                                 <input type="submit" class="btn-modif" value="Modifier"/>
                                             </form>
                                         </td>
-                                        <td>
-                                            <c:if test="${(sessionScope.role == 'admin')}">
+                                        <c:if test="${(sessionScope.menu == 'admin')}">
+                                            <td>
                                                 <form action="<c:url value="/supUtilisateur"/>" method="post">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
                                                     <input type="submit" class="btn-sup" value="Désactiver"/>
                                                 </form>
-                                            </c:if>
-                                        </td>
+                                            </td>
+                                        </c:if>
                                     </c:if>
                                 </c:if>
                             </tr>
@@ -154,16 +158,16 @@
                                         <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.codePostal}"/></td>
                                         <td><c:out value="${user.adressesByIdAdresse.villesByIdVille.nomVille}"/></td>
                                         <td><c:out value="${user.rolesByIdRole.roleDescription}"/></td>
-                                        <c:if test="${(sessionScope.role == 'admin') || (sessionScope.role == 'employe') }">
-                                            <td>
-                                                <c:if test="${(sessionScope.role == 'admin')}">
+                                        <c:if test="${(sessionScope.menu == 'admin') || (sessionScope.menu == 'employe') }">
+                                            <c:if test="${(sessionScope.menu == 'admin')}">
+                                                <td>
                                                     <form action="<c:url value="/gestionDroit"/>" method="get">
                                                         <input type="hidden" name="idSup" value="${user.idUtilisateur}">
                                                         <input type="hidden" name="idRole" value="${user.rolesByIdRole.idRole}">
                                                         <input type="submit" class="btn-right" value="Gestion des droits"/>
                                                     </form>
-                                                </c:if>
-                                            </td>
+                                                </td>
+                                            </c:if>
                                             <td>
                                                 <form action="<c:url value="/reservation"/>" method="post">
                                                     <input type="hidden" name="idSup" value="${user.idUtilisateur}">
@@ -176,14 +180,14 @@
                                                     <input type="submit" class="btn-modif" value="Modifier"/>
                                                 </form>
                                             </td>
-                                            <td>
-                                                <c:if test="${(sessionScope.role == 'admin')}">
+                                            <c:if test="${(sessionScope.menu == 'admin')}">
+                                                <td>
                                                     <form action="<c:url value="/supUtilisateur"/>" method="post">
                                                         <input type="hidden" name="idSup" value="${user.idUtilisateur}"/>
                                                         <input type="submit" class="btn-modif" value="Réactiver"/>
                                                     </form>
-                                                </c:if>
-                                            </td>
+                                                </td>
+                                            </c:if>
                                         </c:if>
                                     </c:if>
                                 </tr>
