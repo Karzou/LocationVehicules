@@ -705,6 +705,32 @@ function validateModifMotDePasse() {
     return result;
 }
 
+function validateAjoutCouleur() {
+
+    let result = true;
+
+    const couleur = document.forms["ajoutCouleur"]["couleur-ajout-input"];
+
+    if (couleur.value == "" || couleur.value == null) {
+        document.getElementById("errorCouleurAjout").innerHTML = "Veuillez entrer une couleur";
+        couleur.style.border = "1px solid red";
+        couleur.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (couleur.value.length < 2 || couleur.value.length > 50 ) {
+        document.getElementById("errorCouleurAjout").innerHTML = "Veuillez entrer un nom de couleur valide";
+        couleur.style.border = "1px solid red";
+        couleur.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCouleurAjout").innerHTML = "";
+        couleur.removeAttribute('style');
+    }
+
+    return result;
+}
+
 function validateModifCouleur() {
 
     let result = true;
@@ -731,6 +757,110 @@ function validateModifCouleur() {
     return result;
 }
 
+function validateAjoutEntrepot() {
+
+    let result = true;
+
+    const nomEntrepot = document.forms["ajoutEntrepot"]["nomEntrepot-ajout-input"];
+    const nombrePlaceEntrepot = document.forms["ajoutEntrepot"]["nombrePlaceEntrepot-ajout-input"];
+    const rueEntrepot = document.forms["ajoutEntrepot"]["rueEntrepot-ajout-input"];
+    const numeroEntrepot = document.forms["ajoutEntrepot"]["numeroEntrepot-ajout-input"];
+    const boiteEntrepot = document.forms["ajoutEntrepot"]["boiteEntrepot-ajout-input"];
+    const villeEntrepot = document.forms["ajoutEntrepot"]["villeEntrepot-ajout-input"];
+
+    if (nomEntrepot.value == "" || nomEntrepot.value == null) {
+        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepôt";
+        nomEntrepot.style.border = "1px solid red";
+        nomEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if ((nomEntrepot.value.length < 2) || (nomEntrepot.value.length > 50)) {
+        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepôt valide";
+        nomEntrepot.style.border = "1px solid red";
+        nomEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNomEntrepotAjout").innerHTML = "";
+        nomEntrepot.removeAttribute('style');
+    }
+
+    if (nombrePlaceEntrepot.value == "" || nombrePlaceEntrepot.value == null) {
+        document.getElementById("errorPlaceEntrepotAjout").innerHTML = "Veuillez entrer un nombre de place";
+        nombrePlaceEntrepot.style.border = "1px solid red";
+        nombrePlaceEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (nombrePlaceEntrepot.value.length < 2 || nombrePlaceEntrepot.value.length > 50 ) {
+        document.getElementById("errorPlaceEntrepotAjout").innerHTML = "Veuillez entrer un nombre de place valide";
+        nombrePlaceEntrepot.style.border = "1px solid red";
+        nombrePlaceEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPlaceEntrepotAjout").innerHTML = "";
+        nombrePlaceEntrepot.removeAttribute('style');
+    }
+
+    if (rueEntrepot.value == "" || rueEntrepot.value == null) {
+        document.getElementById("errorRueEntrepotAjout").innerHTML = "Veuillez entrer un nom de rue";
+        rueEntrepot.style.border = "1px solid red";
+        rueEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (rueEntrepot.value.length < 2 || rueEntrepot.value.length > 50 ) {
+        document.getElementById("errorRueEntrepotAjout").innerHTML = "Veuillez entrer un nom de rue valide";
+        rueEntrepot.style.border = "1px solid red";
+        rueEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorRueEntrepotAjout").innerHTML = "";
+        rueEntrepot.removeAttribute('style');
+    }
+
+    if (numeroEntrepot.value == "" || numeroEntrepot.value == null) {
+        document.getElementById("errorNumeroEntrepotAjout").innerHTML = "Veuillez entrer un numéro";
+        numeroEntrepot.style.border = "1px solid red";
+        numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numeroEntrepot.value.length <= 1 || numeroEntrepot.value.length > 10) {
+        document.getElementById("errorNumeroEntrepotAjout").innerHTML = "Veuillez entrer un numéro valide";
+        numeroEntrepot.style.border = "1px solid red";
+        numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumeroEntrepotAjout").innerHTML = "";
+        numeroEntrepot.removeAttribute('style');
+    }
+
+    if (boiteEntrepot.value.length > 10 ) {
+        document.getElementById("errorBoiteEntrepotAjout").innerHTML = "Veuillez entrer une boite valide";
+        boiteEntrepot.style.border = "1px solid red";
+        boiteEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorBoiteEntrepotAjout").innerHTML = "";
+        boiteEntrepot.removeAttribute('style');
+    }
+
+    if (villeEntrepot.value == "" || villeEntrepot.value == null) {
+        document.getElementById("errorVilleEntrepotAjout").innerHTML = "Veuillez selectionner une ville";
+        villeEntrepot.style.border = "1px solid red";
+        villeEntrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorVilleEntrepotAjout").innerHTML = "";
+        villeEntrepot.removeAttribute('style');
+    }
+
+    return result;
+}
+
 function validateModifEntrepot() {
 
     let result = true;
@@ -747,7 +877,7 @@ function validateModifEntrepot() {
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
-    } else if (nomEntrepot.value.length > 10) {
+    } else if ((nomEntrepot.value.length < 2) || (nomEntrepot.value.length > 50)) {
         document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepôt valide";
         nomEntrepot.style.border = "1px solid red";
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
@@ -823,6 +953,32 @@ function validateModifEntrepot() {
     return result;
 }
 
+function validateAjoutMarque() {
+
+    let result = true;
+
+    const marque = document.forms["ajoutMarque"]["marque-ajout-input"];
+
+    if (marque.value == "" || marque.value == null) {
+        document.getElementById("errorMarqueAjout").innerHTML = "Veuillez entrer une marque";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (marque.value.length < 2 || marque.value.length > 50 ) {
+        document.getElementById("errorMarqueAjout").innerHTML = "Veuillez entrer un nom de marque valide";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorMarqueAjout").innerHTML = "";
+        marque.removeAttribute('style');
+    }
+
+    return result;
+}
+
 function validateModifMarque() {
 
     let result = true;
@@ -844,6 +1000,338 @@ function validateModifMarque() {
     } else {
         document.getElementById("errorMarqueModif").innerHTML = "";
         marque.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateAjoutModele() {
+
+    let result = true;
+
+    const marque = document.forms["ajoutModele"]["marque-ajout-input2"];
+    const modele = document.forms["ajoutModele"]["modele-ajout-input"];
+
+    if (marque.value == "" || marque.value == null) {
+        document.getElementById("errorMarqueAjout2").innerHTML = "Veuillez selectionner une marque";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorMarqueAjout2").innerHTML = "";
+        marque.removeAttribute('style');
+    }
+
+    if (modele.value == "" || modele.value == null) {
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un modèle";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (modele.value.length < 2 || modele.value.length > 50 ) {
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un nom de modèle valide";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorModeleAjout").innerHTML = "";
+        modele.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifModele() {
+
+    let result = true;
+
+    const modele = document.forms["modifModele"]["modele-modif-input"];
+
+    if (modele.value == "" || modele.value == null) {
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un modèle";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (modele.value.length < 2 || modele.value.length > 50 ) {
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un nom de modèle valide";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorModeleModif").innerHTML = "";
+        modele.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateAjoutVehicule() {
+
+    let result = true;
+
+    const marque = document.forms["ajoutVehicule"]["marque-ajout-input"];
+    const modele = document.forms["ajoutVehicule"]["modele-ajout-input"];
+    const cylindree = document.forms["ajoutVehicule"]["cylindree-ajout-input"];
+    const puissance = document.forms["ajoutVehicule"]["puissance-ajout-input"];
+    const numChassis = document.forms["ajoutVehicule"]["numChassis-ajout-input"];
+    const immatriculation = document.forms["ajoutVehicule"]["immatriculation-ajout-input"];
+    const dateAchat = document.forms["ajoutVehicule"]["dateAchat-ajout-input"];
+    const prixJournalier = document.forms["ajoutVehicule"]["prixJournalier-ajout-input"];
+    const couleur = document.forms["ajoutVehicule"]["couleur-ajout-input"];
+    const entrepot = document.forms["ajoutVehicule"]["entrepot-ajout-input"];
+
+    if (marque.value == "" || marque.value == null) {
+        document.getElementById("errorMarqueAjout").innerHTML = "Veuillez selectionner une marque";
+        marque.style.border = "1px solid red";
+        marque.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorMarqueAjout").innerHTML = "";
+        marque.removeAttribute('style');
+    }
+
+    if (modele.value == "" || modele.value == null) {
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez selectionner un modèle";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorModeleAjout").innerHTML = "";
+        modele.removeAttribute('style');
+    }
+
+    if (cylindree.value == "" || cylindree.value == null) {
+        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrée";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
+        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrée valide";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCylindreeAjout").innerHTML = "";
+        cylindree.removeAttribute('style');
+    }
+
+    if (puissance.value == "" || puissance.value == null) {
+        document.getElementById("errorPuissanceAjout").innerHTML = "Veuillez entrer une puissance";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (puissance.value.length < 2 || puissance.value.length > 50 ) {
+        document.getElementById("errorPuissanceAjout").innerHTML = "Veuillez entrer une puissance valide";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPuissanceAjout").innerHTML = "";
+        puissance.removeAttribute('style');
+    }
+
+    if (numChassis.value == "" || numChassis.value == null) {
+        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numéro de chassis";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
+        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numéro de chassis valide";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumChassisAjout").innerHTML = "";
+        numChassis.removeAttribute('style');
+    }
+
+    if (immatriculation.value == "" || immatriculation.value == null) {
+        document.getElementById("errorImmatriculationAjout").innerHTML = "Veuillez entrer une immatriculation";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (immatriculation.value.length < 2 || immatriculation.value.length > 50 ) {
+        document.getElementById("errorImmatriculationAjout").innerHTML = "Veuillez entrer une immatriculation valide";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorImmatriculationAjout").innerHTML = "";
+        immatriculation.removeAttribute('style');
+    }
+
+    if (dateAchat.value == "" || dateAchat.value == null) {
+        document.getElementById("errorDateAchatAjout").innerHTML = "Veuillez selectionner une date";
+        dateAchat.style.border = "1px solid red";
+        dateAchat.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorDateAchatAjout").innerHTML = "";
+        dateAchat.removeAttribute('style');
+    }
+
+    if (prixJournalier.value == "" || prixJournalier.value == null) {
+        document.getElementById("errorPrixJournalierAjout").innerHTML = "Veuillez entrer un prix journalier";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (prixJournalier.value.length < 2 || prixJournalier.value.length > 50 ) {
+        document.getElementById("errorPrixJournalierAjout").innerHTML = "Veuillez entrer un prix journalier valide";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPrixJournalierAjout").innerHTML = "";
+        prixJournalier.removeAttribute('style');
+    }
+
+    if (couleur.value == "" || couleur.value == null) {
+        document.getElementById("errorCouleurAjout").innerHTML = "Veuillez entrer une cylindrée";
+        couleur.style.border = "1px solid red";
+        couleur.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCouleurAjout").innerHTML = "";
+        couleur.removeAttribute('style');
+    }
+
+    if (entrepot.value == "" || entrepot.value == null) {
+        document.getElementById("errorEntrepotAjout").innerHTML = "Veuillez entrer une cylindrée";
+        entrepot.style.border = "1px solid red";
+        entrepot.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorEntrepotAjout").innerHTML = "";
+        entrepot.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifVehicule() {
+
+    let result = true;
+
+    const cylindree = document.forms["modifVehicule"]["cylindree-modif-input"];
+    const puissance = document.forms["modifVehicule"]["puissance-modif-input"];
+    const numChassis = document.forms["modifVehicule"]["numChassis-modif-input"];
+    const immatriculation = document.forms["modifVehicule"]["immatriculation-modif-input"];
+    const dateAchat = document.forms["modifVehicule"]["dateAchat-modif-input"];
+    const prixJournalier = document.forms["modifVehicule"]["prixJournalier-modif-input"];
+
+    if (cylindree.value == "" || cylindree.value == null) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée valide";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCylindreeModif").innerHTML = "";
+        cylindree.removeAttribute('style');
+    }
+
+    if (puissance.value == "" || puissance.value == null) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (puissance.value.length < 2 || puissance.value.length > 50 ) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance valide";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPuissanceModif").innerHTML = "";
+        puissance.removeAttribute('style');
+    }
+
+    if (numChassis.value == "" || numChassis.value == null) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis valide";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumChassisModif").innerHTML = "";
+        numChassis.removeAttribute('style');
+    }
+
+    if (immatriculation.value == "" || immatriculation.value == null) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (immatriculation.value.length < 2 || immatriculation.value.length > 50 ) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation valide";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorImmatriculationModif").innerHTML = "";
+        immatriculation.removeAttribute('style');
+    }
+
+    if (dateAchat.value == "" || dateAchat.value == null) {
+        document.getElementById("errorDateAchatModif").innerHTML = "Veuillez selectionner une date";
+        dateAchat.style.border = "1px solid red";
+        dateAchat.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorDateAchatModif").innerHTML = "";
+        dateAchat.removeAttribute('style');
+    }
+
+    if (prixJournalier.value == "" || prixJournalier.value == null) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (prixJournalier.value.length < 2 || prixJournalier.value.length > 50 ) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier valide";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "";
+        prixJournalier.removeAttribute('style');
     }
 
     return result;

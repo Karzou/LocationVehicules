@@ -74,38 +74,44 @@
                     </c:if>
                 </div>
 
-                <form action="<c:url value="/ajoutEntrepot"/>" method="post">
+                <form name="ajoutEntrepot" action="<c:url value="/ajoutEntrepot"/>" method="post" onsubmit="return validateAjoutEntrepot()">
                     <div class="div-input-modif">
-                        <label class="label-input">Nom entrepôt : </label>
-                        <input class="input-modif" type="text" name="nomEntrepot" value="${entrepot.nomEntrepot}">
+                        <label class="label-input">Nom entrepôt</label>
+                        <input class="input-modif" type="text" name="nomEntrepot" id="nomEntrepot-ajout-input" value="${entrepot.nomEntrepot}">
+                        <div class="span-error-div"><span class="span-error4" id="errorNomEntrepotAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Nombre de place : </label>
-                        <input class="input-modif" type="text" name="nombrePlace" value="${entrepot.nombrePlace}">
+                        <label class="label-input">Nombre de place</label>
+                        <input class="input-modif" type="text" name="nombrePlace" id="nombrePlaceEntrepot-ajout-input" value="${entrepot.nombrePlace}">
+                        <div class="span-error-div"><span class="span-error4" id="errorPlaceEntrepotAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Rue : </label>
-                        <input class="input-modif" type="text" name="rue" value="${entrepot.adressesByIdAdresse.rue}">
+                        <label class="label-input">Rue</label>
+                        <input class="input-modif" type="text" name="rue" id="rueEntrepot-ajout-input" value="${entrepot.adressesByIdAdresse.rue}">
+                        <div class="span-error-div"><span class="span-error4" id="errorRueEntrepotAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Numéro : </label>
-                        <input class="input-modif" type="text" name="numero" value="${entrepot.adressesByIdAdresse.numero}">
+                        <label class="label-input">Numéro</label>
+                        <input class="input-modif" type="text" name="numero" id="numeroEntrepot-ajout-input" value="${entrepot.adressesByIdAdresse.numero}">
+                        <div class="span-error-div"><span class="span-error4" id="errorNumeroEntrepotAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Boite : </label>
-                        <input class="input-modif" type="text" name="boite" value="${entrepot.adressesByIdAdresse.boite}">
+                        <label class="label-input">Boite</label>
+                        <input class="input-modif" type="text" name="boite" id="boiteEntrepot-ajout-input" value="${entrepot.adressesByIdAdresse.boite}">
+                        <div class="span-error-div"><span class="span-error4" id="errorBoiteEntrepotAjout"></span></div>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Ville : </label>
-                        <select class="select-modif" id="modif-ville" name="idVille" value="">
+                        <label class="label-input">Ville</label>
+                        <select class="select-modif" name="idVille" id="villeEntrepot-ajout-input" value="">
                             <option value="" disabled selected>Choisissez une ville</option>
                             <c:forEach var="villeList" items="${villeList}">
                                 <option value="${villeList.idVille}" <c:if test="${ville.idVille == villeList.idVille}">selected</c:if>>${villeList.codePostal} - ${villeList.nomVille}</option>
                             </c:forEach>
                         </select>
+                        <div class="span-error-div"><span class="span-error4" id="errorVilleEntrepotAjout"></span></div>
                     </div>
 
-                    <button type="submit" value="Envoyer" id="bouton-modif" class="btn-modif2">Ajouter</button>
+                    <input type="submit" class="btn-modif2" value="Ajouter">
                 </form>
             </div>
 
