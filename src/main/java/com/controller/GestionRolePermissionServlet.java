@@ -139,29 +139,34 @@ public class GestionRolePermissionServlet extends HttpServlet {
             String nomRole = request.getParameter("nomRole").trim();
 
             if( !Validation.checkValueLenght(nomRole, 1, 50) || Validation.checkValueIsEmpty(nomRole)){
+
                 if(logger.isInfoEnabled()){
                     logger.info("Nom du role pas valide: " + nomRole);
                 }
                 session.setAttribute("erreur", "problème lors de la création du rôle. Le nom du rôle n'est pas valide.");
             }
             else{
-                Role role = new Role(nomRole);
-                try {
-                    if(logger.isInfoEnabled()){
-                        logger.info("Début methode ajout de role. : " + nomRole);
-                    }
+                if ( roleService.trouverParNom(nomRole) != null){
+                    session.setAttribute("erreur", "Ce role existe deja.");
+                }else{
+                    Role role = new Role(nomRole);
+                    try {
+                        if(logger.isInfoEnabled()){
+                            logger.info("Début methode ajout de role. : " + nomRole);
+                        }
 
-                    transaction.begin();
-                    roleService.creer(role);
-                    transaction.commit();
-
-                } catch (ServiceException e) {
-                    logger.warn("Problème lors de la création du rôle : " + e);
-                    session.setAttribute("erreur", "problème lors de la création du rôle. ");
-                }finally {
-                    if (transaction.isActive()) {
-                        logger.warn("Rollback de la création du rôle.");
-                        transaction.rollback();
+                        transaction.begin();
+                        roleService.creer(role);
+                        transaction.commit();
+                        session.setAttribute("success", "Le role a bien été créé.");
+                    } catch (ServiceException e) {
+                        logger.warn("Problème lors de la création du rôle : " + e);
+                        session.setAttribute("erreur", "problème lors de la création du rôle. ");
+                    }finally {
+                        if (transaction.isActive()) {
+                            logger.warn("Rollback de la création du rôle.");
+                            transaction.rollback();
+                        }
                     }
                 }
             }
@@ -190,7 +195,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
                             autoriseService.supprimerParRole(role.getIdRole());
                             roleService.supprimer(role);
                             transaction.commit();
-
+                            session.setAttribute("success", "Le role est bien supprimé.");
                         }else{
                             logger.warn("tentative d'effacer le rôle 'employe'");
                             session.setAttribute("adminSafe", "Vous ne pouvez pas effacer le rôle 'employe'");
@@ -253,6 +258,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
                                transaction.begin();
                                em.persist(autorise);
                                transaction.commit();
+                               session.setAttribute("success", "Le role a bien été mis à jour.");
                            } catch (Exception e) {
                                logger.warn("Problème lors de l'insertion en db de l'autorisation. " + e);
                                session.setAttribute("erreur", "Erreur lors de la persistance de 'autorise'. ");

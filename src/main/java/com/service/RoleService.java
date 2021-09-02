@@ -29,8 +29,14 @@ public class RoleService {
     public Role trouverParNom (String nom){
         TypedQuery<Role> query = em.createNamedQuery("Role.trouverParNom", Role.class);
         query.setParameter("roleDescritpion", nom);
-        return  query.getSingleResult();
+        try{
+            return  query.getSingleResult();
+        }catch(javax.persistence.NoResultException e) {
+            return null;
+        }
     }
+
+
 
     public void creer(Role role) throws ServiceException {
         try {
