@@ -34,9 +34,9 @@
                     </c:if>
                 </div>
 
-                <form name="modifModele" action="<c:url value="/gestionMarqueModele"/>" method="post" onsubmit="return validateModifModele()">
+                <form action="<c:url value="/gestionMarqueModele"/>" method="post">
                     <div class="div-input-modif">
-                        <label class="label-input">Modèle à modifier</label>
+                        <label class="label-input">Modèle à modifier : </label>
                         <select class="select-modif" id="modif-modele" name="idModif" value="">
                             <c:forEach var="modele" items="${modeleList}">
                                 <c:if test="${modele.marquesByIdMarque.idMarque == marque.idMarque}">
@@ -46,9 +46,8 @@
                         </select>
                     </div>
                     <div class="div-input-modif">
-                        <label class="label-input">Remplacer par</label>
-                        <input class="input-modif" type="text" name="nomModele" id="modele-modif-input">
-                        <div class="span-error-div"><span class="span-error4" id="errorModeleModif"></span></div>
+                        <label class="label-input">Remplacer par : </label>
+                        <input class="input-modif" type="text" name="nomModele">
                     </div>
 
                     <input type="hidden" name="idMarque" value="${marque.idMarque}">

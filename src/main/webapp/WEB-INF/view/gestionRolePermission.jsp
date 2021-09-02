@@ -30,6 +30,23 @@
                     </div>
                 </c:if>
 
+                <c:if test="${sessionScope.success != null}">
+                    <div class="success-message-admin">
+                        <div class="success-message-admin-title">
+                            <div class="success-message-admin-title-img">
+                                <img src="${pageContext.request.contextPath}/images/success.png" alt="success" />
+                            </div>
+                            <div class="success-message-admin-title-txt">
+                                <p>Félicitation</p>
+                            </div>
+                        </div>
+                        <div class="success-message-admin-body-txt">
+                            <div>${success}</div>
+                        </div>
+                    </div>
+                    <c:remove var="success" scope="session" />
+                </c:if>
+
                 <form action="<c:url value="/gestionRolePermission"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Role : </label>

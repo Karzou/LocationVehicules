@@ -54,7 +54,7 @@
                     </c:if>
                 </div>
 
-                <form name="modifVehicule" action="<c:url value="/gestionVehicule"/>" method="post" onsubmit="return validateModifVehicule()">
+                <form action="<c:url value="/gestionVehicule"/>" method="post">
                     <div class="div-input-modif">
                         <label class="label-input">Marque</label>
                         <select class="select-modif" name="idMarque" onChange="location.href='${pageContext.request.contextPath}/modifVehicule?idMarque='+this.value+'&idModif='+${vehicule.idVehicule};">
@@ -91,16 +91,14 @@
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Cylindrée</label>
-                        <input class="input-modif" type="text" name="cylindree" id="cylindree-modif-input" value="${vehicule.cylindree}">
-                        <div class="span-error-div"><span class="span-error4" id="errorCylindreeModif"></span></div>
+                        <input class="input-modif" type="text" name="cylindree" value="${vehicule.cylindree}">
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Puissance</label>
-                        <input class="input-modif" type="text" name="puissance" id="puissance-modif-input" value="${vehicule.puissance}">
-                        <div class="span-error-div"><span class="span-error4" id="errorPuissanceModif"></span></div>
+                        <input class="input-modif" type="text" name="puissance" value="${vehicule.puissance}">
                     </div>
                     <div class="div-input-modif2">
-                        <div class="div-input-left"><label class="label-input">Option</label></div>
+                        <div class="div-input-left"><label class="label-input">Option: </label></div>
                         <div class="div-input-right">
                         <c:forEach var="optionVehiculesList" items="${optionVehiculesList}">
                             <div class="div-input-checkbox">
@@ -112,23 +110,19 @@
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Numéro de chassis</label>
-                        <input class="input-modif" type="text" name="numChassis" id="numChassis-modif-input" value="${vehicule.numChassis}">
-                        <div class="span-error-div"><span class="span-error4" id="errorNumChassisModif"></span></div>
+                        <input class="input-modif" type="text" name="numChassis" value="${vehicule.numChassis}">
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Immatriculation</label>
-                        <input class="input-modif" type="text" name="immatriculation" id="immatriculation-modif-input" value="${vehicule.immatriculation}">
-                        <div class="span-error-div"><span class="span-error4" id="errorImmatriculationModif"></span></div>
+                        <input class="input-modif" type="text" name="immatriculation" value="${vehicule.immatriculation}">
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Date achat</label>
-                        <input class="input-modif" type="date" name="dateAchat" id="dateAchat-modif-input" value="${vehicule.dateAchat}">
-                        <div class="span-error-div"><span class="span-error4" id="errorDateAchatModif"></span></div>
+                        <input class="input-modif" type="date" name="dateAchat" value="${vehicule.dateAchat}">
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Prix journalier</label>
-                        <input class="input-modif" type="text" name="prixJournalier" id="prixJournalier-modif-input" value="${vehicule.prixJournalier}">
-                        <div class="span-error-div"><span class="span-error4" id="errorPrixJournalierModif"></span></div>
+                        <input class="input-modif" type="text" name="prixJournalier" value="${vehicule.prixJournalier}">
                     </div>
                     <div class="div-input-modif">
                         <label class="label-input">Couleur</label>
@@ -155,7 +149,7 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
-                    <input type="submit" class="btn-modif2" value="Modifier">
+                    <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
                     <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionVehicule">
                 </form>
             </div>

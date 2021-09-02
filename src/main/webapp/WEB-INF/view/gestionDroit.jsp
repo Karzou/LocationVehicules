@@ -20,6 +20,7 @@
                         <th scope="col">Prenom</th>
                         <th scope="col">Role</th>
                         <th scope="col">Permissions</th>
+                        <th></th>
                     </thead>
 
                     <tbody>
