@@ -10,13 +10,11 @@
     <c:import url="menu.jsp"/>
 
     <div class="content-global">
-        <h2>Modification utilisateur</h2>
+        <h2>Modification de votre mot de passe</h2>
+
+        <h3>Veuillez encoder votre nouveau mot de passe.</h3>
 
         <form action="<c:url value="/changerMotDePasse"/>" method="post">
-            <div class="form-group"id="form-modif">
-                <label>Password : </label>
-                <input class="input-modif" name="oldPassword" value="${utilisateur.motDePasse}">
-            </div>
             <div class="form-group"id="form-modif1">
                 <label>Nouveau mot de passe : </label>
                 <input class="input-modif" name="password" value="${utilisateur.motDePasse}">
