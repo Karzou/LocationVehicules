@@ -105,7 +105,7 @@ public class Vehicule {
     }
 
     @Basic
-    @Column(name = "Immatriculation", nullable = true, length = 50)
+    @Column(name = "Immatriculation", nullable = false, length = 50)
     public String getImmatriculation() {
         return immatriculation;
     }
@@ -115,7 +115,7 @@ public class Vehicule {
     }
 
     @Basic
-    @Column(name = "Prix_journalier", nullable = true, precision = 2)
+    @Column(name = "Prix_journalier", nullable = false, precision = 2)
     public float getPrixJournalier() {
         return prixJournalier;
     }
