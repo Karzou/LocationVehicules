@@ -155,7 +155,7 @@
                     </div>
 
                     <input type="hidden" name="idModif" value="${vehicule.idVehicule}"/>
-                    <input type="submit" class="btn-modif2" value="Modifier" id="bouton-modif">
+                    <input type="submit" class="btn-modif2" value="Modifier">
                     <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/gestionVehicule">
                 </form>
             </div>

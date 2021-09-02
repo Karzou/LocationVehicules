@@ -15,16 +15,17 @@
         <h3>Veuillez encoder votre nouveau mot de passe.</h3>
 
         <form action="<c:url value="/changerMotDePasse"/>" method="post">
-            <div class="form-group"id="form-modif1">
-                <label>Nouveau mot de passe : </label>
+            <div class="div-input-modif">
+                <label class="label-input2">Nouveau mot de passe</label>
                 <input class="input-modif" name="password" value="${utilisateur.motDePasse}">
             </div>
-            <div class="form-group"id="form-modif2">
-                <label>Confirmer le nouveau mot de passe : </label>
+            <div class="div-input-modif">
+                <label class="label-input2">Confirmer nouveau mot de passe</label>
                 <input class="input-modif" name="confirmPassword" value="${utilisateur.motDePasse}">
             </div>
             <input type="hidden" name="idModif" value="${utilisateur.idUtilisateur}">
-            <button type="submit" value="Envoyer"id="bouton-modif" class="btn btn-primary">Modifier</button>
+            <input type="submit" class="btn-modif2" value="Modifier">
+            <input type="button" class="btn-modif2" value="Retour" onclick=location.href="${pageContext.request.contextPath}/profil">
         </form>
     </div>
         <c:import url="footer.jsp"/>
