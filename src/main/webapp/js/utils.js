@@ -848,3 +848,249 @@ function validateModifMarque() {
 
     return result;
 }
+
+function validateModifModele() {
+
+    let result = true;
+
+    const modele = document.forms["modifModele"]["modele-modif-input"];
+
+    if (modele.value == "" || modele.value == null) {
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un modèle";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (modele.value.length < 2 || modele.value.length > 50 ) {
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un nom de modèle valide";
+        modele.style.border = "1px solid red";
+        modele.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorModeleModif").innerHTML = "";
+        modele.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateAjoutVehicule() {
+
+    let result = true;
+
+    const cylindree = document.forms["modifVehicule"]["cylindree-modif-input"];
+    const puissance = document.forms["modifVehicule"]["puissance-modif-input"];
+    const numChassis = document.forms["modifVehicule"]["numChassis-modif-input"];
+    const immatriculation = document.forms["modifVehicule"]["immatriculation-modif-input"];
+    const dateAchat = document.forms["modifVehicule"]["dateAchat-modif-input"];
+    const prixJournalier = document.forms["modifVehicule"]["prixJournalier-modif-input"];
+
+    if (cylindree.value == "" || cylindree.value == null) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée valide";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCylindreeModif").innerHTML = "";
+        cylindree.removeAttribute('style');
+    }
+
+    if (puissance.value == "" || puissance.value == null) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (puissance.value.length < 2 || puissance.value.length > 50 ) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance valide";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPuissanceModif").innerHTML = "";
+        puissance.removeAttribute('style');
+    }
+
+    if (numChassis.value == "" || numChassis.value == null) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis valide";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumChassisModif").innerHTML = "";
+        numChassis.removeAttribute('style');
+    }
+
+    if (immatriculation.value == "" || immatriculation.value == null) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (immatriculation.value.length < 2 || immatriculation.value.length > 50 ) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation valide";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorImmatriculationModif").innerHTML = "";
+        immatriculation.removeAttribute('style');
+    }
+
+    if (dateAchat.value == "" || dateAchat.value == null) {
+        document.getElementById("errorDateAchatModif").innerHTML = "Veuillez selectionner une date";
+        dateAchat.style.border = "1px solid red";
+        dateAchat.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorDateAchatModif").innerHTML = "";
+        dateAchat.removeAttribute('style');
+    }
+
+    if (prixJournalier.value == "" || prixJournalier.value == null) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (prixJournalier.value.length < 2 || prixJournalier.value.length > 50 ) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier valide";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "";
+        prixJournalier.removeAttribute('style');
+    }
+
+    return result;
+}
+
+function validateModifVehicule() {
+
+    let result = true;
+
+    const cylindree = document.forms["modifVehicule"]["cylindree-modif-input"];
+    const puissance = document.forms["modifVehicule"]["puissance-modif-input"];
+    const numChassis = document.forms["modifVehicule"]["numChassis-modif-input"];
+    const immatriculation = document.forms["modifVehicule"]["immatriculation-modif-input"];
+    const dateAchat = document.forms["modifVehicule"]["dateAchat-modif-input"];
+    const prixJournalier = document.forms["modifVehicule"]["prixJournalier-modif-input"];
+
+    if (cylindree.value == "" || cylindree.value == null) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée valide";
+        cylindree.style.border = "1px solid red";
+        cylindree.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorCylindreeModif").innerHTML = "";
+        cylindree.removeAttribute('style');
+    }
+
+    if (puissance.value == "" || puissance.value == null) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (puissance.value.length < 2 || puissance.value.length > 50 ) {
+        document.getElementById("errorPuissanceModif").innerHTML = "Veuillez entrer une puissance valide";
+        puissance.style.border = "1px solid red";
+        puissance.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPuissanceModif").innerHTML = "";
+        puissance.removeAttribute('style');
+    }
+
+    if (numChassis.value == "" || numChassis.value == null) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis valide";
+        numChassis.style.border = "1px solid red";
+        numChassis.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorNumChassisModif").innerHTML = "";
+        numChassis.removeAttribute('style');
+    }
+
+    if (immatriculation.value == "" || immatriculation.value == null) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (immatriculation.value.length < 2 || immatriculation.value.length > 50 ) {
+        document.getElementById("errorImmatriculationModif").innerHTML = "Veuillez entrer une immatriculation valide";
+        immatriculation.style.border = "1px solid red";
+        immatriculation.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorImmatriculationModif").innerHTML = "";
+        immatriculation.removeAttribute('style');
+    }
+
+    if (dateAchat.value == "" || dateAchat.value == null) {
+        document.getElementById("errorDateAchatModif").innerHTML = "Veuillez selectionner une date";
+        dateAchat.style.border = "1px solid red";
+        dateAchat.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorDateAchatModif").innerHTML = "";
+        dateAchat.removeAttribute('style');
+    }
+
+    if (prixJournalier.value == "" || prixJournalier.value == null) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else if (prixJournalier.value.length < 2 || prixJournalier.value.length > 50 ) {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "Veuillez entrer un prix journalier valide";
+        prixJournalier.style.border = "1px solid red";
+        prixJournalier.style.boxShadow = "0 0 1px 2px red";
+
+        result = false;
+    } else {
+        document.getElementById("errorPrixJournalierModif").innerHTML = "";
+        prixJournalier.removeAttribute('style');
+    }
+
+    return result;
+}
