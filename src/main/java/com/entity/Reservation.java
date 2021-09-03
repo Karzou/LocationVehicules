@@ -133,7 +133,7 @@ public class Reservation {
     }
 
     @OneToOne
-    @JoinColumn(name = "Id_contrat", referencedColumnName = "Id_contrat", nullable = false)
+    @JoinColumn(name = "Id_contrat", referencedColumnName = "Id_contrat", nullable = true)
     public Contrat getContratsByIdContrat() {
         return contratsByIdContrat;
     }
