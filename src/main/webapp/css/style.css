@@ -57,6 +57,11 @@ li {
     width: 200px;
 }
 
+.div-input-modif .label-input2 {
+    display: inline-block;
+    width: 250px;
+}
+
 .div-input-modif2 {
     height: 385px;
 }

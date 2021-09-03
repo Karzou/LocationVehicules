@@ -1,3 +1,0 @@
-function generatepdf(idFacture) {
-
-}

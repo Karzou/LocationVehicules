@@ -6,7 +6,6 @@
 <head>
     <title>Facture</title>
     <c:import url="head.jsp"/>
-    <script type="text/javascript" src="<c:url value="/js/facture.js"/>"></script>
 </head>
 
 <body class="body">
