@@ -20,7 +20,7 @@
 
     <h1>OUPS ERREUR 500</h1>
 
-    <h1>Probleme de connection DBs !!! </h1>
+    <h1>Un problème coté serveur est survenu. Veuillez réessayer ultérieurement ou contacter votre fournisseur. </h1>
 
     <c:import url="footer.jsp"/>
 </div>
