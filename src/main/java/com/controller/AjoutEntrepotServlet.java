@@ -52,7 +52,7 @@ public class AjoutEntrepotServlet extends HttpServlet {
         AutoriseService autoriseService = new AutoriseService(em);
         HttpSession session = request.getSession();
 
-        if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "entreports:write"))) {
+        if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "entrepots:write"))) {
 
             // Récupération des données
             String nomEntrepot = request.getParameter("nomEntrepot");
