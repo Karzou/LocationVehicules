@@ -256,7 +256,7 @@ public class GestionRolePermissionServlet extends HttpServlet {
                                    logger.info("Début de la transaction persist autorise.");
                                }
                                transaction.begin();
-                               em.persist(autorise);
+                               autoriseService.creer(autorise);
                                transaction.commit();
                                session.setAttribute("success", "Le role a bien été mis à jour.");
                            } catch (Exception e) {
