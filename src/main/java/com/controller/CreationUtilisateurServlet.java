@@ -213,6 +213,11 @@ public class CreationUtilisateurServlet extends HttpServlet {
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         }
+        if (!confirmPassword.equals(password)) {
+            session.setAttribute("errRegister11", "Les mots de passes ne sont pas identiques");
+            session.setAttribute("erreurFlag", true);
+            errFlag = true;
+        }
         if (errFlag) {
             if(logger.isInfoEnabled()){
                 logger.info("Erreur lors de la creation de l'utilisateur");
@@ -252,10 +257,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
                         role);
 
                 //insertion db
-                if (confirmPassword.equals(password)) {
-                    if (logger.isInfoEnabled()) {
-                        logger.info("Les mots de passes sont identiques : " + password + "/" + confirmPassword);
-                    }
                     try {
                         if (logger.isInfoEnabled()) {
                             logger.info("Début de la création de l'utilisateur " + utilisateur.getEmail());
@@ -278,10 +279,6 @@ public class CreationUtilisateurServlet extends HttpServlet {
                     } catch (ServiceException e) {
                         logger.warn("Problème de création de l'utilisateur " + utilisateur.getEmail() + " " + e);
                     }
-                } else {
-                    session.setAttribute("errRegister4", "les mots de passe ne sont pas identiques");
-                    session.setAttribute("erreurFlag", true);
-                }
             } catch ( Exception e ) {
                 logger.warn("Problème lors de la transaction de création utilisateur. " + e);
             } finally {
