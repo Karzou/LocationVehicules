@@ -429,13 +429,18 @@ function validateCreationUtilisateur() {
         confirmPassword.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
-    } else if (Password.value !== confirmPassword.value) {
+
+    } else {
+        document.getElementById("errorConfirmPasswordCreate").innerHTML = "";
+        confirmPassword.removeAttribute('style');
+    }
+    if (password.value !== confirmPassword.value) {
         document.getElementById("errorConfirmPasswordCreate").innerHTML = "Les mots de passe ne sont pas identiques";
         confirmPassword.style.border = "1px solid red";
         confirmPassword.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
-    } else {
+    }else {
         document.getElementById("errorConfirmPasswordCreate").innerHTML = "";
         confirmPassword.removeAttribute('style');
     }

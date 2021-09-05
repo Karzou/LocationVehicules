@@ -120,7 +120,10 @@ public class GestionDroitServlet extends HttpServlet {
                 }
 
                 transaction.begin();
+
                 utilisateurService.update(utilisateur);
+                session.setAttribute("success", "Les droits de l utilisateur ont ete mis à jour.");
+
                 transaction.commit();
             }finally {
                 if (transaction.isActive()) {
@@ -128,10 +131,8 @@ public class GestionDroitServlet extends HttpServlet {
                     transaction.rollback();
                 }
             }
-
             response.sendRedirect("gestionUtilisateur");
         }
-
         em.close();
     }
 }

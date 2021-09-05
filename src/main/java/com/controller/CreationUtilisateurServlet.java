@@ -264,6 +264,16 @@ public class CreationUtilisateurServlet extends HttpServlet {
 
                         utilisateurService.creer(utilisateur);
 
+                        session.removeAttribute("nom");
+                        session.removeAttribute("prenom");
+                        session.removeAttribute("password");
+                        session.removeAttribute("confirmPassword");
+                        session.removeAttribute("mail");
+                        session.removeAttribute("telephone");
+                        session.removeAttribute("rue");
+                        session.removeAttribute("numero");
+                        session.removeAttribute("boite");
+
                         transaction.commit();
                     } catch (ServiceException e) {
                         logger.warn("Problème de création de l'utilisateur " + utilisateur.getEmail() + " " + e);

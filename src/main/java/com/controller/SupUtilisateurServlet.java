@@ -63,7 +63,6 @@ public class SupUtilisateurServlet extends HttpServlet {
                 String retour = "/gestionUtilisateur";
                 session.setAttribute("retour", retour);
                 response.sendRedirect("gestionUtilisateur");
-               // this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
             }else{
                 try {
                     transaction.begin();
@@ -73,8 +72,12 @@ public class SupUtilisateurServlet extends HttpServlet {
                     if (utilisateur.isActifUtilisateur())
                     {
                         utilisateurService.suppressionLogique(utilisateur);
+
+                        session.setAttribute("succes", "L utilisateur a été supprimé avec succes.");
                     }else{
                         utilisateurService.activationLogique(utilisateur);
+
+                        session.setAttribute("succes", "L utilisateur a été réactivé avec succes.");
                     }
 
                     transaction.commit();
