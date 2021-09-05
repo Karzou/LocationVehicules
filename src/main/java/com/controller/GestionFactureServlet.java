@@ -94,7 +94,6 @@ public class GestionFactureServlet extends HttpServlet {
 
         if (Validation.checkValueIsEmptyorNull(strDateFacture))
         {
-
             session.setAttribute("errMessage1", "Veuillez insérer une date pour la facture");
 
             errFlag = true;
@@ -102,8 +101,6 @@ public class GestionFactureServlet extends HttpServlet {
 
         if (Validation.checkValueIsEmpty(strPrixFacture))
         {
-            //HttpSession session = request.getSession();
-
             session.setAttribute("errMessage2", "Veuillez insérer un prix");
 
             errFlag = true;
@@ -128,7 +125,6 @@ public class GestionFactureServlet extends HttpServlet {
 
             try {
                 transaction.begin();
-
 
                 facture.setDateFacture(dateFacture);
                 facture.setPrixFacture(price);

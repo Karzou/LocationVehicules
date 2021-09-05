@@ -38,8 +38,6 @@ public class ModifModeleServlet extends HttpServlet {
 
         int id = (int) request.getSession().getAttribute("idMarque");
 
-        logger.info("test: " + id);
-
         MarqueService marqueService = new MarqueService(em);
         ModeleService modeleService = new ModeleService(em);
         Marque marque = null;

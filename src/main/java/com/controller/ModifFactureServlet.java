@@ -36,8 +36,6 @@ public class ModifFactureServlet extends HttpServlet {
         }
 
         EntityManager em = EMF.getEM();
-        //faire rollback si transaction se passe pas correctement
-        EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données du champ de la jsp
         HttpSession session = request.getSession();
@@ -50,7 +48,6 @@ public class ModifFactureServlet extends HttpServlet {
 
         try
         {
-
             facture = factureService.findById(idFacture);
             session.removeAttribute("idModif");
         }
@@ -73,12 +70,7 @@ public class ModifFactureServlet extends HttpServlet {
         request.setAttribute("facture", facture);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/modifFacture.jsp").forward(request, response);
-
-
-
     }
-
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -88,12 +80,9 @@ public class ModifFactureServlet extends HttpServlet {
         }
 
         EntityManager em = EMF.getEM();
-        //faire rollback si transaction se passe pas correctement
-        EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données du champ de la jsp
-                String strIdModif = request.getParameter("idModif");
-
+        String strIdModif = request.getParameter("idModif");
 
         // Instanciation
         //appel toutes les méthodes dans facture service
@@ -110,7 +99,7 @@ public class ModifFactureServlet extends HttpServlet {
             e.printStackTrace();
        }
        finally
-        {
+       {
 
             if (logger.isInfoEnabled())
             {

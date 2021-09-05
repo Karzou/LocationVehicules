@@ -29,9 +29,6 @@ public class PdfServlet extends HttpServlet {
         //Ajout d'une ligne de type info dans le log
         logger.info("je passe par la page facture");
 
-        //EntityManger = le gestionnaire du modèle de ta BD
-        //em = nom de l'instance
-        //EMF.getEM() provient de la page EMF.java (fourni par le prof). Gère la BD
         EntityManager em = EMF.getEM();
 
         //objet de type FactureService permettant de faire des traitements sur la DB (ajouter factures, m à j factures,...)
@@ -70,11 +67,10 @@ public class PdfServlet extends HttpServlet {
         }
         responseOutputStream.flush();
         responseOutputStream.close();
-//Affichage de la page avec deux élements request, reponse
-//        this.getServletContext().getRequestDispatcher( "/WEB-INF/view/facture.jsp" ).forward( request, response );
     }
 
     //utiliser pour un formulaires avec le submit
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

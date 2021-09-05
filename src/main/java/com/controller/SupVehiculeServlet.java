@@ -48,16 +48,13 @@ public class SupVehiculeServlet extends HttpServlet {
 
         VehiculeService vehiculeService = new VehiculeService(em);
         Vehicule vehicule = null;
-        String message = "";
 
         try {
 
             vehicule = vehiculeService.trouver(idSup);
-            message = "Supression de l id " + idSup + " !!";
         } catch (ServiceException e) {
 
             e.printStackTrace();
-            message = " erreur ";
         }
 
         try {

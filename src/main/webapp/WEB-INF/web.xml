@@ -36,11 +36,12 @@
         <filter-name>logFilter</filter-name>
         <url-pattern>/accueil</url-pattern>
         <url-pattern>/gestionUtilisateur</url-pattern>
-        <url-pattern>/modifFacture</url-pattern>
         <url-pattern>/modifUtilisateur</url-pattern>
         <url-pattern>/optionSup</url-pattern>
         <url-pattern>/vehicule</url-pattern>
         <url-pattern>/facture</url-pattern>
+        <url-pattern>/pdf</url-pattern>
+        <url-pattern>/changerMotDePasse</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
@@ -48,20 +49,34 @@
         <url-pattern>/gestionReservation</url-pattern>
         <url-pattern>/gestionFacture</url-pattern>
         <url-pattern>/gestionContrat</url-pattern>
+        <url-pattern>/modifFacture</url-pattern>
+        <url-pattern>/modifContrat</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
         <filter-name>adminFiltre</filter-name>
         <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/supEntrepot</url-pattern>
+        <url-pattern>/supMarqueModele</url-pattern>
+        <url-pattern>/supCouleur</url-pattern>
+        <url-pattern>/supUtilisateur</url-pattern>
         <url-pattern>/modifVehicule</url-pattern>
         <url-pattern>/modifEntrepot</url-pattern>
+        <url-pattern>/modifCouleur</url-pattern>
+        <url-pattern>/modifMarque</url-pattern>
+        <url-pattern>/modifModele</url-pattern>
         <url-pattern>/ajoutVehicule</url-pattern>
         <url-pattern>/ajoutEntrepot</url-pattern>
+        <url-pattern>/ajoutCouleur</url-pattern>
+        <url-pattern>/ajoutMarque</url-pattern>
+        <url-pattern>/ajoutModele</url-pattern>
+        <url-pattern>/reactiveEntrepot</url-pattern>
+        <url-pattern>/reactiveVehicule</url-pattern>
         <url-pattern>/gestionEntrepot</url-pattern>
+        <url-pattern>/gestionCouleur</url-pattern>
+        <url-pattern>/gestionMarqueModele</url-pattern>
+        <url-pattern>/gestionVehicule</url-pattern>
         <url-pattern>/gestionDroit</url-pattern>
-        <url-pattern>/supUtilisateur</url-pattern>
-        <url-pattern>/supVehicule</url-pattern>
         <url-pattern>/gestionRolePermission</url-pattern>
     </filter-mapping>
 

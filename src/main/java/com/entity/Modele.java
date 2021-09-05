@@ -30,6 +30,7 @@ public class Modele {
 
         this.nomModele = nomModele;
         this.marquesByIdMarque = marque;
+        this.actifModele = true;
     }
 
     @Id

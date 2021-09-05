@@ -48,16 +48,13 @@ public class SupMarqueModeleServlet extends HttpServlet {
 
         EntrepotService entrepotService = new EntrepotService(em);
         Entrepot entrepot = null;
-        String message = "";
 
         try {
 
             entrepot = entrepotService.trouver(idSup);
-            message = "Supression de l id " + idSup + " !!";
         } catch (ServiceException e) {
 
             e.printStackTrace();
-            message = " erreur ";
         }
 
         try {
