@@ -18,7 +18,6 @@
 
                 <input type="button" class="btn-return" value="Retour" onclick=location.href="${pageContext.request.contextPath}${sessionScope.retour}">
             </div>
-
             <c:import url="footer.jsp"/>
         </div>
     </body>

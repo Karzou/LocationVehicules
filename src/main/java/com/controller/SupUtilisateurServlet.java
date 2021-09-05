@@ -57,30 +57,38 @@ public class SupUtilisateurServlet extends HttpServlet {
                 logger.warn("Problème lors de l' 'import de l'utilisateur : " + idSup + ". " + e);
                 session.setAttribute("erreur", "erreur lors de l'import de la liste de permission. ");
             }
+            if (utilisateur.getEmail().equals("admin@admin.com")){
+                String message = "Vous ne pouvez pas supprimer cet utilisateur !";
+                session.setAttribute("erreur", message);
+                String retour = "/gestionUtilisateur";
+                session.setAttribute("retour", retour);
+                response.sendRedirect("gestionUtilisateur");
+               // this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
+            }else{
+                try {
+                    transaction.begin();
+                    if(logger.isInfoEnabled()){
+                        logger.info("Début de la transaction de suppression de l'utilisateur : " + utilisateur.getEmail());
+                    }
+                    if (utilisateur.isActifUtilisateur())
+                    {
+                        utilisateurService.suppressionLogique(utilisateur);
+                    }else{
+                        utilisateurService.activationLogique(utilisateur);
+                    }
 
-            try {
-                transaction.begin();
-                if(logger.isInfoEnabled()){
-                    logger.info("Début de la transaction de suppression de l'utilisateur : " + utilisateur.getEmail());
+                    transaction.commit();
+                } catch ( Exception e ) {
+                    logger.warn("Problème lors de la suppression de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
+                    throw new ServletException( e );
+                } finally {
+                    if (transaction.isActive()) {
+                        logger.warn("Rollback de la suppression de l'utilisateur : " + utilisateur.getEmail());
+                        transaction.rollback();
+                    }
                 }
-                if (utilisateur.isActifUtilisateur())
-                {
-                    utilisateurService.suppressionLogique(utilisateur);
-                }else{
-                    utilisateurService.activationLogique(utilisateur);
-                }
-
-                transaction.commit();
-            } catch ( Exception e ) {
-                logger.warn("Problème lors de la suppression de l'utilisateur : " + utilisateur.getEmail() + ". " + e);
-                throw new ServletException( e );
-            } finally {
-                if (transaction.isActive()) {
-                    logger.warn("Rollback de la suppression de l'utilisateur : " + utilisateur.getEmail());
-                    transaction.rollback();
-                }
+                response.sendRedirect("gestionUtilisateur");
             }
-            response.sendRedirect("gestionUtilisateur");
         } else {
             if(logger.isInfoEnabled()){
                 logger.info("Permission non accordée pour la suppression d'utilisateur");

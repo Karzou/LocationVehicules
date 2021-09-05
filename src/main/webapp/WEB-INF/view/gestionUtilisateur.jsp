@@ -45,6 +45,7 @@
                             <div>${sessionScope.erreur}</div>
                         </div>
                     </div>
+                    <c:remove var="erreur" scope="session" />
                 </c:if>
 
                 <div class="content-global-overflow">
