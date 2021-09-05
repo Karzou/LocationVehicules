@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Vanconingsloo Kevin
+ */
 public class AdminFiltre implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

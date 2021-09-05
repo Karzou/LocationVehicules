@@ -248,7 +248,6 @@ public class GestionMarqueModeleServlet extends HttpServlet {
                 session.setAttribute("retour", "/modifModele");
 
                 response.sendRedirect("erreur");
-                //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
             }
         }
     }

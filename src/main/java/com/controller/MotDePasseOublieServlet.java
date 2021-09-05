@@ -79,9 +79,7 @@ public class MotDePasseOublieServlet extends HttpServlet {
                 utilisateur = utilisateurService.trouverParEmail(mail);
             } catch (ServiceException e) {
 
-                e.getMessage();
-
-                session.setAttribute("errMessage", "");
+                session.setAttribute("errMessage", e.getMessage());
             }
 
             try {

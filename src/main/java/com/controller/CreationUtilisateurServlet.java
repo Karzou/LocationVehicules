@@ -139,38 +139,62 @@ public class CreationUtilisateurServlet extends HttpServlet {
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         } else if (utilisateurService.mailExist(mail)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème, ce mail existe : " + mail);
+            }
             session.setAttribute("errRegister3", "Ce mail existe déjà");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         }
         if (Validation.checkValueIsEmpty(telephone)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation du telephone ");
+            }
             session.setAttribute("errRegister6", "Veuillez insérer un numéro de téléphone");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         } else if (!Validation.checkTelephoneFormat(telephone)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation du telephone : " + telephone);
+            }
             session.setAttribute("errRegister6", "Veuillez insérer un numéro de téléphone valide");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         } else if (!Validation.checkValueLenght(telephone, 7, 50)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation du telephone : " + telephone);
+            }
             session.setAttribute("errRegister6", "Le numéro de téléphone doit être composé d'au minimum 7 caractères et au maximum 50 caractères");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         }
         if (Validation.checkValueIsEmpty(rue)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation de la rue vide. ");
+            }
             session.setAttribute("errRegister7", "Veuillez insérer un nom de rue");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         } else if (!Validation.checkValueLenght(rue, 6, 100)) {
-            session.setAttribute("errRegister7", "Le nom de la rue de l'entrepôt doit être composé d'au minimum 6 caractères et au maximum 100 caractères");
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation de la rue longeur. " );
+            }
+            session.setAttribute("errRegister7", "Le nom de la rue doit être composé d'au minimum 6 caractères et au maximum 100 caractères");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         }
         if (Validation.checkValueIsEmpty(numero)) {
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation du numero de rue. vide " );
+            }
             session.setAttribute("errRegister8", "Veuillez insérer un numéro de rue");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         } else if (!Validation.checkValueLenghtMax(numero, 10)) {
-            session.setAttribute("errRegister8", "Le numéro de la rue de l'entrepôt doit être composé d'au maximum 10 caractères");
+            if(logger.isInfoEnabled()) {
+                logger.info("Problème avec la validation de numero de rue longeur. " );
+            }
+            session.setAttribute("errRegister8", "Le numéro de la rue doit être composé d'au maximum 10 caractères");
             session.setAttribute("erreurFlag", true);
             errFlag = true;
         }

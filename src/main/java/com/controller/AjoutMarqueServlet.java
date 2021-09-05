@@ -117,7 +117,6 @@ public class AjoutMarqueServlet extends HttpServlet {
             session.setAttribute("retour", "/gestionMarqueModele");
 
             response.sendRedirect("erreur");
-            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

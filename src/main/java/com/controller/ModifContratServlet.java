@@ -2,14 +2,8 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Contrat;
-import com.entity.Facture;
-import com.entity.Marque;
-import com.entity.Modele;
 import com.exception.ServiceException;
 import com.service.ContratService;
-import com.service.FactureService;
-import com.service.MarqueService;
-import com.service.ModeleService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -22,10 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.util.List;
 
 /**
  * @author Deschamps Jérôme

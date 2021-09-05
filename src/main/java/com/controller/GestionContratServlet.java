@@ -2,9 +2,6 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Contrat;
-import com.entity.Facture;
-import com.entity.Marque;
-import com.entity.Modele;
 import com.enumeration.Etat;
 import com.exception.ServiceException;
 import com.service.*;
@@ -20,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

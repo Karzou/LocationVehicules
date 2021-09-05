@@ -2,12 +2,8 @@ package com.controller;
 
 import com.connection.EMF;
 import com.entity.Facture;
-import com.entity.Marque;
-import com.entity.Modele;
 import com.exception.ServiceException;
 import com.service.FactureService;
-import com.service.MarqueService;
-import com.service.ModeleService;
 import com.service.Validation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -68,7 +64,7 @@ public class GestionFactureServlet extends HttpServlet {
         }
 
         EntityManager em = EMF.getEM();
-        //faire rollback si transaction se passe pas correctement
+
         EntityTransaction transaction = em.getTransaction();
 
         // Récupération des données du champ de la jsp
@@ -99,8 +95,6 @@ public class GestionFactureServlet extends HttpServlet {
         if (Validation.checkValueIsEmptyorNull(strDateFacture))
         {
 
-           // HttpSession session = request.getSession();
-
             session.setAttribute("errMessage1", "Veuillez insérer une date pour la facture");
 
             errFlag = true;
@@ -117,8 +111,6 @@ public class GestionFactureServlet extends HttpServlet {
         }
         else if (!Validation.checkValueIsIFloat(strPrixFacture))
         {
-            //HttpSession session = request.getSession();
-
             session.setAttribute("errMessage2", "Le prix doit être une valeur décimale");
 
             errFlag = true;

@@ -160,7 +160,6 @@ public class GestionCouleurServlet extends HttpServlet {
             session.setAttribute("retour", "/modifCouleur");
 
             response.sendRedirect("erreur");
-            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

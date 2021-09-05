@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
             }
 
             session.invalidate();
-            request.setAttribute("errMessage", "Vous êtes bien déconnecté");
+
             response.sendRedirect("login");
         }
     }

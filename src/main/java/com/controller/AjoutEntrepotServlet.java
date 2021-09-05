@@ -202,7 +202,6 @@ public class AjoutEntrepotServlet extends HttpServlet {
             session.setAttribute("retour", "/gestionEntrepot");
 
             response.sendRedirect("erreur");
-            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

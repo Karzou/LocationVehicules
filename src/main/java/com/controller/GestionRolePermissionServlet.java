@@ -345,7 +345,6 @@ public class GestionRolePermissionServlet extends HttpServlet {
                 logger.info("Redirection vers erreur.");
             }
             session.setAttribute("retour", "/gestionRolePermission");
-           // response.sendRedirect("erreur");
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/gestionRolePermission.jsp").forward( request, response );
         }else {
             if(logger.isInfoEnabled()){

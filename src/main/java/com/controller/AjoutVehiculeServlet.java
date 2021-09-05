@@ -308,7 +308,6 @@ public class AjoutVehiculeServlet extends HttpServlet {
             session.setAttribute("retour", "/gestionVehicule");
 
             response.sendRedirect("erreur");
-            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

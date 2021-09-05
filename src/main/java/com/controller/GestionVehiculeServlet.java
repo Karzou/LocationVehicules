@@ -434,7 +434,6 @@ public class GestionVehiculeServlet extends HttpServlet {
             session.setAttribute("retour", "/modifVehicule");
 
             response.sendRedirect("erreur");
-            //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
         }
     }
 }

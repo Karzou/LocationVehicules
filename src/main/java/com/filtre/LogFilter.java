@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author Vanconingsloo Kevin
+ */
 public class LogFilter implements Filter {
 
     public void init( FilterConfig config ) throws ServletException {
