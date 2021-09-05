@@ -36,8 +36,6 @@ public class RoleService {
         }
     }
 
-
-
     public void creer(Role role) throws ServiceException {
         try {
             em.persist(role);

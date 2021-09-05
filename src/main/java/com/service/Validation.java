@@ -8,19 +8,6 @@ import java.sql.Date;
 
 public class Validation {
 
-    public static boolean validationTelephone( String telephone ) {
-        if ( telephone != null  && telephone.matches( "^\\d+$" ) &&  telephone.length() > 7  && telephone.length() < 51) {
-              return true;
-        }
-        return false;
-    }
-
-    public static boolean validationPassword (String password) {
-        if (password.length() > 3 && password.length() < 256){
-            return true;
-        }
-        return false;
-    }
 
     public static String ucFirst (String mot){
 

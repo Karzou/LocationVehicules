@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author Wets Jeoffroy
+ * Partie de Shahin
  */
 
 public class ReservationService {

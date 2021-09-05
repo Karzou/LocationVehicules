@@ -1,6 +1,5 @@
 package com.service;
 
-import com.entity.Entrepot;
 import com.entity.Vehicule;
 import com.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;

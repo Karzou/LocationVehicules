@@ -40,7 +40,7 @@ public class ChangerMotDePasseServlet extends HttpServlet {
         int idUtilisateur = Integer.parseInt(idModif);
         String message = "";
 
-        if(!Validation.validationPassword(password)){
+        if(!Validation.checkValueLenght(password, 3, 255)){
             if(logger.isInfoEnabled()){
                 logger.info("Problème lors de la validation de mot de passe");
             }

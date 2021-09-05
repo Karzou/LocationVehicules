@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PaysService {
 
-    // classe pour plus tard
+    // classe pour plus tard si la société s'étend
 
     EntityManager em;
 
