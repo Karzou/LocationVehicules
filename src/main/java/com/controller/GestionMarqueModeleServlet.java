@@ -90,8 +90,8 @@ public class GestionMarqueModeleServlet extends HttpServlet {
 
         boolean flagModifMarque = Boolean.parseBoolean(request.getParameter("flagModifMarque"));
 
-        int idModif = Integer.parseInt(request.getParameter("idModif"));
-        int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+
+
         String nomMarque = request.getParameter("nomMarque");
         String nomModele = request.getParameter("nomModele");
 
@@ -100,23 +100,17 @@ public class GestionMarqueModeleServlet extends HttpServlet {
         Marque marque = null;
         Modele modele = null;
 
-        try {
-
-            marque = marqueService.trouver(idModif);
-        } catch (ServiceException e) {
-
-            e.printStackTrace();
-        }
-
-        try {
-
-            modele = modeleService.trouver(idModif);
-        } catch (ServiceException e) {
-
-            e.printStackTrace();
-        }
-
         if(flagModifMarque) {
+
+            int idModif = Integer.parseInt(request.getParameter("idModif"));
+
+            try {
+
+                marque = marqueService.trouver(idModif);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            }
 
             if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "marques:write"))) {
 
@@ -185,6 +179,17 @@ public class GestionMarqueModeleServlet extends HttpServlet {
                 //this.getServletContext().getRequestDispatcher( "/WEB-INF/view/erreur.jsp" ).forward( request, response );
             }
         } else {
+
+            int idModif = Integer.parseInt(request.getParameter("idModif"));
+            int idMarque = Integer.parseInt(request.getParameter("idMarque"));
+
+            try {
+
+                modele = modeleService.trouver(idModif);
+            } catch (ServiceException e) {
+
+                e.printStackTrace();
+            }
 
             if ((autoriseService.hasPermission((int)session.getAttribute("idRole"), "all")) || (autoriseService.hasPermission((int)session.getAttribute("idRole"), "modeles:write"))) {
 
