@@ -117,7 +117,7 @@ function resetInputDateDepart() {
     if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value == "" || heureDepart.value == null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une heure de dï¿½part";
+        error.innerHTML = "Veuillez choisir une heure de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         dateDepart.removeAttribute('style');
@@ -134,7 +134,7 @@ function resetInputHeureDepart() {
     if (((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
-        error.innerHTML = "Veuillez choisir une date de dï¿½part";
+        error.innerHTML = "Veuillez choisir une date de départ";
     } else if (((dateDepart.value != "" || dateDepart.value != null) && (heureDepart.value != "" || heureDepart.value != null)) && error.innerHTML != "") {
 
         heureDepart.removeAttribute('style');
@@ -188,7 +188,7 @@ function validateSearchVehicle() {
     const heureRetour = document.forms["searchVehicle"]["heureRetour"];
 
     if (lieuDepart.value == "" || lieuDepart.value == null) {
-        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de dï¿½part";
+        document.getElementById('lieu-depart-error').innerHTML = "Veuillez selectionner un lieu de départ";
         LieuDepart.style.border = "1px solid red";
         LieuDepart.style.boxShadow = "0 0 1px 2px red";
 
@@ -210,7 +210,7 @@ function validateSearchVehicle() {
     }
 
     if ((dateDepart.value == "" || dateDepart.value == null) && (heureDepart.value == "" || heureDepart.value == null)) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de dï¿½part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date et heure de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.style.border = "1px solid red";
@@ -218,14 +218,14 @@ function validateSearchVehicle() {
 
         result = false;
     } else if (dateDepart.value == "" || dateDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de dï¿½part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une date de départ";
         dateDepart.style.border = "1px solid red";
         dateDepart.style.boxShadow = "0 0 1px 2px red";
         heureDepart.removeAttribute('style');
 
         result = false;
     } else if (heureDepart.value == "" || heureDepart.value == null) {
-        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de dï¿½part";
+        document.getElementById('date-time-depart-error').innerHTML = "Veuillez choisir une heure de départ";
         heureDepart.style.border = "1px solid red";
         heureDepart.style.boxShadow = "0 0 1px 2px red";
         dateDepart.removeAttribute('style');
@@ -643,7 +643,7 @@ function validateModifUtilisateur() {
 
         result = false;
     } else if (rue.value.length < 6 || rue.value.length > 100) {
-        document.getElementById("errorRueModif").innerHTML = "Veuillez entrer une rue valide entre 6 et 100 caractï¿½res";
+        document.getElementById("errorRueModif").innerHTML = "Veuillez entrer une rue valide entre 6 et 100 caractères";
         rue.style.border = "1px solid red";
         rue.style.boxShadow = "0 0 1px 2px red";
 
@@ -660,7 +660,7 @@ function validateModifUtilisateur() {
 
         result = false;
     } else if (numero.value.length > 10) {
-        document.getElementById("errorNumModif").innerHTML = "Veuillez entrer un numero valide entre 1 et 10 caractï¿½res";
+        document.getElementById("errorNumModif").innerHTML = "Veuillez entrer un numero valide entre 1 et 10 caractères";
         numero.style.border = "1px solid red";
         numero.style.boxShadow = "0 0 1px 2px red";
 
@@ -671,7 +671,7 @@ function validateModifUtilisateur() {
     }
 
     if (boite.value.length > 50 ) {
-        document.getElementById("errorBoiteModif").innerHTML = "Veuillez entrer une boite valide entre 2 et 50 caractï¿½res";
+        document.getElementById("errorBoiteModif").innerHTML = "Veuillez entrer une boite valide entre 2 et 50 caractères";
         boite.style.border = "1px solid red";
         boite.style.boxShadow = "0 0 1px 2px red";
 
@@ -774,13 +774,13 @@ function validateAjoutEntrepot() {
     const villeEntrepot = document.forms["ajoutEntrepot"]["villeEntrepot-ajout-input"];
 
     if (nomEntrepot.value == "" || nomEntrepot.value == null) {
-        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepï¿½t";
+        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepot";
         nomEntrepot.style.border = "1px solid red";
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if ((nomEntrepot.value.length < 2) || (nomEntrepot.value.length > 50)) {
-        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepï¿½t valide";
+        document.getElementById("errorNomEntrepotAjout").innerHTML = "Veuillez entrer un nom d'entrepot valide";
         nomEntrepot.style.border = "1px solid red";
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
 
@@ -877,13 +877,13 @@ function validateModifEntrepot() {
     const boiteEntrepot = document.forms["modifEntrepot"]["boiteEntrepot-modif-input"];
 
     if (nomEntrepot.value == "" || nomEntrepot.value == null) {
-        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepï¿½t";
+        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepot";
         nomEntrepot.style.border = "1px solid red";
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if ((nomEntrepot.value.length < 2) || (nomEntrepot.value.length > 50)) {
-        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepï¿½t valide";
+        document.getElementById("errorNomEntrepotModif").innerHTML = "Veuillez entrer un nom d'entrepot valide";
         nomEntrepot.style.border = "1px solid red";
         nomEntrepot.style.boxShadow = "0 0 1px 2px red";
 
@@ -928,13 +928,13 @@ function validateModifEntrepot() {
     }
 
     if (numeroEntrepot.value == "" || numeroEntrepot.value == null) {
-        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numï¿½ro";
+        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numéro";
         numeroEntrepot.style.border = "1px solid red";
         numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (numeroEntrepot.value.length <= 1 || numeroEntrepot.value.length > 10) {
-        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numï¿½ro valide";
+        document.getElementById("errorNumeroEntrepotModif").innerHTML = "Veuillez entrer un numéro valide";
         numeroEntrepot.style.border = "1px solid red";
         numeroEntrepot.style.boxShadow = "0 0 1px 2px red";
 
@@ -1029,13 +1029,13 @@ function validateAjoutModele() {
     }
 
     if (modele.value == "" || modele.value == null) {
-        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un modï¿½le";
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un modèle";
         modele.style.border = "1px solid red";
         modele.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (modele.value.length < 2 || modele.value.length > 50 ) {
-        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un nom de modï¿½le valide";
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez entrer un nom de modèle valide";
         modele.style.border = "1px solid red";
         modele.style.boxShadow = "0 0 1px 2px red";
 
@@ -1055,13 +1055,13 @@ function validateModifModele() {
     const modele = document.forms["modifModele"]["modele-modif-input"];
 
     if (modele.value == "" || modele.value == null) {
-        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un modï¿½le";
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un modèle";
         modele.style.border = "1px solid red";
         modele.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (modele.value.length < 2 || modele.value.length > 50 ) {
-        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un nom de modï¿½le valide";
+        document.getElementById("errorModeleModif").innerHTML = "Veuillez entrer un nom de modèle valide";
         modele.style.border = "1px solid red";
         modele.style.boxShadow = "0 0 1px 2px red";
 
@@ -1101,7 +1101,7 @@ function validateAjoutVehicule() {
     }
 
     if (modele.value == "" || modele.value == null) {
-        document.getElementById("errorModeleAjout").innerHTML = "Veuillez selectionner un modï¿½le";
+        document.getElementById("errorModeleAjout").innerHTML = "Veuillez selectionner un modèle";
         modele.style.border = "1px solid red";
         modele.style.boxShadow = "0 0 1px 2px red";
 
@@ -1112,13 +1112,13 @@ function validateAjoutVehicule() {
     }
 
     if (cylindree.value == "" || cylindree.value == null) {
-        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrï¿½e";
+        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrée";
         cylindree.style.border = "1px solid red";
         cylindree.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
-        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrï¿½e valide";
+        document.getElementById("errorCylindreeAjout").innerHTML = "Veuillez entrer une cylindrée valide";
         cylindree.style.border = "1px solid red";
         cylindree.style.boxShadow = "0 0 1px 2px red";
 
@@ -1146,13 +1146,13 @@ function validateAjoutVehicule() {
     }
 
     if (numChassis.value == "" || numChassis.value == null) {
-        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numï¿½ro de chassis";
+        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numéro de chassis";
         numChassis.style.border = "1px solid red";
         numChassis.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
-        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numï¿½ro de chassis valide";
+        document.getElementById("errorNumChassisAjout").innerHTML = "Veuillez entrer un numéro de chassis valide";
         numChassis.style.border = "1px solid red";
         numChassis.style.boxShadow = "0 0 1px 2px red";
 
@@ -1208,7 +1208,7 @@ function validateAjoutVehicule() {
     }
 
     if (couleur.value == "" || couleur.value == null) {
-        document.getElementById("errorCouleurAjout").innerHTML = "Veuillez entrer une cylindrï¿½e";
+        document.getElementById("errorCouleurAjout").innerHTML = "Veuillez entrer une cylindrée";
         couleur.style.border = "1px solid red";
         couleur.style.boxShadow = "0 0 1px 2px red";
 
@@ -1219,7 +1219,7 @@ function validateAjoutVehicule() {
     }
 
     if (entrepot.value == "" || entrepot.value == null) {
-        document.getElementById("errorEntrepotAjout").innerHTML = "Veuillez entrer une cylindrï¿½e";
+        document.getElementById("errorEntrepotAjout").innerHTML = "Veuillez entrer une cylindrée";
         entrepot.style.border = "1px solid red";
         entrepot.style.boxShadow = "0 0 1px 2px red";
 
@@ -1244,13 +1244,13 @@ function validateModifVehicule() {
     const prixJournalier = document.forms["modifVehicule"]["prixJournalier-modif-input"];
 
     if (cylindree.value == "" || cylindree.value == null) {
-        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrï¿½e";
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée";
         cylindree.style.border = "1px solid red";
         cylindree.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (cylindree.value.length < 2 || cylindree.value.length > 50 ) {
-        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrï¿½e valide";
+        document.getElementById("errorCylindreeModif").innerHTML = "Veuillez entrer une cylindrée valide";
         cylindree.style.border = "1px solid red";
         cylindree.style.boxShadow = "0 0 1px 2px red";
 
@@ -1278,13 +1278,13 @@ function validateModifVehicule() {
     }
 
     if (numChassis.value == "" || numChassis.value == null) {
-        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numï¿½ro de chassis";
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis";
         numChassis.style.border = "1px solid red";
         numChassis.style.boxShadow = "0 0 1px 2px red";
 
         result = false;
     } else if (numChassis.value.length < 2 || numChassis.value.length > 50 ) {
-        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numï¿½ro de chassis valide";
+        document.getElementById("errorNumChassisModif").innerHTML = "Veuillez entrer un numéro de chassis valide";
         numChassis.style.border = "1px solid red";
         numChassis.style.boxShadow = "0 0 1px 2px red";
 
