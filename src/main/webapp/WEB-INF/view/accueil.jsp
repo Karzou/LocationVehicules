@@ -50,9 +50,11 @@
                             <select name="LieuDepart" id="LieuDepart" oninput="style.color='black';resetSelectLieuDepart()">
                                 <option value="" style='display:none'>Lieu de départ</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
-                                    <optgroup label="${entrepot.nomEntrepot}">
-                                    <option value="${entrepot.idEntrepot}">${entrepot.adressesByIdAdresse.rue} ${entrepot.adressesByIdAdresse.numero} - ${entrepot.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}</option>
-                                    </optgroup>
+                                    <c:if test="${entrepot.actifEntrepot}">
+                                        <optgroup label="${entrepot.nomEntrepot}">
+                                            <option value="${entrepot.idEntrepot}">${entrepot.adressesByIdAdresse.rue} ${entrepot.adressesByIdAdresse.numero} - ${entrepot.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                                        </optgroup>
+                                    </c:if>
                                 </c:forEach>
                             </select>
 
@@ -64,9 +66,11 @@
                             <select name="LieuRetour" id="LieuRetour" oninput="style.color='black';resetSelectLieuRetour()">
                                 <option value="" style='display:none'>Lieu de retour</option>
                                 <c:forEach var="entrepot" items="${entrepotList}">
-                                    <optgroup label="${entrepot.nomEntrepot}">
-                                        <option value="${entrepot.idEntrepot}">${entrepot.adressesByIdAdresse.rue} ${entrepot.adressesByIdAdresse.numero} - ${entrepot.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}</option>
-                                    </optgroup>
+                                    <c:if test="${entrepot.actifEntrepot}">
+                                        <optgroup label="${entrepot.nomEntrepot}">
+                                            <option value="${entrepot.idEntrepot}">${entrepot.adressesByIdAdresse.rue} ${entrepot.adressesByIdAdresse.numero} - ${entrepot.adressesByIdAdresse.villesByIdVille.codePostal} ${entrepot.adressesByIdAdresse.villesByIdVille.nomVille}</option>
+                                        </optgroup>
+                                    </c:if>
                                 </c:forEach>
                             </select>
 
